@@ -1,8 +1,8 @@
 Asteroids (Part 1)
 ==================
-In this assignment we will start to replicate the old video game Asteroids. You will write an applet that has a space ship that can be controlled with the keyboard. You will need to write a Spaceship class. Your Spaceship class will extend the Floater class, an abstract class that represents all things that float in space. 
+In this assignment we will start to replicate the old video game Asteroids. You will write a program that has a space ship that can be controlled with the keyboard. You will need to write a SpaceShip class. Your SpaceShip class will extend the Floater class, an abstract class that represents all things that float in space. 
 
-An abstract class is an "incomplete" class. It has abstract methods--methods that have no body. When your class extends an abstract class, you must write the methods that are needed to "complete" the class. _Note: You will be writing a `SpaceShip` class. Do not modify the `Floater` class._
+An abstract class is an "incomplete" class. It has abstract methods--methods that have no body. When your class extends an abstract class, you must write the methods that are needed to "complete" the class. _Note: You will be writing two classes `SpaceShip` and `Star`. Do not modify the `Floater` class._
 
 Sugested steps to completing this assignment
 -----------------------------------
