@@ -4,12 +4,12 @@ In this assignment we will start to replicate the old video game Asteroids. You 
 
 An abstract class is an "incomplete" class. It has abstract methods--methods that have no body. When your class extends an abstract class, you must write the methods that are needed to "complete" the class. _Note: You will be writing two classes `SpaceShip` and `Star`. Do not modify the `Floater` class._
 
-Sugested steps to completing this assignment
+Suggested steps to completing this assignment
 -----------------------------------
 
 1. Fork and clone down the AsteroidsGame repository
 2. Uncomment the `extends floater` on Line 10
-3. Complete the 10 abstract set and get functions
+3. Complete the 10 abstract `set` and `get` functions
 4. Write a Spaceship constructor. Make sure you initialize all 7 of the inherited `protected` member variables. You may find the Asteroids PowerPoint slides to be helpful.
 5. At the top of your program, declare a variable of type `SpaceShip`
 6. Initialize the `SpaceShip` as a new instance of the class
