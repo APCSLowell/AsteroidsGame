@@ -10,7 +10,7 @@ Suggested steps to complete this assignment
 1. Fork and clone down the AsteroidsGame repository
 2. Uncomment the `extends floater` on Line 10
 3. Complete the 10 abstract `set` and `get` functions
-4. Write a Spaceship constructor. Make sure you initialize all 7 of the inherited `protected` member variables. You may find the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) slides to be helpful.
+4. Write a Spaceship constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) slides to be helpful.
 5. At the top of your program, declare a variable of type `SpaceShip`
 6. Initialize the `SpaceShip` as a new instance of the class
 7. In `draw()` call the SpaceShip's `show()` function
