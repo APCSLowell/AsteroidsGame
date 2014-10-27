@@ -2,14 +2,31 @@
 public void setup() 
 {
   //your code here
+  size(400,400);
 }
 public void draw() 
 {
   //your code here
 }
-class SpaceShip //extends Floater  
+class SpaceShip extends Floater  
 {   
-    //your code here
+  SpaceShip()
+  {
+     corners = 8;
+     xCorners[] = [8];
+     yCorners[] = [8];
+     xCorners = [0,10,10,10,10,-20,-10,-20];
+     yCorners = [20,20,10,-10,-20,20,0,-20];
+     myColor = (127);
+     myCenterX = width/2;
+     myCenterY = height/2;
+     myDirectionX = 0;
+     myDirectionY = 0;
+     myPointDirection = 0;
+
+
+  }
+}
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
