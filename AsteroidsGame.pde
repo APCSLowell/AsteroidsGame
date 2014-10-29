@@ -8,10 +8,24 @@ public void setup()
 public void draw() 
 {
   //your code here
+  background(0);
   philip.show();
-
+  philip.move();
 
 }
+
+void keyPressed()
+{
+  if(keyCode == LEFT)
+    philip.rotate(-4);
+  if(keyCode == RIGHT)
+    philip.rotate(4);
+  if(keyCode == UP)
+    philip.accelerate(1);
+  if(keyCode == DOWN)
+    philip.accelerate(-1);
+}
+
 class SpaceShip extends Floater  
 {   
   SpaceShip()

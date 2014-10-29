@@ -14,7 +14,8 @@ import java.io.IOException;
 
 public class AsteroidsGame extends PApplet {
 
-//your variable declarations here
+SpaceShip philip = new SpaceShip();
+
 public void setup() 
 {
   //your code here
@@ -23,26 +24,45 @@ public void setup()
 public void draw() 
 {
   //your code here
+  background(0);
+  philip.show();
+  philip.move();
+
 }
+
+public void keyPressed()
+{
+  if(keyCode == LEFT)
+    philip.rotate(-4);
+  if(keyCode == RIGHT)
+    philip.rotate(4);
+  if(keyCode == UP)
+    philip.accelerate(1);
+  if(keyCode == DOWN)
+    philip.accelerate(-1);
+}
+
 class SpaceShip extends Floater  
 {   
   SpaceShip()
   {
-     corners = 8;
+     corners = 10;
      xCorners  = new int[corners];
      yCorners  = new int[corners];
-     xCorners[0] = 0;   yCorners[0] = 20;
-     xCorners[1] = 10;  yCorners[1] = 20;
-     xCorners[2] = 10;  yCorners[2] = 10;
-     xCorners[3] = 10;  yCorners[3] = -10;
-     xCorners[4] = 10;  yCorners[4] = -20;
-     xCorners[5] = -20; yCorners[5] = 20;
-     xCorners[6] = -10; yCorners[6] = 0;
-     xCorners[7] = -20; yCorners[7] = -20;
+     xCorners[0] = 10;  yCorners[0] = -7;
+     xCorners[1] = 25;  yCorners[1] = 0;
+     xCorners[2] = 10;  yCorners[2] = 7;
+     xCorners[3] = 10;  yCorners[3] = 20;
+     xCorners[4] = -20; yCorners[4] = 20;
+     xCorners[5] = -13; yCorners[5]= 10;
+     xCorners[6] = -13; yCorners[6] = 0;
+     xCorners[7] = -13; yCorners[7] = -10;
+     xCorners[8] = -20; yCorners[8] = -20;
+     xCorners[9] = 10;  yCorners[9] = -20;
 
-     myColor = (127);
-     myCenterX = 0;
-     myCenterY = 0;
+     myColor = (0xff45595F);
+     myCenterX = 200;
+     myCenterY = 200;
      myDirectionX = 0;
      myDirectionY = 0;
      myPointDirection = 0;
