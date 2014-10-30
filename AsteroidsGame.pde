@@ -16,6 +16,8 @@ public void draw()
 
 void keyPressed()
 {
+  if(keyPressed == true && key == 'h')
+    philip.hyperSpace();
   if(keyCode == LEFT)
     philip.rotate(-4);
   if(keyCode == RIGHT)
@@ -24,6 +26,7 @@ void keyPressed()
     philip.accelerate(1);
   if(keyCode == DOWN)
     philip.accelerate(-1);
+
 }
 
 class SpaceShip extends Floater  
@@ -51,6 +54,16 @@ class SpaceShip extends Floater
      myDirectionY = 0;
      myPointDirection = 0;
   }
+
+  public void hyperSpace()
+  {
+      myPointDirection = 0;
+      myDirectionX = 0;
+      myDirectionY = 0;
+      myCenterX = (int)(Math.random() * width);
+      myCenterY = (int)(Math.random() * height);  
+  }
+
   public void setX(int x){myDirectionX =x;}
   public int getX(){return (int)myDirectionX;}
   public void setY(int y) {myCenterY = y;}
