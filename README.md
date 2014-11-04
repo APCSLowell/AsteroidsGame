@@ -28,4 +28,4 @@ Samples of Student Work
 [Erika](http://bekutaa.github.io/AsteroidsGame/)   
 [Lucy](http://luchen825.github.io/AsteroidsGame/)   
 [Zachary](https://zachooz.github.io/AsteroidsGame/)   
-{Antonio](https://adcarmona.github.io/AsteroidsGame/)   
+[Antonio](https://adcarmona.github.io/AsteroidsGame/)   
