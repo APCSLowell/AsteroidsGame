@@ -30,5 +30,5 @@ Samples of Student Work
 [Zachary](https://zachooz.github.io/AsteroidsGame/)   
 [Antonio](https://adcarmona.github.io/AsteroidsGame/)   
 [Kirby](http://kichoy.github.io/AsteroidsGame/)   
-[Averal](http://avekan33.github.io/AsteroidsGame/)
+[Averal](http://avekan33.github.io/AsteroidsGame/)   
 [Lily](http://magicallilicorn.github.io/AsteroidsGame/)   
