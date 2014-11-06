@@ -47,21 +47,32 @@ interface starSystem
    public void show();
 }
 
-/*class Sun extends Floater implements starSystem
+class Sun extends Pixel //implements starSystem
 {
-  Sun
+  Sun(int posX,int posY)
   {
-    corners = 8;
+    corners = 6;
     xCorners = new int [corners];
     yCorners = new int [corners];
+    xCorners[0] = 10;  yCorners[0] = 0;
+    xCorners[1] = 5;   yCorners[1] = (int)(Math.sqrt(3)*5);
+    xCorners[2] = -5;  yCorners[2] = (int)(Math.sqrt(3)*5);
+    xCorners[3] = -10; yCorners[3] = 0;
+    xCorners[4] = -5;  yCorners[4] = (int)(-1 *Math.sqrt(3)*5);
+    xCorners[5] = 5;   yCorners[5] = (int)(-1 * Math.sqrt(3)*5);
 
-    myColor = ();
-    myCenterX = ;
-    myCenterY = ;
-    myPointDirection =
+
+    myColor = (#FFE942);
+    myCenterX = posX;
+    myCenterY = posY;
   }
+  public void setX(int x){myCenterX = x;} 
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}   
+  //has public void show ()
 }
-*/
+
 class Star extends Pixel //implements starSystem
 {
   Star()
@@ -78,13 +89,7 @@ class Star extends Pixel //implements starSystem
   public int getX(){return (int)myCenterX;}   
   public void setY(int y){myCenterY = y;}
   public int getY(){return (int)myCenterY;}
-  public void setDirectionX(double x){myDirectionX = x;}   
-  public double getDirectionX(){return myCenterX;}   
-  public void setDirectionY(double y){myCenterY = y;}   
-  public double getDirectionY(){return myDirectionY;}
-  public void setPointDirection(int degrees){myPointDirection = degrees;}  
-  public double getPointDirection(){return myPointDirection;} 
-  //holds the publics functions move(),accelerate(), rotate(), and show()
+  //holds the public function show()
 
 }
 
@@ -226,19 +231,12 @@ abstract class Pixel
   abstract public int getX();   
   abstract public void setY(int y);   
   abstract public int getY();   
-  abstract public void setDirectionX(double x);   
-  abstract public double getDirectionX();   
-  abstract public void setDirectionY(double y);   
-  abstract public double getDirectionY();   
-  abstract public void setPointDirection(int degrees);   
-  abstract public double getPointDirection(); 
-
   public void show ()  //Draws the floater at the current position  
   {             
     fill(myColor);   
     stroke(myColor);    
-    //convert degrees to radians for sin and cos         
-    double dRadians = myPointDirection*(Math.PI/180);                 
+    //make the myDirection always = 0        
+    double dRadians = 0;                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
     for(int nI = 0; nI < corners; nI++)    
