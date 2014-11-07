@@ -1,21 +1,39 @@
 private SpaceShip philip = new SpaceShip();
-private Star[] peter = new Star[100];
+//private Star[] peter = new Star[100];
+//private Sun bright = new Sun(200,200); 
+private starSystem [] background = new starSystem[100];
 
 public void setup() 
 {
   //your code here
+ 
   size(400,400);
+  background[0] = new Sun(200,200);
+  for(int i = 1; i < background.length; ++i)
+  {
+    background[i] = new Star();
+  }
+  
+   /*
   for (int i = 0; i < peter.length; ++i) {
     peter[i] = new Star();   
   }
+  */
 }
 public void draw() 
 {
   //your code here
   background(0);
+  for (int z = 1; z < peter.length; ++z) {
+    background[z].show();
+  }
+  background[0].show();
+  /*
   for (int z = 0; z < peter.length; ++z) {
     peter[z].show();
   }
+  bright.show();
+  */
   philip.show();
   philip.move();
 
@@ -47,19 +65,21 @@ interface starSystem
    public void show();
 }
 
-class Sun extends Pixel //implements starSystem
+class Sun extends Pixel implements starSystem
 {
-  Sun(int posX,int posY)
+  private int siz;
+  public Sun(int posX,int posY)
   {
+    siz = 28;
     corners = 6;
     xCorners = new int [corners];
     yCorners = new int [corners];
-    xCorners[0] = 10;  yCorners[0] = 0;
-    xCorners[1] = 5;   yCorners[1] = (int)(Math.sqrt(3)*5);
-    xCorners[2] = -5;  yCorners[2] = (int)(Math.sqrt(3)*5);
-    xCorners[3] = -10; yCorners[3] = 0;
-    xCorners[4] = -5;  yCorners[4] = (int)(-1 *Math.sqrt(3)*5);
-    xCorners[5] = 5;   yCorners[5] = (int)(-1 * Math.sqrt(3)*5);
+    xCorners[0] = siz;  yCorners[0] = 0;
+    xCorners[1] = siz/2;   yCorners[1] = (int)(Math.sqrt(3)*siz/2);
+    xCorners[2] = -siz/2;  yCorners[2] = (int)(Math.sqrt(3)*siz/2);
+    xCorners[3] = -siz; yCorners[3] = 0;
+    xCorners[4] = -siz/2;  yCorners[4] = (int)(-1 *Math.sqrt(3)*siz/2);
+    xCorners[5] = siz/2;   yCorners[5] = (int)(-1 * Math.sqrt(3)*siz/2);
 
 
     myColor = (#FFE942);
@@ -73,7 +93,7 @@ class Sun extends Pixel //implements starSystem
   //has public void show ()
 }
 
-class Star extends Pixel //implements starSystem
+class Star extends Pixel implements starSystem
 {
   Star()
   {
