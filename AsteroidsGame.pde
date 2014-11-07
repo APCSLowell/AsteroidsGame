@@ -1,6 +1,4 @@
 private SpaceShip philip = new SpaceShip();
-//private Star[] peter = new Star[100];
-//private Sun bright = new Sun(200,200); 
 private starSystem [] background = new starSystem[100];
 
 public void setup() 
@@ -13,27 +11,15 @@ public void setup()
   {
     background[i] = new Star();
   }
-  
-   /*
-  for (int i = 0; i < peter.length; ++i) {
-    peter[i] = new Star();   
-  }
-  */
 }
 public void draw() 
 {
   //your code here
   background(0);
-  for (int z = 1; z < peter.length; ++z) {
+  for (int z = 1; z < background.length; ++z) {
     background[z].show();
   }
   background[0].show();
-  /*
-  for (int z = 0; z < peter.length; ++z) {
-    peter[z].show();
-  }
-  bright.show();
-  */
   philip.show();
   philip.move();
 
@@ -44,9 +30,9 @@ void keyPressed()
   if(keyPressed == true && key == 'h')
   {
     philip.hyperSpace();
-    for (int i = 0; i < peter.length; ++i) 
+    for (int i = 1; i < background.length; ++i) 
     {
-       peter[i] = new Star();   
+       background[i] = new Star();   
     }
   }
   if(keyCode == LEFT)
