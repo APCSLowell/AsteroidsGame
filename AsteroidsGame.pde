@@ -1,13 +1,16 @@
 private SpaceShip philip = new SpaceShip();
 private starSystem [] background = new starSystem[100];
+private int[] sunSpot = {100,300};
 
 public void setup() 
 {
   //your code here
- 
   size(400,400);
-  background[0] = new Sun(200,200);
-  for(int i = 1; i < background.length; ++i)
+  for(int a = 0; a < 5; a++)
+  {
+  background[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+  }
+  for(int i = 5; i < background.length; ++i)
   {
     background[i] = new Star();
   }
@@ -23,17 +26,21 @@ public void draw()
   philip.show();
   philip.move();
 
-}
+}   
 
 void keyPressed()
 {
   if(keyPressed == true && key == 'h')
   {
     philip.hyperSpace();
-    for (int i = 1; i < background.length; ++i) 
-    {
-       background[i] = new Star();   
-    }
+     for(int a = 0; a < 5; a++)
+     {
+        background[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+     }
+     for(int i = 5; i < background.length; ++i)
+     {
+       background[i] = new Star();
+     }
   }
   if(keyCode == LEFT)
     philip.rotate(-4);
