@@ -64,25 +64,25 @@ class Sun extends Pixel implements starSystem
   public Sun(int posX,int posY)
   {
     siz = 28;
-    corners = 6;
-    xCorners = new int [corners];
-    yCorners = new int [corners];
-    xCorners[0] = siz;  yCorners[0] = 0;
-    xCorners[1] = siz/2;   yCorners[1] = (int)(Math.sqrt(3)*siz/2);
-    xCorners[2] = -siz/2;  yCorners[2] = (int)(Math.sqrt(3)*siz/2);
-    xCorners[3] = -siz; yCorners[3] = 0;
-    xCorners[4] = -siz/2;  yCorners[4] = (int)(-1 *Math.sqrt(3)*siz/2);
-    xCorners[5] = siz/2;   yCorners[5] = (int)(-1 * Math.sqrt(3)*siz/2);
+    cornerz = 6;
+    xCornerz = new int [cornerz];
+    yCornerz = new int [cornerz];
+    xCornerz[0] = siz;     yCornerz[0] = 0;
+    xCornerz[1] = siz/2;   yCornerz[1] = (int)(Math.sqrt(3)*siz/2);
+    xCornerz[2] = -siz/2;  yCornerz[2] = (int)(Math.sqrt(3)*siz/2);
+    xCornerz[3] = -siz;    yCornerz[3] = 0;
+    xCornerz[4] = -siz/2;  yCornerz[4] = (int)(-1 *Math.sqrt(3)*siz/2);
+    xCornerz[5] = siz/2;   yCornerz[5] = (int)(-1 * Math.sqrt(3)*siz/2);
 
 
-    myColor = (#FFE942);
-    myCenterX = posX;
-    myCenterY = posY;
+    myColorz = (#FFE942);
+    myCenterXz = posX;
+    myCenterYz = posY;
   }
-  public void setX(int x){myCenterX = x;} 
-  public int getX(){return (int)myCenterX;}   
-  public void setY(int y){myCenterY = y;}   
-  public int getY(){return (int)myCenterY;}   
+  public void setXz(int x){myCenterXz = x;} 
+  public int getXz(){return (int)myCenterXz;}   
+  public void setYz(int y){myCenterYz = y;}   
+  public int getYz(){return (int)myCenterYz;}   
   //has public void show ()
 }
 
@@ -90,18 +90,18 @@ class Star extends Pixel implements starSystem
 {
   Star()
   {
-    corners = 1;
-    xCorners = new int[corners];
-    yCorners = new int[corners];
-    xCorners[0] = 0; yCorners[0] = 0;
-    myColor = (#FFFFFF);
-    myCenterX = (int)(Math.random() * width);
-    myCenterY = (int)(Math.random() * height);
+    cornerz = 1;
+    xCornerz = new int[cornerz];
+    yCornerz = new int[cornerz];
+    xCornerz[0] = 0; yCornerz[0] = 0;
+    myColorz = (#FFFFFF);
+    myCenterXz = (int)(Math.random() * width);
+    myCenterYz = (int)(Math.random() * height);
   }
-  public void setX(int x){myCenterX = x;}  
-  public int getX(){return (int)myCenterX;}   
-  public void setY(int y){myCenterY = y;}
-  public int getY(){return (int)myCenterY;}
+  public void setXz(int x){myCenterXz = x;}  
+  public int getXz(){return (int)myCenterXz;}   
+  public void setYz(int y){myCenterYz = y;}
+  public int getYz(){return (int)myCenterYz;}
   //holds the public function show()
 
 }
@@ -234,29 +234,29 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
 
 abstract class Pixel
 {
-    protected int corners;
-    protected int xCorners[];
-    protected int yCorners[];
-    protected int myColor;
-    protected double myCenterX;
-    protected double myCenterY;
-  abstract public void setX(int x);  
-  abstract public int getX();   
-  abstract public void setY(int y);   
-  abstract public int getY();   
+    protected int cornerz;
+    protected int xCornerz[];
+    protected int yCornerz[];
+    protected int myColorz;
+    protected double myCenterXz;
+    protected double myCenterYz;
+  abstract public void setXz(int x);  
+  abstract public int getXz();   
+  abstract public void setYz(int y);   
+  abstract public int getYz();   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor);   
-    stroke(myColor);    
+    fill(myColorz);   
+    stroke(myColorz);    
     //make the myDirection always = 0        
     double dRadians = 0;                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
-    for(int nI = 0; nI < corners; nI++)    
+    for(int nI = 0; nI < cornerz; nI++)    
     {     
       //rotate and translate the coordinates of the floater using current direction 
-      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
-      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      xRotatedTranslated = (int)((xCornerz[nI]* Math.cos(dRadians)) - (yCornerz[nI] * Math.sin(dRadians))+myCenterXz);     
+      yRotatedTranslated = (int)((xCornerz[nI]* Math.sin(dRadians)) + (yCornerz[nI] * Math.cos(dRadians))+myCenterYz);      
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
