@@ -19,9 +19,11 @@ public void draw()
 {
   //your code here
   background(0);
-  for (int z = 1; z < surroundings.length; ++z) {
+  for (int z = 5; z < surroundings.length; ++z) {
     surroundings[z].show();
   }
+  for(int b = 0 ; b < 5; b++)
+    surroundings[b].show();
   surroundings[0].show();
   philip.show();
   philip.move();
@@ -94,6 +96,7 @@ class Star extends Pixel implements starSystem
     xCornerz = new int[cornerz];
     yCornerz = new int[cornerz];
     xCornerz[0] = 0; yCornerz[0] = 0;
+    strokeWeight(3);
     myColorz = (#FFFFFF);
     myCenterXz = (int)(Math.random() * width);
     myCenterYz = (int)(Math.random() * height);
