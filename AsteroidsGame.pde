@@ -1,5 +1,5 @@
 private SpaceShip philip = new SpaceShip();
-private starSystem [] background = new starSystem[100];
+private starSystem [] surroundings = new starSystem[100];
 private int[] sunSpot = {100,300};
 
 public void setup() 
@@ -8,21 +8,21 @@ public void setup()
   size(400,400);
   for(int a = 0; a < 5; a++)
   {
-  background[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+  surroundings[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
   }
-  for(int i = 5; i < background.length; ++i)
+  for(int i = 5; i < surroundings.length; ++i)
   {
-    background[i] = new Star();
+    surroundings[i] = new Star();
   }
 }
 public void draw() 
 {
   //your code here
   background(0);
-  for (int z = 1; z < background.length; ++z) {
-    background[z].show();
+  for (int z = 1; z < surroundings.length; ++z) {
+    surroundings[z].show();
   }
-  background[0].show();
+  surroundings[0].show();
   philip.show();
   philip.move();
 
@@ -35,11 +35,11 @@ void keyPressed()
     philip.hyperSpace();
      for(int a = 0; a < 5; a++)
      {
-        background[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+        surroundings[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
      }
-     for(int i = 5; i < background.length; ++i)
+     for(int i = 5; i < surroundings.length; ++i)
      {
-       background[i] = new Star();
+       surroundings[i] = new Star();
      }
   }
   if(keyCode == LEFT)
