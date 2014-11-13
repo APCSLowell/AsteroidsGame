@@ -34,3 +34,4 @@ Samples of Student Work
 [Lily](http://magicallilicorn.github.io/AsteroidsGame/)   
 [Calvin](http://icalvin12.github.io/AsteroidsGame/)   
 [Kenta](http://redtorch.github.io/AsteroidsGame/)   
+[Thomas](http://tomikam.github.io/AsteroidsGame/)
