@@ -88,24 +88,31 @@ class Sun extends Pixel implements starSystem
   //has public void show ()
 }
 
-class Star extends Pixel implements starSystem
+class Star  implements starSystem 
 {
+  private int starX,starY;
+  private int starColor;
+  private int starSiz;
+
   Star()
-  {
-    cornerz = 1;
-    xCornerz = new int[cornerz];
-    yCornerz = new int[cornerz];
-    xCornerz[0] = 0; yCornerz[0] = 0;
-    strokeWeight(3);
-    myColorz = (#FFFFFF);
-    myCenterXz = (int)(Math.random() * width);
-    myCenterYz = (int)(Math.random() * height);
+  { 
+    starX = (int)(Math.random()*width);
+    starY = (int)(Math.random()*height);
+    starColor = (#FFFFFF);
+    starSiz = 3;
   }
-  public void setXz(int x){myCenterXz = x;}  
-  public int getXz(){return (int)myCenterXz;}   
-  public void setYz(int y){myCenterYz = y;}
-  public int getYz(){return (int)myCenterYz;}
-  //holds the public function show()
+  public void show()
+  {
+    ellipse(starX, starY, starSiz, starSiz);
+  }
+
+  public void setX(int x){starX = x;}  
+  public int getX(){return (int)starX;}   
+  public void setY(int y){starY = y;}
+  public int getY(){return (int)starY;}
+  public void setSiz(int z){starSiz = z;}
+  public int getSiz(){return (int)starSiz;} 
+
 
 }
 
