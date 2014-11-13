@@ -1,1 +1,2 @@
-1: native code shows "Stars", however JavaScript does not, and the website shows no error
+1: Windows Processing makes the keyPress() function to lag
+
