@@ -1,6 +1,6 @@
 
 body {
-    background-color: rgb(200,200,200);
+    background-color: lemonchiffon;
     color: rgb(0,0,0);
     font-family: "Open Sans", sans-serif;
     text-align: center;
@@ -21,3 +21,6 @@ footer {
 	font-size: 90%;
 }
 
+img{
+    display: inline-block;
+}
