@@ -1,4 +1,5 @@
 private SpaceShip philip = new SpaceShip();
+private Asteroids peter = new Asteroids();
 private starSystem [] surroundings = new starSystem[100];
 private int[] sunSpot = {100,300};
 
@@ -27,6 +28,7 @@ public void draw()
   surroundings[0].show();
   philip.show();
   philip.move();
+  peter.show();
 
 }   
 
@@ -52,6 +54,7 @@ void keyPressed()
     philip.accelerate(1);
   if(keyCode == DOWN)
     philip.accelerate(-1);
+  peter.show();
 
 }
 
@@ -112,6 +115,41 @@ class Star  implements starSystem
   public int getY(){return (int)starY;}
   public void setSiz(int z){starSiz = z;}
   public int getSiz(){return (int)starSiz;} 
+
+
+}
+
+class Asteroids extends Floater
+{
+  private int turn;
+  Asteroids()
+  {
+    corners = 3;
+    xCorners  = new int[corners];
+    yCorners  = new int[corners];
+    xCorners[0] = -10; yCorners[0] = -10;
+    xCorners[1] = 8; yCorners[1] = -5;
+    xCorners[2] = 5; yCorners[2] = 11;
+    myColor =(#E600D2);
+    myCenterX = (int)(Math.random()*width);
+    myCenterY = (int)(Math.random()*height);
+    myDirectionX = Math.random()*15-7;
+    myDirectionY = Math.random()*15-7;
+    myPointDirection = 0;
+    turn = (int)(Math.random()*11-5); 
+  }
+  public void setX(int x){myDirectionX =x;}
+  public int getX(){return (int)myDirectionX;}
+  public void setY(int y) {myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+
+  public void setDirectionX(double x) {myDirectionX = x;} 
+  public double getDirectionX(){return myDirectionX;}
+  public void setDirectionY(double y){myDirectionY = y;} 
+  public double getDirectionY(){return myDirectionY;}
+
+  public void setPointDirection(int degrees){myPointDirection = degrees;}
+  public double getPointDirection(){return myPointDirection;}
 
 
 }
@@ -250,12 +288,12 @@ abstract class Pixel
     protected int myColorz;
     protected double myCenterXz;
     protected double myCenterYz;
-  abstract public void setXz(int x);  
-  abstract public int getXz();   
-  abstract public void setYz(int y);   
-  abstract public int getYz();   
-  public void show ()  //Draws the floater at the current position  
-  {             
+    abstract public void setXz(int x);  
+    abstract public int getXz();   
+    abstract public void setYz(int y);   
+    abstract public int getYz();   
+    public void show ()  //Draws the floater at the current position  
+    {             
     fill(myColorz);   
     stroke(myColorz);    
     //make the myDirection always = 0        
@@ -270,5 +308,5 @@ abstract class Pixel
       vertex(xRotatedTranslated,yRotatedTranslated);    
     }   
     endShape(CLOSE);  
-  }
+     }
 }
