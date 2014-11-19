@@ -1,5 +1,5 @@
 private SpaceShip philip = new SpaceShip();
-private Asteroids peter = new Asteroids();
+private Asteroids peter;
 private starSystem [] surroundings = new starSystem[100];
 private int[] sunSpot = {100,300};
 
@@ -15,6 +15,7 @@ public void setup()
   {
     surroundings[i] = new Star();
   }
+  peter = new Asteroids();
 }
 public void draw() 
 {
@@ -46,6 +47,7 @@ void keyPressed()
        surroundings[i] = new Star();
      }
   }
+  peter.show();
   if(keyCode == LEFT)
     philip.rotate(-4);
   if(keyCode == RIGHT)
@@ -54,7 +56,7 @@ void keyPressed()
     philip.accelerate(1);
   if(keyCode == DOWN)
     philip.accelerate(-1);
-  peter.show();
+  
 
 }
 
@@ -80,7 +82,7 @@ class Sun extends Pixel implements starSystem
     xCornerz[5] = siz/2;   yCornerz[5] = (int)(-1 * Math.sqrt(3)*siz/2);
 
 
-    myColorz = (#FFE942);
+    myColorz = color(255,233,66);
     myCenterXz = posX;
     myCenterYz = posY;
   }
@@ -101,11 +103,13 @@ class Star  implements starSystem
   { 
     starX = (int)(Math.random()*width);
     starY = (int)(Math.random()*height);
-    starColor = (#FFFFFF);
+    starColor = color(69,86,95);
     starSiz = 3;
   }
   public void show()
   {
+    fill(starColor);   
+    stroke(starColor); 
     ellipse(starX, starY, starSiz, starSiz);
   }
 
@@ -130,16 +134,17 @@ class Asteroids extends Floater
     xCorners[0] = -10; yCorners[0] = -10;
     xCorners[1] = 8; yCorners[1] = -5;
     xCorners[2] = 5; yCorners[2] = 11;
-    myColor =(#E600D2);
+    myColor = color(230,0,210);
     myCenterX = (int)(Math.random()*width);
     myCenterY = (int)(Math.random()*height);
+    System.out.println(width + ", " + height);
     myDirectionX = Math.random()*15-7;
     myDirectionY = Math.random()*15-7;
     myPointDirection = 0;
     turn = (int)(Math.random()*11-5); 
   }
-  public void setX(int x){myDirectionX =x;}
-  public int getX(){return (int)myDirectionX;}
+  public void setX(int x){myCenterX =x;}
+  public int getX(){return (int)myCenterX;}
   public void setY(int y) {myCenterY = y;}
   public int getY(){return (int)myCenterY;}
 
@@ -172,7 +177,7 @@ class SpaceShip extends Floater
      xCorners[8] = -20; yCorners[8] = -20;
      xCorners[9] = 10;  yCorners[9] = -20;
 
-     myColor = (#45595F);
+     myColor = color(75,90,100);
      myCenterX = 200;
      myCenterY = 200;
      myDirectionX = 0;
