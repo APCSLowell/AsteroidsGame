@@ -15,7 +15,7 @@ import java.io.IOException;
 public class AsteroidsGame extends PApplet {
 
 private SpaceShip philip = new SpaceShip();
-private Asteroids peter;
+private Asteroids[] peter = new Asteroids[7];
 private starSystem [] surroundings = new starSystem[100];
 private int[] sunSpot = {100,300};
 
@@ -31,7 +31,10 @@ public void setup()
   {
     surroundings[i] = new Star();
   }
-  peter = new Asteroids();
+  for (int b = 0; b < peter.length;b++) {
+    peter[b] = new Asteroids();
+  }
+  
 }
 public void draw() 
 {
@@ -45,12 +48,18 @@ public void draw()
   surroundings[0].show();
   philip.show();
   philip.move();
-  peter.show();
+  for(int a = 0; a < peter.length;a++)
+  {
+   peter[a].show();
+   peter[a].move();
+ }
+
 
 }   
 
 public void keyPressed()
 {
+  
   if(keyPressed == true && key == 'h')
   {
     philip.hyperSpace();
@@ -62,9 +71,11 @@ public void keyPressed()
      {
        surroundings[i] = new Star();
      }
+    for (int b = 0; b < peter.length;b++) {
+      peter[b] = new Asteroids();
+    }   
   }
-  peter = new Asteroids();
-  peter.show();
+  
   if(keyCode == LEFT)
     philip.rotate(-4);
   if(keyCode == RIGHT)
@@ -73,8 +84,6 @@ public void keyPressed()
     philip.accelerate(1);
   if(keyCode == DOWN)
     philip.accelerate(-1);
-  
-
 }
 
 interface starSystem
@@ -142,7 +151,7 @@ class Star  implements starSystem
 
 class Asteroids extends Floater
 {
-  private int turn;
+  private double turn;
   Asteroids()
   {
     corners = 3;
@@ -154,11 +163,11 @@ class Asteroids extends Floater
     myColor = color(230,0,210);
     myCenterX = (int)(Math.random()*width);
     myCenterY = (int)(Math.random()*height);
-    System.out.println(width + ", " + height);
-    myDirectionX = Math.random()*15-7;
-    myDirectionY = Math.random()*15-7;
+    myDirectionX = Math.random()*11-5;
+    myDirectionY = Math.random()*11-5;
     myPointDirection = 0;
-    turn = (int)(Math.random()*11-5); 
+    turn = Math.pow(-1,(int)(Math.random()*2))*3; 
+    System.out.println(Math.pow(-1,(int)(Math.random()*2))*3);
   }
   public void setX(int x){myCenterX =x;}
   public int getX(){return (int)myCenterX;}
@@ -172,7 +181,32 @@ class Asteroids extends Floater
 
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+ 
+  public void move ()   //move the floater in the current direction of travel
+  {      
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;  
+    myPointDirection+= turn;   
 
+    //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    }   
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }   
+  } 
 
 }
 
