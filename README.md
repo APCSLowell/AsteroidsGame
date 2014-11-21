@@ -41,3 +41,4 @@ Samples of Student Work
 [Aaron](http://aaronchowapcs.github.io/AsteroidsGame/)  
 [Philip](http://philiphuang2.github.io/AsteroidsGame/)  
 [David](http://inthehat.github.io/AsteroidsGame/)  
+[Jessica](http://happyjessica97.github.io/AsteroidsGame/)  
