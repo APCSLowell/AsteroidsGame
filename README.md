@@ -37,4 +37,5 @@ Samples of Student Work
 [Thomas](http://tomikam.github.io/AsteroidsGame/)  
 [Jeffrey](http://jeffreyyin1.github.io/AsteroidsGame/)  
 [Aaron](http://aaronchowapcs.github.io/AsteroidsGame/)  
-[Philip](http://philiphuang2.github.io/AsteroidsGame/)
+[Philip](http://philiphuang2.github.io/AsteroidsGame/)  
+[David](http://inthehat.github.io/AsteroidsGame/)  
