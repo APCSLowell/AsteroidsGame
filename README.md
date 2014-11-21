@@ -35,3 +35,4 @@ Samples of Student Work
 [Calvin](http://icalvin12.github.io/AsteroidsGame/)   
 [Kenta](http://redtorch.github.io/AsteroidsGame/)   
 [Thomas](http://tomikam.github.io/AsteroidsGame/)
+[Jeffrey](http://jeffreyyin1.github.io/AsteroidsGame/)  
