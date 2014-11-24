@@ -1,20 +1,20 @@
 private SpaceShip philip = new SpaceShip();
 private Asteroids[] peter = new Asteroids[7];
 private starSystem [] surroundings = new starSystem[100];
-private int[] sunSpot = {100,300};
+
 
 public void setup() 
 {
   //your code here
   size(400,400);
-  for(int a = 0; a < 5; a++)
-  {
-  surroundings[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+  for(int a = 0; a < 5; a++){
+  surroundings[a] = new Sun();
   }
-  for(int i = 5; i < surroundings.length; ++i)
-  {
+
+  for(int i = 5; i < surroundings.length; ++i){
     surroundings[i] = new Star();
   }
+
   for (int b = 0; b < peter.length;b++) {
     peter[b] = new Asteroids();
   }
@@ -28,8 +28,9 @@ public void draw()
     surroundings[z].show();
   }
   for(int b = 0 ; b < 5; b++)
-    surroundings[b].show();
-  surroundings[0].show();
+  surroundings[b].show();
+  
+
   philip.show();
   philip.move();
   for(int a = 0; a < peter.length;a++)
@@ -47,12 +48,10 @@ void keyPressed()
   if(keyPressed == true && key == 'h')
   {
     philip.hyperSpace();
-     for(int a = 0; a < 5; a++)
-     {
-        surroundings[a] = new Sun(sunSpot[(int)(Math.random()*2)],sunSpot[(int)(Math.random()*2)]);
+     for(int a = 0; a < 5; a++){
+        surroundings[a] = new Sun();
      }
-     for(int i = 5; i < surroundings.length; ++i)
-     {
+     for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
     for (int b = 0; b < peter.length;b++) {
@@ -78,8 +77,10 @@ interface starSystem
 class Sun extends Pixel implements starSystem
 {
   private int siz;
-  public Sun(int posX,int posY)
+  private int[] sunSpot = {100,300};
+  public Sun()
   {
+    
     siz = 28;
     cornerz = 6;
     xCornerz = new int [cornerz];
@@ -93,8 +94,8 @@ class Sun extends Pixel implements starSystem
 
 
     myColorz = color(255,233,66);
-    myCenterXz = posX;
-    myCenterYz = posY;
+    myCenterXz = sunSpot[(int)(Math.random()*2)];
+    myCenterYz = sunSpot[(int)(Math.random()*2)];
   }
   public void setXz(int x){myCenterXz = x;} 
   public int getXz(){return (int)myCenterXz;}   
