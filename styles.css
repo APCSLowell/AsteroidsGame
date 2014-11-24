@@ -1,10 +1,12 @@
 
 body {
+    background-image: url("http://wallfon.com/walls/space/the-asteroid-belt.jpg");
     background-color: lemonchiffon;
-    color: rgb(0,0,0);
+   
     font-family: "Open Sans", sans-serif;
     text-align: center;
 }
+
 
 #content {
     display: block;
@@ -13,10 +15,11 @@ body {
 }
 
 header {
-	
+	color: deeppink;
 }
 
 footer {
+	color: aliceblue;
 	font-style: italic;
 	font-size: 90%;
 }
