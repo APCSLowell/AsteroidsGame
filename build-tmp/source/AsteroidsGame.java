@@ -64,12 +64,10 @@ public void keyPressed()
   if(keyPressed == true && key == 'h')
   {
     philip.hyperSpace();
-     for(int a = 0; a < 5; a++)
-     {
+     for(int a = 0; a < 5; a++){
         surroundings[a] = new Sun();
      }
-     for(int i = 5; i < surroundings.length; ++i)
-     {
+     for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
     for (int b = 0; b < peter.length;b++) {
