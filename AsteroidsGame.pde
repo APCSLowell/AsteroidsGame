@@ -152,7 +152,6 @@ class Asteroids extends Floater
     myDirectionY = Math.random()*11-5;
     myPointDirection = 0;
     turn = Math.pow(-1,(int)(Math.random()*2))*3; 
-    System.out.println(Math.pow(-1,(int)(Math.random()*2))*3);
   }
   public void setX(int x){myCenterX =x;}
   public int getX(){return (int)myCenterX;}
