@@ -77,7 +77,7 @@ interface starSystem
 class Sun extends Pixel implements starSystem
 {
   private int siz;
-  private int[] sunSpot = {100,300};
+  private int[] sunSpot = {(int)(width/4),(int)(3*width/4)};
   public Sun()
   {
     
