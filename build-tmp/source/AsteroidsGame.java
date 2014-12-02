@@ -15,14 +15,17 @@ import java.io.IOException;
 public class AsteroidsGame extends PApplet {
 
 private SpaceShip philip = new SpaceShip();
-private Asteroids[] peter = new Asteroids[7];
+private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
+private int field = 15;
+private boolean turnLeft;
+private boolean turnRight;
 private starSystem [] surroundings = new starSystem[100];
 
 
 public void setup() 
 {
   //your code here
-  size(400,400);
+  size(800,800);
   for(int a = 0; a < 5; a++){
   surroundings[a] = new Sun();
   }
@@ -31,8 +34,8 @@ public void setup()
     surroundings[i] = new Star();
   }
 
-  for (int b = 0; b < peter.length;b++) {
-    peter[b] = new Asteroids();
+  for (int b = 0; b < field;b++) {
+    peter.add(new Asteroids());
   }
   
 }
@@ -49,10 +52,15 @@ public void draw()
 
   philip.show();
   philip.move();
-  for(int a = 0; a < peter.length;a++)
+  if(turnRight == true)
+    philip.rotate(4);
+  if(turnLeft == true)
+    philip.rotate(-4);
+  
+  for(int a = 0; a < field;a++)
   {
-   peter[a].show();
-   peter[a].move();
+   peter.get(a).show();
+   peter.get(a).move();
  }
 
 
@@ -70,15 +78,29 @@ public void keyPressed()
      for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
-    for (int b = 0; b < peter.length;b++) {
-      peter[b] = new Asteroids();
+    for (int b = 0; b < field;b++) {
+      // functions Atsteroids() does not exist
+      peter.set(b, new Asteroids());
     }   
   }
+
+  if(keyCode == LEFT && keyPressed == true)
+    turnLeft = true;
+  else if(keyPressed == false)
+    turnLeft = false;
   
-  if(keyCode == LEFT)
-    philip.rotate(-4);
-  if(keyCode == RIGHT)
-    philip.rotate(4);
+  if(keyCode == RIGHT && keyPressed == true)
+    turnRight = true;
+  else
+    turnRight = false;
+  
+  /*if(keyPressed == false)
+  {
+    turnRight = false;
+    turnLeft = false;
+  }
+  */
+  
   if(keyCode == UP)
     philip.accelerate(1);
   if(keyCode == DOWN)
@@ -93,7 +115,7 @@ interface starSystem
 class Sun extends Pixel implements starSystem
 {
   private int siz;
-  private int[] sunSpot = {100,300};
+  private int[] sunSpot = {(int)(width/4),(int)(3*width/4)};
   public Sun()
   {
     
@@ -118,6 +140,7 @@ class Sun extends Pixel implements starSystem
   public void setYz(int y){myCenterYz = y;}   
   public int getYz(){return (int)myCenterYz;}   
   //has public void show ()
+
 }
 
 class Star  implements starSystem 
@@ -147,7 +170,6 @@ class Star  implements starSystem
   public void setSiz(int z){starSiz = z;}
   public int getSiz(){return (int)starSiz;} 
 
-
 }
 
 class Asteroids extends Floater
@@ -155,12 +177,14 @@ class Asteroids extends Floater
   private double turn;
   Asteroids()
   {
-    corners = 3;
+    corners = 5;
     xCorners  = new int[corners];
     yCorners  = new int[corners];
     xCorners[0] = -10; yCorners[0] = -10;
     xCorners[1] = 8; yCorners[1] = -5;
     xCorners[2] = 5; yCorners[2] = 11;
+    xCorners[3] = -3; yCorners[3] = 7;
+    xCorners[4] = -16; yCorners[4] = -3;
     myColor = color(230,0,210);
     myCenterX = (int)(Math.random()*width);
     myCenterY = (int)(Math.random()*height);
@@ -211,7 +235,7 @@ class Asteroids extends Floater
 }
 
 class SpaceShip extends Floater  
-{   
+{
   SpaceShip()
   {
      corners = 10;
@@ -257,10 +281,11 @@ class SpaceShip extends Floater
 
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+
 }
 
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
-{   
+{
   protected int corners;  //the number of corners, a triangular floater has 3   
   protected int[] xCorners;   
   protected int[] yCorners;   
