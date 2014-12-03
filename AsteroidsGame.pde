@@ -1,10 +1,6 @@
 private SpaceShip philip = new SpaceShip();
 private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
 private int fieldSiz = 15;
-private boolean turnLeft;
-private boolean turnRight;
-private boolean accel;
-private boolean deAccel;
 private starSystem [] surroundings = new starSystem[100];
 
 
@@ -28,8 +24,6 @@ public void setup()
 public void draw() 
 {
   //your code here
-  println("turnLeft: "+turnLeft);
-  println("turnRight: "+turnRight);
   background(0);
   for (int z = 5; z < surroundings.length; ++z) {
     surroundings[z].show();
@@ -40,13 +34,13 @@ public void draw()
 
   philip.show();
   philip.move();
-  if(turnRight == true)
+  if(philip.getTurnRight() == true)
     philip.rotate(4);
-  if(turnLeft == true)
+  if(philip.getTurnLeft() == true)
     philip.rotate(-4);
-   if(accel == true)
+   if(philip.getAccel() == true)
     philip.accelerate(.1);
-  if(deAccel == true)
+  if(philip.getDeAccel() == true)
     philip.accelerate(-.1);
   
   for(int a = 0; a < fieldSiz;a++)
@@ -75,19 +69,19 @@ void keyPressed()
       peter.set(b, new Asteroids());
     }   
   }
-if(key==CODED)
-{
-  if(keyCode == LEFT)
-    turnLeft = true;
+  if(key==CODED)
+  {
+    if(keyCode == LEFT)
+      philip.setTurnLeft(true);
 
-  if(keyCode == RIGHT)
-    turnRight = true;
+    if(keyCode == RIGHT)
+      philip.setTurnRight(true);
   
-  if(keyCode == UP)
-    accel = true;
-  if(keyCode == DOWN)
-    deAccel = true;
-}
+    if(keyCode == UP)
+      philip.setAccel(true);
+    if(keyCode == DOWN)
+      philip.setDeAccel(true);
+  }
   
 }
 
@@ -95,14 +89,16 @@ void keyReleased()
 {
   if( key == CODED)
   {
-    if(keyCode == LEFT)
-      turnLeft = false;
-    if(keyCode == RIGHT) 
-      turnRight = false;
+   if(keyCode == LEFT)
+      philip.setTurnLeft(false);
+
+    if(keyCode == RIGHT)
+      philip.setTurnRight(false);
+  
     if(keyCode == UP)
-      accel = false;
+      philip.setAccel(false);
     if(keyCode == DOWN)
-      deAccel = false;
+      philip.setDeAccel(false);
   }
   
 }
@@ -238,6 +234,10 @@ class Asteroids extends Floater
 
 class SpaceShip extends Floater  
 {
+  private boolean turnLeft;
+  private boolean turnRight;
+  private boolean accel;
+  private boolean deAccel;
   SpaceShip()
   {
      corners = 10;
@@ -260,6 +260,11 @@ class SpaceShip extends Floater
      myDirectionX = 0;
      myDirectionY = 0;
      myPointDirection = 0;
+
+     turnLeft  = false;
+     turnRight = false;
+     accel     = false;
+     deAccel   = false;
   }
 
   public void hyperSpace()
@@ -283,6 +288,16 @@ class SpaceShip extends Floater
 
   public void setPointDirection(int degrees){myPointDirection = degrees;}
   public double getPointDirection(){return myPointDirection;}
+
+  public void setTurnLeft(boolean fact){turnLeft = fact;}
+  public void setTurnRight(boolean fact){turnRight = fact;}
+  public void setAccel(boolean fact){accel = fact;}
+  public void setDeAccel(boolean fact){deAccel = fact;}
+
+  public boolean getTurnLeft(){ return turnLeft;}
+  public boolean getTurnRight(){return turnRight;}
+  public boolean getAccel(){return accel;}
+  public boolean getDeAccel(){return deAccel;}
 
 }
 
