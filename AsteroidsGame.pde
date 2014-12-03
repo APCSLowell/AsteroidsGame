@@ -1,8 +1,10 @@
 private SpaceShip philip = new SpaceShip();
 private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
-private int field = 15;
+private int fieldSiz = 15;
 private boolean turnLeft;
 private boolean turnRight;
+private boolean accel;
+private boolean deAccel;
 private starSystem [] surroundings = new starSystem[100];
 
 
@@ -18,7 +20,7 @@ public void setup()
     surroundings[i] = new Star();
   }
 
-  for (int b = 0; b < field;b++) {
+  for (int b = 0; b < fieldSiz;b++) {
     peter.add(new Asteroids());
   }
   
@@ -26,6 +28,8 @@ public void setup()
 public void draw() 
 {
   //your code here
+  println("turnLeft: "+turnLeft);
+  println("turnRight: "+turnRight);
   background(0);
   for (int z = 5; z < surroundings.length; ++z) {
     surroundings[z].show();
@@ -40,8 +44,12 @@ public void draw()
     philip.rotate(4);
   if(turnLeft == true)
     philip.rotate(-4);
+   if(accel == true)
+    philip.accelerate(.1);
+  if(deAccel == true)
+    philip.accelerate(-.1);
   
-  for(int a = 0; a < field;a++)
+  for(int a = 0; a < fieldSiz;a++)
   {
    peter.get(a).show();
    peter.get(a).move();
@@ -53,7 +61,7 @@ public void draw()
 void keyPressed()
 {
   
-  if(keyPressed == true && key == 'h')
+  if( key == 'h')
   {
     philip.hyperSpace();
      for(int a = 0; a < 5; a++){
@@ -62,27 +70,44 @@ void keyPressed()
      for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
-    for (int b = 0; b < field;b++) {
+    for (int b = 0; b < fieldSiz;b++) {
       // functions Atsteroids() does not exist
       peter.set(b, new Asteroids());
     }   
   }
-
-  if(keyCode == LEFT && keyPressed == true)
+if(key==CODED)
+{
+  if(keyCode == LEFT)
     turnLeft = true;
-  else 
-    turnLeft = false;
-  
-  if(keyCode == RIGHT && keyPressed == true)
+
+  if(keyCode == RIGHT)
     turnRight = true;
-  else
-    turnRight = false;
   
   if(keyCode == UP)
-    philip.accelerate(1);
+    accel = true;
   if(keyCode == DOWN)
-    philip.accelerate(-1);
+    deAccel = true;
 }
+  
+}
+
+void keyReleased()
+{
+  if( key == CODED)
+  {
+    if(keyCode == LEFT)
+      turnLeft = false;
+    if(keyCode == RIGHT) 
+      turnRight = false;
+    if(keyCode == UP)
+      accel = false;
+    if(keyCode == DOWN)
+      deAccel = false;
+  }
+  
+}
+
+
 
 interface starSystem
 {
