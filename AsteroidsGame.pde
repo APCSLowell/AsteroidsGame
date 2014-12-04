@@ -43,15 +43,29 @@ public void draw()
   if(philip.getDeAccel() == true)
     philip.accelerate(-.1);
   
-  for(int a = 0; a < fieldSiz;a++)
+  for(int a = 0; a < peter.size();a++)
   {
    peter.get(a).show();
    peter.get(a).move();
  }
+ for(int b = 0; b < peter.size();b++)
+ {
+  if(dist(philip.getX(), philip.getY(),peter.get(b).getX(),peter.get(b).getY()) <= 20)
+    peter.remove(b);
+ }
 
 
+  println("peter.size(): "+peter.size());
+  
 }   
 
+/*
+public void collision (Object floater ,Object floater )
+{
+  if(dist(a.getX(), a.getY,b.getX(),b.getY()) <= 20)
+    peter.remove(0);
+}
+*/
 void keyPressed()
 {
   
@@ -64,7 +78,7 @@ void keyPressed()
      for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
-    for (int b = 0; b < fieldSiz;b++) {
+    for (int b = 0; b < peter.size();b++) {
       // functions Atsteroids() does not exist
       peter.set(b, new Asteroids());
     }   
