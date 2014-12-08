@@ -31,6 +31,15 @@ public void draw()
   for(int b = 0 ; b < 5; b++)
   surroundings[b].show();
   
+    
+ for(int b = 0; b < peter.size();b++)
+ {
+   double d = dist(philip.getX(), philip.getY(),peter.get(b).getX(),peter.get(b).getY());
+  if(d <= 45)
+  {
+    peter.remove(b);
+  }
+ }
 
   philip.show();
   philip.move();
@@ -42,30 +51,16 @@ public void draw()
     philip.accelerate(.1);
   if(philip.getDeAccel() == true)
     philip.accelerate(-.1);
-  
+
+
   for(int a = 0; a < peter.size();a++)
   {
    peter.get(a).show();
    peter.get(a).move();
  }
- for(int b = 0; b < peter.size();b++)
- {
-  if(dist(philip.getX(), philip.getY(),peter.get(b).getX(),peter.get(b).getY()) <= 20)
-    peter.remove(b);
- }
-
-
-  println("peter.size(): "+peter.size());
   
 }   
 
-/*
-public void collision (Object floater ,Object floater )
-{
-  if(dist(a.getX(), a.getY,b.getX(),b.getY()) <= 20)
-    peter.remove(0);
-}
-*/
 void keyPressed()
 {
   
@@ -290,8 +285,8 @@ class SpaceShip extends Floater
       myCenterY = (int)(Math.random() * height);  
   }
 
-  public void setX(int x){myDirectionX =x;}
-  public int getX(){return (int)myDirectionX;}
+  public void setX(int x){myCenterX =x;}
+  public int getX(){return (int)myCenterX;}
   public void setY(int y) {myCenterY = y;}
   public int getY(){return (int)myCenterY;}
 
