@@ -15,9 +15,11 @@ import java.io.IOException;
 public class AsteroidsGame extends PApplet {
 
 private SpaceShip philip = new SpaceShip();
-private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
-private int fieldSiz = 15;
 private starSystem [] surroundings = new starSystem[100];
+private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
+private ArrayList<Bullets> clip = new ArrayList<Bullets>();
+private int fieldSiz = 15;
+
 
 
 public void setup() 
@@ -46,6 +48,12 @@ public void draw()
   }
   for(int b = 0 ; b < 5; b++)
   surroundings[b].show();
+
+  for(int a =0; a < clip.size(); a++)
+ {
+  clip.get(a).show();
+  clip.get(a).move();
+ }
   
     
  for(int b = 0; b < peter.size();b++)
@@ -94,6 +102,7 @@ public void keyPressed()
       peter.set(b, new Asteroids());
     }   
   }
+  
   if(key==CODED)
   {
     if(keyCode == LEFT)
@@ -108,6 +117,11 @@ public void keyPressed()
       philip.setDeAccel(true);
   }
   
+  if(key == 's')
+  {
+    clip.add(new Bullets(philip));
+    println("pew");
+  }
 }
 
 public void keyReleased()
@@ -127,8 +141,6 @@ public void keyReleased()
   }
   
 }
-
-
 
 interface starSystem
 {
@@ -255,6 +267,41 @@ class Asteroids extends Floater
     }   
   } 
 
+}
+
+class Bullets extends Floater
+{
+  private float bulletSiz;
+  private double dRadians;
+  Bullets(SpaceShip theShip)
+  {
+    myColor = color(73,122,55);
+    bulletSiz = 5;
+    myCenterX = theShip.getX();
+    myCenterY = theShip.getY();
+    myPointDirection = theShip.getPointDirection();
+    dRadians = myPointDirection*(Math.PI/180);
+    myDirectionX = 5 * Math.cos(dRadians) + theShip.getDirectionX();
+    myDirectionY = 5 * Math.sin(dRadians) + theShip.getDirectionY();
+  }
+
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}
+  public void setY(int y){myCenterY = y;}   
+  public int getY(){return (int)myCenterY;}   
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}   
+  public double getDirectionY(){return myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return (double)myPointDirection;} 
+
+  public void show()
+  {
+    fill(myColor);
+    stroke(myColor);
+    ellipse((float)myCenterX, (float)myCenterY, bulletSiz, bulletSiz);
+  }
 }
 
 class SpaceShip extends Floater  
