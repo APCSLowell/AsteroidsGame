@@ -20,8 +20,6 @@ private ArrayList<Asteroids> peter = new ArrayList<Asteroids>();
 private ArrayList<Bullets> clip = new ArrayList<Bullets>();
 private int fieldSiz = 15;
 
-
-
 public void setup() 
 {
   //your code here
@@ -39,15 +37,24 @@ public void setup()
   }
   
 }
+
 public void draw() 
 {
   //your code here
   background(0);
+  
+
   for (int z = 5; z < surroundings.length; ++z) {
     surroundings[z].show();
   }
   for(int b = 0 ; b < 5; b++)
   surroundings[b].show();
+
+  for(int a = 0; a < clip.size(); a++)
+  {
+    if(clip.get(a).getDestroyed() == true)
+      clip.remove(a);
+  }
 
   for(int a =0; a < clip.size(); a++)
  {
@@ -97,10 +104,9 @@ public void keyPressed()
      for(int i = 5; i < surroundings.length; ++i){
        surroundings[i] = new Star();
      }
-    for (int b = 0; b < peter.size();b++) {
-      // functions Atsteroids() does not exist
-      peter.set(b, new Asteroids());
-    }   
+    for (int b = 0; b < fieldSiz - peter.size();b++) {
+       peter.add(new Asteroids());
+    } 
   }
   
   if(key==CODED)
@@ -120,7 +126,6 @@ public void keyPressed()
   if(key == 's')
   {
     clip.add(new Bullets(philip));
-    println("pew");
   }
 }
 
@@ -218,13 +223,13 @@ class Asteroids extends Floater
     xCorners[0] = -10; yCorners[0] = -10;
     xCorners[1] = 8; yCorners[1] = -5;
     xCorners[2] = 5; yCorners[2] = 11;
-    xCorners[3] = -3; yCorners[3] = 7;
+    xCorners[3] = -3; yCorners[3] = 18;
     xCorners[4] = -16; yCorners[4] = -3;
     myColor = color(230,0,210);
     myCenterX = (int)(Math.random()*width);
     myCenterY = (int)(Math.random()*height);
-    myDirectionX = Math.random()*11-5;
-    myDirectionY = Math.random()*11-5;
+    myDirectionX = Math.random()*3-.95f;
+    myDirectionY = Math.random()*3-.95f;
     myPointDirection = 0;
     turn = Math.pow(-1,(int)(Math.random()*2))*3; 
   }
@@ -273,10 +278,12 @@ class Bullets extends Floater
 {
   private float bulletSiz;
   private double dRadians;
+  private boolean deStroyed;
   Bullets(SpaceShip theShip)
   {
+    deStroyed = false;
     myColor = color(73,122,55);
-    bulletSiz = 5;
+    bulletSiz = 10;
     myCenterX = theShip.getX();
     myCenterY = theShip.getY();
     myPointDirection = theShip.getPointDirection();
@@ -295,6 +302,8 @@ class Bullets extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return (double)myPointDirection;} 
+  public void setDestroyed(boolean fact){deStroyed = fact;} 
+  public boolean getDestroyed(){return deStroyed;}
 
   public void show()
   {
@@ -302,6 +311,31 @@ class Bullets extends Floater
     stroke(myColor);
     ellipse((float)myCenterX, (float)myCenterY, bulletSiz, bulletSiz);
   }
+
+    public void move ()   //move the floater in the current direction of travel
+  {      
+    //change the x and y coordinates by myDirectionX and myDirectionY       
+    myCenterX += myDirectionX;    
+    myCenterY += myDirectionY;     
+
+    //wrap around screen    
+    if(myCenterX >width)
+    {     
+      deStroyed = true;
+    }    
+    else if (myCenterX<0)
+    {     
+      deStroyed = true;    
+    }    
+    if(myCenterY >height)
+    {    
+      deStroyed = true;   
+    }   
+    else if (myCenterY < 0)
+    {     
+      deStroyed = true;    
+    }   
+  } 
 }
 
 class SpaceShip extends Floater  
