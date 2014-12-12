@@ -1,2 +1,2 @@
-1: Windows Processing makes the keyPress() function to lag
+1: right now two variables (boolean fired, and int countdown) controls the cooldown period, try to simplify to one.
 
