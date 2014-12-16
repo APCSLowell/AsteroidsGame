@@ -38,7 +38,7 @@ Samples of Student Work
 [Kenta](http://redtorch.github.io/AsteroidsGame/)   
 [Thomas](http://tomikam.github.io/AsteroidsGame/)  
 [Jeffrey](http://jeffreyyin1.github.io/AsteroidsGame/)  
-[Aaron](http://aaronchowapcs.github.io/AsteroidsGame/)  
+[Aaron](http://aaronchowapcs.github.io/Lightning/)  
 [Philip](http://philiphuang2.github.io/AsteroidsGame/)  
 [David](http://inthehat.github.io/AsteroidsGame/)  
 [Jessica](http://happyjessica97.github.io/AsteroidsGame/)  
