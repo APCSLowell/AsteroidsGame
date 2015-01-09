@@ -29,7 +29,7 @@ Samples of Student Work
 [Erika](http://bekutaa.github.io/AsteroidsGame/)   
 [Lucy](http://luchen825.github.io/AsteroidsGame/)   
 [Zachary](https://zachooz.github.io/AsteroidsGame/)   
-[Antonio](https://adcarmona.github.io/AsteroidsGame/) 
+[Antonio](https://adcarmona.github.io/AsteroidsGame/)   
 [Eric](http://ericheung1231.github.io/AsteroidsGame/)  
 [Kirby](http://kichoy.github.io/AsteroidsGame/)   
 [Averal](http://avekan33.github.io/AsteroidsGame/)   
