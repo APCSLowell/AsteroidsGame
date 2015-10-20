@@ -10,7 +10,7 @@ Suggested steps to complete this assignment
 1. Fork this repository.
 2. Uncomment the `extends floater` on Line 10
 3. Complete the 10 abstract `set` and `get` functions
-4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) slides and the [SpaceShip design worksheet](https://drive.google.com/open?id=0Bz2ZkT6qWPYTSXFkdGxJYTVDTmc"> to be helpful. You may also find [this sample SpaceShip program](https://56d4b6566b56a59e1f634ea30f548666c459899d.googledrive.com/host/0Bz2ZkT6qWPYTallTVFJBOWdNcDQ/) to be helpful in understanding how the variables affect the SpaceShip's movement.
+4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) slides and the [SpaceShip design worksheet](https://drive.google.com/open?id=0Bz2ZkT6qWPYTSXFkdGxJYTVDTmc) to be helpful. You may also find [this sample SpaceShip program](https://56d4b6566b56a59e1f634ea30f548666c459899d.googledrive.com/host/0Bz2ZkT6qWPYTallTVFJBOWdNcDQ/) to be helpful in understanding how the variables affect the SpaceShip's movement.
 5. At the top of your program, declare a variable of type `SpaceShip`
 6. Initialize the `SpaceShip` as a new instance of the class
 7. In `draw()` call the SpaceShip's `show()` function
