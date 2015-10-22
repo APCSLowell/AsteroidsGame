@@ -18,7 +18,7 @@ Suggested steps to complete this assignment
 9. Write code in `keyPressed` that allows you to control the space ship with the keyboard. You must include the ability to rotate left, rotate right, accelerate, and enter "hyperspace." (There is no requirement for any fancy visual effects, hyperspace just needs to stop the ship, and give it a new random position and direction.)
 10. Add code to `draw()` to `move()` the Spaceship
 11. Finally, add a `Star` class that creates a random number of stars in random positions
-12. Note that for full credit, you MUST include instructions on how to operate your SpaceShip in the index.html file
+12. Note that for full credit, you MUST include instructions on how to operate your SpaceShip in the `index.html` file
 12. If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
