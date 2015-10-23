@@ -23,7 +23,7 @@ Suggested steps to complete this assignment
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
 
-*This assignment was selected as a "Nifty CS Assignment" in 2008 by Nick Parlante @ Stanford
+######*This assignment was selected as a "Nifty CS Assignment" in 2008 by Nick Parlante @ Stanford*
 Samples of Student Work
 -----------------------
 [Rebecca](http://rebeccachen1.github.io/AsteroidsGame/)  
