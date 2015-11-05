@@ -1,15 +1,55 @@
-//your variable declarations here
+SpaceShip tom = new SpaceShip(0,0,0);//your variable declarations here
 public void setup() 
 {
-  //your code here
+  size(600,600);
 }
 public void draw() 
 {
-  //your code here
+  background(0);
+  tom.show();
 }
-class SpaceShip //extends Floater  
+public void keyPressed()
+{
+  if(key == 'w')
+  {
+    tom.accelerate(1);
+    tom.move();
+  }
+  if(key == 'd')
+  {
+    tom.rotate(10);
+  }
+  if(key == 'a')
+  {
+    tom.rotate(-10);
+  }
+}
+class SpaceShip extends Floater  
 {   
-    //your code here
+    SpaceShip(int x, int y, int degrees) 
+    {
+      corners = 12;  //the number of corners, a triangular floater has 3   
+      int[] xS = {-11,0,18,18,13,13,18,18,7,10,10,0};
+      int[] yS = {0,11,3,2,2,-1,-1,-2,-7,-8,-9,-10};
+      xCorners = xS;
+      yCorners = yS;
+      myColor = 255;   
+      myCenterX = 300;
+      myCenterY = 300; //holds center coordinates   
+      myDirectionX = 2; 
+      myDirectionY = 3; //holds x and y coordinates of the vector for direction of travel   
+      myPointDirection = 0; //holds curre
+    }
+    public void setX(int x){myCenterX = x;}  
+    public int getX(){return (int)myCenterX;}   
+    public void setY(int y){myCenterY = y;}
+    public int getY(){return (int)myCenterY;}
+    public void setDirectionX(double x){myDirectionX = x;}   
+    public double getDirectionX(){return myDirectionX;}   
+    public void setDirectionY(double y){myDirectionY = y;}
+    public double getDirectionY(){return myDirectionY;}   
+    public void setPointDirection(int degrees){myPointDirection = degrees;}   
+    public double getPointDirection(){return myPointDirection;}
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
@@ -35,7 +75,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void accelerate (double dAmount)   
   {          
     //convert the current direction the floater is pointing to radians    
-    double dRadians =myPointDirection*(Math.PI/180);     
+    double dRadians = myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
@@ -87,4 +127,3 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     endShape(CLOSE);  
   }   
 } 
-
