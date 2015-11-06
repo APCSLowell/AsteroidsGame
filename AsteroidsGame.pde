@@ -1,4 +1,5 @@
-SpaceShip tom = new SpaceShip(0,0,0);//your variable declarations here
+SpaceShip tom = new SpaceShip(0,0,0);
+
 public void setup() 
 {
   size(600,600);
@@ -7,21 +8,33 @@ public void draw()
 {
   background(0);
   tom.show();
+  tom.move();
 }
 public void keyPressed()
 {
-  if(key == 'w')
+  if(key == 'w' || keyCode == UP)
   {
-    tom.accelerate(1);
-    tom.move();
+    tom.accelerate(0.3);
   }
-  if(key == 'd')
+  if(key == 's' || keyCode == DOWN)
+  {
+    tom.accelerate(-0.3);
+  }
+  if(key == 'b')
+  {
+    tom.brake();
+  }
+  if(key == 'd' || keyCode == RIGHT)
   {
     tom.rotate(10);
   }
-  if(key == 'a')
+  if(key == 'a' || keyCode == LEFT)
   {
     tom.rotate(-10);
+  }
+  if(key == 'h')
+  {
+    tom.hyperSpace();
   }
 }
 class SpaceShip extends Floater  
@@ -36,9 +49,28 @@ class SpaceShip extends Floater
       myColor = 255;   
       myCenterX = 300;
       myCenterY = 300; //holds center coordinates   
-      myDirectionX = 2; 
-      myDirectionY = 3; //holds x and y coordinates of the vector for direction of travel   
-      myPointDirection = 0; //holds curre
+      myDirectionX = 0; 
+      myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
+      myPointDirection = 0; 
+    }
+    public void brake()
+    {
+      boolean brake = true;
+      if(brake == true)
+      {
+        tom.accelerate(-0.9);
+      }
+      if(myDirectionX == 0)
+      {
+        tom.accelerate(0);
+        brake = false;
+      }
+    }
+    public void hyperSpace()
+    {
+      myCenterX = (int)(Math.random()*600);
+      myCenterY = (int)(Math.random()*600);
+      myPointDirection = (int)(Math.random()*360);
     }
     public void setX(int x){myCenterX = x;}  
     public int getX(){return (int)myCenterX;}   
@@ -92,7 +124,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myCenterY += myDirectionY;     
 
     //wrap around screen    
-    if(myCenterX >width)
+    if(myCenterX > width)
     {     
       myCenterX = 0;    
     }    
