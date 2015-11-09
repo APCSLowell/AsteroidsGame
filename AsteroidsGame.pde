@@ -1,5 +1,8 @@
 SpaceShip tom = new SpaceShip(0,0,0);
-
+boolean keyW = false;
+boolean keyS = false;
+boolean keyD = false;
+boolean keyA = false;
 public void setup() 
 {
   size(600,600);
@@ -9,32 +12,65 @@ public void draw()
   background(0);
   tom.show();
   tom.move();
+  if(keyW == true)
+  {
+    tom.accelerate(0.3);
+  }
+  if(keyS == true)
+  {
+    tom.accelerate(-0.3);
+  }
+  if(keyD == true)
+  {
+    tom.rotate(3);
+  }
+  if(keyA == true)
+  {
+    tom.rotate(-3);
+  }
 }
 public void keyPressed()
 {
   if(key == 'w' || keyCode == UP)
   {
-    tom.accelerate(0.3);
+    keyW = true;
   }
   if(key == 's' || keyCode == DOWN)
   {
-    tom.accelerate(-0.3);
-  }
-  if(key == 'b')
-  {
-    tom.brake();
+    keyS = true;
   }
   if(key == 'd' || keyCode == RIGHT)
   {
-    tom.rotate(10);
+    keyD = true;
   }
   if(key == 'a' || keyCode == LEFT)
   {
-    tom.rotate(-10);
+    keyA = true;
   }
   if(key == 'h')
   {
     tom.hyperSpace();
+    setDirectionX(0.0);
+    setDirectionY(0.0);
+  }
+}
+public void keyReleased()
+{
+  if(key == 'w' || keyCode == UP)
+  {
+    keyW = false;
+  }
+  if(key == 's' || keyCode == DOWN)
+  {
+    keyS = false;
+  }
+  if(key == 'd' || keyCode == RIGHT)
+  {
+    keyD = false;
+  }
+  if(key == 'a' || keyCode == LEFT)
+  {
+    keyA = false;
   }
 }
 class SpaceShip extends Floater  
