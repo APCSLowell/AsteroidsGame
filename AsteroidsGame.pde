@@ -1,4 +1,5 @@
 SpaceShip tom = new SpaceShip(0,0,0);
+Star[] bob = new Star[200];
 boolean keyW = false;
 boolean keyS = false;
 boolean keyD = false;
@@ -6,12 +7,20 @@ boolean keyA = false;
 public void setup() 
 {
   size(600,600);
+  for (int i = 0; i < bob.length; i++)
+  {
+    bob[i] = new Star();
+  }
 }
 public void draw() 
 {
   background(0);
   tom.show();
   tom.move();
+  for (int i = 0; i < bob.length; i++)
+  {
+    bob[i].show();
+  }
   if(keyW == true)
   {
     tom.accelerate(0.3);
@@ -50,8 +59,8 @@ public void keyPressed()
   if(key == 'h')
   {
     tom.hyperSpace();
-    setDirectionX(0.0);
-    setDirectionY(0.0);
+    //setDirectionX(0.0);
+    //setDirectionY(0.0);
   }
 }
 public void keyReleased()
@@ -118,6 +127,21 @@ class SpaceShip extends Floater
     public double getDirectionY(){return myDirectionY;}   
     public void setPointDirection(int degrees){myPointDirection = degrees;}   
     public double getPointDirection(){return myPointDirection;}
+}
+class Star
+{
+  int x, y;
+  Star()
+  {
+    x = (int)(Math.random()*600);
+    y = (int)(Math.random()*600);
+  }
+  public void show()
+  {
+    stroke(255,255,255);
+    fill(255,255,255);
+    ellipse(x, y, 1, 1);
+  }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
