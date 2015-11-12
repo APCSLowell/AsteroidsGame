@@ -59,8 +59,6 @@ public void keyPressed()
   if(key == 'h')
   {
     tom.hyperSpace();
-    //setDirectionX(0.0);
-    //setDirectionY(0.0);
   }
 }
 public void keyReleased()
