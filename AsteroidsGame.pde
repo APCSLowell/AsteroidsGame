@@ -59,6 +59,8 @@ public void keyPressed()
   if(key == 'h')
   {
     tom.hyperSpace();
+    tom.setDirectionX(0);
+    tom.setDirectionY(0);
   }
 }
 public void keyReleased()
@@ -82,7 +84,7 @@ public void keyReleased()
 }
 class SpaceShip extends Floater  
 {   
-    SpaceShip(int x, int y, int degrees) 
+    public SpaceShip(int x, int y, int degrees) 
     {
       corners = 12;  //the number of corners, a triangular floater has 3   
       int[] xS = {-11,0,18,18,13,13,18,18,7,10,10,0};
