@@ -4,6 +4,7 @@ boolean keyW = false;
 boolean keyS = false;
 boolean keyD = false;
 boolean keyA = false;
+boolean keyB = false;
 public void setup() 
 {
   size(600,600);
@@ -37,6 +38,10 @@ public void draw()
   {
     tom.rotate(-3);
   }
+  if(keyB == true)
+  {
+    
+  }
 }
 public void keyPressed()
 {
@@ -62,6 +67,10 @@ public void keyPressed()
     tom.setDirectionX(0);
     tom.setDirectionY(0);
   }
+  if(key == 'b')
+  {
+    keyB = true;
+  }
 }
 public void keyReleased()
 {
@@ -81,9 +90,14 @@ public void keyReleased()
   {
     keyA = false;
   }
+  if(key == 'b')
+  {
+    keyB = false;
+  }
 }
 class SpaceShip extends Floater  
 {   
+    private boolean brake;
     public SpaceShip(int x, int y, int degrees) 
     {
       corners = 12;  //the number of corners, a triangular floater has 3   
@@ -97,19 +111,7 @@ class SpaceShip extends Floater
       myDirectionX = 0; 
       myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = 0; 
-    }
-    public void brake()
-    {
-      boolean brake = true;
-      if(brake == true)
-      {
-        tom.accelerate(-0.9);
-      }
-      if(myDirectionX == 0)
-      {
-        tom.accelerate(0);
-        brake = false;
-      }
+      brake = false;
     }
     public void hyperSpace()
     {
