@@ -5,9 +5,11 @@ boolean keyS = false;
 boolean keyD = false;
 boolean keyA = false;
 boolean keyB = false;
+PImage f;
 public void setup() 
 {
   size(600,600);
+  f = loadImage("falcon1.png");
   for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
@@ -16,6 +18,7 @@ public void setup()
 public void draw() 
 {
   background(0);
+  image(f, 300, 300,74,55);
   tom.show();
   tom.move();
   for (int i = 0; i < bob.length; i++)
