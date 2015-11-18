@@ -5,26 +5,26 @@ boolean keyS = false;
 boolean keyD = false;
 boolean keyA = false;
 boolean keyB = false;
-PImage f;
+PImage back;
 public void setup() 
 {
   size(600,600);
-  f = loadImage("falcon1.png");
-  for (int i = 0; i < bob.length; i++)
+  back = loadImage("deathstar3.png");
+  /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
-  }
+  }*/
 }
 public void draw() 
 {
-  background(0);
-  image(f, 300, 300,74,55);
+  image(back,0,0,900,600);
+  //image(f, 300, 300,74,55);
   tom.show();
   tom.move();
-  for (int i = 0; i < bob.length; i++)
+  /*for (int i = 0; i < bob.length; i++)
   {
     bob[i].show();
-  }
+  }*/
   if(keyW == true)
   {
     tom.accelerate(0.3);
@@ -101,6 +101,7 @@ public void keyReleased()
 class SpaceShip extends Floater  
 {   
     private boolean brake;
+    private PImage f;
     public SpaceShip(int x, int y, int degrees) 
     {
       corners = 12;  //the number of corners, a triangular floater has 3   
@@ -113,7 +114,8 @@ class SpaceShip extends Floater
       myCenterY = 300; //holds center coordinates   
       myDirectionX = 0; 
       myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
-      myPointDirection = 0; 
+      myPointDirection = 0;
+      f = loadImage("falcon1.png"); 
       brake = false;
     }
     public void hyperSpace()
