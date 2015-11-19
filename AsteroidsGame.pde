@@ -18,7 +18,6 @@ public void setup()
 public void draw() 
 {
   image(back,0,0,900,600);
-  //image(f, 300, 300,74,55);
   tom.show();
   tom.move();
   /*for (int i = 0; i < bob.length; i++)
@@ -102,6 +101,7 @@ class SpaceShip extends Floater
 {   
     private boolean brake;
     private PImage f;
+    private String ship;
     public SpaceShip(int x, int y, int degrees) 
     {
       corners = 12;  //the number of corners, a triangular floater has 3   
@@ -116,6 +116,7 @@ class SpaceShip extends Floater
       myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = 0;
       f = loadImage("falcon1.png"); 
+      //ship = "falcon1.png";
       brake = false;
     }
     public void hyperSpace()
