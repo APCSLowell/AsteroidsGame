@@ -52,7 +52,7 @@ Samples of Student Work
 [Noah](http://noahzpepper.github.io/AsteroidsGame/)  
 [Martin](http://marrtinj.github.io/AsteroidsGame/)  
 [Amy](http://amhe3.github.io/AsteroidsGame/)  
-[Evanb](http://evhuang.github.io/AsteroidsGame/)  
+[Evan](http://evhuang.github.io/AsteroidsGame/)  
 [Kevin](http://oohklim.github.io/AsteroidsGame/)  
 [Jeremy](http://gitrektapcs.github.io/AsteroidsGame/)  
 [Jacky](http://jackyrobot.github.io/AsteroidsGame/)  
