@@ -27,6 +27,7 @@ These steps are only a suggestion. Your Asteroids game doesn't have to work or a
 Samples of Student Work
 -----------------------
 [Brian](http://brianlam37.github.io/AsteroidsGame/)  
+[Theo](https://awesomestickman.github.io/AsteroidsGame/)  
 [Brian](http://btx123.github.io/AsteroidsGame/)  
 [Steven](http://crzysteven.github.io/AsteroidsGame/)  
 [Lawrence](http://shakaking.github.io/AsteroidsGame/)  
