@@ -2,14 +2,14 @@ SpaceShip tom = new SpaceShip(0,0,0);
 Star[] bob = new Star[200];
 boolean keyW = false;
 boolean keyS = false;
-boolean keyD = false;
-boolean keyA = false;
 boolean keyB = false;
 PImage back;
+PImage f;
 public void setup() 
 {
   size(600,600);
   back = loadImage("deathstar3.png");
+  f = loadImage("falcon1.png");
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
@@ -32,14 +32,6 @@ public void draw()
   {
     tom.accelerate(-0.3);
   }
-  if(keyD == true)
-  {
-    tom.rotate(3);
-  }
-  if(keyA == true)
-  {
-    tom.rotate(-3);
-  }
   if(keyB == true)
   {
     
@@ -54,14 +46,6 @@ public void keyPressed()
   if(key == 's' || keyCode == DOWN)
   {
     keyS = true;
-  }
-  if(key == 'd' || keyCode == RIGHT)
-  {
-    keyD = true;
-  }
-  if(key == 'a' || keyCode == LEFT)
-  {
-    keyA = true;
   }
   if(key == 'h')
   {
@@ -84,14 +68,6 @@ public void keyReleased()
   {
     keyS = false;
   }
-  if(key == 'd' || keyCode == RIGHT)
-  {
-    keyD = false;
-  }
-  if(key == 'a' || keyCode == LEFT)
-  {
-    keyA = false;
-  }
   if(key == 'b')
   {
     keyB = false;
@@ -100,23 +76,26 @@ public void keyReleased()
 class SpaceShip extends Floater  
 {   
     private boolean brake;
-    private PImage f;
-    private String ship;
+    private double dRadians;
+    private int maxSpeed;
     public SpaceShip(int x, int y, int degrees) 
     {
-      corners = 12;  //the number of corners, a triangular floater has 3   
-      int[] xS = {-11,0,18,18,13,13,18,18,7,10,10,0};
-      int[] yS = {0,11,3,2,2,-1,-1,-2,-7,-8,-9,-10};
+      /*corners = 4;  //the number of corners, a triangular floater has 3   
+      int[] xS = {40,-21,0,-12};
+      int[] yS = {0,-20,0,20};
       xCorners = xS;
-      yCorners = yS;
-      myColor = 255;   
+      yCorners = yS;    //OLD SHIP
+      myColor = 255; */  
       myCenterX = 300;
       myCenterY = 300; //holds center coordinates   
       myDirectionX = 0; 
       myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = 0;
-      f = loadImage("falcon1.png"); 
-      //ship = "falcon1.png";
+      dRadians = Math.asin((mouseY-myCenterY)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
+      if((mouseX-myCenterX)<0)
+      {
+        dRadians=Math.PI-dRadians;
+      }
       brake = false;
     }
     public void hyperSpace()
@@ -124,6 +103,40 @@ class SpaceShip extends Floater
       myCenterX = (int)(Math.random()*600);
       myCenterY = (int)(Math.random()*600);
       myPointDirection = (int)(Math.random()*360);
+    }
+    public void show()
+    {
+      super.show();
+      if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY)!=0)
+      {
+        dRadians = Math.acos((mouseX-myCenterX)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
+      }
+      if((mouseY-myCenterY)<0)
+      {
+      dRadians*=-1;
+      }
+      translate((int)(myCenterX),(int)(myCenterY));
+      rotate((float)dRadians);
+      image(f,-37,-25.5,80,56);
+      translate(-(int)(myCenterX),-(int)(myCenterY));
+      }
+      public void brake()
+      {
+
+      }
+    public void accelerate(double dAmount)
+    {
+    maxSpeed = 10;
+    myDirectionX += ((dAmount) * Math.cos(dRadians)); 
+    myDirectionY += ((dAmount) * Math.sin(dRadians));
+    if(myDirectionX > maxSpeed)
+      myDirectionX = maxSpeed;
+    if(myDirectionY > maxSpeed)
+      myDirectionY = maxSpeed;
+    if(myDirectionX < -1 * maxSpeed)
+      myDirectionX = -1 * maxSpeed;
+    if(myDirectionY < -1 * maxSpeed)
+      myDirectionY = -1 * maxSpeed;
     }
     public void setX(int x){myCenterX = x;}  
     public int getX(){return (int)myCenterX;}   
@@ -180,7 +193,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
-  public void rotate (int nDegreesOfRotation)   
+  public void turn (int nDegreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
     myPointDirection+=nDegreesOfRotation;   
