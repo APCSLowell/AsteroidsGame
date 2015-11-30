@@ -8,7 +8,7 @@ PImage f;
 public void setup() 
 {
   size(600,600);
-  back = loadImage("deathstar3.png");
+  back = loadImage("deathstar4.png");
   f = loadImage("falcon1.png");
   /*for (int i = 0; i < bob.length; i++)
   {
@@ -17,7 +17,7 @@ public void setup()
 }
 public void draw() 
 {
-  image(back,0,0,900,600);
+  image(back,0,0,600,600);
   tom.show();
   tom.move();
   /*for (int i = 0; i < bob.length; i++)
