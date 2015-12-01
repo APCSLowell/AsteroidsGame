@@ -28,6 +28,8 @@ Samples of Student Work
 -----------------------
 [Raymond](http://raymondshew.github.io/AsteroidsGame/)  
 [Thien](http://thtran1.github.io/AsteroidsGame/)  
+[Terrance](http://auxoworks.github.io/AsteroidsGame/)  
+[Melanie](http://melaniepeng.github.io/AsteroidsGame/)  
 [Brian](http://brianlam37.github.io/AsteroidsGame/)  
 [Theo](https://awesomestickman.github.io/AsteroidsGame/)  
 [Brian](http://btx123.github.io/AsteroidsGame/)  
