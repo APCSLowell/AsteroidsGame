@@ -1,15 +1,19 @@
 SpaceShip tom = new SpaceShip(0,0,0);
 Star[] bob = new Star[200];
-boolean keyW = false;
-boolean keyS = false;
-boolean keyB = false;
-PImage back;
-PImage f;
+private boolean keyW = false;
+private boolean keyS = false;
+private boolean keyB = false;
+private PImage back;
+private PImage f;
+private PImage fMove;
+private String ship;
+
 public void setup() 
 {
   size(600,600);
   back = loadImage("deathstar4.png");
-  f = loadImage("falcon1.png");
+  ship = "falcon1.png";
+  f = loadImage(ship);
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
@@ -34,7 +38,7 @@ public void draw()
   }
   if(keyB == true)
   {
-    
+    tom.stop(0);
   }
 }
 public void keyPressed()
@@ -75,9 +79,9 @@ public void keyReleased()
 }
 class SpaceShip extends Floater  
 {   
-    private boolean brake;
     private double dRadians;
     private int maxSpeed;
+    private int maxBreak;
     public SpaceShip(int x, int y, int degrees) 
     {
       /*corners = 4;  //the number of corners, a triangular floater has 3   
@@ -96,7 +100,6 @@ class SpaceShip extends Floater
       {
         dRadians=Math.PI-dRadians;
       }
-      brake = false;
     }
     public void hyperSpace()
     {
@@ -120,23 +123,33 @@ class SpaceShip extends Floater
       image(f,-37,-25.5,80,56);
       translate(-(int)(myCenterX),-(int)(myCenterY));
       }
-      public void brake()
-      {
-
-      }
     public void accelerate(double dAmount)
     {
-    maxSpeed = 10;
-    myDirectionX += ((dAmount) * Math.cos(dRadians)); 
-    myDirectionY += ((dAmount) * Math.sin(dRadians));
-    if(myDirectionX > maxSpeed)
-      myDirectionX = maxSpeed;
-    if(myDirectionY > maxSpeed)
-      myDirectionY = maxSpeed;
-    if(myDirectionX < -1 * maxSpeed)
-      myDirectionX = -1 * maxSpeed;
-    if(myDirectionY < -1 * maxSpeed)
-      myDirectionY = -1 * maxSpeed;
+      maxSpeed = 10;
+      myDirectionX += ((dAmount) * Math.cos(dRadians)); 
+      myDirectionY += ((dAmount) * Math.sin(dRadians));
+      if(myDirectionX > maxSpeed)
+        myDirectionX = maxSpeed;
+      if(myDirectionY > maxSpeed)
+        myDirectionY = maxSpeed;
+      if(myDirectionX < -1 * maxSpeed)
+        myDirectionX = -1 * maxSpeed;
+      if(myDirectionY < -1 * maxSpeed)
+        myDirectionY = -1 * maxSpeed;
+    }
+    public void stop(double dAmount)
+    {
+      maxBreak = 0;
+      myDirectionX += ((dAmount) * Math.cos(dRadians)); 
+      myDirectionY += ((dAmount) * Math.sin(dRadians));
+      if(myDirectionX > maxBreak)
+        myDirectionX = maxBreak;
+      if(myDirectionY > maxBreak)
+        myDirectionY = maxBreak;
+      if(myDirectionX < -1 * maxBreak)
+        myDirectionX = -1 * maxBreak;
+      if(myDirectionY < -1 * maxBreak)
+        myDirectionY = -1 * maxBreak;
     }
     public void setX(int x){myCenterX = x;}  
     public int getX(){return (int)myCenterX;}   
