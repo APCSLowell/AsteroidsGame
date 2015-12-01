@@ -71,8 +71,5 @@ Samples of Student Work
 [Alexander](http://alzhu1.github.io/AsteroidsGame/)  
 [Justin](http://justinleong360.github.io/AsteroidsGame/)  
 
-[David](http://inthehat.github.io/AsteroidsGame/)  
-[Jessica](http://happyjessica97.github.io/AsteroidsGame/)   
-[Chris](http://chrisma1.github.io/AsteroidsGame/)   
 
 *This assignment was selected as a "Nifty CS Assignment" in 2008 by Nick Parlante @ Stanford*
