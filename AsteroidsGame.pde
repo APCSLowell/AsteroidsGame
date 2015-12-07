@@ -11,8 +11,8 @@ private String ship;
 public void setup() 
 {
   size(600,600);
-  back = loadImage("deathstar4.png");
-  ship = "falcon1.png";
+  back = loadImage("deathstar.png");
+  ship = "falcon.png";
   f = loadImage(ship);
   /*for (int i = 0; i < bob.length; i++)
   {
@@ -120,12 +120,12 @@ class SpaceShip extends Floater
       }
       translate((int)(myCenterX),(int)(myCenterY));
       rotate((float)dRadians);
-      image(f,-37,-25.5,80,56);
+      image(f,-37,-25.5,80,58);
       translate(-(int)(myCenterX),-(int)(myCenterY));
       }
     public void accelerate(double dAmount)
     {
-      maxSpeed = 10;
+      maxSpeed = 3;
       myDirectionX += ((dAmount) * Math.cos(dRadians)); 
       myDirectionY += ((dAmount) * Math.sin(dRadians));
       if(myDirectionX > maxSpeed)
