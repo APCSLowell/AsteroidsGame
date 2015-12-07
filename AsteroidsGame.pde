@@ -1,19 +1,15 @@
-SpaceShip tom = new SpaceShip(0,0,0);
-Star[] bob = new Star[200];
+public SpaceShip tom;
+//Star[] bob = new Star[200];
 private boolean keyW = false;
 private boolean keyS = false;
 private boolean keyB = false;
 private PImage back;
-private PImage f;
-private PImage fMove;
-private String ship;
 
 public void setup() 
 {
   size(600,600);
+  tom = new SpaceShip(0,0,0);
   back = loadImage("deathstar.png");
-  ship = "falcon.png";
-  f = loadImage(ship);
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
@@ -21,7 +17,7 @@ public void setup()
 }
 public void draw() 
 {
-  image(back,0,0,600,600);
+  image(back,300,300,600,600);
   tom.show();
   tom.move();
   /*for (int i = 0; i < bob.length; i++)
@@ -79,6 +75,8 @@ public void keyReleased()
 }
 class SpaceShip extends Floater  
 {   
+    private PImage ship;
+    private String currentShip;
     private double dRadians;
     private int maxSpeed;
     private int maxBreak;
@@ -95,6 +93,8 @@ class SpaceShip extends Floater
       myDirectionX = 0; 
       myDirectionY = 0; //holds x and y coordinates of the vector for direction of travel   
       myPointDirection = 0;
+      ship = loadImage("falcon.png");
+      currentShip = "falcon.png";
       dRadians = Math.asin((mouseY-myCenterY)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
       if((mouseX-myCenterX)<0)
       {
@@ -119,9 +119,11 @@ class SpaceShip extends Floater
       dRadians*=-1;
       }
       translate((int)(myCenterX),(int)(myCenterY));
+      imageMode(CENTER);
       rotate((float)dRadians);
-      image(f,-37,-25.5,80,58);
+      image(ship,0,0,80,58);
       translate(-(int)(myCenterX),-(int)(myCenterY));
+      ship = loadImage(currentShip);
       }
     public void accelerate(double dAmount)
     {
@@ -136,6 +138,17 @@ class SpaceShip extends Floater
         myDirectionX = -1 * maxSpeed;
       if(myDirectionY < -1 * maxSpeed)
         myDirectionY = -1 * maxSpeed;
+      if(dAmount > 0)
+      {
+        currentShip = "falconmove.png";
+      }
+    }
+    public void notAccelerating()
+    {
+      if(currentShip!="falcon.png")
+      {
+        currentShip = "falcon.png";
+      }
     }
     public void stop(double dAmount)
     {
@@ -150,6 +163,10 @@ class SpaceShip extends Floater
         myDirectionX = -1 * maxBreak;
       if(myDirectionY < -1 * maxBreak)
         myDirectionY = -1 * maxBreak;
+      if(dAmount > 0)
+      {
+        currentShip = "falconmove.png";
+      }
     }
     public void setX(int x){myCenterX = x;}  
     public int getX(){return (int)myCenterX;}   
