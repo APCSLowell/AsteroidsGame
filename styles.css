@@ -1,6 +1,6 @@
 
 body {
-    background-image: url("star wars.jpg"); background-size: cover;
+    background-image: url('star wars.jpg'); background-size: cover;
     color: rgb(0,0,0);
     font-family: "Open Sans", sans-serif;
     text-align: center;
