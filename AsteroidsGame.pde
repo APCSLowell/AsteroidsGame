@@ -96,8 +96,8 @@ class SpaceShip extends Floater
       myPointDirection = 0;
       ship = loadImage("falcon.png");
       currentShip = "falcon.png";
-      dRadians = Math.asin((mouseY-myCenterY)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
-      if((mouseX-myCenterX)<0)
+      dRadians = Math.asin((mouseY-myCenterY) / (dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
+      if((mouseX - myCenterX)<0)
       {
         dRadians=Math.PI-dRadians;
       }
@@ -111,13 +111,13 @@ class SpaceShip extends Floater
     public void show()
     {
       super.show();
-      if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY)!=0)
+      if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY) != 0)
       {
         dRadians = Math.acos((mouseX-myCenterX)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
       }
-      if((mouseY-myCenterY)<0)
+      if((mouseY - myCenterY) < 0)
       {
-      dRadians*=-1;
+      dRadians *=- 1;
       }
       translate((int)(myCenterX),(int)(myCenterY));
       imageMode(CENTER);
@@ -146,7 +146,7 @@ class SpaceShip extends Floater
     }
     public void notAccelerating()
     {
-      if(currentShip!="falcon.png")
+      if(currentShip != "falcon.png")
       {
         currentShip = "falcon.png";
       }
@@ -179,6 +179,32 @@ class SpaceShip extends Floater
     public double getDirectionY(){return myDirectionY;}   
     public void setPointDirection(int degrees){myPointDirection = degrees;}   
     public double getPointDirection(){return myPointDirection;}
+}
+class Asteroid extends Floater
+{
+  private int rotSpeed;
+  public Asteroid()
+  {
+
+  }
+  public void move()
+  {
+    
+  }
+  public void show()
+  {
+
+  }
+  public void setX(int x){myCenterX = x;}  
+  public int getX(){return (int)myCenterX;}   
+  public void setY(int y){myCenterY = y;}
+  public int getY(){return (int)myCenterY;}
+  public void setDirectionX(double x){myDirectionX = x;}   
+  public double getDirectionX(){return myDirectionX;}   
+  public void setDirectionY(double y){myDirectionY = y;}
+  public double getDirectionY(){return myDirectionY;}   
+  public void setPointDirection(int degrees){myPointDirection = degrees;}   
+  public double getPointDirection(){return myPointDirection;}
 }
 class Star
 {
