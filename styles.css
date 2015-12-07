@@ -17,6 +17,7 @@ header {
 }
 
 footer {
+    font-color: rgb(255,255,255);
 	font-style: italic;
 	font-size: 90%;
 }
