@@ -20,6 +20,7 @@ public void draw()
   image(back,300,300,600,600);
   tom.show();
   tom.move();
+  tom.notAccelerating();
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i].show();
