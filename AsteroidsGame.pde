@@ -1,4 +1,5 @@
 public SpaceShip tom;
+public Asteroid bob;
 //Star[] bob = new Star[200];
 private boolean keyW = false;
 private boolean keyS = false;
@@ -9,6 +10,7 @@ public void setup()
 {
   size(600,600);
   tom = new SpaceShip(0,0,0);
+  bob = new Asteroid();
   back = loadImage("deathstar.png");
   /*for (int i = 0; i < bob.length; i++)
   {
@@ -21,6 +23,8 @@ public void draw()
   tom.show();
   tom.move();
   tom.notAccelerating();
+  bob.show();
+  bob.move();
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i].show();
@@ -183,17 +187,25 @@ class SpaceShip extends Floater
 class Asteroid extends Floater
 {
   private int rotSpeed;
+  private PImage tie;
   public Asteroid()
   {
-
+    rotSpeed = (int)(Math.random()*3)-3;
+    tie = loadImage("tieAsteroid.png");
   }
   public void move()
   {
-    
+      
   }
+  public void turn (int nDegreesOfRotation)   
+  {     
+    //rotates the floater by a given number of degrees    
+    nDegreesOfRotation = rotSpeed;    
+    myPointDirection+=nDegreesOfRotation;   
+  }   
   public void show()
   {
-
+    image(tie,300,300,128,124);
   }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}   
