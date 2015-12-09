@@ -28,6 +28,7 @@ Samples of Student Work
 -----------------------
 [Melody](http://itsmelodious.github.io/AsteroidsGame/)  
 [Victor](http://anonymousm3xican.github.io/AsteroidsGame/)  
+[Thomas](http://leechak.github.io/AsteroidsGame/)  
 [Francisco](http://frbui.github.io/AsteroidsGame/)  
 [Simon](http://omgitssimon.github.io/AsteroidsGame/)  
 [Lin](http://lin00.github.io/AsteroidsGame/)  
