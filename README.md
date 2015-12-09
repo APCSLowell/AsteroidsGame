@@ -30,7 +30,7 @@ Samples of Student Work
 [Victor](http://anonymousm3xican.github.io/AsteroidsGame/)  
 [Francisco](http://frbui.github.io/AsteroidsGame/)  
 [Simon](http://omgitssimon.github.io/AsteroidsGame/)  
-[Lin}(http://lin00.github.io/AsteroidsGame/)  
+[Lin](http://lin00.github.io/AsteroidsGame/)  
 [Skylar](http://sky121.github.io/AsteroidsGame/)  
 [Hannah](http://kaliburr.github.io/AsteroidsGame/)  
 [Linda](http://wanglindal.github.io/AsteroidsGame/)  
