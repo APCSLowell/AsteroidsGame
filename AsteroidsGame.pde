@@ -2,7 +2,9 @@ public SpaceShip tom;
 public Asteroid bob;
 //Star[] bob = new Star[200];
 private boolean keyW = false;
+private boolean keyA = false;
 private boolean keyS = false;
+private boolean keyD = false;
 private boolean keyB = false;
 private PImage back;
 
@@ -29,24 +31,21 @@ public void draw()
   {
     bob[i].show();
   }*/
-  if(keyW == true)
-  {
-    tom.accelerate(0.3);
-  }
-  if(keyS == true)
-  {
-    tom.accelerate(-0.3);
-  }
-  if(keyB == true)
-  {
-    tom.stop(0);
-  }
+  
 }
 public void keyPressed()
 {
   if(key == 'w' || keyCode == UP)
   {
     keyW = true;
+  }
+  if(key == 'a' || keyCode == LEFT)
+  {
+    keyA = true;
+  }
+  if(key == 'd' || keyCode == RIGHT)
+  {
+    keyD = true;
   }
   if(key == 's' || keyCode == DOWN)
   {
@@ -69,9 +68,17 @@ public void keyReleased()
   {
     keyW = false;
   }
+  if(key == 'a' || keyCode == LEFT)
+  {
+    keyA = false;
+  }
   if(key == 's' || keyCode == DOWN)
   {
     keyS = false;
+  }
+  if(key == 'd' || keyCode == RIGHT)
+  {
+    keyD = false;
   }
   if(key == 'b')
   {
@@ -100,11 +107,11 @@ class SpaceShip extends Floater
       myPointDirection = 0;
       ship = loadImage("falcon.png");
       currentShip = "falcon.png";
-      dRadians = Math.asin((mouseY-myCenterY) / (dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
-      if((mouseX - myCenterX)<0)
-      {
-        dRadians=Math.PI-dRadians;
-      }
+      // dRadians = Math.asin((mouseY-myCenterY) / (dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
+      // if((mouseX - myCenterX)<0)
+      // {
+      //   dRadians=Math.PI-dRadians;
+      // }
     }
     public void hyperSpace()
     {
@@ -114,22 +121,53 @@ class SpaceShip extends Floater
     }
     public void show()
     {
-      super.show();
-      if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY) != 0)
-      {
-        dRadians = Math.acos((mouseX-myCenterX)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
-      }
-      if((mouseY - myCenterY) < 0)
-      {
-      dRadians *=- 1;
-      }
-      translate((int)(myCenterX),(int)(myCenterY));
-      imageMode(CENTER);
-      rotate((float)dRadians);
-      image(ship,0,0,80,58);
-      translate(-(int)(myCenterX),-(int)(myCenterY));
-      ship = loadImage(currentShip);
-      }
+      // super.show();
+      // double dRadians = myPointDirection*(Math.PI/180);
+      // translate((int)myCenterX,(int)myCenterY);
+      // rotate((float)(dRadians - (270*(Math.PI/180))));
+      // image(ship,0,0,80,58);
+      // rotate(-(float)(dRadians -(270*(Math.PI/180))));
+      // translate(-(int)myCenterX,-(int)myCenterY);
+      // if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY) != 0)
+      // {
+      //   dRadians = Math.acos((mouseX-myCenterX)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
+      // }
+      // if((mouseY - myCenterY) < 0)
+      // {
+      // dRadians *=- 1;
+      // }
+        super.show();
+        double dRadians = myPointDirection*(Math.PI/180);
+        translate((int)(myCenterX),(int)(myCenterY));
+        imageMode(CENTER);
+        if(keyW == true)
+        {
+          tom.accelerate(0.3);
+        }
+        if(keyA == true)
+        {
+          rotate((float)Math.PI/2);
+          rotate((float)-Math.PI/2);
+        }
+        if(keyS == true)
+        {
+          tom.accelerate(-0.3);
+        }
+        if(keyD == true)
+        {
+          rotate((float)-Math.PI/2);
+          rotate((float)Math.PI/2);
+        }
+        if(keyB == true)
+        {
+          tom.stop(0);
+        }
+        rotate((float)(dRadians-(0*(Math.PI/180))));
+        image(ship,0,0,80,58);
+        rotate(-(float)(dRadians-(0*(Math.PI/180))));
+        translate(-(int)(myCenterX),-(int)(myCenterY));
+        ship = loadImage(currentShip);
+    }
     public void accelerate(double dAmount)
     {
       maxSpeed = 3;
@@ -190,18 +228,14 @@ class Asteroid extends Floater
   private PImage tie;
   public Asteroid()
   {
+    myCenterX = (int)(Math.random()*600); 
+    myCenterY = (int)(Math.random()*600);
     rotSpeed = (int)(Math.random()*3)-3;
     tie = loadImage("tieAsteroid.png");
   }
   public void move()
   {
       
-  }
-  public void turn (int nDegreesOfRotation)   
-  {     
-    //rotates the floater by a given number of degrees    
-    nDegreesOfRotation = rotSpeed;    
-    myPointDirection+=nDegreesOfRotation;   
   }   
   public void show()
   {
