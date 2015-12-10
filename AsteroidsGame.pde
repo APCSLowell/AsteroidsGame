@@ -1,5 +1,7 @@
 public SpaceShip tom;
 public Asteroid bob;
+private ArrayList <Asteroid> aList;
+aList = new ArrayList <Asteroid>();
 //Star[] bob = new Star[200];
 private boolean keyW = false;
 private boolean keyA = false;
@@ -170,7 +172,7 @@ class SpaceShip extends Floater
     }
     public void accelerate(double dAmount)
     {
-      maxSpeed = 3;
+      maxSpeed = 5;
       myDirectionX += ((dAmount) * Math.cos(dRadians)); 
       myDirectionY += ((dAmount) * Math.sin(dRadians));
       if(myDirectionX > maxSpeed)
@@ -230,16 +232,23 @@ class Asteroid extends Floater
   {
     myCenterX = (int)(Math.random()*600); 
     myCenterY = (int)(Math.random()*600);
-    rotSpeed = (int)(Math.random()*3)-3;
-    tie = loadImage("tieAsteroid.png");
+    rotSpeed = (int)(Math.random()*5)-3;
+    corners = 4;
+    int[] xS = {-5,5,5,-5};
+    int[] yS = {-5,-5,5,5};
+    xCorners = xS;
+    yCorners = yS; 
+    myColor = 255; //OLD SHIP
+    // tie = loadImage("tieAsteroid1.png");
   }
   public void move()
   {
-      
+    super.move();
+    myPointDirection+=rotSpeed;
   }   
   public void show()
   {
-    image(tie,300,300,128,124);
+    super.show();// image(tie,300,300,59,66);
   }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}   
