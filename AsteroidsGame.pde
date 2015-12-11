@@ -34,7 +34,6 @@ public void draw()
   {
     aList.get(i).move();
     aList.get(i).show();
-    aList.get(i).accelerate((int)(Math.random()*5)-3);
   }
   /*for (int i = 0; i < bob.length; i++)
   {
@@ -261,7 +260,7 @@ class Asteroid extends Floater
   }   
   public void accelerate(double dAmount)
   {
-    maxSpeed = 3;
+    maxSpeed = (int)(Math.random()*5)-3;
     myDirectionX += ((dAmount) * Math.cos(dRadians)); 
     myDirectionY += ((dAmount) * Math.sin(dRadians));
     if(myDirectionX > maxSpeed)
