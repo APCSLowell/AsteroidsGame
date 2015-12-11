@@ -1,7 +1,6 @@
 public SpaceShip tom;
 public Asteroid bob;
-private ArrayList <Asteroid> aList;
-aList = new ArrayList <Asteroid>();
+ArrayList<Asteroid> aList = new ArrayList<Asteroid>();
 //Star[] bob = new Star[200];
 private boolean keyW = false;
 private boolean keyA = false;
@@ -20,6 +19,10 @@ public void setup()
   {
     bob[i] = new Star();
   }*/
+  for (int i = 0; i < 10; i++)
+  {
+    aList.add(new Asteroid());
+  }
 }
 public void draw() 
 {
@@ -27,8 +30,12 @@ public void draw()
   tom.show();
   tom.move();
   tom.notAccelerating();
-  bob.show();
-  bob.move();
+  for (int i = 0; i < aList.size(); i++)
+  {
+    aList.get(i).move();
+    aList.get(i).show();
+    aList.get(i).accelerate((int)(Math.random()*5)-3);
+  }
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i].show();
@@ -227,6 +234,8 @@ class SpaceShip extends Floater
 class Asteroid extends Floater
 {
   private int rotSpeed;
+  private double dRadians;
+  private int maxSpeed;
   private PImage tie;
   public Asteroid()
   {
@@ -238,14 +247,32 @@ class Asteroid extends Floater
     int[] yS = {-5,-5,5,5};
     xCorners = xS;
     yCorners = yS; 
-    myColor = 255; //OLD SHIP
+    myColor = 255; 
     // tie = loadImage("tieAsteroid1.png");
   }
   public void move()
   {
     super.move();
     myPointDirection+=rotSpeed;
+    if(rotSpeed == 0)
+    {
+      rotSpeed = (int)(Math.random()*5)-3;
+    }
   }   
+  public void accelerate(double dAmount)
+  {
+    maxSpeed = 3;
+    myDirectionX += ((dAmount) * Math.cos(dRadians)); 
+    myDirectionY += ((dAmount) * Math.sin(dRadians));
+    if(myDirectionX > maxSpeed)
+        myDirectionX = maxSpeed;
+    if(myDirectionY > maxSpeed)
+      myDirectionY = maxSpeed;
+    if(myDirectionX < -1 * maxSpeed)
+      myDirectionX = -1 * maxSpeed;
+    if(myDirectionY < -1 * maxSpeed)
+      myDirectionY = -1 * maxSpeed;
+  }
   public void show()
   {
     super.show();// image(tie,300,300,59,66);
