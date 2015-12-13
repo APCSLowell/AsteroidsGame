@@ -178,7 +178,7 @@ class SpaceShip extends Floater
     }
     public void accelerate(double dAmount)
     {
-      maxSpeed = 5;
+      maxSpeed = 4;
       myDirectionX += ((dAmount) * Math.cos(dRadians)); 
       myDirectionY += ((dAmount) * Math.sin(dRadians));
       if(myDirectionX > maxSpeed)
