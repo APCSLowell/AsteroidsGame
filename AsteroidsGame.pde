@@ -154,8 +154,7 @@ class SpaceShip extends Floater
         }
         if(keyA == true)
         {
-          rotate((float)Math.PI/2);
-          rotate((float)-Math.PI/2);
+          tom.turn(-3);
         }
         if(keyS == true)
         {
@@ -163,8 +162,7 @@ class SpaceShip extends Floater
         }
         if(keyD == true)
         {
-          rotate((float)-Math.PI/2);
-          rotate((float)Math.PI/2);
+          tom.turn(3);
         }
         if(keyB == true)
         {
@@ -176,11 +174,9 @@ class SpaceShip extends Floater
         translate(-(int)(myCenterX),-(int)(myCenterY));
         ship = loadImage(currentShip);
     }
-    public void accelerate(double dAmount)
-    {
+    public void accelerate (double dAmount)   
+    { 
       maxSpeed = 4;
-      myDirectionX += ((dAmount) * Math.cos(dRadians)); 
-      myDirectionY += ((dAmount) * Math.sin(dRadians));
       if(myDirectionX > maxSpeed)
         myDirectionX = maxSpeed;
       if(myDirectionY > maxSpeed)
@@ -192,8 +188,13 @@ class SpaceShip extends Floater
       if(dAmount > 0)
       {
         currentShip = "falconmove.png";
-      }
-    }
+      }         
+      //convert the current direction the floater is pointing to radians    
+      double dRadians = myPointDirection*(Math.PI/180);     
+      //change coordinates of direction of travel    
+      myDirectionX += ((dAmount) * Math.cos(dRadians));    
+      myDirectionY += ((dAmount) * Math.sin(dRadians));       
+    }   
     public void notAccelerating()
     {
       if(currentShip != "falcon.png")
@@ -204,8 +205,6 @@ class SpaceShip extends Floater
     public void stop(double dAmount)
     {
       maxBreak = 0;
-      myDirectionX += ((dAmount) * Math.cos(dRadians)); 
-      myDirectionY += ((dAmount) * Math.sin(dRadians));
       if(myDirectionX > maxBreak)
         myDirectionX = maxBreak;
       if(myDirectionY > maxBreak)
@@ -214,10 +213,6 @@ class SpaceShip extends Floater
         myDirectionX = -1 * maxBreak;
       if(myDirectionY < -1 * maxBreak)
         myDirectionY = -1 * maxBreak;
-      if(dAmount > 0)
-      {
-        currentShip = "falconmove.png";
-      }
     }
     public void setX(int x){myCenterX = x;}  
     public int getX(){return (int)myCenterX;}   
