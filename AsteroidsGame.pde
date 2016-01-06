@@ -6,7 +6,7 @@ private boolean keyW = false;
 private boolean keyA = false;
 private boolean keyS = false;
 private boolean keyD = false;
-private boolean keyB = false;
+private boolean keyF = false;
 private PImage back;
 
 public void setup() 
@@ -65,9 +65,9 @@ public void keyPressed()
     tom.setDirectionX(0);
     tom.setDirectionY(0);
   }
-  if(key == 'b')
+  if(key == 'f')
   {
-    keyB = true;
+    keyF = true;
   }
 }
 public void keyReleased()
@@ -88,9 +88,9 @@ public void keyReleased()
   {
     keyD = false;
   }
-  if(key == 'b')
+  if(key == 'f')
   {
-    keyB = false;
+    keyF = false;
   }
 }
 class SpaceShip extends Floater  
@@ -115,11 +115,6 @@ class SpaceShip extends Floater
       myPointDirection = 0;
       ship = loadImage("falcon.png");
       currentShip = "falcon.png";
-      // dRadians = Math.asin((mouseY-myCenterY) / (dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
-      // if((mouseX - myCenterX)<0)
-      // {
-      //   dRadians=Math.PI-dRadians;
-      // }
     }
     public void hyperSpace()
     {
@@ -129,21 +124,6 @@ class SpaceShip extends Floater
     }
     public void show()
     {
-      // super.show();
-      // double dRadians = myPointDirection*(Math.PI/180);
-      // translate((int)myCenterX,(int)myCenterY);
-      // rotate((float)(dRadians - (270*(Math.PI/180))));
-      // image(ship,0,0,80,58);
-      // rotate(-(float)(dRadians -(270*(Math.PI/180))));
-      // translate(-(int)myCenterX,-(int)myCenterY);
-      // if(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY) != 0)
-      // {
-      //   dRadians = Math.acos((mouseX-myCenterX)/(dist((float)myCenterX,(float)myCenterY,mouseX,mouseY))); 
-      // }
-      // if((mouseY - myCenterY) < 0)
-      // {
-      // dRadians *=- 1;
-      // }
         super.show();
         double dRadians = myPointDirection*(Math.PI/180);
         translate((int)(myCenterX),(int)(myCenterY));
@@ -164,7 +144,7 @@ class SpaceShip extends Floater
         {
           tom.turn(3);
         }
-        if(keyB == true)
+        if(keyF == true)
         {
           tom.stop(0);
         }
