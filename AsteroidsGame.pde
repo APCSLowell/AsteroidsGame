@@ -222,6 +222,8 @@ class Asteroid extends Floater
     xCorners = xS;
     yCorners = yS; 
     myColor = 255; 
+    myDirectionX = (int)(Math.random()*5)-3;
+    myDirectionY = (int)(Math.random()*5)-3;
     // tie = loadImage("tieAsteroid1.png");
   }
   public void move()
@@ -231,6 +233,11 @@ class Asteroid extends Floater
     if(rotSpeed == 0)
     {
       rotSpeed = (int)(Math.random()*5)-3;
+    }
+    if(myDirectionY == 0 && myDirectionX == 0)
+    {
+      myDirectionX = ((int)(Math.random()*5) - 2); 
+      myDirectionY = ((int)(Math.random()*5) - 2); 
     }
   }   
   public void accelerate(double dAmount)
