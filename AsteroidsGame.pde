@@ -213,8 +213,8 @@ class Asteroid extends Floater
   private PImage tie;
   public Asteroid()
   {
-    myCenterX = (int)(Math.random()*600); 
-    myCenterY = (int)(Math.random()*600);
+    myCenterX = (int)(Math.random()*1118); 
+    myCenterY = (int)(Math.random()*700);
     rotSpeed = (int)(Math.random()*5)-3;
     corners = 4;
     int[] xS = {-5,5,5,-5};
