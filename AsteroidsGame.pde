@@ -11,10 +11,10 @@ private PImage back;
 
 public void setup() 
 {
-  size(600,600);
+  size(1118,700);
   tom = new SpaceShip(0,0,0);
   bob = new Asteroid();
-  back = loadImage("deathstar.png");
+  back = loadImage("deathstar1.png");
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
@@ -26,7 +26,7 @@ public void setup()
 }
 public void draw() 
 {
-  image(back,300,300,600,600);
+  image(back,559,350,1118, 700);
   tom.show();
   tom.move();
   tom.notAccelerating();
@@ -236,8 +236,6 @@ class Asteroid extends Floater
   public void accelerate(double dAmount)
   {
     maxSpeed = (int)(Math.random()*5)-3;
-    myDirectionX += ((dAmount) * Math.cos(dRadians)); 
-    myDirectionY += ((dAmount) * Math.sin(dRadians));
     if(myDirectionX > maxSpeed)
         myDirectionX = maxSpeed;
     if(myDirectionY > maxSpeed)
