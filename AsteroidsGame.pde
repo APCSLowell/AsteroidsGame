@@ -1,6 +1,6 @@
 public SpaceShip tom;
-public Asteroid bob;
-ArrayList<Asteroid> aList = new ArrayList<Asteroid>();
+ArrayList<Laser> lasers;
+ArrayList<Asteroid> aList;
 //Star[] bob = new Star[200];
 private boolean keyW = false;
 private boolean keyA = false;
@@ -13,13 +13,18 @@ public void setup()
 {
   size(1118,700);
   tom = new SpaceShip(0,0,0);
-  bob = new Asteroid();
-  back = loadImage("deathstar1.png");
+  aList = new ArrayList<Asteroid>();
+  lasers = new ArrayList<Laser>();
+  back = loadImage("deathstar1.png"); 
   /*for (int i = 0; i < bob.length; i++)
   {
     bob[i] = new Star();
   }*/
   for (int i = 0; i < 10; i++)
+  {
+    aList.add(new Asteroid());
+  }
+  if(aList.size()<8)
   {
     aList.add(new Asteroid());
   }
@@ -39,7 +44,21 @@ public void draw()
   {
     bob[i].show();
   }*/
-  
+  for(int i = 0; i < lasers.size(); i++)
+  {
+    lasers.get(i).move(); 
+    lasers.get(i).show();
+    for(int k = 0; k < aList.size(); k++)
+    {
+      float dis = dist(((int)aList.get(k).getX()),((int)aList.get(k).getY()),((int)lasers.get(i).getX()),((int)lasers.get(i).getY()));
+      if(dis < 5)
+      {
+        aList.remove(k);
+        lasers.remove(i);
+        break;
+      }
+    }
+  }  
 }
 public void keyPressed()
 {
@@ -148,6 +167,10 @@ class SpaceShip extends Floater
         {
           tom.stop(0);
         }
+        if(spaceIsPessed == true)
+        {
+          lasers.add(new Laser());
+        }
         rotate((float)(dRadians-(0*(Math.PI/180))));
         image(ship,0,0,80,58);
         rotate(-(float)(dRadians-(0*(Math.PI/180))));
@@ -239,6 +262,10 @@ class Asteroid extends Floater
       myDirectionX = ((int)(Math.random()*5) - 2); 
       myDirectionY = ((int)(Math.random()*5) - 2); 
     }
+  }
+  public void destroy()
+  {
+    
   }   
   public void accelerate(double dAmount)
   {
@@ -266,6 +293,40 @@ class Asteroid extends Floater
   public double getDirectionY(){return myDirectionY;}   
   public void setPointDirection(int degrees){myPointDirection = degrees;}   
   public double getPointDirection(){return myPointDirection;}
+}
+class Laser extends Floater 
+{
+    public double dRadians;
+    public Laser(SpaceShip theShip) 
+    {
+      myCenterX = theShip.getX();
+      myCenterY = theShip.getY();
+      myPointDirection = theShip.getPointDirection();
+      dRadians = myPointDirection*(Math.PI/180);
+      myDirectionX = 5*Math.cos(dRadians) + theShip.getDirectionX();
+      myDirectionY = 5*Math.sin(dRadians) + theShip.getDirectionY();
+    }
+    public void setX(int x) {myCenterX = x;}
+    public int getX() {return (int) myCenterX;}
+    public void setY(int y) {myCenterY = y;}
+    public int getY() {return (int) myCenterY;}
+    public void setDirectionX(double x) {myDirectionX = x;}
+    public double getDirectionX() {return myDirectionX;}
+    public void setDirectionY(double y) {myDirectionY = y;}
+    public double getDirectionY() {return myDirectionY;}
+    public void setPointDirection(int degrees) {myPointDirection = degrees;}
+    public double getPointDirection() {return myPointDirection;}
+
+    public void move() 
+    {
+      myCenterX += myDirectionX;    
+      myCenterY += myDirectionY;
+    }
+    public void show() 
+    {
+      fill(0,0,255);
+      ellipse((float)myCenterX, (float)myCenterY, 5, 5);
+    }
 }
 class Star
 {
