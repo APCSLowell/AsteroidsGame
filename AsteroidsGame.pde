@@ -261,7 +261,7 @@ class Asteroid extends Floater
     // myColor = 255; 
     myDirectionX = (int)(Math.random()*5)-3;
     myDirectionY = (int)(Math.random()*5)-3;
-    tie = loadImage("tieAsteroid1.png");
+    tie = loadImage("tieAsteroid2.png");
   }
   public void move()
   {
@@ -273,8 +273,8 @@ class Asteroid extends Floater
     }
     if(myDirectionY == 0 && myDirectionX == 0)
     {
-      myDirectionX = ((int)(Math.random()*5) - 2); 
-      myDirectionY = ((int)(Math.random()*5) - 2); 
+      myDirectionX = ((int)(Math.random()*5) - 3); 
+      myDirectionY = ((int)(Math.random()*5) - 3); 
     }
   }
   public void accelerate(double dAmount)
@@ -295,7 +295,7 @@ class Asteroid extends Floater
     double dRadians = myPointDirection*(Math.PI/180);
     translate((int)(myCenterX),(int)(myCenterY));
     rotate((float)(dRadians-(0*(Math.PI/180))));
-    image(tie,0,0,80,58);
+    image(tie,0,0,40,45);
     rotate(-(float)(dRadians-(0*(Math.PI/180))));
     translate(-(int)(myCenterX),-(int)(myCenterY));
   }
