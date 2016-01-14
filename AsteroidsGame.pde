@@ -7,6 +7,7 @@ private boolean keyA = false;
 private boolean keyS = false;
 private boolean keyD = false;
 private boolean keyF = false;
+private boolean spaceIsPressed = false;
 private PImage back;
 
 public void setup() 
@@ -23,10 +24,10 @@ public void setup()
   for (int i = 0; i < 10; i++)
   {
     aList.add(new Asteroid());
-  }
-  if(aList.size()<8)
-  {
-    aList.add(new Asteroid());
+    if(aList.size()<8)
+    {
+      aList.add(new Asteroid());
+    }
   }
 }
 public void draw() 
@@ -88,6 +89,10 @@ public void keyPressed()
   {
     keyF = true;
   }
+  if(key == ' ')
+  {
+    spaceIsPressed = true;
+  }
 }
 public void keyReleased()
 {
@@ -110,6 +115,10 @@ public void keyReleased()
   if(key == 'f')
   {
     keyF = false;
+  }
+  if(key == ' ')
+  {
+    spaceIsPressed = false;
   }
 }
 class SpaceShip extends Floater  
@@ -167,9 +176,9 @@ class SpaceShip extends Floater
         {
           tom.stop(0);
         }
-        if(spaceIsPessed == true)
+        if(spaceIsPressed == true)
         {
-          lasers.add(new Laser());
+          lasers.add(new Laser(tom));
         }
         rotate((float)(dRadians-(0*(Math.PI/180))));
         image(ship,0,0,80,58);
@@ -324,8 +333,9 @@ class Laser extends Floater
     }
     public void show() 
     {
-      fill(0,0,255);
-      ellipse((float)myCenterX, (float)myCenterY, 5, 5);
+      fill(255,0,0);
+      stroke(255,0,0);
+      rect((float)myCenterX, (float)myCenterY-3, 5, 5);
     }
 }
 class Star
