@@ -40,6 +40,11 @@ public void draw()
   {
     aList.get(i).move();
     aList.get(i).show();
+    float sd = dist(((int)aList.get(i).getX()),((int)aList.get(i).getY()),((int)tom.getX()),((int)tom.getY()));
+    if(sd < 40)
+    {
+      aList.remove(i);
+    }
   }
   /*for (int i = 0; i < bob.length; i++)
   {
@@ -248,15 +253,15 @@ class Asteroid extends Floater
     myCenterX = (int)(Math.random()*1118); 
     myCenterY = (int)(Math.random()*700);
     rotSpeed = (int)(Math.random()*5)-3;
-    corners = 4;
-    int[] xS = {-5,5,5,-5};
-    int[] yS = {-5,-5,5,5};
-    xCorners = xS;
-    yCorners = yS; 
-    myColor = 255; 
+    // corners = 4;
+    // int[] xS = {-5,5,5,-5};
+    // int[] yS = {-5,-5,5,5};
+    // xCorners = xS;
+    // yCorners = yS; 
+    // myColor = 255; 
     myDirectionX = (int)(Math.random()*5)-3;
     myDirectionY = (int)(Math.random()*5)-3;
-    // tie = loadImage("tieAsteroid1.png");
+    tie = loadImage("tieAsteroid1.png");
   }
   public void move()
   {
@@ -272,10 +277,6 @@ class Asteroid extends Floater
       myDirectionY = ((int)(Math.random()*5) - 2); 
     }
   }
-  public void destroy()
-  {
-    
-  }   
   public void accelerate(double dAmount)
   {
     maxSpeed = (int)(Math.random()*5)-3;
@@ -290,7 +291,14 @@ class Asteroid extends Floater
   }
   public void show()
   {
-    super.show();// image(tie,300,300,59,66);
+    super.show();
+    double dRadians = myPointDirection*(Math.PI/180);
+    translate((int)(myCenterX),(int)(myCenterY));
+    imageMode(CENTER);
+    rotate((float)(dRadians-(0*(Math.PI/180))));
+    image(tie,0,0,80,58);
+    rotate(-(float)(dRadians-(0*(Math.PI/180))));
+    translate(-(int)(myCenterX),-(int)(myCenterY));
   }
   public void setX(int x){myCenterX = x;}  
   public int getX(){return (int)myCenterX;}   
