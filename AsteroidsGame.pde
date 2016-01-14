@@ -96,7 +96,7 @@ public void keyPressed()
   }
   if(key == ' ')
   {
-    spaceIsPressed = true;
+    lasers.add(new Laser(tom));
   }
 }
 public void keyReleased()
@@ -121,10 +121,10 @@ public void keyReleased()
   {
     keyF = false;
   }
-  if(key == ' ')
-  {
-    spaceIsPressed = false;
-  }
+  // if(key == ' ')
+  // {
+  //   spaceIsPressed = false;
+  // }
 }
 class SpaceShip extends Floater  
 {   
@@ -294,7 +294,6 @@ class Asteroid extends Floater
     super.show();
     double dRadians = myPointDirection*(Math.PI/180);
     translate((int)(myCenterX),(int)(myCenterY));
-    imageMode(CENTER);
     rotate((float)(dRadians-(0*(Math.PI/180))));
     image(tie,0,0,80,58);
     rotate(-(float)(dRadians-(0*(Math.PI/180))));
@@ -343,7 +342,7 @@ class Laser extends Floater
     {
       fill(255,0,0);
       stroke(255,0,0);
-      rect((float)myCenterX, (float)myCenterY-3, 5, 5);
+      rect((float)myCenterX, (float)myCenterY-3, 10, 5);
     }
 }
 class Star
