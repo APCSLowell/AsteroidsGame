@@ -7,7 +7,7 @@ public void draw()
 {
   //your code here
 }
-class SpaceShip //extends Floater  
+class Spaceship //extends Floater  
 {   
     //your code here
 }
