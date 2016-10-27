@@ -28,6 +28,9 @@ Samples of Student Work
 -----------------------
 [Katie](https://kachow4.github.io/AsteroidsGame/)   
 [Nghi](https://nagirokudo.github.io/AsteroidsGame/)   
+[Bryan](https://bzin22.github.io/AsteroidsGame/)   
+[Erica](https://ekwkk.github.io/AsteroidsGame/)   
+[Joanna](https://j0annalu.github.io/AsteroidsGame/)   
 [Jonathan](https://jonathanchu33.github.io/AsteroidsGame/)   
 [Mi-Kaela](https://mikamarciales.github.io/AsteroidsGame/)   
 [Elston](http://458elma.github.io/AsteroidsGame/)  
