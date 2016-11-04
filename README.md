@@ -37,6 +37,7 @@ Samples of Student Work
 [Garvin](https://garvingit.github.io/AsteroidsGame/)   
 [Aaron](https://aahuangithub.github.io/AsteroidsGame1/)   
 [Joshua](https://joshualchan.github.io/AsteroidsGame/)   
+[Sam](https://flukemeister28.github.io/AsteroidsGame/)   
 [Otto](https://otschmidt.github.io/AsteroidsGame/)   
 [Steven](https://sjkchang.github.io/AsteroidsGame/)   
 [Makoi](https://magacula1.github.io/AsteroidsGame/)   
