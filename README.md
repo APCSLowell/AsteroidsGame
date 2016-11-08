@@ -61,6 +61,7 @@ Samples of Student Work
 [Erica](https://ekwkk.github.io/AsteroidsGame/)   
 [Joanna](https://j0annalu.github.io/AsteroidsGame/)   
 [Jonathan](https://jonathanchu33.github.io/AsteroidsGame/)   
+[Derek](https://keredlew.github.io/AsteroidsGame/)   
 [Mi-Kaela](https://mikamarciales.github.io/AsteroidsGame/)   
 [Elston](http://458elma.github.io/AsteroidsGame/)  
 [Melody](http://itsmelodious.github.io/AsteroidsGame/)  
