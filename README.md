@@ -8,15 +8,15 @@ Suggested steps to complete this assignment
 -------------------------------------------
 
 1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame).
-2. Uncomment the `extends floater` on Line 10
-3. Complete the 10 abstract `set` and `get` functions
+2. Uncomment the `extends floater` on Line 1 of `Spaceship.pde`
+3. Complete the 10 abstract `set` and `get` functions that the `Spaceship` class inherits from `Floater`
 4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find slides #1 - 58 on the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemo/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
-5. At the top of your program, declare a variable of type `Spaceship`
+5. At the top of `AsteroidsGame.pde`, declare a variable of type `Spaceship`
 6. Initialize the `Spaceship` as a new instance of the class
-7. In `draw()` call the Spaceship's `show()` function
-8. When you are happy with appearance of the Spaceship, add a `public void keyPressed()` function to your program
-9. Write code in `keyPressed` that allows you to control the space ship with the keyboard. You must include the ability to rotate left, rotate right, accelerate, and enter "hyperspace." (There is no requirement for any fancy visual effects, hyperspace just needs to stop the ship, and give it a new random position and direction.)
-10. Add code to `draw()` to `move()` the Spaceship
+7. In `draw()` in `AsteroidsGame.pde` call the Spaceship's `show()` function
+8. When you are happy with appearance of the Spaceship, add a `public void keyPressed()` function in `AsteroidsGame.pde`
+9. Write code in `keyPressed` that allows you to control the spaceship with the keyboard. You must include the ability to rotate left, rotate right, accelerate, and enter "hyperspace." (There is no requirement for any fancy visual effects, hyperspace just needs to stop the ship, and give it a new random position and direction.)
+10. Add code to the `draw()` in `AsteroidsGame.pde` to `move()` the Spaceship
 11. Finally, add a `Star` class that creates a random number of stars in random positions
 12. Note that for full credit, **you MUST include instructions on how to operate your Spaceship in the `index.html` file**
 12. If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate
