@@ -7,7 +7,7 @@ An `abstract` class is an "incomplete" class. It has `abstract` methods--incompl
 Suggested steps to complete this assignment
 -------------------------------------------
 
-1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame).
+1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame). Open the program by opening `AsteroidsGame.pde` in Processing or opening the AsteroidsGame folder in Sublime.
 2. Uncomment the `extends floater` on Line 1 of `Spaceship.pde`
 3. Complete the 10 abstract `set` and `get` functions that the `Spaceship` class inherits from `Floater`
 4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find slides #1 - 58 on the [Asteroids PowerPoint](https://drive.google.com/file/d/0Bz2ZkT6qWPYTYjU0NDE5ZDYtYzEwOS00MGNlLTk0OGMtODBhODI3N2JiYzRi/view?usp=sharing) and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
