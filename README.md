@@ -28,7 +28,14 @@ These steps are only a suggestion. Your Asteroids game doesn't have to work or a
 
 Samples of Student Work
 -----------------------
+[Nathan](https://nathansng.github.io/AsteroidsGame/)   
+[Steven](https://stliu8.github.io/AsteroidsGame/)   
 [Brandon](https://zawszefl.github.io/AsteroidsGame/)   
+[Preston](https://prestonttt.github.io/AsteroidsGame/)   
+[Tatiana](https://sonotatiana.github.io/AsteroidsGame/)   
+[Karen](https://sonokjw.github.io/AsteroidsGame/)   
+[Kyle](https://yachtmasterkyle.github.io/AsteroidsGame/)   
+[Michelle](https://miphung.github.io/AsteroidsGame/)   
 [Jayden](https://jaydenlee1229.github.io/AsteroidsGame/)   
 [Kevin](https://tig777.github.io/AsteroidsGame/)   
 [Kyle](https://yachtmasterkyle.github.io/AsteroidsGame/)   
