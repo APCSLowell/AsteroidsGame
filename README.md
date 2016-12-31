@@ -29,7 +29,7 @@ Some important things to keep in mind
 -------------------------------------
 1. Abstract classes are "unfinished"
 2. Abstract classes are one way that programmers can collaborate and divide up the work of a large program
-3. You're collaborating! Some of the work for the `Ship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to make a `Ship` class. You need to write the constructor finish the "unfinished" abstract functions in `Floater`.`
+3. You're collaborating! Some of the work for the `Ship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to make a `Ship` class. You need to write the constructor to finish the "unfinished" abstract functions in `Floater`.`
 4. Don't declare any duplicate variables in your `Ship` class. You are inheriting all the variables you need from `Floater`
 5. Make sure your constructor initializes all 9 of the `protected` variables it inherits from `Floater`
 
