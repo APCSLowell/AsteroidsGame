@@ -21,10 +21,17 @@ Suggested steps to complete this assignment
 11. Finish the `Stars` class in `Stars.pde` 
 12. Finally, add code to `AsteroidsGame.pde` that declares and initializes an instance of the `Stars` class to create a random number of stars in random positions
 12. Note that for full credit, **you MUST include instructions on how to operate your Spaceship in the `index.html` file**
-12. OPTIONAL: If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate. The best way to do this is to override `show()` by copying the `show()` function from Floater into your Spaceship class. Then add an `if` statement in your Spaceship `show()` function right after `endShape(CLOSE);`. If your rockets are firing, draw additional shapes just behind your Spaceship. You can sketch out the shapes on graph paper with the ship centered at (0,0) and pointing right. The `show()` function will rotate and translate the rocket shapes to the correct position on the screen.
+12. OPTIONAL: If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate, simliar to the [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/). The best way to do this is to override `show()` by copying the `show()` function from Floater into your Spaceship class. Then add an `if` statement in your Spaceship `show()` function right after `endShape(CLOSE);`. If your rockets are firing, draw additional shapes just behind your Spaceship. You can sketch out the shapes on graph paper with the ship centered at (0,0) and pointing right. The `show()` function will rotate and translate the rocket shapes to the correct position on the screen.
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
 
+Some important things to keep in mind
+-------------------------------------
+1. Abstract classes are "unfinished"
+2. Abstract classes are one way that programmers can collaborate and divide up the work of a large program
+3. You're collaborating! Some of the work for the `Ship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to make a `Ship` class. You need to write the constructor finish the "unfinished" abstract functions in `Floater`.`
+4. Don't declare any duplicate variables in your `Ship` class. You are inheriting all the variables you need from `Floater`
+5. Make sure your constructor initializes all 9 of the `protected` variables it inherits from `Floater`
 
 Samples of Student Work
 -----------------------
