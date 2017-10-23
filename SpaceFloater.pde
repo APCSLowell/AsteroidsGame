@@ -1,0 +1,3 @@
+class SpaceFloater extends Floater {
+	
+}
