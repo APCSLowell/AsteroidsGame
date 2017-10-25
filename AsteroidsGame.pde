@@ -2,6 +2,7 @@
 public void setup() 
 {
   //your code here
+  size(640, 480);
 }
 public void draw() 
 {

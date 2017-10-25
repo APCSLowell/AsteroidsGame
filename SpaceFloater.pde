@@ -1,21 +1,35 @@
-class SpaceFloater extends Floater {
+abstract class SpriteFloater extends Floater {
 	//Implement abstract getter/setter methods
-  public int getX(){ return myCenterX; }
-  public void setY(int y); 
-  public int getY(){ return myCenterY; };   
-  public void setDirectionX(double x);   
-  public double getDirectionX(){ return myDirectionX; };   
-  public void setDirectionY(double y);   
-  public double getDirectionY(){ return myDirectionY; };   
-  public void setPointDirection(int degrees);   
-  public double getPointDirection(){ return myPointDirection; };
+  public int getX(){ return (int) myCenterX; }
+  public void setY(int y){ myCenterY = y; };
+  public int getY(){ return (int) myCenterY; }
+  public void setDirectionX(double x){ myDirectionX = x; }
+  public double getDirectionX(){ return (int) myDirectionX; }
+  public void setDirectionY(double y){ myDirectionY = y; }
+  public double getDirectionY(){ return (int) myDirectionY; }
+  public void setPointDirection(int degrees){ myPointDirection = degrees; }
+  public double getPointDirection(){ return (int) myPointDirection; }
+
+  //Add sprite image variable for storing location of sprite
+  private PImage spriteImage;
+
+  //Constructor
+  SpriteFloater(String sprite){
+    spriteImage = loadImage(sprite);
+    myCenterX = 320;
+    myCenterY = 240;
+
+  }
 
   //Override show
   public void show(){
-  	translate(myCenterX, myCenterY);
-  	rotate(radians(myPointDirection));
+  	translate((float) myCenterX, (float) myCenterY);
+  	rotate(radians((float) myPointDirection));
   	drawSelf();
-  	translate(-1*myCenterX, -1*myCenterY);
-  	rotate(radians(-1*myPointDirection));
+  	translate(-1*(float) myCenterX, -1*(float) myCenterY);
+  	rotate(radians(-1*(float) myPointDirection));
   }
+
+  //Add ShowSelf function
+  abstract void drawSelf();
 }
