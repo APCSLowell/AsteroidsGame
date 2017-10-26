@@ -18,7 +18,6 @@ abstract class SpriteFloater extends Floater {
     spriteImage = loadImage(sprite);
     myCenterX = 320;
     myCenterY = 240;
-
   }
 
   //Override show
