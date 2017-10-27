@@ -1,6 +1,8 @@
 //your variable declarations here
-final int NUM_STARS = 80;
+private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
+Spaceship main;
+
 public void setup() 
 {
   //your code here
@@ -20,6 +22,11 @@ public void setup()
   			col
   		);
   }
+
+  //Initialize main spaceship
+  int[] mainX = {2, -2, -1, -2};
+  int[] mainY = {0, -2, -0, 2};
+  main = new Spaceship(mainX, mainY);
 }
 public void draw() 
 {
@@ -31,6 +38,9 @@ public void draw()
   for (int i = 0; i < NUM_STARS; i++) {
   	stars[i].show();
   }
+
+  //Draw spaceship
+  main.show();
 }
 
 class Star{

@@ -1,4 +1,10 @@
-class Spaceship //extends Floater  
+class Spaceship extends SpaceFloater
 {   
-    //your code here
+    //TODO use a sprite rather than points
+    public void show(){
+    	super.super.show();
+    }
+    public Spaceship(int[] x, int[] y){
+	  	super(x, y);
+	  }
 }

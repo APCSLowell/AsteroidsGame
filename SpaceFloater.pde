@@ -1,4 +1,7 @@
-abstract class SpriteFloater extends Floater {
+abstract class SpaceFloater extends Floater {
+  //Tells whether this instance uses sprites or point rendering
+  protected final boolean IS_SPRITE_FLOATER;
+
 	//Implement abstract getter/setter methods
   public int getX(){ return (int) myCenterX; }
   public void setY(int y){ myCenterY = y; };
@@ -11,13 +14,24 @@ abstract class SpriteFloater extends Floater {
   public double getPointDirection(){ return (int) myPointDirection; }
 
   //Add sprite image variable for storing location of sprite
-  private PImage spriteImage;
+  protected PImage spriteImage;
 
-  //Constructor
-  SpriteFloater(String sprite){
+  //Constructor with sprite
+  public SpaceFloater(String sprite){
     spriteImage = loadImage(sprite);
     myCenterX = 320;
     myCenterY = 240;
+    IS_SPRITE_FLOATER = true;
+  }
+
+  //Constructor with points to draw
+  public SpaceFloater(int[] x, int[] y){
+    corners = x.length;
+    xCorners = x;
+    yCorners = y;
+    myCenterX = 320;
+    myCenterY = 240;
+    IS_SPRITE_FLOATER = false;
   }
 
   //Override show
@@ -29,6 +43,6 @@ abstract class SpriteFloater extends Floater {
   	rotate(radians(-1*(float) myPointDirection));
   }
 
-  //Add ShowSelf function
-  abstract void drawSelf();
+  //ShowSelf function that must be implemented by SpaceFloater's children
+  abstract protected void drawSelf();
 }
