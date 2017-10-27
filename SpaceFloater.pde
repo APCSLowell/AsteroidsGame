@@ -4,6 +4,7 @@ abstract class SpaceFloater extends Floater {
 
 	//Implement abstract getter/setter methods
   public int getX(){ return (int) myCenterX; }
+  public void setX(int x){ myCenterX = x; }
   public void setY(int y){ myCenterY = y; };
   public int getY(){ return (int) myCenterY; }
   public void setDirectionX(double x){ myDirectionX = x; }
