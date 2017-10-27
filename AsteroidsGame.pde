@@ -3,12 +3,11 @@ private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 Spaceship main;
 
-public void setup() 
+public void setup()
 {
-  //your code here
   size(640, 480);
   background(30);
-  
+
   //Initialize stars
   for (int i = 0; i < NUM_STARS; i++) {
   	int[] col = {
@@ -24,11 +23,11 @@ public void setup()
   }
 
   //Initialize main spaceship
-  int[] mainX = {2, -2, -1, -2};
-  int[] mainY = {0, -2, -0, 2};
+  int[] mainX = {10, -10, -5, -10};
+  int[] mainY = {0, -10, -0, 10};
   main = new Spaceship(mainX, mainY);
 }
-public void draw() 
+public void draw()
 {
 	//Clear
 	fill(30);
@@ -39,26 +38,30 @@ public void draw()
   	stars[i].show();
   }
 
-  //Draw spaceship
+  //Draw + move spaceship
+  main.move();
   main.show();
+
+  //Run keyCheck
+  keyCheck();
 }
 
-class Star{
-	private int x, y;
-	private int colors[];
-	public Star(int sX, int sY, int[] sRGB){
-		colors = sRGB;
-		x = sX;
-		y = sY;
-	}
-	public void show(){
-		fill(colors[0], colors[1], colors[2]);
-		noStroke();
-		translate(x, y);
-		rotate(PI/4);
-		rect(0,0,2,2);
-		rotate(PI/-4);
-		translate(-x, -y);		
-		stroke(1);
-	}
+void keyCheck(){
+  if (keyPressed == true){
+    if (key == 'w' || key == 'W') {
+      main.accelerate(.03);
+    }
+    if (key == 'a' || key == 'A'){
+      int d = (int) main.getPointDirection() -5;
+      main.setPointDirection(d);
+    }
+    if (key == 's' || key == 'S'){
+      main.backAccelerate(.03);
+    }
+    //TODO fix backwards acceleration
+    /*if (key == 'd' || key == 'D'){
+      int d = (int) main.getPointDirection() + 5;
+      main.setPointDirection(d);
+    }*/
+  }
 }
