@@ -55,13 +55,13 @@ void keyCheck(){
       int d = (int) main.getPointDirection() -5;
       main.setPointDirection(d);
     }
-    if (key == 's' || key == 'S'){
-      main.backAccelerate(.03);
-    }
     //TODO fix backwards acceleration
-    /*if (key == 'd' || key == 'D'){
+    /*if (key == 's' || key == 'S'){
+      main.backAccelerate(.03);
+    }*/
+    if (key == 'd' || key == 'D'){
       int d = (int) main.getPointDirection() + 5;
       main.setPointDirection(d);
-    }*/
+    }
   }
 }
