@@ -1,9 +1,9 @@
 
 body {
-    background-color: #1a132d;
-    color: white;
-    font-family: "Open Sans", sans-serif;
-    text-align: center;
+  background-color: #1a132d;
+  color: white;
+  font-family: "Saira Semi Condensed", sans-serif;
+  text-align: center;
 }
 
 #content {
@@ -13,11 +13,13 @@ body {
 }
 
 header {
+  font-weight: 600;
 	font-weight: bold;
+  font-size: 40;
+  height: 80;
 }
 
 footer {
 	font-style: italic;
 	font-size: 90%;
 }
-
