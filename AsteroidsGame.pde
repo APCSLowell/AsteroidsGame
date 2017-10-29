@@ -3,6 +3,7 @@ private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 Spaceship main;
 int hyperspaceCooldown = 0;
+boolean debug = false;
 
 public void setup()
 {
@@ -47,10 +48,12 @@ public void draw()
   main.show();
 
   //Debug
-  stroke(255);
-  textSize(20);
-  String pointDirDebug = "Point direction: "+ main.getPointDirection();
-  text(pointDirDebug, 10, 20);
+  if (debug){
+    stroke(255);
+    textSize(20);
+    String pointDirDebug = "Point direction: "+ main.getPointDirection();
+    text(pointDirDebug, 10, 20);
+  }
 }
 
 void keyCheck(){
@@ -87,4 +90,8 @@ void keyCheck(){
       }
     }
   }
+}
+
+void keyPressed(){
+  if (key == 'q' || key == 'Q') debug = !debug;
 }
