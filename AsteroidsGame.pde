@@ -2,6 +2,7 @@
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 Spaceship main;
+int hyperspaceCooldown = 0;
 
 public void setup()
 {
@@ -29,6 +30,9 @@ public void setup()
 }
 public void draw()
 {
+  //Run keyCheck
+  keyCheck();
+
 	//Clear
 	fill(30);
 	rect(0, 0, 640, 480);
@@ -41,12 +45,15 @@ public void draw()
   //Draw + move spaceship
   main.move();
   main.show();
-
-  //Run keyCheck
-  keyCheck();
 }
 
 void keyCheck(){
+  if (hyperspaceCooldown > 0)
+    hyperspaceCooldown--;
+  else if (hyperspaceCooldown != 0)
+    //Bug protection
+    hyperspaceCooldown = 0;
+
   if (keyPressed == true){
     if (key == 'w' || key == 'W') {
       main.accelerate(.03);
@@ -62,6 +69,16 @@ void keyCheck(){
     if (key == 'd' || key == 'D'){
       int d = (int) main.getPointDirection() + 5;
       main.setPointDirection(d);
+    }
+    if (key == 'b' || key == 'B'){
+      //Hyperspace
+      if (hyperspaceCooldown == 0){
+        main.setX( (int) (Math.random()*647-6) );
+        main.setY( (int) (Math.random()*485-4) );
+        main.setDirectionX(0);
+        main.setDirectionY(0);
+        hyperspaceCooldown = 100;
+      }
     }
   }
 }
