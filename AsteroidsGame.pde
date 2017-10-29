@@ -49,7 +49,7 @@ public void draw()
 
   //Debug
   if (debug){
-    stroke(255);
+    fill(255);
     textSize(20);
     String pointDirDebug = "Point direction: "+ main.getPointDirection();
     text(pointDirDebug, 10, 20);
