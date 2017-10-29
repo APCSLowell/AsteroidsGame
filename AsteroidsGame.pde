@@ -45,6 +45,12 @@ public void draw()
   //Draw + move spaceship
   main.move();
   main.show();
+
+  //Debug
+  stroke(255);
+  textSize(20);
+  String pointDirDebug = "Point direction: "+ main.getPointDirection();
+  text(pointDirDebug, 10, 20);
 }
 
 void keyCheck(){
@@ -56,7 +62,7 @@ void keyCheck(){
 
   if (keyPressed == true){
     if (key == 'w' || key == 'W') {
-      main.accelerate(.03);
+      main.accelerate(.1);
     }
     if (key == 'a' || key == 'A'){
       int d = (int) main.getPointDirection() -5;

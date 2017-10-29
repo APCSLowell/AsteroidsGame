@@ -11,7 +11,11 @@ abstract class SpaceFloater extends Floater {
   public double getDirectionX(){ return (int) myDirectionX; }
   public void setDirectionY(double y){ myDirectionY = y; }
   public double getDirectionY(){ return (int) myDirectionY; }
-  public void setPointDirection(int degrees){ myPointDirection = degrees; }
+  public void setPointDirection(int degrees){
+      myPointDirection = degrees;
+      if (myPointDirection > 360) myPointDirection = myPointDirection - 360;
+      if (myPointDirection < 0) myPointDirection = myPointDirection + 360;
+  }
   public double getPointDirection(){ return (int) myPointDirection; }
 
   //Add sprite image variable for storing location of sprite
@@ -37,11 +41,15 @@ abstract class SpaceFloater extends Floater {
 
   //Override show
   public void show(){
+    //Convert radians
+    float dRadians = radians((float) myPointDirection);
+
+    pushMatrix();
   	translate((float) myCenterX, (float) myCenterY);
-  	rotate(radians((float) myPointDirection));
+  	rotate(dRadians);
   	drawSelf();
-  	translate(-1*(float) myCenterX, -1*(float) myCenterY);
-  	rotate(radians(-1*(float) myPointDirection));
+    
+  	popMatrix();
   }
 
   //New acceleration function for backwards movement
