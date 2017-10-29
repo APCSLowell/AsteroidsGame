@@ -8,7 +8,7 @@ boolean debug = false;
 public void setup()
 {
   size(640, 480);
-  background(30);
+  background(15);
 
   //Initialize stars
   for (int i = 0; i < NUM_STARS; i++) {
@@ -35,7 +35,8 @@ public void draw()
   keyCheck();
 
 	//Clear
-	fill(30);
+  noStroke();
+	fill(15);
 	rect(0, 0, 640, 480);
 
   //Show stars

@@ -1,6 +1,6 @@
 
 body {
-  background-color: #1a132d;
+  background-color: #100c19;
   color: white;
   font-family: "Saira Semi Condensed", sans-serif;
   text-align: center;
@@ -10,6 +10,9 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto
+}
+#AsteroidsGame {
+  outline: none;
 }
 
 header {
