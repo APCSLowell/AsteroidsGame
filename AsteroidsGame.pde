@@ -2,6 +2,7 @@
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 Spaceship main;
+//@Deprecated
 int hyperspaceCooldown = 0;
 boolean debug = false;
 
@@ -54,17 +55,19 @@ public void draw()
     textSize(20);
     String pointDirDebug = "Point direction: "+ main.getPointDirection();
     text(pointDirDebug, 10, 20);
+    text("Keys pressed: " + key, 10, 40);
+    text("Is key pressed? " + keyPressed, 10, 60);
   }
 }
 
 void keyCheck(){
-  if (hyperspaceCooldown > 0)
+  //Deprecated code
+  /*if (hyperspaceCooldown > 0)
     hyperspaceCooldown--;
   else if (hyperspaceCooldown != 0)
     //Bug protection
-    hyperspaceCooldown = 0;
-
-  if (keyPressed == true){
+    hyperspaceCooldown = 0;*/
+  if(keyPressed == true){
     if (key == 'w' || key == 'W') {
       main.accelerate(.1);
     }
@@ -80,19 +83,16 @@ void keyCheck(){
       int d = (int) main.getPointDirection() + 5;
       main.setPointDirection(d);
     }
-    if (key == 'b' || key == 'B'){
-      //Hyperspace
-      if (hyperspaceCooldown == 0){
-        main.setX( (int) (Math.random()*647-6) );
-        main.setY( (int) (Math.random()*485-4) );
-        main.setDirectionX(0);
-        main.setDirectionY(0);
-        hyperspaceCooldown = 100;
-      }
-    }
   }
 }
 
 void keyPressed(){
   if (key == 'q' || key == 'Q') debug = !debug;
+  if (key == 'b' || key == 'B'){
+    //Hyperspace
+    main.setX( (int) (Math.random()*647-6) );
+    main.setY( (int) (Math.random()*485-4) );
+    main.setDirectionX(0);
+    main.setDirectionY(0);
+  }
 }
