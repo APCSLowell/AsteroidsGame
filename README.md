@@ -18,8 +18,8 @@ Suggested steps to complete this assignment
 8. When you are happy with appearance of the Spaceship, add a `public void keyPressed()` function in `AsteroidsGame.pde`
 9. Write code in `keyPressed` that allows you to control the spaceship with the keyboard. You must include the ability to turn left, turn right, accelerate, and enter "hyperspace." (There is no requirement for any fancy visual effects, hyperspace just needs to stop the ship, and give it a new random position and direction.)
 10. Add code to the `draw()` in `AsteroidsGame.pde` to `move()` the Spaceship
-11. Finish the `Stars` class in `Stars.pde` 
-12. Finally, add code to `AsteroidsGame.pde` that declares and initializes an instance of the `Stars` class to create a random number of stars in random positions
+11. Finish the `Star` class in `Star.pde` 
+12. Finally, add code to `AsteroidsGame.pde` that declares and initializes an array of instances of the `Star` class to create a number of stars in random positions
 12. Note that for full credit, **you MUST include instructions on how to operate your Spaceship in the `index.html` file**
 12. OPTIONAL: If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate, simliar to the [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/). The best way to do this is to override `show()` by copying the `show()` function from Floater into your Spaceship class. Then add an `if` statement in your Spaceship `show()` function right after `endShape(CLOSE);`. If your rockets are firing, draw additional shapes just behind your Spaceship. You can sketch out the shapes on graph paper with the ship centered at (0,0) and pointing right. The `show()` function will rotate and translate the rocket shapes to the correct position on the screen.
 
