@@ -2,8 +2,6 @@
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 Spaceship main;
-//@Deprecated
-int hyperspaceCooldown = 0;
 boolean debug = false;
 
 public void setup()
@@ -61,12 +59,6 @@ public void draw()
 }
 
 void keyCheck(){
-  //Deprecated code
-  /*if (hyperspaceCooldown > 0)
-    hyperspaceCooldown--;
-  else if (hyperspaceCooldown != 0)
-    //Bug protection
-    hyperspaceCooldown = 0;*/
   if(keyPressed == true){
     if (key == 'w' || key == 'W') {
       main.accelerate(.1);
