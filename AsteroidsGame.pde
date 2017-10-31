@@ -33,6 +33,11 @@ public void setup()
   		);
   }
 
+  //Initialize asteroids
+  for (int i = 0; i<NUM_ASTEROIDS; i++){
+    asteroids.add(new Asteroid());
+  }
+
   //Initialize main spaceship
   int[] mainX = {10, -10, -5, -10};
   int[] mainY = {0, -10, -0, 10};

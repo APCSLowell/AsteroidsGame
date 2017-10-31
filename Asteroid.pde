@@ -7,7 +7,7 @@ class Asteroid extends SpaceFloater {
 
   //Default constructor
   public Asteroid(){
-    super(false);
+    Asteroid(3);
 	}
 
   //Constructor with size
@@ -20,10 +20,20 @@ class Asteroid extends SpaceFloater {
       xCorners[i] = coords[0][i]*size*3;
       yCorners[i] = coords[1][i]*size*3;
     }
+    myDirectionX = Math.random()*9-4;
+    myDirectionY = Math.random()*9-4;
+    myPointDirection = 0;
+    myRotationSpeed = 5/size;
   }
   private Asteroid breakApart(){
     this.size = size - 1;
+    myRotationSpeed = 5/size;
     return new Asteroid(size);
   }
 
+  //Override move()
+  public void move(){
+    super.move();
+    myPointDirection+=myRotationSpeed;
+  }
 }
