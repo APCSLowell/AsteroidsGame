@@ -11,15 +11,4 @@ class Spaceship extends SpaceFloater
 			(int) (Math.random()*202+53)
     );
 	}
-  protected void drawSelf(){
-    fill(myColor);
-    //draw the polygon
-    beginShape();
-    for (int nI = 0; nI < corners; nI++)
-    {
-      vertex(xCorners[nI], yCorners[nI]);
-    }
-
-    endShape(CLOSE);
-  }
 }

@@ -27,19 +27,6 @@ class Asteroid extends SpaceFloater {
               break;
     }
   }
-  protected void drawSelf(){
-    //TODO use sprites rather than shapes
-
-    noFill();
-
-    beginShape();
-    for (int nI = 0; nI < corners; nI++)
-    {
-      vertex(xCorners[nI], yCorners[nI]);
-    }
-
-    endShape(CLOSE);
-  }
   private Asteroid breakApart(){ return new Asteroid(); }
 
 }

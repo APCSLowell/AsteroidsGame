@@ -1,4 +1,4 @@
-abstract class SpaceFloater extends Floater {
+class SpaceFloater extends Floater {
   //Tells whether this instance uses sprites or point rendering
   protected final boolean IS_SPRITE_FLOATER;
 
@@ -52,8 +52,18 @@ abstract class SpaceFloater extends Floater {
     pushMatrix();
   	translate((float) myCenterX, (float) myCenterY);
   	rotate(dRadians);
-  	drawSelf();
     
+    if(IS_SPRITE_FLOATER){
+      //code for sprite rendering
+    } else {
+      beginShape();
+      for (int nI = 0; nI < corners; nI++)
+      {
+        vertex(xCorners[nI], yCorners[nI]);
+      }
+      endShape(CLOSE);
+    }
+
   	popMatrix();
   }
 
@@ -75,7 +85,4 @@ abstract class SpaceFloater extends Floater {
     if (myPointDirection > 360) myPointDirection -= 360;
     if (myPointDirection < 0) myPointDirection += 360;
   }
-
-  //ShowSelf function that must be implemented by SpaceFloater's children
-  abstract protected void drawSelf();
 }
