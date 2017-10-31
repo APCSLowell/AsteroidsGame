@@ -39,6 +39,11 @@ abstract class SpaceFloater extends Floater {
     IS_SPRITE_FLOATER = false;
   }
 
+  //Default constructor
+  public SpaceFloater(boolean spriteFloater){
+    IS_SPRITE_FLOATER = spriteFloater;
+  }
+
   //Override show
   public void show(){
     //Convert radians

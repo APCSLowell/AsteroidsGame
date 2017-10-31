@@ -1,6 +1,11 @@
+import java.util.*;
+
 //your variable declarations here
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
+
+List<Asteroid> asteroids = new ArrayList<Asteroid>();
+private final int NUM_ASTEROIDS = 10;
 
 Spaceship main;
 
