@@ -1,8 +1,13 @@
 //your variable declarations here
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
+
 Spaceship main;
+
 boolean debug = false;
+private final int TURN_SPEED = 4;
+private final float SPEED = 0.1;
+
 
 public void setup()
 {
@@ -61,17 +66,17 @@ public void draw()
 void keyCheck(){
   if(keyPressed == true){
     if (key == 'w' || key == 'W') {
-      main.accelerate(.1);
+      main.accelerate(SPEED);
     }
     if (key == 'a' || key == 'A'){
-      main.turn(-5);
+      main.turn(-1*TURN_SPEED);
     }
     //TODO fix backwards acceleration
     /*if (key == 's' || key == 'S'){
       main.backAccelerate(.03);
     }*/
     if (key == 'd' || key == 'D'){
-      main.turn(5);
+      main.turn(TURN_SPEED);
     }
   }
 }
