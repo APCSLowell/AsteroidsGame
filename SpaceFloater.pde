@@ -62,6 +62,15 @@ abstract class SpaceFloater extends Floater {
     myDirectionY -= ((dAmount) * Math.sin(dRadians));
   }
 
+  //Memory-efficient turning
+  public void turn (int nDegreesOfRotation)
+  {
+    //rotates the floater by a given number of degrees
+    myPointDirection+=nDegreesOfRotation;
+    if (myPointDirection > 360) myPointDirection -= 360;
+    if (myPointDirection < 0) myPointDirection += 360;
+  }
+
   //ShowSelf function that must be implemented by SpaceFloater's children
   abstract protected void drawSelf();
 }

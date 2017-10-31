@@ -72,16 +72,14 @@ void keyCheck(){
       main.accelerate(.1);
     }
     if (key == 'a' || key == 'A'){
-      int d = (int) main.getPointDirection() -5;
-      main.setPointDirection(d);
+      main.turn(-5);
     }
     //TODO fix backwards acceleration
     /*if (key == 's' || key == 'S'){
       main.backAccelerate(.03);
     }*/
     if (key == 'd' || key == 'D'){
-      int d = (int) main.getPointDirection() + 5;
-      main.setPointDirection(d);
+      main.turn(5);
     }
   }
 }
