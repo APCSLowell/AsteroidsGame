@@ -11,4 +11,9 @@ class Spaceship extends SpaceFloater
 			(int) (Math.random()*202+53)
     );
 	}
+	public void move(){
+		super.move();
+		myDirectionX = myDirectionX / 1.005;
+		myDirectionY = myDirectionY / 1.005;
+	}
 }
