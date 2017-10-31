@@ -1,6 +1,11 @@
 class Asteroid extends SpaceFloater {
-  //Variable that stores the current size of the asteroid
-  private int size;
+  //Variables for size and rotation speed
+  private int mySize, myRotationSpeed;
+
+  //Default point arrays for different sizes
+  private final int[][] coordsSmall = {{},{}};
+  private final int[][] coordsMed = {{},{}};
+  private final int[][] coordsLarge = {{-6, -3, -4, -1, 5, 6, 7, 5, 3, -1, -2},{}};
 
   //Default constructor
   public Asteroid(){
@@ -12,21 +17,17 @@ class Asteroid extends SpaceFloater {
     super(false);
     this.size = size;
     switch(size){
-      case 1: xCorners[0] = 0;
-              xCorners[1] = 0;
-              xCorners[2] = 0;
-              yCorners[0] = 0;
-              yCorners[1] = 0;
-              yCorners[2] = 0;
-              break;
-      case 2: xCorners[0] = 0;
-              yCorners[0] = 0;
-              break;
-      case 3: xCorners[0] = 0;
-              yCorners[0] = 0;
-              break;
+      case 1:
+        break;
+      case 2:
+        break;
+      case 3:
+        break;
     }
   }
-  private Asteroid breakApart(){ return new Asteroid(); }
+  private Asteroid breakApart(){
+    this.size = size - 1;
+    return new Asteroid(size);
+  }
 
 }
