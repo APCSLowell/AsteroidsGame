@@ -4,7 +4,7 @@ import java.util.*;
 private final int NUM_STARS = 80;
 Star[] stars = new Star[NUM_STARS];
 
-List<Asteroid> asteroids = new ArrayList<Asteroid>();
+ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 private final int NUM_ASTEROIDS = 10;
 
 Spaceship main;
@@ -35,7 +35,7 @@ public void setup()
 
   //Initialize asteroids
   for (int i = 0; i<NUM_ASTEROIDS; i++){
-    asteroids.add(new Asteroid());
+    asteroids.add(new Asteroid(3));
   }
 
   //Initialize main spaceship
@@ -61,6 +61,12 @@ public void draw()
   //Draw + move spaceship
   main.move();
   main.show();
+
+  //Draw + move asteroids
+  for (Asteroid a : asteroids){
+    a.move();
+    a.show();
+  }
 
   //Debug
   if (debug){
