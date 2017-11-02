@@ -7,9 +7,6 @@ class Spaceship extends SpaceFloater
 			(int) (Math.random()*202+53),
 			(int) (Math.random()*202+53)
     );
-		System.out.println("red: "+red(myColor));
-		System.out.println("green: "+green(myColor));
-		System.out.println("blue: "+blue(myColor));
 	}
 	public void move(){
 		super.move();
