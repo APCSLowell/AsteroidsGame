@@ -4,23 +4,24 @@ class Asteroid extends SpaceFloater {
   private int mySize, myRotationSpeed;
 
   //Default point array
-  private final int[] coordsX = {-6, -3, -4, -1, 5, 2, 6, 7, 5, 3, -1, -2};
-  private final int[] coordsY = {-4, 0, 4, 8, 4, 0, 0, -3, -8, -4, -8, -4};
+  private final int[] coordsX = {0,1,-1};
+  private final int[] coordsY = {1,-1,-1};
 
   //Constructor with size
   public Asteroid(int size){
     super(false);
+    this.myColor = color(255);
     this.mySize = size;
     for (int i = 0; i<coordsX.length; i++){
       xCorners = new int[coordsX.length];
       yCorners = new int[coordsX.length];
-      xCorners[i] = coordsX[i]*size*3;
-      yCorners[i] = coordsY[i]*size*3;
+      xCorners[i] = coordsX[i]*size*20;
+      yCorners[i] = coordsY[i]*size*20;
     }
-    myDirectionX = Math.random()*9-4;
-    myDirectionY = Math.random()*9-4;
+    myDirectionX = 2;//Math.random()*9-4;
+    myDirectionY = 2;//Math.random()*9-4;
     myPointDirection = 0;
-    myRotationSpeed = 5/size;
+    myRotationSpeed = 5;
   }
   private Asteroid breakApart(){
     this.mySize = mySize - 1;
@@ -32,5 +33,10 @@ class Asteroid extends SpaceFloater {
   public void move(){
     super.move();
     myPointDirection+=myRotationSpeed;
+    System.out.println("Moving asteroid at myDirectionX = "+myDirectionX+", myDirectionY = "+myDirectionY);
+  }
+  public void show(){
+    super.show();
+    System.out.println("Showing asteroid! IS_SPRITE_FLOATER is "+IS_SPRITE_FLOATER+", colorRed is "+red(myColor));
   }
 }
