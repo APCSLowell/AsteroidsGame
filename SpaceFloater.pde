@@ -1,6 +1,7 @@
 class SpaceFloater extends Floater {
   //Tells whether this instance uses sprites or point rendering
   protected final boolean IS_SPRITE_FLOATER;
+  protected color myColor;
 
 	//Implement abstract getter/setter methods
   public int getX(){ return (int) myCenterX; }
@@ -56,6 +57,7 @@ class SpaceFloater extends Floater {
     if(IS_SPRITE_FLOATER){
       //code for sprite rendering
     } else {
+      fill(myColor);
       beginShape();
       for (int nI = 0; nI < corners; nI++)
       {
