@@ -10,11 +10,13 @@ class Asteroid extends SpaceFloater {
   //Constructor with size
   public Asteroid(int size){
     super(false);
+    this.myCenterX = Math.random()*647-6;
+    this.myCenterY = Math.random()*485-4;
     this.myColor = color(255);
     this.mySize = size;
+    xCorners = new int[coordsX.length];
+    yCorners = new int[coordsX.length];
     for (int i = 0; i<coordsX.length; i++){
-      xCorners = new int[coordsX.length];
-      yCorners = new int[coordsX.length];
       xCorners[i] = coordsX[i]*size*20;
       yCorners[i] = coordsY[i]*size*20;
     }
@@ -33,10 +35,8 @@ class Asteroid extends SpaceFloater {
   public void move(){
     super.move();
     myPointDirection+=myRotationSpeed;
-    System.out.println("Moving asteroid at myDirectionX = "+myDirectionX+", myDirectionY = "+myDirectionY);
   }
   public void show(){
     super.show();
-    System.out.println("Showing asteroid! IS_SPRITE_FLOATER is "+IS_SPRITE_FLOATER+", colorRed is "+red(myColor));
   }
 }
