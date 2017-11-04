@@ -2,7 +2,7 @@ import java.util.*;
 
 //your variable declarations here
 private final int NUM_STARS = 80;
-Star[] stars = new Star[NUM_STARS];
+ArrayList<Star>stars = new ArrayList<Star>();
 
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 private final int NUM_ASTEROIDS = 10;
@@ -26,11 +26,11 @@ public void setup()
   				(int) (Math.random()*202+53),
   				(int) (Math.random()*202+53)
   			};
-  	stars[i] = new Star(
+  	stars.add(new Star(
   			(int) (Math.random()*647-6),
   			(int) (Math.random()*485-4),
   			col
-  		);
+  		));
   }
 
   //Initialize asteroids
@@ -54,8 +54,8 @@ public void draw()
 	rect(0, 0, 640, 480);
 
   //Show stars
-  for (int i = 0; i < NUM_STARS; i++) {
-  	stars[i].show();
+  for (Star s : stars) {
+  	s.show();
   }
 
   //Draw + move spaceship
