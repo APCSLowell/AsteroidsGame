@@ -3,10 +3,6 @@ class Asteroid extends SpaceFloater {
   //Variables for size and rotation speed
   private int mySize, myRotationSpeed;
 
-  //Default point array
-  private final int[] coordsX = {0,1,-1};
-  private final int[] coordsY = {1,-1,-1};
-
   //Constructor with size
   public Asteroid(int size){
     super(false);
@@ -14,16 +10,21 @@ class Asteroid extends SpaceFloater {
     this.myCenterY = Math.random()*485-4;
     this.myColor = color(255);
     this.mySize = size;
-    xCorners = new int[coordsX.length];
-    yCorners = new int[coordsX.length];
+
+    //default point array
+    int[] coordsX = {0,1,-1};
+    int[] coordsY = {1,-1,-1};
+    this.corners = coordsX.length;
+    this.xCorners = new int[coordsX.length];
+    this.yCorners = new int[coordsX.length];
     for (int i = 0; i<coordsX.length; i++){
-      xCorners[i] = coordsX[i]*size*20;
-      yCorners[i] = coordsY[i]*size*20;
+      this.xCorners[i] = coordsX[i]*size*10;
+      this.yCorners[i] = coordsY[i]*size*10;
     }
-    myDirectionX = 2;//Math.random()*9-4;
-    myDirectionY = 2;//Math.random()*9-4;
-    myPointDirection = 0;
-    myRotationSpeed = 5;
+    myDirectionX = Math.random()*9-4;
+    myDirectionY = Math.random()*9-4;
+    myPointDirection = Math.random()*364-3;
+    myRotationSpeed = 3;
   }
   private Asteroid breakApart(){
     this.mySize = mySize - 1;
@@ -35,8 +36,5 @@ class Asteroid extends SpaceFloater {
   public void move(){
     super.move();
     myPointDirection+=myRotationSpeed;
-  }
-  public void show(){
-    super.show();
   }
 }
