@@ -2,10 +2,10 @@ import java.util.*;
 
 //your variable declarations here
 private final int NUM_STARS = 80;
-ArrayList<Star>stars = new ArrayList<Star>();
+ArrayList<Star> stars = new ArrayList<Star>();
 
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-private final int NUM_ASTEROIDS = 10;
+private final int NUM_ASTEROIDS = 7;
 
 Spaceship main;
 

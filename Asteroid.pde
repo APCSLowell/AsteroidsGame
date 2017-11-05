@@ -21,8 +21,8 @@ class Asteroid extends SpaceFloater {
       this.xCorners[i] = coordsX[i]*size*10;
       this.yCorners[i] = coordsY[i]*size*10;
     }
-    myDirectionX = Math.random()*9-4;
-    myDirectionY = Math.random()*9-4;
+    myDirectionX = Math.random()*3-1.5;
+    myDirectionY = Math.random()*3-1.5;
     myPointDirection = Math.random()*364-3;
     myRotationSpeed = 3;
   }
