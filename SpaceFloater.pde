@@ -53,13 +53,13 @@ class SpaceFloater extends Floater {
     pushMatrix();
   	translate((float) myCenterX, (float) myCenterY);
   	rotate(dRadians);
-    
+
     if(IS_SPRITE_FLOATER){
       //code for sprite rendering
     } else {
       fill(myColor);
       beginShape();
-      for (int nI = 0; nI < corners; nI++)
+      for (int nI = 0; nI < xCorners.length; nI++)
       {
         vertex(xCorners[nI], yCorners[nI]);
       }
