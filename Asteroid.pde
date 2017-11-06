@@ -24,7 +24,7 @@ class Asteroid extends SpaceFloater {
     myDirectionX = Math.random()*3-1.5;
     myDirectionY = Math.random()*3-1.5;
     myPointDirection = Math.random()*364-3;
-    myRotationSpeed = 3;
+    myRotationSpeed = (int) (Math.random()*2) == 1 ? 5/mySize : -5/mySize;
   }
   private Asteroid breakApart(){
     this.mySize = mySize - 1;
