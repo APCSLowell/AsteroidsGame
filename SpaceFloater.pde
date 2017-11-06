@@ -19,6 +19,14 @@ class SpaceFloater extends Floater {
   }
   public double getPointDirection(){ return (int) myPointDirection; }
 
+  //Add getters for vertices
+  public int[] getXVertices(){
+    return xCorners;
+  }
+  public int[] getYVertices(){
+    return yCorners;
+  }
+
   //Add sprite image variable for storing location of sprite
   protected PImage spriteImage;
 
