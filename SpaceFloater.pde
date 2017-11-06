@@ -1,4 +1,4 @@
-class SpaceFloater extends Floater {
+class SpaceFloater extends Floater implements Collidable{
   //Tells whether this instance uses sprites or point rendering
   protected final boolean IS_SPRITE_FLOATER;
   protected color myColor;
