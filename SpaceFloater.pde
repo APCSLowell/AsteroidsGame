@@ -20,10 +20,10 @@ class SpaceFloater extends Floater implements Collidable{
   public double getPointDirection(){ return (int) myPointDirection; }
 
   //Add getters for vertices
-  public int[] getXVertices(){
+  public double[] (double) getXVertices(){
     return xCorners;
   }
-  public int[] getYVertices(){
+  public double[] (double) getYVertices(){
     return yCorners;
   }
 
