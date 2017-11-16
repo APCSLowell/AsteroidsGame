@@ -20,11 +20,21 @@ class SpaceFloater extends Floater implements Collidable{
   public double getPointDirection(){ return (int) myPointDirection; }
 
   //Add getters for vertices
-  public double[] (double) getXVertices(){
-    return xCorners;
+  public double[] getXVertices(){
+    double[] ret = new double[xCorners.length];
+    //Loop through and apply angle, then add myCenterX
+    for (int i = 0; i < xCorners.length; i++){
+      ret[i] = cos(radians(myPointDirection)*xCorners[i])+myCenterX;
+    }
+    return ret;
   }
-  public double[] (double) getYVertices(){
-    return yCorners;
+  public double[] getYVertices(){
+    double[] ret = new double[yCorners.length];
+    //Loop through and apply angle, then add myCenter Y
+    for (int i = 0; i < yCorners.length; i++){
+      ret[i] = sin(radians(myPointDirection)*yCorners[i])+myCenterY;
+    }
+    return ret;
   }
 
   //Add sprite image variable for storing location of sprite

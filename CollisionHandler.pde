@@ -5,11 +5,7 @@ class CollisionHandler{
     double[] y1 = f1.getYVertices();
     double[] x2 = f2.getXVertices();
     double[] y2 = f2.getYVertices();
-    if (x1.length != y1.length || x2.length != y2.length ||
-      x1.length < 3 || x2.length < 3 || y1.length < 3 || y2.length < 3){
-      System.err.println("shapesCollide() was given invalid arguments");
-      return false;
-    }
+
     //TODO figure out how to project axes
     for(int i = 1; i < x1.length); i++{
       double m = (y1[i] - y1[i-1])/(x1[i] - x1[i-1]);
