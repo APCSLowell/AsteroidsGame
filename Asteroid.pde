@@ -1,4 +1,4 @@
-class Asteroid extends SpaceFloater {
+class Asteroid extends SpaceFloater implements Collidable {
 
   //Variables for size and rotation speed
   private int mySize, myRotationSpeed;
@@ -12,14 +12,14 @@ class Asteroid extends SpaceFloater {
     this.mySize = size;
 
     //default point array
-    int[] coordsX = {0,1,-1};
-    int[] coordsY = {1,-1,-1};
+    int[] coordsX = {-1,2,3,2,-1,-2};
+    int[] coordsY = {3,3,-1,-3,-2,2};
     this.corners = coordsX.length;
     this.xCorners = new int[coordsX.length];
     this.yCorners = new int[coordsX.length];
     for (int i = 0; i<coordsX.length; i++){
-      this.xCorners[i] = coordsX[i]*size*10;
-      this.yCorners[i] = coordsY[i]*size*10;
+      this.xCorners[i] = coordsX[i]*size*8;
+      this.yCorners[i] = coordsY[i]*size*8;
     }
     myDirectionX = Math.random()*3-1.5;
     myDirectionY = Math.random()*3-1.5;

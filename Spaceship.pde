@@ -1,4 +1,4 @@
-class Spaceship extends SpaceFloater
+class Spaceship extends SpaceFloater implements Collidable
 {
   public Spaceship(int[] x, int[] y){
 		super(x, y);

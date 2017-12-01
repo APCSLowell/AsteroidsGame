@@ -1,4 +1,4 @@
-class CollisionHandler{
+/*class CollisionHandler{
   public boolean shapesCollide(Collidable f1, Collidable f2){
     //TODO do something that will get the real vertices with centerX and Y, as well as rotation accounted for
     double[] x1 = f1.getXVertices();
@@ -20,9 +20,9 @@ class CollisionHandler{
       if()
     }
   }
-}
+}*/
 
 interface Collidable{
-  public int[] getXVertices();
-  public int[] getYVertices();
+  public double[] getXVertices();
+  public double[] getYVertices();
 }

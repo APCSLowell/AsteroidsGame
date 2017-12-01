@@ -24,7 +24,7 @@ class SpaceFloater extends Floater implements Collidable{
     double[] ret = new double[xCorners.length];
     //Loop through and apply angle, then add myCenterX
     for (int i = 0; i < xCorners.length; i++){
-      ret[i] = cos(radians(myPointDirection)*xCorners[i])+myCenterX;
+      ret[i] = cos(radians((float)myPointDirection)*xCorners[i])+myCenterX;
     }
     return ret;
   }
@@ -32,7 +32,7 @@ class SpaceFloater extends Floater implements Collidable{
     double[] ret = new double[yCorners.length];
     //Loop through and apply angle, then add myCenter Y
     for (int i = 0; i < yCorners.length; i++){
-      ret[i] = sin(radians(myPointDirection)*yCorners[i])+myCenterY;
+      ret[i] = sin(radians((float) myPointDirection)*yCorners[i])+myCenterY;
     }
     return ret;
   }
