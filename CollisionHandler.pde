@@ -7,11 +7,13 @@ class CollisionHandler{
     double[] y2 = f2.getYVertices();
 
     //TODO figure out how to project axes
-    for(int i = 1; i < x1.length); i++{
+    for(int i = 1; i < x1.length; i++){
       double m = (y1[i] - y1[i-1])/(x1[i] - x1[i-1]);
       double[] proj1 = this.getProjection(m, x1, y1);
       double[] proj2 = this.getProjection(m, x2, y2);
-      if(proj1[1] < proj2[0]) return false;
+
+      //Check if projections don't overlap - if they don't, they aren't colliding
+      if(proj1[0] < proj2[1] || proj2[0] < proj1[1]) return false;
     }
     return false;
   }
@@ -25,7 +27,7 @@ class CollisionHandler{
       double point = (x[i] + 2*m*y[i])/(2*m+1);
       //Find the largest + smallest points
       if(point < bottom) point = bottom;
-      else(point > top) point = top;
+      else if(point > top) point = top;
     }
 
     double[] ret = {top, bottom};
