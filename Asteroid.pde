@@ -12,8 +12,8 @@ class Asteroid extends SpaceFloater implements Collidable {
     this.mySize = size;
 
     //default point array
-    int[] coordsX = {-1,2,3,2,-1,-2};
-    int[] coordsY = {3,3,-1,-3,-2,2};
+    int[] coordsX = {0,2,2,0,-2};
+    int[] coordsY = {3,2,0,-1,1};
     this.corners = coordsX.length;
     this.xCorners = new int[coordsX.length];
     this.yCorners = new int[coordsX.length];
