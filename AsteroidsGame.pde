@@ -7,6 +7,8 @@ ArrayList<Star> stars = new ArrayList<Star>();
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
 private final int NUM_ASTEROIDS = 7;
 
+private final CollisionHandler collisions = new CollisionHandler();
+
 Spaceship main;
 
 boolean debug = false;
@@ -48,6 +50,9 @@ public void draw()
   //Run keyCheck
   keyCheck();
 
+  //Check collisions
+  collisionCheck();
+
 	//Clear
   noStroke();
 	fill(15);
@@ -76,6 +81,7 @@ public void draw()
     text(pointDirDebug, 10, 20);
     text("Keys pressed: " + key, 10, 40);
     text("Is key pressed? " + keyPressed, 10, 60);
+    text("Colliding? " + debugCollide, 10, 80);
   }
 }
 
@@ -93,6 +99,18 @@ void keyCheck(){
     }*/
     if (key == 'd' || key == 'D'){
       main.turn(TURN_SPEED);
+    }
+  }
+}
+
+boolean debugCollide = false;
+void collisionCheck(){
+  for(Asteroid a : asteroids){
+    //Get distance between asteroid and spaceship
+    double distance =
+      Math.sqrt(Math.pow(a.getX()-main.getX(), 2)+Math.pow(a.getY()-main.getY(), 2));
+    if (distance < a.getSize()*Math.sqrt(5) + sqrt(200)){
+      if (collisions.shapesCollide(a, main)) { debugCollide = true; break; }
     }
   }
 }

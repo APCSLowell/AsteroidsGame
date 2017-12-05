@@ -13,7 +13,7 @@ class Asteroid extends SpaceFloater implements Collidable {
 
     //default point array
     int[] coordsX = {0,2,2,0,-2};
-    int[] coordsY = {3,2,0,-1,1};
+    int[] coordsY = {2,1,-1,-2,0};
     this.corners = coordsX.length;
     this.xCorners = new int[coordsX.length];
     this.yCorners = new int[coordsX.length];
@@ -31,6 +31,8 @@ class Asteroid extends SpaceFloater implements Collidable {
     myRotationSpeed = 5/mySize;
     return new Asteroid(mySize);
   }
+
+  public int getSize(){return mySize*8;}
 
   //Override move()
   public void move(){
