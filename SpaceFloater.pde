@@ -20,6 +20,7 @@ class SpaceFloater extends Floater implements Collidable{
   public double getPointDirection(){ return (int) myPointDirection; }
 
   //Add getters for vertices
+  //TODO fix these methods returning broken coordinates
   public double[] getXVertices(){
     double[] ret = new double[xCorners.length];
     //Loop through and apply angle, then add myCenterX
