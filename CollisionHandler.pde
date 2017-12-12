@@ -17,12 +17,12 @@ class CollisionHandler{
   }
   private double[] getProjection(double m, double[] x, double[] y){
     //Variables for the biggest and smallest X values when projected onto axis
-    double top = (x[0] + 2*m*y[0])/(2*m+1);
-    double bottom = (x[0] + 2*m*y[0])/(2*m+1);
+    double top = (x[0]/m+y[0])/(m+1/m);
+    double bottom = (x[0]/m+y[0])/(m+1/m);
 
     //Loop through points given and project onto axis y=mx
     for(int i = 0; i < x.length; i++){
-      double point = (x[i] + 2*m*y[i])/(2*m+1);
+      double point = (x[i]/m+y[i])/(m+1/m);
       //Find the largest + smallest points
       if(point < bottom) point = bottom;
       else if(point > top) point = top;

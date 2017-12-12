@@ -5,7 +5,7 @@ private final int NUM_STARS = 80;
 ArrayList<Star> stars = new ArrayList<Star>();
 
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-private final int NUM_ASTEROIDS = 7;
+private final int NUM_ASTEROIDS = 1;
 
 private final CollisionHandler collisions = new CollisionHandler();
 
@@ -83,8 +83,7 @@ public void draw()
     text("Is key pressed? " + keyPressed, 10, 60);
     text("Colliding? " + debugCollide, 10, 80);
 
-    System.out.println("First asteroid coordsX: "
-      + Arrays.toString(asteroids.get(0).getXVertices()));
+    System.out.println("Asteroid coordsX: "+Arrays.toString(asteroids.get(0).getXVertices()));
   }
 }
 
@@ -115,7 +114,11 @@ void collisionCheck(){
     /*double distance =
       Math.sqrt(Math.pow(a.getX()-main.getX(), 2)+Math.pow(a.getY()-main.getY(), 2));
     if (distance < a.getSize()*Math.sqrt(5) + sqrt(200)){*/
-      if (collisions.shapesCollide(a, main)) { collide = true; break; }
+      if (collisions.shapesCollide(a, main)) {
+        System.out.println("Collision! "+Math.random());
+        collide = true;
+        break;
+      }
     //}
   }
   debugCollide = collide;
