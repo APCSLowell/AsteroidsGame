@@ -13,7 +13,7 @@ class CollisionHandler{
       //Check if projections don't overlap - if they don't, they aren't colliding
       if(proj1[0] < proj2[1] || proj2[0] < proj1[1]) return false;
     }
-    return false;
+    return true;
   }
   private double[] getProjection(double m, double[] x, double[] y){
     //Variables for the biggest and smallest X values when projected onto axis

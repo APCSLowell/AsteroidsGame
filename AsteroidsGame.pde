@@ -83,7 +83,7 @@ public void draw()
     text("Is key pressed? " + keyPressed, 10, 60);
     text("Colliding? " + debugCollide, 10, 80);
 
-    System.out.println("Asteroid coordsX: "+Arrays.toString(asteroids.get(0).getXVertices()));
+    //System.out.println("Asteroid coordsX: "+Arrays.toString(asteroids.get(0).getXVertices()));
   }
 }
 
@@ -122,6 +122,7 @@ void collisionCheck(){
     //}
   }
   debugCollide = collide;
+  System.out.println(debugCollide + ", " + collide);
 }
 
 void keyPressed(){

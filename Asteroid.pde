@@ -38,5 +38,11 @@ class Asteroid extends SpaceFloater implements Collidable {
   public void move(){
     super.move();
     myPointDirection+=myRotationSpeed;
+
+    //debug
+    int i = 1;
+    double distance = Math.sqrt(Math.pow(xCorners[i], 2)+Math.pow(yCorners[i], 2));
+    double angle = atan2(xCorners[i], yCorners[i]);
+
   }
 }
