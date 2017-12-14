@@ -5,7 +5,7 @@ private final int NUM_STARS = 80;
 ArrayList<Star> stars = new ArrayList<Star>();
 
 ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-private final int NUM_ASTEROIDS = 1;
+private final int NUM_ASTEROIDS = 7;
 
 private final CollisionHandler collisions = new CollisionHandler();
 
