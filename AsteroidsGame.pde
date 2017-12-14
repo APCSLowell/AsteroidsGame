@@ -119,10 +119,10 @@ void collisionCheck(){
         collide = true;
         break;
       }
+      collisions.shapesCollide(a, main);
     //}
   }
   debugCollide = collide;
-  System.out.println(debugCollide + ", " + collide);
 }
 
 void keyPressed(){

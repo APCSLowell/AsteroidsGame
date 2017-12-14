@@ -5,10 +5,15 @@ class CollisionHandler{
     double[] x2 = f2.getXVertices();
     double[] y2 = f2.getYVertices();
 
-    for(int i = 1; i < x1.length; i++){
-      double m = (y1[i] - y1[i-1])/(x1[i] - x1[i-1]);
+    for(int i = 0; i < x1.length; i++){
+      double m = (i!=0) ? (y1[i] - y1[i-1])/(x1[i] - x1[i-1])
+        : (y1[i] - y1[y1.length-1])/(x1[i] - x1[x1.length-1]);
+      m = -1/m;
       double[] proj1 = this.getProjection(m, x1, y1);
       double[] proj2 = this.getProjection(m, x2, y2);
+
+      //debug
+      if(i == 0) System.out.println(Arrays.toString(proj1));
 
       //Check if projections don't overlap - if they don't, they aren't colliding
       if(proj1[0] < proj2[1] || proj2[0] < proj1[1]) return false;
@@ -24,8 +29,8 @@ class CollisionHandler{
     for(int i = 0; i < x.length; i++){
       double point = (x[i]/m+y[i])/(m+1/m);
       //Find the largest + smallest points
-      if(point < bottom) point = bottom;
-      else if(point > top) point = top;
+      if(point < bottom) bottom = point;
+      else if(point > top) top = point;
     }
 
     double[] ret = {top, bottom};
