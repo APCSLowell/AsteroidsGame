@@ -37,6 +37,7 @@ Some important things to keep in mind
 
 Samples of Student Work
 -----------------------
+[Jack](https://paintcannon.github.io/AsteroidsGame/)   
 [Erica](https://ericamalia.github.io/AsteroidsGame/)   
 [Wilson](https://wilsonh415.github.io/AsteroidsGame/)   
 [Elton](https://elel123.github.io/AsteroidsGame/)   
