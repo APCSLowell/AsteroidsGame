@@ -1,4 +1,16 @@
-class Spaceship //extends Floater  
+class Spaceship extends Floater  
 {   
-    //your code here
+    public Spaceship()
+    {
+    	xCorners={};
+    	yCorners={}
+    }
+    public void get()
+    {
+
+    }
+    public void set()
+    {
+
+    }
 }
