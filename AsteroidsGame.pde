@@ -1,6 +1,11 @@
 //your variable declarations here
 Spaceship ship;
+PImage img;
+int count=0;
+boolean tele = false;
+int teleX, teleY;
 Star[] stars=new Star[500];
+ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 public void setup() 
 {
   ship=new Spaceship();
@@ -12,6 +17,11 @@ public void setup()
   {
   	stars[i]=new Star();
   }
+  for(int h=0;  h<20; h++)
+  {
+  	rockBottom.add(new Asteroid());
+  }
+  img=loadImage("flashtele.png");
   //your code here
 }
 public void draw() 
@@ -21,6 +31,11 @@ public void draw()
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i].show();
+  	}
+  	for(int g=0; g<rockBottom.size();g++)
+  	{
+  		rockBottom.get(g).move();
+  		rockBottom.get(g).show();
   	}
 	ship.move();
 	ship.show();
@@ -32,6 +47,18 @@ public void draw()
   		}
   	rect(25, 25, 50, 50)
 	}*/
+	if(count<5&&tele)
+	{
+		flashDis();
+		if(count==4)
+		{
+			tele=false;
+		}
+	}
+	if(tele)
+	{
+		count++;
+	}
 }
 public void keyPressed()
 {
@@ -48,13 +75,27 @@ public void keyPressed()
 		case 'd':
 			ship.turn(20);
 		break;
+		case 'z':
+			ship.setTagX(ship.getX());
+			ship.setTagY(ship.getY());
+		break;
+		case 'x':
+			tele=true;
+			count=0;
+			image(img, ship.getX()-140, ship.getY()-106, 280, 212);
+			teleX=ship.getX();
+			teleY=ship.getY();
+			ship.setX(ship.getTagX());
+			ship.setY(ship.getTagY());
+			image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
 		case 'f':
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
 		break;
-
-		case 'x':
-
-		break;
 	}
+}
+public void flashDis()
+{
+	image(img, teleX-140, teleY-106, 280, 212);
+	image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
 }
