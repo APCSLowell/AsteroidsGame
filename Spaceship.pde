@@ -2,6 +2,7 @@ class Spaceship extends Floater
 {   
 	int tagX=0;
 	int tagY=0;
+    int colCon=0;
     public Spaceship()
     {
     	//xCorners=new int[]{-1,-2,-2,-6,-6,-14,-14,-15,-15,-16,-16,-17,-17,-16,-16,-15,-15,-14,-14,-5,-5,-3,-3,-2,-2,2,2,3,3,5,5,14,14,15,15,16,16,17,17,16,16,15,15,14,14,6,6,2,2,1};
@@ -36,5 +37,13 @@ class Spaceship extends Floater
     	fill(211,211,211);
     	rect(tagX-10, tagY-5, 20, 10);
     	super.show();
+    }
+    public void distDet(int asx, int asy)
+    {
+        if(dist(asx, asy, this.getX(), this.getY())<=14)
+        {
+            println("oh no collision number "+colCon);
+            colCon++;
+        }
     }
 }

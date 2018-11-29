@@ -8,20 +8,20 @@ Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 public void setup() 
 {
-  ship=new Spaceship();
-  ship.setX(500);
-  ship.setY(500);
-  size(1000, 1000);
-  background(0, 0, 0);
-  for(int i=0; i<stars.length;i++)
-  {
-  	stars[i]=new Star();
-  }
-  for(int h=0;  h<20; h++)
-  {
-  	rockBottom.add(new Asteroid());
-  }
-  img=loadImage("flashtele.png");
+	ship=new Spaceship();
+	ship.setX(500);
+	ship.setY(500);
+	size(1000, 1000);
+	background(0, 0, 0);
+	for(int i=0; i<stars.length;i++)
+  	{
+  		stars[i]=new Star();
+  	}
+  	for(int h=0;  h<5; h++)
+  	{
+  		rockBottom.add(new Asteroid());
+  	}
+  	img=loadImage("flashtele.png");
   //your code here
 }
 public void draw() 
@@ -39,6 +39,10 @@ public void draw()
   	}
 	ship.move();
 	ship.show();
+	for(int f=0; f<rockBottom.size();f++)
+  	{
+  		ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY());
+  	}
 	/*if (keyPressed) {
     	if (key == 'b' || key == 'B') {
       		fill(0);
@@ -92,6 +96,8 @@ public void keyPressed()
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
 		break;
+		case 'e':
+			rockBottom.
 	}
 }
 public void flashDis()
