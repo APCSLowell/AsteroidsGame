@@ -1,9 +1,12 @@
 //your variable declarations here
 Spaceship ship;
 PImage img;
-int count=0;
+int count=0, tCount=0;
 boolean tele = false;
+boolean tStop = false;
 int teleX, teleY;
+ArrayList<Double> tStopX = new ArrayList<Double>();
+ArrayList<Double> tStopY = new ArrayList<Double>();
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 public void setup() 
@@ -24,33 +27,48 @@ public void setup()
   	img=loadImage("flashtele.png");
   //your code here
 }
-public void draw() 
+public void show()
 {
-	fill(0,0,0);
-	rect(0, 0, 1000, 1000);
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i].show();
   	}
+  	//makes stars
+  	ship.show();
+  	//shows the ship
+  	for(int g=0; g<rockBottom.size();g++)
+  	{
+  		rockBottom.get(g).show();
+  	}
+  	//shows the tie fighter asteroid
+}
+public void draw() 
+{
+	fill(0,0,0);
+	rect(0, 0, 1000, 1000);
+	//makes background
+  	if(tCount==20&&tStop)
+	{
+		tStop=false;
+		tiStart();
+	}else if(tStop)
+	{
+		tCount++;
+	}
+	//frame counter for the time stop button
   	for(int g=0; g<rockBottom.size();g++)
   	{
   		rockBottom.get(g).move();
-  		rockBottom.get(g).show();
   	}
+  	//moves all tie fighter asteroids
 	ship.move();
-	ship.show();
+	//moves the ship
 	for(int f=0; f<rockBottom.size();f++)
   	{
   		ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY());
   	}
-	/*if (keyPressed) {
-    	if (key == 'b' || key == 'B') {
-      		fill(0);
-    	}else {
-    	fill(255);
-  		}
-  	rect(25, 25, 50, 50)
-	}*/
+  	//impact detector
+	
 	if(count<5&&tele)
 	{
 		flashDis();
@@ -63,6 +81,8 @@ public void draw()
 	{
 		count++;
 	}
+	//frame counter for the teleportation image
+	show();
 }
 public void keyPressed()
 {
@@ -96,8 +116,46 @@ public void keyPressed()
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
 		break;
+		case ' ':
+			
 		case 'e':
-			rockBottom.
+			tStop=true;
+			tCount=0;
+			tStopX.clear();
+			tStopY.clear();
+			for(int f=0;f<rockBottom.size();f++)
+			{
+				tStopX.add(rockBottom.get(f).getDirectionX());
+				tStopY.add(rockBottom.get(f).getDirectionY());
+			}
+			tStop=true;
+			tCount=0;
+			tiStop();
+		break;
+		/*if (keyPressed) {
+    	if (key == 'b' || key == 'B') {
+      		fill(0);
+    	}else {
+    	fill(255);
+  		}
+  		rect(25, 25, 50, 50)
+		}*/
+	}
+}
+public void tiStop()
+{
+	for(int e=0;e<rockBottom.size();e++)
+	{
+		rockBottom.get(e).setDirectionX(0);
+		rockBottom.get(e).setDirectionY(0);
+	}
+}
+public void tiStart()
+{
+	for(int d=0;d<rockBottom.size();d++)
+	{
+		rockBottom.get(d).setDirectionX(tStopX.get(d));
+		rockBottom.get(d).setDirectionY(tStopY.get(d));
 	}
 }
 public void flashDis()
