@@ -5,6 +5,7 @@ int count=0, tCount=0;
 boolean tele = false;
 boolean tStop = false;
 int teleX, teleY;
+ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
 Star[] stars=new Star[500];
@@ -41,6 +42,11 @@ public void show()
   		rockBottom.get(g).show();
   	}
   	//shows the tie fighter asteroid
+  	for(int e=0; e<bolt.size();e++)
+  	{
+  		bolt.get(e).show();
+  	}
+  	//shows the bolts
 }
 public void draw() 
 {
@@ -68,7 +74,18 @@ public void draw()
   		ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY());
   	}
   	//impact detector
-	
+	for(int e=0; e<bolt.size();e++)
+  	{
+  		bolt.get(e).move();
+  	}
+  	for(int e=0; e<bolt.size();e++)
+  	{
+  		if(bolt.get(e).myCenterX>1000||bolt.get(e).myCenterX<0||bolt.get(e).myCenterY>1000||bolt.get(e).myCenterY<0)
+    	{
+    		bolt.remove(e);
+    	}
+  	}
+  	//moves the bolts
 	if(count<5&&tele)
 	{
 		flashDis();
@@ -117,7 +134,12 @@ public void keyPressed()
 			ship.setDirectionY(0);
 		break;
 		case ' ':
-			
+			bolt.add(new Bolt());
+			/*bolt.setX(ship.getX());
+			bolt.setY(ship.getY());
+			bolt.setPointDirection((int)ship.myPointDirection);
+			bolt.accelerate(2);*/
+		break;
 		case 'e':
 			tStop=true;
 			tCount=0;
@@ -132,6 +154,7 @@ public void keyPressed()
 			tCount=0;
 			tiStop();
 		break;
+
 		/*if (keyPressed) {
     	if (key == 'b' || key == 'B') {
       		fill(0);
