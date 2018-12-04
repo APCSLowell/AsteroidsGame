@@ -1,8 +1,9 @@
 //your variable declarations here
 Spaceship ship;
 PImage img;
-int count=0, tCount=0;
+int count=0, tCount=0, bCount=0;
 boolean tele = false;
+boolean boom = false;
 boolean tStop = false;
 int teleX, teleY;
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
@@ -73,11 +74,12 @@ public void draw()
   	{
   		ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY());
   	}
-  	//impact detector
+  	//ship to asteroid impact detector
 	for(int e=0; e<bolt.size();e++)
   	{
   		bolt.get(e).move();
   	}
+  	//moves the bolts
   	for(int e=0; e<bolt.size();e++)
   	{
   		if(bolt.get(e).myCenterX>1000||bolt.get(e).myCenterX<0||bolt.get(e).myCenterY>1000||bolt.get(e).myCenterY<0)
@@ -85,7 +87,18 @@ public void draw()
     		bolt.remove(e);
     	}
   	}
-  	//moves the bolts
+  	//removes the bolts
+  	for(int c=0; c<rockBottom.size();c++)
+  	{
+  		for(int b=0; b<bolt.size();b++)
+  		{
+  			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
+  			{
+  				rockBottom.remove(c);
+  				break;
+  			}
+  		}
+  	}
 	if(count<5&&tele)
 	{
 		flashDis();
@@ -95,6 +108,18 @@ public void draw()
 		}
 	}
 	if(tele)
+	{
+		count++;
+	}
+	if(bCount<100&&boom)
+	{
+		bRad();
+		if(bCount==99)
+		{
+			boom=false;
+		}
+	}
+	if(boom)
 	{
 		count++;
 	}
@@ -108,13 +133,13 @@ public void keyPressed()
 			ship.accelerate(1);
 		break;
 		case 'a':
-			ship.turn(-20);
+			ship.turn(-10);
 		break;
 		case 's':
 			ship.accelerate(-1);
 		break;
 		case 'd':
-			ship.turn(20);
+			ship.turn(10);
 		break;
 		case 'z':
 			ship.setTagX(ship.getX());
@@ -154,15 +179,29 @@ public void keyPressed()
 			tCount=0;
 			tiStop();
 		break;
-
-		/*if (keyPressed) {
-    	if (key == 'b' || key == 'B') {
-      		fill(0);
-    	}else {
-    	fill(255);
-  		}
-  		rect(25, 25, 50, 50)
-		}*/
+		case 'q':
+			boom=true;
+			ship.setBombX(ship.getX());
+			ship.setBombY(ship.getY());
+			for(int l=0;l<500;l+=10)
+			{
+				for(int z=0;z<rockBottom.size();z++)
+				{
+					if(rockBottom.get(z).bomDet(ship.getBombX(),ship.getBombY(),l))
+					{
+						rockBottom.remove(z);
+						break;
+					}
+				}
+			}
+	}
+}
+public void bRad()
+{
+	for(int l=0;l<500;l+=10)
+	{
+		fill(255,255,255);
+		ellipse(ship.getBombX(), ship.getBombY(), l, l);
 	}
 }
 public void tiStop()

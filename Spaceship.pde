@@ -2,6 +2,8 @@ class Spaceship extends Floater
 {   
 	int tagX=0;
 	int tagY=0;
+    int bombX=0;
+    int bombY=0;
     int colCon=0;
     public Spaceship()
     {
@@ -32,10 +34,15 @@ class Spaceship extends Floater
     public int getTagX(){return (int)tagX;}
     public void setTagY(int y){tagY=y;}
     public int getTagY(){return (int)tagY;}
+    public void setBombX(int x){bombX=x;}
+    public int getBombX(){return (int)bombX;}
+    public void setBombY(int y){bombY=y;}
+    public int getBombY(){return (int)bombY;}
     public void show()
     {
     	fill(211,211,211);
     	rect(tagX-10, tagY-5, 20, 10);
+        ellipse(bombX, bombY, 20, 10);
     	super.show();
     }
     public void distDet(int asx, int asy)

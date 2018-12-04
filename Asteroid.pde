@@ -29,4 +29,22 @@ public class Asteroid extends Floater
     {
     	super.move();
     }
+    public boolean cloDet(int box, int boy)
+	{
+		if(dist(box, boy, this.getX(), this.getY())<=10)
+		{
+			return true;
+		}else{
+			return false;
+		}
+	}
+	public boolean bomDet(int box, int boy, int sphe)
+	{
+		if(dist(box, boy, this.getX(), this.getY())<=sphe)
+		{
+			return true;
+		}else{
+			return false;
+		}
+	}
 }
