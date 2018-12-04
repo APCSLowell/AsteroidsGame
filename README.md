@@ -29,10 +29,10 @@ Some important things to keep in mind
 -------------------------------------
 1. Abstract classes are "unfinished"
 2. Abstract classes are one way that programmers can collaborate and divide up the work of a large program
-3. You're collaborating! Some of the work for the `Ship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Ship` class. 
-3. To create the `Ship` class you need to write a constructor and finish the "unfinished" `abstract` functions in `Floater`.
+3. You're collaborating! Some of the work for the `Spaceship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Ship` class. 
+3. To create the `Spaceship` class you need to write a constructor and finish the "unfinished" `abstract` functions in `Floater`.
 4. When you are sketching out your ship on th [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) make sure the ship is centered at (0,0) and pointing to the right
-4. Don't declare any duplicate variables in your `Ship` class. You are inheriting all the variables you need from `Floater`
+4. Don't declare any duplicate variables in your `Spaceship` class. You are inheriting all the variables you need from `Floater`
 5. Make sure your `Spaceship` constructor initializes all 9 of the `protected` variables it inherits from `Floater`
 
 Samples of Student Work
