@@ -1,7 +1,7 @@
 //your variable declarations here
 Spaceship ship;
 PImage img;
-int count=0, tCount=0, bCount=0;
+int count=0, tCount=0, bCount=0, turn=0;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
@@ -111,19 +111,39 @@ public void draw()
 	{
 		count++;
 	}
-	if(bCount<100&&boom)
+	if(bCount<51&&boom)
 	{
-		bRad();
-		if(bCount==99)
+		if(bCount==50)
 		{
 			boom=false;
+			bCount=0;;
 		}
 	}
+	//frame counter for the teleportation image
 	if(boom)
 	{
-		count++;
+		fill(255,255,255);
+		ellipse(ship.getBombX(), ship.getBombY(), bCount*50, bCount*50);
+		if(bCount>30)
+		{
+			fill(0,0,0);
+			ellipse(ship.getBombX(), ship.getBombY(), (bCount*50)-2000, (bCount*50)-2000);
+		}
+		for(int z=0;z<rockBottom.size();z++)
+		{
+			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*50))
+			{
+				rockBottom.remove(z);
+				break;
+			}
+		}
+		bCount++;
 	}
-	//frame counter for the teleportation image
+	if(turn%10==0)
+	{
+		rockBottom.add(new Asteroid());
+	}
+	turn++;
 	show();
 }
 public void keyPressed()
@@ -183,25 +203,6 @@ public void keyPressed()
 			boom=true;
 			ship.setBombX(ship.getX());
 			ship.setBombY(ship.getY());
-			for(int l=0;l<500;l+=10)
-			{
-				for(int z=0;z<rockBottom.size();z++)
-				{
-					if(rockBottom.get(z).bomDet(ship.getBombX(),ship.getBombY(),l))
-					{
-						rockBottom.remove(z);
-						break;
-					}
-				}
-			}
-	}
-}
-public void bRad()
-{
-	for(int l=0;l<500;l+=10)
-	{
-		fill(255,255,255);
-		ellipse(ship.getBombX(), ship.getBombY(), l, l);
 	}
 }
 public void tiStop()
