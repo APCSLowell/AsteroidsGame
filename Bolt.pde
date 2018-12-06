@@ -2,8 +2,8 @@ public class Bolt extends Floater
 {
 	public Bolt()
     {
-    	yCorners=new int[]{-1,1,1,-1};
-    	xCorners=new int[]{10,10,-10,-10};
+    	yCorners=new int[]{-2,2,2,-2};
+    	xCorners=new int[]{20,20,-20,-20};
     	corners=4;
     	myColor=color(204,255,255);
     	myCenterX=ship.getX();

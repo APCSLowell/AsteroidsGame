@@ -31,7 +31,7 @@ public class Asteroid extends Floater
     }
     public boolean cloDet(int box, int boy)
 	{
-		if(dist(box, boy, this.getX(), this.getY())<=10)
+		if(dist(box, boy, this.getX(), this.getY())<=20)
 		{
 			return true;
 		}else{

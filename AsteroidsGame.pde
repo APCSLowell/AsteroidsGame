@@ -95,10 +95,13 @@ public void draw()
   			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
   			{
   				rockBottom.remove(c);
+  				tStopX.remove(c);
+  				tStopY.remove(c);
   				break;
   			}
   		}
   	}
+  	//bolt to asteroid impact detection
 	if(count<5&&tele)
 	{
 		flashDis();
@@ -124,26 +127,26 @@ public void draw()
 	{
 		fill(255,255,255);
 		ellipse(ship.getBombX(), ship.getBombY(), bCount*50, bCount*50);
-		if(bCount>30)
-		{
-			fill(0,0,0);
-			ellipse(ship.getBombX(), ship.getBombY(), (bCount*50)-2000, (bCount*50)-2000);
-		}
+		fill(0,0,0);
+		ellipse(ship.getBombX(), ship.getBombY(), (bCount*35), (bCount*35));
 		for(int z=0;z<rockBottom.size();z++)
 		{
 			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*50))
 			{
 				rockBottom.remove(z);
+
 				break;
 			}
 		}
 		bCount++;
 	}
-	if(turn%10==0)
+	//pulse bomb impact detection
+	if(turn%100==0)
 	{
 		rockBottom.add(new Asteroid());
 	}
 	turn++;
+	//adds a new asteroid every 100 frames
 	show();
 }
 public void keyPressed()
@@ -215,7 +218,7 @@ public void tiStop()
 }
 public void tiStart()
 {
-	for(int d=0;d<rockBottom.size();d++)
+	for(int d=0;d<rockBottom.size()-1;d++)
 	{
 		rockBottom.get(d).setDirectionX(tStopX.get(d));
 		rockBottom.get(d).setDirectionY(tStopY.get(d));
