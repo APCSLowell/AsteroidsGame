@@ -45,12 +45,16 @@ class Spaceship extends Floater
         ellipse(bombX, bombY, 20, 10);
     	super.show();
     }
-    public void distDet(int asx, int asy)
+    public boolean distDet(int asx, int asy)
     {
         if(dist(asx, asy, this.getX(), this.getY())<=14)
         {
-            println("oh no collision number "+colCon);
-            colCon++;
+            setDirectionX(0);
+            setDirectionY(0);
+            myColor=color(0,0,0);
+            return true;
+        }else{
+            return false;
         }
     }
 }

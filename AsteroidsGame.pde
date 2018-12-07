@@ -1,10 +1,20 @@
 //your variable declarations here
 Spaceship ship;
 PImage img;
-int count=0, tCount=0, bCount=0, turn=0;
+PImage end1;
+PImage end2;
+PImage end3;
+PImage end4;
+PImage end5;
+PImage end6;
+PImage end7;
+PImage end8;
+PImage end9;
+int count=0, tCount=0, bCount=0, eCount=0, turn=0;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
+boolean endGame = false;
 int teleX, teleY;
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
@@ -27,7 +37,15 @@ public void setup()
   		rockBottom.add(new Asteroid());
   	}
   	img=loadImage("flashtele.png");
-  //your code here
+  	end1=loadImage("explofr1.gif");
+  	end2=loadImage("explofr2.gif");
+  	end3=loadImage("explofr3.gif");
+  	end4=loadImage("explofr4.gif");
+  	end5=loadImage("explofr5.gif");
+  	end6=loadImage("explofr6.gif");
+  	end7=loadImage("explofr7.gif");
+  	end8=loadImage("explofr8.gif");
+  	end9=loadImage("explofr9.gif");
 }
 public void show()
 {
@@ -72,7 +90,10 @@ public void draw()
 	//moves the ship
 	for(int f=0; f<rockBottom.size();f++)
   	{
-  		ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY());
+  		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY()))
+  		{
+  			endGame=true;
+		}
   	}
   	//ship to asteroid impact detector
 	for(int e=0; e<bolt.size();e++)
@@ -114,6 +135,57 @@ public void draw()
 	{
 		count++;
 	}
+	//frame counter for teleportation image
+	
+	if(eCount<201&&endGame)
+	{
+		if(eCount<20)
+		{
+			image(end1, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>19&&eCount<40)
+		{
+			image(end2, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>39&&eCount<60)
+		{
+			image(end3, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>59&&eCount<80)
+		{
+			image(end4, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>79&&eCount<100)
+		{	
+			image(end5, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>99&&eCount<120)
+		{
+			image(end6, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>119&&eCount<140)
+		{
+			image(end7, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>139&&eCount<160)
+		{
+			image(end8, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount>159&&eCount<180)
+		{
+			image(end9, ship.getX()-150,ship.getY()-150, 300, 300);
+		}
+		if(eCount==200)
+		{
+			endGame=false;
+			exit();
+		}
+		if(endGame)
+		{
+			eCount++;
+		}
+	}
+	//ship explosion counter at the end of the game
 	if(bCount<51&&boom)
 	{
 		if(bCount==50)
@@ -122,7 +194,6 @@ public void draw()
 			bCount=0;;
 		}
 	}
-	//frame counter for the teleportation image
 	if(boom)
 	{
 		fill(255,255,255);
@@ -229,3 +300,6 @@ public void flashDis()
 	image(img, teleX-140, teleY-106, 280, 212);
 	image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
 }
+	/*start working with the explogif. each frame of the gif 
+	plays every 0.01 seconds and the framerate of this 
+	program is 60 frames per second*/
