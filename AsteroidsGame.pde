@@ -10,7 +10,7 @@ PImage end6;
 PImage end7;
 PImage end8;
 PImage end9;
-int count=0, tCount=0, bCount=0, eCount=0, turn=0;
+int count=0, tCount=0, bCount=0, eCount=0, turn=0, endX=0, endY=0, dedPer=0;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
@@ -92,6 +92,14 @@ public void draw()
   	{
   		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY()))
   		{
+  			endX=ship.getX();
+  			endY=ship.getY();
+  			ship.setX(0);
+  			ship.setY(0);
+  			ship.setTagX(0);
+  			ship.setTagY(0);
+  			ship.setBombX(0);
+  			ship.setBombY(0);
   			endGame=true;
 		}
   	}
@@ -116,8 +124,11 @@ public void draw()
   			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
   			{
   				rockBottom.remove(c);
-  				tStopX.remove(c);
-  				tStopY.remove(c);
+  				if(tStopX.size()!=0)
+  				{
+  					tStopX.remove(c);
+  					tStopY.remove(c);
+  				}
   				break;
   			}
   		}
@@ -139,41 +150,41 @@ public void draw()
 	
 	if(eCount<201&&endGame)
 	{
-		if(eCount<20)
+		if(eCount<10)
 		{
-			image(end1, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end1, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>19&&eCount<40)
+		if(eCount>9&&eCount<20)
 		{
-			image(end2, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end2, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>39&&eCount<60)
+		if(eCount>19&&eCount<30)
 		{
-			image(end3, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end3, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>59&&eCount<80)
+		if(eCount>29&&eCount<40)
 		{
-			image(end4, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end4, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>79&&eCount<100)
+		if(eCount>39&&eCount<50)
 		{	
-			image(end5, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end5, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>99&&eCount<120)
+		if(eCount>49&&eCount<60)
 		{
-			image(end6, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end6, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>119&&eCount<140)
+		if(eCount>59&&eCount<70)
 		{
-			image(end7, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end7, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>139&&eCount<160)
+		if(eCount>69&&eCount<80)
 		{
-			image(end8, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end8, endX-150,endY-150, 300, 300);
 		}
-		if(eCount>159&&eCount<180)
+		if(eCount>79&&eCount<90)
 		{
-			image(end9, ship.getX()-150,ship.getY()-150, 300, 300);
+			image(end9, endX-150,endY-150, 300, 300);
 		}
 		if(eCount==200)
 		{
@@ -247,7 +258,24 @@ public void keyPressed()
 			teleY=ship.getY();
 			ship.setX(ship.getTagX());
 			ship.setY(ship.getTagY());
-			image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+			dedPer=(int)(Math.random()*10);
+			if(dedPer!=4)
+			{
+				image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+			}else if(dedPer==4){
+				endX=ship.getX();
+  				endY=ship.getY();
+	  			ship.setX(0);
+	  			ship.setY(0);
+	  			ship.setTagX(0);
+	  			ship.setTagY(0);
+	  			ship.setBombX(0);
+	  			ship.setBombY(0);
+	  			ship.setDirectionX(0);
+            	ship.setDirectionY(0);
+            	ship.myColor=color(0,0,0);
+	  			endGame=true;
+			}
 		case 'f':
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
@@ -277,6 +305,18 @@ public void keyPressed()
 			boom=true;
 			ship.setBombX(ship.getX());
 			ship.setBombY(ship.getY());
+		break;
+		case 'r':
+			endX=ship.getX();
+  			endY=ship.getY();
+  			ship.setX(0);
+  			ship.setY(0);
+  			ship.setTagX(0);
+  			ship.setTagY(0);
+  			ship.setBombX(0);
+  			ship.setBombY(0);
+  			endGame=true;
+  		break;
 	}
 }
 public void tiStop()
@@ -298,7 +338,10 @@ public void tiStart()
 public void flashDis()
 {
 	image(img, teleX-140, teleY-106, 280, 212);
-	image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+	if(dedPer!=4)
+	{
+		image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+	}
 }
 	/*start working with the explogif. each frame of the gif 
 	plays every 0.01 seconds and the framerate of this 
