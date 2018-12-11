@@ -1,5 +1,8 @@
 public class Asteroid extends Floater
 {
+	int topSide=(int)(Math.random()*2+1);
+	int leftRight=(int)(Math.random()*2+1);
+	int topDown=(int)(Math.random()*2+1);
 	public Asteroid()
     {
     	//xCorners=new int[]{-1,-2,-2,-6,-6,-14,-14,-15,-15,-16,-16,-17,-17,-16,-16,-15,-15,-14,-14,-5,-5,-3,-3,-2,-2,2,2,3,3,5,5,14,14,15,15,16,16,17,17,16,16,15,15,14,14,6,6,2,2,1};
@@ -9,7 +12,11 @@ public class Asteroid extends Floater
     	//corners=50;
     	corners=32;
     	myColor=color(255,255,255);
-    	myCenterX=(int)(Math.random()*990+5);
+    	if(topSide==0)
+    	{
+    		myCenterX=(int)(Math.random()*990+5);
+    		myCenterY=0;
+    	}
     	myCenterY=(int)(Math.random()*990+5);
     	myDirectionX=(int)(Math.random()*5+1);
     	myDirectionY=(int)(Math.random()*5+1);
@@ -28,6 +35,30 @@ public class Asteroid extends Floater
     public void move()
     {
     	super.move();
+    }
+    public void appear()
+    {
+    	if(topSide==1)
+    	{
+    		myCenterX=(int)(Math.random()*990+5);
+    		if(topDown==1)
+    		{	
+    			myCenterY=0;
+    		}else if(topDown==2)
+    		{
+    			myCenterY=1000;
+    		}
+    	}else if(topSide==2)
+    	{
+    		if(leftRight==1)
+    		{
+    			myCenterX=0;
+    		}else if(leftRight==2)
+    		{
+    			myCenterX=1000;
+    		}
+    		myCenterY=(int)(Math.random()*990+5);
+    	}
     }
     public boolean cloDet(int box, int boy)
 	{

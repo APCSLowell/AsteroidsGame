@@ -10,6 +10,7 @@ PImage end6;
 PImage end7;
 PImage end8;
 PImage end9;
+PImage tieBoom;
 int count=0, tCount=0, bCount=0, eCount=0, turn=0, endX=0, endY=0, dedPer=0;
 boolean tele = false;
 boolean boom = false;
@@ -19,6 +20,8 @@ int teleX, teleY;
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
+ArrayList<Integer> tieBlastX = new ArrayList<Integer>();
+ArrayList<Integer> tieBlastY = new ArrayList<Integer>();
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 public void setup() 
@@ -35,6 +38,10 @@ public void setup()
   	for(int h=0;  h<5; h++)
   	{
   		rockBottom.add(new Asteroid());
+  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+		{
+			rockBottom.remove(rockBottom.size()-1);
+		}
   	}
   	img=loadImage("flashtele.png");
   	end1=loadImage("explofr1.gif");
@@ -46,6 +53,7 @@ public void setup()
   	end7=loadImage("explofr7.gif");
   	end8=loadImage("explofr8.gif");
   	end9=loadImage("explofr9.gif");
+  	tieBoom=loadImage("explosion.png");
 }
 public void show()
 {
@@ -123,6 +131,7 @@ public void draw()
   		{
   			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
   			{
+  				image(tieBoom, rockBottom.get(c).getX(), rockBottom.get(c).getY(), 50, 50);
   				rockBottom.remove(c);
   				if(tStopX.size()!=0)
   				{
@@ -197,12 +206,15 @@ public void draw()
 		}
 	}
 	//ship explosion counter at the end of the game
+	
 	if(bCount<51&&boom)
 	{
 		if(bCount==50)
 		{
 			boom=false;
-			bCount=0;;
+			bCount=0;
+			tieBlastX.clear();
+			tieBlastY.clear();
 		}
 	}
 	if(boom)
@@ -213,19 +225,26 @@ public void draw()
 		ellipse(ship.getBombX(), ship.getBombY(), (bCount*35), (bCount*35));
 		for(int z=0;z<rockBottom.size();z++)
 		{
-			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*50))
+			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*35))
 			{
-				rockBottom.remove(z);
+				tieBlastX.add(rockBottom.get(z).getX());
 
+				tieBlastY.add(rockBottom.get(z).getY());
+				rockBottom.remove(z);
 				break;
 			}
 		}
+		boomDis();
 		bCount++;
 	}
 	//pulse bomb impact detection
 	if(turn%100==0)
 	{
 		rockBottom.add(new Asteroid());
+		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+		{
+			rockBottom.remove(rockBottom.size()-1);
+		}
 	}
 	turn++;
 	//adds a new asteroid every 100 frames
@@ -341,6 +360,13 @@ public void flashDis()
 	if(dedPer!=4)
 	{
 		image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+	}
+}
+public void boomDis()
+{
+	for(int y=0;y<tieBlastY.size();y++)
+	{
+		image(tieBoom, tieBlastX.get(y), tieBlastY.get(y), 50, 50);
 	}
 }
 	/*start working with the explogif. each frame of the gif 
