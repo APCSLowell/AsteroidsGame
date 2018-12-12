@@ -11,11 +11,13 @@ PImage end7;
 PImage end8;
 PImage end9;
 PImage tieBoom;
-int count=0, tCount=0, bCount=0, eCount=0, turn=0, endX=0, endY=0, dedPer=0;
+int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
 boolean endGame = false;
+boolean blast = false;
+boolean bolCross = false;
 int teleX, teleY;
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
@@ -125,23 +127,7 @@ public void draw()
     	}
   	}
   	//removes the bolts
-  	for(int c=0; c<rockBottom.size();c++)
-  	{
-  		for(int b=0; b<bolt.size();b++)
-  		{
-  			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
-  			{
-  				image(tieBoom, rockBottom.get(c).getX(), rockBottom.get(c).getY(), 50, 50);
-  				rockBottom.remove(c);
-  				if(tStopX.size()!=0)
-  				{
-  					tStopX.remove(c);
-  					tStopY.remove(c);
-  				}
-  				break;
-  			}
-  		}
-  	}
+  	boAst();
   	//bolt to asteroid impact detection
 	if(count<5&&tele)
 	{
@@ -207,6 +193,21 @@ public void draw()
 	}
 	//ship explosion counter at the end of the game
 	
+	if(dCount<31&&blast)
+	{
+		boAst();
+		image(tieBoom, bolAstX, bolAstY, 50, 50);
+		if(dCount==30)
+		{
+			blast=false;
+			dCount=0;
+		}
+		if(blast)
+		{
+			dCount++;
+		}
+	}
+
 	if(bCount<51&&boom)
 	{
 		if(bCount==50)
@@ -238,6 +239,34 @@ public void draw()
 		bCount++;
 	}
 	//pulse bomb impact detection
+	if(cCount<41&&bolCross)
+	{
+		if(cCount==40)
+		{
+			bolCross=false;
+			cCount=0;
+		}
+		if(bolCross)
+		{
+			bolt.add(new Bolt());
+			bolt.get(bolt.size()-1).setDirectionX(25);
+			bolt.get(bolt.size()-1).setDirectionY(0);
+			bolt.get(bolt.size()-1).setPointDirection(0);
+			bolt.add(new Bolt());
+			bolt.get(bolt.size()-1).setDirectionX(0);
+			bolt.get(bolt.size()-1).setDirectionY(-25);
+			bolt.get(bolt.size()-1).setPointDirection(90);
+			bolt.add(new Bolt());
+			bolt.get(bolt.size()-1).setDirectionX(-25);
+			bolt.get(bolt.size()-1).setDirectionY(0);
+			bolt.get(bolt.size()-1).setPointDirection(180);
+			bolt.add(new Bolt());
+			bolt.get(bolt.size()-1).setDirectionX(0);
+			bolt.get(bolt.size()-1).setDirectionY(25);
+			bolt.get(bolt.size()-1).setPointDirection(270);
+			cCount++;
+		}
+	}
 	if(turn%100==0)
 	{
 		rockBottom.add(new Asteroid());
@@ -299,6 +328,8 @@ public void keyPressed()
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
 		break;
+		case 'c':
+			bolCross=true;
 		case ' ':
 			bolt.add(new Bolt());
 			/*bolt.setX(ship.getX());
@@ -372,3 +403,30 @@ public void boomDis()
 	/*start working with the explogif. each frame of the gif 
 	plays every 0.01 seconds and the framerate of this 
 	program is 60 frames per second*/
+public void boAst()
+{
+	for(int c=0; c<rockBottom.size();c++)
+  	{
+  		for(int b=0; b<bolt.size();b++)
+  		{
+  			if(rockBottom.get(c).cloDet(bolt.get(b).getX(),bolt.get(b).getY()))
+  			{
+  				bolAstX=rockBottom.get(c).getX();
+  				bolAstY=rockBottom.get(c).getY();
+  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+  				rockBottom.remove(c);
+  				blast=true;
+  				if(tStopX.size()!=0)
+  				{
+  					tStopX.remove(c);
+  					tStopY.remove(c);
+  				}
+  				break;
+  			}
+  		}
+  	}
+}
+public void crossBol()
+{
+
+}
