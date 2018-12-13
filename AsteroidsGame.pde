@@ -1,14 +1,21 @@
 Spaceship ufo;
-Asteroid[] rocks;
+//Asteroid[] rocks;
+ArrayList <Asteroid> rocks;
 Star[] starfield;
+int rocksNum = 40;
 public void setup() 
 {
 	size(600,600);
 	background(0);
-	rocks = new Asteroid[40];
-	for (int i = 0; i < rocks.length; i++)
+	// rocks = new Asteroid[40];
+	// for (int i = 0; i < rocks.length; i++)
+	// {
+	// 	rocks[i] = new Asteroid((int)(Math.random()*width), (int)(Math.random()*height), (int)(Math.random()*3)+1);
+	// }
+	rocks = new ArrayList <Asteroid>();
+	for (int i = 0; i < rocksNum; i++)
 	{
-		rocks[i] = new Asteroid((int)(Math.random()*width), (int)(Math.random()*height), (int)(Math.random()*3)+1);
+		rocks.add(i,new Asteroid((int)(Math.random()*width), (int)(Math.random()*height), (int)(Math.random()*3)+1));
 	}
 	starfield = new Star[100];
 	for (int i = 0; i < starfield.length; i++)
@@ -26,10 +33,16 @@ public void draw()
  	{
   		starfield[i].show();
   	}
-  	for (int i = 0; i < rocks.length; i++)
+  	for (int i = 0; i < rocks.size(); i++)
   	{
-  		rocks[i].move();
-  		rocks[i].show();
+  		// rocks[i].move();
+  		// rocks[i].show();
+  		rocks.get(i).move();
+  		rocks.get(i).show();
+  		if (dist(ufo.getX(), ufo.getY(), rocks.get(i).getX(), rocks.get(i).getY()) <= 37)
+  		{
+  			rocks.remove(i);
+  		}
   	}
 	ufo.move();
 	ufo.show();
