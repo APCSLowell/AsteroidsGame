@@ -11,7 +11,13 @@ PImage end7;
 PImage end8;
 PImage end9;
 PImage tieBoom;
-int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
+PImage boomwait;
+PImage telewait;
+PImage timewait;
+PImage crosswait;
+int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
+int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
+int blastWait=1800, chroWait=900, telWait=300, plusWait=300;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
@@ -56,6 +62,10 @@ public void setup()
   	end8=loadImage("explofr8.gif");
   	end9=loadImage("explofr9.gif");
   	tieBoom=loadImage("explosion.png");
+  	boomwait=loadImage("boomwait.png");
+  	telewait=loadImage("telewait.png");
+  	timewait=loadImage("timewait.png");
+  	crosswait=loadImage("crosswait.png");
 }
 public void show()
 {
@@ -76,6 +86,14 @@ public void show()
   		bolt.get(e).show();
   	}
   	//shows the bolts
+  	rect(5, 5, 60, 60);
+  	image(telewait, 5, 5, 60, 60);
+  	rect(70, 5, 60, 60);
+  	image(timewait, 70, 5, 60, 60);
+  	rect(135, 5, 60, 60);
+  	image(boomwait, 135, 5, 60, 60);
+  	rect(200, 5, 60, 60);
+  	image(crosswait, 200, 5, 60, 60);
 }
 public void draw() 
 {
@@ -216,6 +234,7 @@ public void draw()
 			bCount=0;
 			tieBlastX.clear();
 			tieBlastY.clear();
+			blastWait++;
 		}
 	}
 	if(boom)
@@ -239,12 +258,13 @@ public void draw()
 		bCount++;
 	}
 	//pulse bomb impact detection
-	if(cCount<41&&bolCross)
+	if(cCount<3600&&bolCross)
 	{
 		if(cCount==40)
 		{
 			bolCross=false;
 			cCount=0;
+			plusWait++;
 		}
 		if(bolCross)
 		{
@@ -299,37 +319,45 @@ public void keyPressed()
 			ship.setTagY(ship.getY());
 		break;
 		case 'x':
-			tele=true;
-			count=0;
-			image(img, ship.getX()-140, ship.getY()-106, 280, 212);
-			teleX=ship.getX();
-			teleY=ship.getY();
-			ship.setX(ship.getTagX());
-			ship.setY(ship.getTagY());
-			dedPer=(int)(Math.random()*10);
-			if(dedPer!=4)
+			if(telWait==300)
 			{
-				image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
-			}else if(dedPer==4){
-				endX=ship.getX();
-  				endY=ship.getY();
-	  			ship.setX(0);
-	  			ship.setY(0);
-	  			ship.setTagX(0);
-	  			ship.setTagY(0);
-	  			ship.setBombX(0);
-	  			ship.setBombY(0);
-	  			ship.setDirectionX(0);
-            	ship.setDirectionY(0);
-            	ship.myColor=color(0,0,0);
-	  			endGame=true;
+				tele=true;
+				count=0;
+				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
+				teleX=ship.getX();
+				teleY=ship.getY();
+				ship.setX(ship.getTagX());
+				ship.setY(ship.getTagY());
+				dedPer=(int)(Math.random()*10);
+				if(dedPer!=4)
+				{
+					image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+				}else if(dedPer==4){
+					endX=ship.getX();
+	  				endY=ship.getY();
+		  			ship.setX(0);
+		  			ship.setY(0);
+		  			ship.setTagX(0);
+		  			ship.setTagY(0);
+		  			ship.setBombX(0);
+		  			ship.setBombY(0);
+		  			ship.setDirectionX(0);
+	            	ship.setDirectionY(0);
+	            	ship.myColor=color(0,0,0);
+		  			endGame=true;
+				}
+				telWait=0;
 			}
 		case 'f':
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
 		break;
 		case 'c':
-			bolCross=true;
+			if(plusWait==300)
+			{
+				bolCross=true;
+				plusWait=0;
+			}
 		case ' ':
 			bolt.add(new Bolt());
 			/*bolt.setX(ship.getX());
@@ -338,23 +366,31 @@ public void keyPressed()
 			bolt.accelerate(2);*/
 		break;
 		case 'e':
-			tStop=true;
-			tCount=0;
-			tStopX.clear();
-			tStopY.clear();
-			for(int f=0;f<rockBottom.size();f++)
+			if(chroWait==900)
 			{
-				tStopX.add(rockBottom.get(f).getDirectionX());
-				tStopY.add(rockBottom.get(f).getDirectionY());
+				tStop=true;
+				tCount=0;
+				tStopX.clear();
+				tStopY.clear();
+				for(int f=0;f<rockBottom.size();f++)
+				{
+					tStopX.add(rockBottom.get(f).getDirectionX());
+					tStopY.add(rockBottom.get(f).getDirectionY());
+				}
+				tStop=true;
+				tCount=0;
+				tiStop();
+				chroWait=0;
 			}
-			tStop=true;
-			tCount=0;
-			tiStop();
 		break;
 		case 'q':
-			boom=true;
-			ship.setBombX(ship.getX());
-			ship.setBombY(ship.getY());
+			if(blastWait==1800)
+			{
+				boom=true;
+				ship.setBombX(ship.getX());
+				ship.setBombY(ship.getY());
+				blastWait=0;
+			}
 		break;
 		case 'r':
 			endX=ship.getX();
