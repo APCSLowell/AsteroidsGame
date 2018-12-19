@@ -17,7 +17,8 @@ PImage timewait;
 PImage crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
-int blastWait=1800, chroWait=900, telWait=300, plusWait=300;
+int blastWait=900, chroWait=600, telWait=300, plusWait=300;
+int tSize=45, bX=5, bY=50;
 boolean tele = false;
 boolean boom = false;
 boolean tStop = false;
@@ -94,6 +95,96 @@ public void show()
   	image(boomwait, 135, 5, 60, 60);
   	rect(200, 5, 60, 60);
   	image(crosswait, 200, 5, 60, 60);
+  	if(blastWait<=60)
+	  	{
+			textSize(60);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=120)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=180)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=240)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=300)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=360)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=420)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=480)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=540)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=600)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=660)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=720)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=780)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=840)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
+		if(blastWait<=900)
+	  	{
+			textSize(tSize);
+			fill(255,0,0);
+			text(blastWait/60, bX, bY);
+		}
 }
 public void draw() 
 {
@@ -234,7 +325,6 @@ public void draw()
 			bCount=0;
 			tieBlastX.clear();
 			tieBlastY.clear();
-			blastWait++;
 		}
 	}
 	if(boom)
@@ -264,7 +354,6 @@ public void draw()
 		{
 			bolCross=false;
 			cCount=0;
-			plusWait++;
 		}
 		if(bolCross)
 		{
@@ -297,6 +386,22 @@ public void draw()
 	}
 	turn++;
 	//adds a new asteroid every 100 frames
+	if(blastWait<900)
+	{
+		blastWait++;
+	}
+	if(chroWait<600)
+	{
+		chroWait++;
+	}
+	if(telWait<300)
+	{
+		telWait++;
+	}
+	if(plusWait<300)
+	{
+		plusWait++;
+	}
 	show();
 }
 public void keyPressed()
@@ -366,7 +471,7 @@ public void keyPressed()
 			bolt.accelerate(2);*/
 		break;
 		case 'e':
-			if(chroWait==900)
+			if(chroWait==600)
 			{
 				tStop=true;
 				tCount=0;
@@ -384,7 +489,7 @@ public void keyPressed()
 			}
 		break;
 		case 'q':
-			if(blastWait==1800)
+			if(blastWait==900)
 			{
 				boom=true;
 				ship.setBombX(ship.getX());
