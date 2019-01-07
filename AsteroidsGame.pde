@@ -87,103 +87,101 @@ public void show()
   		bolt.get(e).show();
   	}
   	//shows the bolts
-  	rect(5, 5, 60, 60);
-  	image(telewait, 5, 5, 60, 60);
   	rect(70, 5, 60, 60);
   	image(timewait, 70, 5, 60, 60);
   	rect(135, 5, 60, 60);
-  	image(boomwait, 135, 5, 60, 60);
+  	image(telewait, 135, 5, 60, 60);
   	rect(200, 5, 60, 60);
   	image(crosswait, 200, 5, 60, 60);
   	if(blastWait<=60)
 	  	{
-			textSize(60);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,61,60,4);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=120)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,57,60,8);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=180)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,53,60,12);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=240)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,49,60,16);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=300)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,45,60,20);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=360)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,41,60,24);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=420)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,37,60,28);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=480)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,33,60,32);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=540)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,29,60,36);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=600)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,25,60,40);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=660)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,21,60,44);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=720)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,17,60,48);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=780)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,13,60,52);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=840)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5,9,60,56);
+			image(boomwait, 5,5,60,60);
 		}
 		if(blastWait<=900)
 	  	{
-			textSize(tSize);
-			fill(255,0,0);
-			text(blastWait/60, bX, bY);
+			fill(255,255,255);
+			rect(5, 5, 60, 60);
+			image(boomwait, 5, 5, 60, 60);
 		}
 }
 public void draw() 
@@ -566,8 +564,4 @@ public void boAst()
   			}
   		}
   	}
-}
-public void crossBol()
-{
-
 }
