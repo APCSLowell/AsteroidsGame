@@ -25,6 +25,7 @@ boolean tStop = false;
 boolean endGame = false;
 boolean blast = false;
 boolean bolCross = false;
+boolean invinc = false;
 int teleX, teleY;
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
@@ -87,102 +88,105 @@ public void show()
   		bolt.get(e).show();
   	}
   	//shows the bolts
-  	rect(70, 5, 60, 60);
+  	fill(255,255,255);
+  	rect(70, 5, 60, chroWait/10);
   	image(timewait, 70, 5, 60, 60);
-  	rect(135, 5, 60, 60);
+  	rect(135, 5, 60, telWait/5);
   	image(telewait, 135, 5, 60, 60);
-  	rect(200, 5, 60, 60);
+  	rect(200, 5, 60, plusWait/5);
   	image(crosswait, 200, 5, 60, 60);
-  	if(blastWait<=60)
-	  	{
-			fill(255,255,255);
-			rect(5,61,60,4);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=120)
-	  	{
-			fill(255,255,255);
-			rect(5,57,60,8);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=180)
-	  	{
-			fill(255,255,255);
-			rect(5,53,60,12);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=240)
-	  	{
-			fill(255,255,255);
-			rect(5,49,60,16);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=300)
-	  	{
-			fill(255,255,255);
-			rect(5,45,60,20);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=360)
-	  	{
-			fill(255,255,255);
-			rect(5,41,60,24);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=420)
-	  	{
-			fill(255,255,255);
-			rect(5,37,60,28);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=480)
-	  	{
-			fill(255,255,255);
-			rect(5,33,60,32);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=540)
-	  	{
-			fill(255,255,255);
-			rect(5,29,60,36);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=600)
-	  	{
-			fill(255,255,255);
-			rect(5,25,60,40);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=660)
-	  	{
-			fill(255,255,255);
-			rect(5,21,60,44);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=720)
-	  	{
-			fill(255,255,255);
-			rect(5,17,60,48);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=780)
-	  	{
-			fill(255,255,255);
-			rect(5,13,60,52);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=840)
-	  	{
-			fill(255,255,255);
-			rect(5,9,60,56);
-			image(boomwait, 5,5,60,60);
-		}
-		if(blastWait<=900)
-	  	{
-			fill(255,255,255);
-			rect(5, 5, 60, 60);
-			image(boomwait, 5, 5, 60, 60);
-		}
+  	rect(5,5,60,blastWait/15);
+  	image(boomwait,5,5,60,60);
+  	/*if(blastWait<=60)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,4);
+		image(boomwait,5,5,60,60);
+	}
+	if(blastWait<=120)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,8);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=180)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,12);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=240)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,16);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=300)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,20);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=360)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,24);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=420)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,28);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=480)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,32);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=540)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,36);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=600)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,40);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=660)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,44);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=720)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,48);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=780)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,52);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=840)
+  	{
+		fill(255,255,255);
+		rect(5,5,60,56);
+		image(boomwait, 5,5,60,60);
+	}
+	if(blastWait<=900)
+  	{
+		fill(255,255,255);
+		rect(5,5, 60, 60);
+		image(boomwait, 5, 5, 60, 60);
+	}*/
 }
 public void draw() 
 {
@@ -207,7 +211,7 @@ public void draw()
 	//moves the ship
 	for(int f=0; f<rockBottom.size();f++)
   	{
-  		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY()))
+  		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY())&&invinc==false)
   		{
   			endX=ship.getX();
   			endY=ship.getY();
@@ -400,6 +404,7 @@ public void draw()
 	{
 		plusWait++;
 	}
+	//determines recharge time
 	show();
 }
 public void keyPressed()
@@ -557,8 +562,8 @@ public void boAst()
   				blast=true;
   				if(tStopX.size()!=0)
   				{
-  					tStopX.remove(c);
-  					tStopY.remove(c);
+  					tStopX.remove(c-1);
+  					tStopY.remove(c-1);
   				}
   				break;
   			}
