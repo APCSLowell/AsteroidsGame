@@ -72,6 +72,6 @@ public void keyPressed()
 		ufo.setY((int)(Math.random()*600));
 		ufo.setDirectionX(0);
 		ufo.setDirectionY(0);
-		//make a sorce field
+		//make a force field
 	}
 }
