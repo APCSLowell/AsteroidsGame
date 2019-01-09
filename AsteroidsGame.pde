@@ -1,5 +1,6 @@
 //your variable declarations here
 Spaceship ship;
+Leftwing lWing;
 PImage img;
 PImage end1;
 PImage end2;
@@ -17,7 +18,7 @@ PImage timewait;
 PImage crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
-int blastWait=900, chroWait=600, telWait=300, plusWait=300;
+int blastWait=900, chroWait=600, telWait=300, plusWait=300, invfill=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false;
 boolean boom = false;
@@ -37,8 +38,11 @@ ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 public void setup() 
 {
 	ship=new Spaceship();
+	lWing=new Leftwing();
 	ship.setX(500);
 	ship.setY(500);
+	lWing.setX(500);
+	lWing.setY(500);
 	size(1000, 1000);
 	background(0, 0, 0);
 	for(int i=0; i<stars.length;i++)
@@ -77,6 +81,7 @@ public void show()
   	}
   	//makes stars
   	ship.show();
+  	lWing.show();
   	//shows the ship
   	for(int g=0; g<rockBottom.size();g++)
   	{
@@ -97,96 +102,6 @@ public void show()
   	image(crosswait, 200, 5, 60, 60);
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
-  	/*if(blastWait<=60)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,4);
-		image(boomwait,5,5,60,60);
-	}
-	if(blastWait<=120)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,8);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=180)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,12);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=240)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,16);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=300)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,20);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=360)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,24);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=420)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,28);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=480)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,32);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=540)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,36);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=600)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,40);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=660)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,44);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=720)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,48);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=780)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,52);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=840)
-  	{
-		fill(255,255,255);
-		rect(5,5,60,56);
-		image(boomwait, 5,5,60,60);
-	}
-	if(blastWait<=900)
-  	{
-		fill(255,255,255);
-		rect(5,5, 60, 60);
-		image(boomwait, 5, 5, 60, 60);
-	}*/
 }
 public void draw() 
 {
@@ -208,6 +123,7 @@ public void draw()
   	}
   	//moves all tie fighter asteroids
 	ship.move();
+	lWing.move();
 	//moves the ship
 	for(int f=0; f<rockBottom.size();f++)
   	{
@@ -217,6 +133,8 @@ public void draw()
   			endY=ship.getY();
   			ship.setX(0);
   			ship.setY(0);
+  			lWing.setX(0);
+  			lWing.setY(0);
   			ship.setTagX(0);
   			ship.setTagY(0);
   			ship.setBombX(0);
@@ -412,15 +330,19 @@ public void keyPressed()
 	switch (key) {
 		case 'w':
 			ship.accelerate(1);
+			lWing.accelerate(1);
 		break;
 		case 'a':
 			ship.turn(-10);
+			lWing.turn(-10);
 		break;
 		case 's':
 			ship.accelerate(-1);
+			lWing.accelerate(-1);
 		break;
 		case 'd':
 			ship.turn(10);
+			lWing.turn(10);
 		break;
 		case 'z':
 			ship.setTagX(ship.getX());
@@ -436,6 +358,8 @@ public void keyPressed()
 				teleY=ship.getY();
 				ship.setX(ship.getTagX());
 				ship.setY(ship.getTagY());
+				lWing.setX(ship.getTagX());
+				lWing.setY(ship.getTagY());
 				dedPer=(int)(Math.random()*10);
 				if(dedPer!=4)
 				{
@@ -445,13 +369,18 @@ public void keyPressed()
 	  				endY=ship.getY();
 		  			ship.setX(0);
 		  			ship.setY(0);
+		  			lWing.setX(0);
+		  			lWing.setY(0);
 		  			ship.setTagX(0);
 		  			ship.setTagY(0);
 		  			ship.setBombX(0);
 		  			ship.setBombY(0);
 		  			ship.setDirectionX(0);
 	            	ship.setDirectionY(0);
+	            	lWing.setDirectionX(0);
+	            	lWing.setDirectionY(0);
 	            	ship.myColor=color(0,0,0);
+	            	lWing.myColor=color(0,0,0);
 		  			endGame=true;
 				}
 				telWait=0;
@@ -459,6 +388,8 @@ public void keyPressed()
 		case 'f':
 			ship.setDirectionX(0);
 			ship.setDirectionY(0);
+			lWing.setDirectionX(0);
+	        lWing.setDirectionY(0);
 		break;
 		case 'c':
 			if(plusWait==300)
@@ -505,12 +436,16 @@ public void keyPressed()
   			endY=ship.getY();
   			ship.setX(0);
   			ship.setY(0);
+  			ship.setX(0);
+  			ship.setY(0);
   			ship.setTagX(0);
   			ship.setTagY(0);
   			ship.setBombX(0);
   			ship.setBombY(0);
   			endGame=true;
   		break;
+  		case 'v':
+  			invinc=true;
 	}
 }
 public void tiStop()
@@ -560,6 +495,7 @@ public void boAst()
   				image(tieBoom, bolAstX, bolAstY, 50, 50);
   				rockBottom.remove(c);
   				blast=true;
+  				invfill++;
   				if(tStopX.size()!=0)
   				{
   					tStopX.remove(c-1);
