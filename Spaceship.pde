@@ -1,10 +1,10 @@
 class Spaceship extends Floater  
 {   
-	int tagX=0;
-	int tagY=0;
-    int bombX=0;
-    int bombY=0;
-    int colCon=0;
+	int tagX=500;
+	int tagY=500;
+    int bombX=500;
+    int bombY=500;
+    int colCon=500;
     public Spaceship()
     {
     	//xCorners=new int[]{-1,-2,-2,-6,-6,-14,-14,-15,-15,-16,-16,-17,-17,-16,-16,-15,-15,-14,-14,-5,-5,-3,-3,-2,-2,2,2,3,3,5,5,14,14,15,15,16,16,17,17,16,16,15,15,14,14,6,6,2,2,1};
@@ -40,7 +40,8 @@ class Spaceship extends Floater
     public int getBombY(){return (int)bombY;}
     public void show()
     {
-    	fill(211,211,211);
+    	stroke(211,211,211);
+        fill(211,211,211);
     	rect(tagX-10, tagY-5, 20, 10);
         ellipse(bombX, bombY, 20, 10);
     	super.show();

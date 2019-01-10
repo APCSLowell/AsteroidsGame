@@ -1,6 +1,9 @@
 //your variable declarations here
 Spaceship ship;
 Leftwing lWing;
+Rightwing rWing;
+Leftbackwing lbWing;
+Rightbackwing rbWing;
 PImage img;
 PImage end1;
 PImage end2;
@@ -39,12 +42,22 @@ public void setup()
 {
 	ship=new Spaceship();
 	lWing=new Leftwing();
+	rWing=new Rightwing();
+	lbWing=new Leftbackwing();
+	rbWing=new Rightbackwing();
 	ship.setX(500);
 	ship.setY(500);
 	lWing.setX(500);
 	lWing.setY(500);
+	rWing.setX(500);
+	rWing.setY(500);
+	lbWing.setX(500);
+	lbWing.setY(500);
+	rbWing.setX(500);
+	rbWing.setY(500);
 	size(1000, 1000);
 	background(0, 0, 0);
+	noStroke();
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i]=new Star();
@@ -82,6 +95,9 @@ public void show()
   	//makes stars
   	ship.show();
   	lWing.show();
+  	rWing.show();
+  	lbWing.show();
+  	rbWing.show();
   	//shows the ship
   	for(int g=0; g<rockBottom.size();g++)
   	{
@@ -124,6 +140,9 @@ public void draw()
   	//moves all tie fighter asteroids
 	ship.move();
 	lWing.move();
+	rWing.move();
+	lbWing.move();
+	rbWing.move();
 	//moves the ship
 	for(int f=0; f<rockBottom.size();f++)
   	{
@@ -135,10 +154,26 @@ public void draw()
   			ship.setY(0);
   			lWing.setX(0);
   			lWing.setY(0);
+  			rWing.setX(0);
+  			rWing.setY(0);
+  			lbWing.setX(0);
+  			lbWing.setY(0);
+  			rbWing.setX(0);
+  			rbWing.setY(0);
   			ship.setTagX(0);
   			ship.setTagY(0);
   			ship.setBombX(0);
   			ship.setBombY(0);
+  			ship.setDirectionX(0);
+        	ship.setDirectionY(0);
+        	lWing.setDirectionX(0);
+        	lWing.setDirectionY(0);
+        	rWing.setDirectionX(0);
+        	rWing.setDirectionY(0);
+        	lbWing.setDirectionX(0);
+        	lbWing.setDirectionY(0);
+        	rbWing.setDirectionX(0);
+        	rbWing.setDirectionY(0);
   			endGame=true;
 		}
   	}
@@ -331,18 +366,30 @@ public void keyPressed()
 		case 'w':
 			ship.accelerate(1);
 			lWing.accelerate(1);
+			rWing.accelerate(1);
+			lbWing.accelerate(1);
+			rbWing.accelerate(1);
 		break;
 		case 'a':
 			ship.turn(-10);
 			lWing.turn(-10);
+			rWing.turn(-10);
+			lbWing.turn(-10);
+			rbWing.turn(-10);
 		break;
 		case 's':
 			ship.accelerate(-1);
 			lWing.accelerate(-1);
+			rWing.accelerate(-1);
+			lbWing.accelerate(-1);
+			rbWing.accelerate(-1);
 		break;
 		case 'd':
 			ship.turn(10);
 			lWing.turn(10);
+			rWing.turn(10);
+			lbWing.turn(10);
+			rbWing.turn(10);
 		break;
 		case 'z':
 			ship.setTagX(ship.getX());
@@ -360,6 +407,12 @@ public void keyPressed()
 				ship.setY(ship.getTagY());
 				lWing.setX(ship.getTagX());
 				lWing.setY(ship.getTagY());
+				rWing.setX(ship.getTagX());
+				rWing.setY(ship.getTagY());
+				lbWing.setX(ship.getTagX());
+				lbWing.setY(ship.getTagY());
+				rbWing.setX(ship.getTagX());
+				rbWing.setY(ship.getTagY());
 				dedPer=(int)(Math.random()*10);
 				if(dedPer!=4)
 				{
@@ -371,6 +424,14 @@ public void keyPressed()
 		  			ship.setY(0);
 		  			lWing.setX(0);
 		  			lWing.setY(0);
+		  			lWing.setX(0);
+		  			lWing.setY(0);
+		  			rWing.setX(0);
+		  			rWing.setY(0);
+		  			lbWing.setX(0);
+		  			lbWing.setY(0);
+		  			rbWing.setX(0);
+		  			rbWing.setY(0);
 		  			ship.setTagX(0);
 		  			ship.setTagY(0);
 		  			ship.setBombX(0);
@@ -379,8 +440,17 @@ public void keyPressed()
 	            	ship.setDirectionY(0);
 	            	lWing.setDirectionX(0);
 	            	lWing.setDirectionY(0);
+	            	rWing.setDirectionX(0);
+	            	rWing.setDirectionY(0);
+	            	lbWing.setDirectionX(0);
+	            	lbWing.setDirectionY(0);
+	            	rbWing.setDirectionX(0);
+	            	rbWing.setDirectionY(0);
 	            	ship.myColor=color(0,0,0);
 	            	lWing.myColor=color(0,0,0);
+	            	rWing.myColor=color(0,0,0);
+	            	lbWing.myColor=color(0,0,0);
+	            	rbWing.myColor=color(0,0,0);
 		  			endGame=true;
 				}
 				telWait=0;
@@ -390,6 +460,12 @@ public void keyPressed()
 			ship.setDirectionY(0);
 			lWing.setDirectionX(0);
 	        lWing.setDirectionY(0);
+	        rWing.setDirectionX(0);
+	        rWing.setDirectionY(0);
+	        lbWing.setDirectionX(0);
+	        lbWing.setDirectionY(0);
+	        rbWing.setDirectionX(0);
+	        rbWing.setDirectionY(0);
 		break;
 		case 'c':
 			if(plusWait==300)
@@ -433,15 +509,38 @@ public void keyPressed()
 		break;
 		case 'r':
 			endX=ship.getX();
-  			endY=ship.getY();
+			endY=ship.getY();
   			ship.setX(0);
   			ship.setY(0);
-  			ship.setX(0);
-  			ship.setY(0);
+  			lWing.setX(0);
+  			lWing.setY(0);
+  			lWing.setX(0);
+  			lWing.setY(0);
+  			rWing.setX(0);
+  			rWing.setY(0);
+  			lbWing.setX(0);
+  			lbWing.setY(0);
+  			rbWing.setX(0);
+  			rbWing.setY(0);
   			ship.setTagX(0);
   			ship.setTagY(0);
   			ship.setBombX(0);
   			ship.setBombY(0);
+  			ship.setDirectionX(0);
+        	ship.setDirectionY(0);
+        	lWing.setDirectionX(0);
+        	lWing.setDirectionY(0);
+        	rWing.setDirectionX(0);
+        	rWing.setDirectionY(0);
+        	lbWing.setDirectionX(0);
+        	lbWing.setDirectionY(0);
+        	rbWing.setDirectionX(0);
+        	rbWing.setDirectionY(0);
+        	ship.myColor=color(0,0,0);
+        	lWing.myColor=color(0,0,0);
+        	rWing.myColor=color(0,0,0);
+        	lbWing.myColor=color(0,0,0);
+        	rbWing.myColor=color(0,0,0);
   			endGame=true;
   		break;
   		case 'v':
@@ -498,8 +597,8 @@ public void boAst()
   				invfill++;
   				if(tStopX.size()!=0)
   				{
-  					tStopX.remove(c-1);
-  					tStopY.remove(c-1);
+  					tStopX.remove(c-5);
+  					tStopY.remove(c-5);
   				}
   				break;
   			}
