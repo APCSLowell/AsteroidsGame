@@ -31,6 +31,13 @@ boolean blast = false;
 boolean bolCross = false;
 boolean invinc = false;
 int teleX, teleY;
+color rd=(255,0,0);
+color og=(255,127,0);
+color yw=(255,255,0);
+color gn=(0,255,0);
+color bu=(0,0,255);
+color pe=(139,0,255);
+ArrayList<
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
@@ -56,6 +63,7 @@ public void setup()
 	rbWing.setX(500);
 	rbWing.setY(500);
 	size(1000, 1000);
+
 	background(0, 0, 0);
 	noStroke();
 	for(int i=0; i<stars.length;i++)
@@ -109,6 +117,7 @@ public void show()
   		bolt.get(e).show();
   	}
   	//shows the bolts
+  	noStroke();
   	fill(255,255,255);
   	rect(70, 5, 60, chroWait/10);
   	image(timewait, 70, 5, 60, 60);
@@ -118,6 +127,7 @@ public void show()
   	image(crosswait, 200, 5, 60, 60);
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
+  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
 }
 public void draw() 
 {
@@ -148,10 +158,13 @@ public void draw()
   	{
   		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY())&&invinc==false)
   		{
+  			rockBottom.remove(f);
   			endX=ship.getX();
-  			endY=ship.getY();
+			endY=ship.getY();
   			ship.setX(0);
   			ship.setY(0);
+  			lWing.setX(0);
+  			lWing.setY(0);
   			lWing.setX(0);
   			lWing.setY(0);
   			rWing.setX(0);
@@ -174,6 +187,11 @@ public void draw()
         	lbWing.setDirectionY(0);
         	rbWing.setDirectionX(0);
         	rbWing.setDirectionY(0);
+        	ship.myColor=color(0,0,0);
+        	lWing.myColor=color(0,0,0);
+        	rWing.myColor=color(0,0,0);
+        	lbWing.myColor=color(0,0,0);
+        	rbWing.myColor=color(0,0,0);
   			endGame=true;
 		}
   	}
@@ -296,6 +314,7 @@ public void draw()
 
 				tieBlastY.add(rockBottom.get(z).getY());
 				rockBottom.remove(z);
+				invfill++;
 				break;
 			}
 		}
@@ -303,6 +322,18 @@ public void draw()
 		bCount++;
 	}
 	//pulse bomb impact detection
+	if(invinc)
+	{
+		if(invfill>0)
+		{
+			invfill-=0.6;
+			invShipFlash();
+		}
+		if(invfill==0)
+		{
+			invinc=false;
+		}
+	}
 	if(cCount<3600&&bolCross)
 	{
 		if(cCount==40)
@@ -396,6 +427,14 @@ public void keyPressed()
 			ship.setTagY(ship.getY());
 		break;
 		case 'x':
+			if(ship.getTagX()==0)
+			{
+				ship.setTagX(ship.getX());
+			}
+			if(ship.getTagY()==0)
+			{
+				ship.setTagY(ship.getY());
+			}
 			if(telWait==300)
 			{
 				tele=true;
@@ -545,6 +584,10 @@ public void keyPressed()
   		break;
   		case 'v':
   			invinc=true;
+  		break;
+  		case 'b':
+  			invfill+=30;
+  		break;
 	}
 }
 public void tiStop()
@@ -604,4 +647,12 @@ public void boAst()
   			}
   		}
   	}
+}
+public void invShipFlash()
+{
+	ship.myColor=rd;
+	lWing.myColor=og;
+	rWing.myColor=yw;
+	lbWing.myColor=gn;
+	rbWing.myColor=bu;
 }

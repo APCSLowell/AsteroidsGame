@@ -6,6 +6,7 @@ class Star //note that this class does NOT extend Floater
 	{
 		fill(255, 255, 255);
 		ellipse(stxr, styr, 5, 5);
+		noStroke();
 	}
 
 }
