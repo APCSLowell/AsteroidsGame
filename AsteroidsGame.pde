@@ -31,13 +31,12 @@ boolean blast = false;
 boolean bolCross = false;
 boolean invinc = false;
 int teleX, teleY;
-color rd=(255,0,0);
-color og=(255,127,0);
-color yw=(255,255,0);
-color gn=(0,255,0);
-color bu=(0,0,255);
-color pe=(139,0,255);
-ArrayList<
+color rd=color(255,0,0);
+color og=color(255,127,0);
+color yw=color(255,255,0);
+color gn=color(0,255,0);
+color bu=color(0,0,255);
+color pe=color(139,0,255);
 ArrayList<Bolt> bolt = new ArrayList<Bolt>();
 ArrayList<Double> tStopX = new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
@@ -314,7 +313,10 @@ public void draw()
 
 				tieBlastY.add(rockBottom.get(z).getY());
 				rockBottom.remove(z);
-				invfill++;
+				if(invfill<101)
+				{
+					invfill++;
+				}
 				break;
 			}
 		}
@@ -327,11 +329,16 @@ public void draw()
 		if(invfill>0)
 		{
 			invfill-=0.6;
-			invShipFlash();
+			invShipFlash(invfill);
 		}
-		if(invfill==0)
+		if(invfill==0&&endGame==false)
 		{
 			invinc=false;
+			ship.myColor=color(211,211,211);
+			lWing.myColor=color(255,0,0);
+			rWing.myColor=color(255,0,0);
+			lbWing.myColor=color(255,0,0);
+			rbWing.myColor=color(255,0,0);
 		}
 	}
 	if(cCount<3600&&bolCross)
@@ -435,7 +442,9 @@ public void keyPressed()
 			{
 				ship.setTagY(ship.getY());
 			}
-			if(telWait==300)
+			if(invinc==false)
+			{
+				if(telWait==300)
 			{
 				tele=true;
 				count=0;
@@ -492,6 +501,67 @@ public void keyPressed()
 	            	rbWing.myColor=color(0,0,0);
 		  			endGame=true;
 				}
+			}else if(invinc==true)
+			{
+				if(telWait==60)
+			{
+				tele=true;
+				count=0;
+				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
+				teleX=ship.getX();
+				teleY=ship.getY();
+				ship.setX(ship.getTagX());
+				ship.setY(ship.getTagY());
+				lWing.setX(ship.getTagX());
+				lWing.setY(ship.getTagY());
+				rWing.setX(ship.getTagX());
+				rWing.setY(ship.getTagY());
+				lbWing.setX(ship.getTagX());
+				lbWing.setY(ship.getTagY());
+				rbWing.setX(ship.getTagX());
+				rbWing.setY(ship.getTagY());
+				dedPer=(int)(Math.random()*10);
+				if(dedPer!=4)
+				{
+					image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+				}else if(dedPer==4){
+					endX=ship.getX();
+	  				endY=ship.getY();
+		  			ship.setX(0);
+		  			ship.setY(0);
+		  			lWing.setX(0);
+		  			lWing.setY(0);
+		  			lWing.setX(0);
+		  			lWing.setY(0);
+		  			rWing.setX(0);
+		  			rWing.setY(0);
+		  			lbWing.setX(0);
+		  			lbWing.setY(0);
+		  			rbWing.setX(0);
+		  			rbWing.setY(0);
+		  			ship.setTagX(0);
+		  			ship.setTagY(0);
+		  			ship.setBombX(0);
+		  			ship.setBombY(0);
+		  			ship.setDirectionX(0);
+	            	ship.setDirectionY(0);
+	            	lWing.setDirectionX(0);
+	            	lWing.setDirectionY(0);
+	            	rWing.setDirectionX(0);
+	            	rWing.setDirectionY(0);
+	            	lbWing.setDirectionX(0);
+	            	lbWing.setDirectionY(0);
+	            	rbWing.setDirectionX(0);
+	            	rbWing.setDirectionY(0);
+	            	ship.myColor=color(0,0,0);
+	            	lWing.myColor=color(0,0,0);
+	            	rWing.myColor=color(0,0,0);
+	            	lbWing.myColor=color(0,0,0);
+	            	rbWing.myColor=color(0,0,0);
+		  			endGame=true;
+				}
+			}
+			
 				telWait=0;
 			}
 		case 'f':
@@ -507,10 +577,20 @@ public void keyPressed()
 	        rbWing.setDirectionY(0);
 		break;
 		case 'c':
-			if(plusWait==300)
+			if(invinc==false)
 			{
-				bolCross=true;
-				plusWait=0;
+				if(plusWait==300)
+				{
+					bolCross=true;
+					plusWait=0;
+				}
+			}else if(invinc==true)
+			{ 
+				if(plusWait==300)
+				{
+					bolCross=true;
+					plusWait=0;
+				}
 			}
 		case ' ':
 			bolt.add(new Bolt());
@@ -637,7 +717,10 @@ public void boAst()
   				image(tieBoom, bolAstX, bolAstY, 50, 50);
   				rockBottom.remove(c);
   				blast=true;
-  				invfill++;
+  				if(invfill<101)
+  				{
+  					invfill++;
+  				}
   				if(tStopX.size()!=0)
   				{
   					tStopX.remove(c-5);
@@ -648,11 +731,78 @@ public void boAst()
   		}
   	}
 }
-public void invShipFlash()
+public void invShipFlash(int i)
 {
-	ship.myColor=rd;
-	lWing.myColor=og;
-	rWing.myColor=yw;
-	lbWing.myColor=gn;
-	rbWing.myColor=bu;
+	switch(i%10) {
+		case 0:
+			ship.myColor=rd;
+			lWing.myColor=og;
+			rWing.myColor=yw;
+			lbWing.myColor=gn;
+			rbWing.myColor=bu;
+		break;
+		case 1:
+			ship.myColor=pe;
+			lWing.myColor=rd;
+			rWing.myColor=og;
+			lbWing.myColor=yw;
+			rbWing.myColor=gn;
+		break;
+		case 2:
+			ship.myColor=bu;
+			lWing.myColor=pe;
+			rWing.myColor=rd;
+			lbWing.myColor=og;
+			rbWing.myColor=yw;
+		break;
+		case 3:
+			ship.myColor=gn;
+			lWing.myColor=bu;
+			rWing.myColor=pe;
+			lbWing.myColor=rd;
+			rbWing.myColor=og;
+		break;
+		case 4:
+			ship.myColor=yw;
+			lWing.myColor=gn;
+			rWing.myColor=bu;
+			lbWing.myColor=pe;
+			rbWing.myColor=rd;
+		break;
+		case 5:
+			ship.myColor=og;
+			lWing.myColor=yw;
+			rWing.myColor=gn;
+			lbWing.myColor=bu;
+			rbWing.myColor=pe;
+		break;
+		case 6:
+			ship.myColor=rd;
+			lWing.myColor=og;
+			rWing.myColor=yw;
+			lbWing.myColor=gn;
+			rbWing.myColor=bu;
+		break;
+		case 7:
+			ship.myColor=pe;
+			lWing.myColor=rd;
+			rWing.myColor=og;
+			lbWing.myColor=yw;
+			rbWing.myColor=gn;
+		break;
+		case 8:
+			ship.myColor=bu;
+			lWing.myColor=pe;
+			rWing.myColor=rd;
+			lbWing.myColor=og;
+			rbWing.myColor=yw;
+		break;
+		case 9:
+			ship.myColor=gn;
+			lWing.myColor=bu;
+			rWing.myColor=pe;
+			lbWing.myColor=rd;
+			rbWing.myColor=og;
+		break;
+	}
 }
