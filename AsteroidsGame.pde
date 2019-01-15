@@ -379,25 +379,53 @@ public void draw()
 	}
 	turn++;
 	//adds a new asteroid every 100 frames
-	if(blastWait<900)
+	if(invinc==false)
 	{
-		blastWait++;
-	}
-	if(chroWait<600)
+		if(blastWait<900)
+		{
+			blastWait++;
+		}
+		if(chroWait<600)
+		{
+			chroWait++;
+		}
+		if(telWait<300)
+		{
+			telWait++;
+		}
+		if(plusWait<300)
+		{
+			plusWait++;
+		}
+	}else if(invinc==true)
 	{
-		chroWait++;
+		if(blastWait<900)
+		{
+			blastWait+=5;
+		}
+		if(chroWait<600)
+		{
+			chroWait+=5;
+		}
+		if(telWait<300)
+		{
+			telWait+=5;
+		}
+		if(plusWait<300)
+		{
+			plusWait+=5;
+		}
 	}
-	if(telWait<300)
-	{
-		telWait++;
-	}
-	if(plusWait<300)
-	{
-		plusWait++;
-	}
+	
 	//determines recharge time
 	show();
 }
+
+
+
+
+
+
 public void keyPressed()
 {
 	switch (key) {
@@ -442,9 +470,7 @@ public void keyPressed()
 			{
 				ship.setTagY(ship.getY());
 			}
-			if(invinc==false)
-			{
-				if(telWait==300)
+			if(telWait==300)
 			{
 				tele=true;
 				count=0;
@@ -501,67 +527,6 @@ public void keyPressed()
 	            	rbWing.myColor=color(0,0,0);
 		  			endGame=true;
 				}
-			}else if(invinc==true)
-			{
-				if(telWait==60)
-			{
-				tele=true;
-				count=0;
-				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
-				teleX=ship.getX();
-				teleY=ship.getY();
-				ship.setX(ship.getTagX());
-				ship.setY(ship.getTagY());
-				lWing.setX(ship.getTagX());
-				lWing.setY(ship.getTagY());
-				rWing.setX(ship.getTagX());
-				rWing.setY(ship.getTagY());
-				lbWing.setX(ship.getTagX());
-				lbWing.setY(ship.getTagY());
-				rbWing.setX(ship.getTagX());
-				rbWing.setY(ship.getTagY());
-				dedPer=(int)(Math.random()*10);
-				if(dedPer!=4)
-				{
-					image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
-				}else if(dedPer==4){
-					endX=ship.getX();
-	  				endY=ship.getY();
-		  			ship.setX(0);
-		  			ship.setY(0);
-		  			lWing.setX(0);
-		  			lWing.setY(0);
-		  			lWing.setX(0);
-		  			lWing.setY(0);
-		  			rWing.setX(0);
-		  			rWing.setY(0);
-		  			lbWing.setX(0);
-		  			lbWing.setY(0);
-		  			rbWing.setX(0);
-		  			rbWing.setY(0);
-		  			ship.setTagX(0);
-		  			ship.setTagY(0);
-		  			ship.setBombX(0);
-		  			ship.setBombY(0);
-		  			ship.setDirectionX(0);
-	            	ship.setDirectionY(0);
-	            	lWing.setDirectionX(0);
-	            	lWing.setDirectionY(0);
-	            	rWing.setDirectionX(0);
-	            	rWing.setDirectionY(0);
-	            	lbWing.setDirectionX(0);
-	            	lbWing.setDirectionY(0);
-	            	rbWing.setDirectionX(0);
-	            	rbWing.setDirectionY(0);
-	            	ship.myColor=color(0,0,0);
-	            	lWing.myColor=color(0,0,0);
-	            	rWing.myColor=color(0,0,0);
-	            	lbWing.myColor=color(0,0,0);
-	            	rbWing.myColor=color(0,0,0);
-		  			endGame=true;
-				}
-			}
-			
 				telWait=0;
 			}
 		case 'f':
@@ -577,20 +542,10 @@ public void keyPressed()
 	        rbWing.setDirectionY(0);
 		break;
 		case 'c':
-			if(invinc==false)
+			if(plusWait==300)
 			{
-				if(plusWait==300)
-				{
-					bolCross=true;
-					plusWait=0;
-				}
-			}else if(invinc==true)
-			{ 
-				if(plusWait==300)
-				{
-					bolCross=true;
-					plusWait=0;
-				}
+				bolCross=true;
+				plusWait=0;
 			}
 		case ' ':
 			bolt.add(new Bolt());
@@ -625,6 +580,7 @@ public void keyPressed()
 				ship.setBombY(ship.getY());
 				blastWait=0;
 			}
+			
 		break;
 		case 'r':
 			endX=ship.getX();
@@ -668,7 +624,7 @@ public void keyPressed()
   		case 'b':
   			invfill+=30;
   		break;
-	}
+  	}
 }
 public void tiStop()
 {
@@ -733,7 +689,8 @@ public void boAst()
 }
 public void invShipFlash(int i)
 {
-	switch(i%10) {
+	switch(i%10)
+	{
 		case 0:
 			ship.myColor=rd;
 			lWing.myColor=og;
