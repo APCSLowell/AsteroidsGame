@@ -21,7 +21,8 @@ PImage timewait;
 PImage crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
-int blastWait=900, chroWait=600, telWait=300, plusWait=300, invfill=0;
+int blastWait=900, chroWait=600, telWait=300, plusWait=300;
+float invfill=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false;
 boolean boom = false;
@@ -62,7 +63,7 @@ public void setup()
 	rbWing.setX(500);
 	rbWing.setY(500);
 	size(1000, 1000);
-
+	frameRate(60);
 	background(0, 0, 0);
 	noStroke();
 	for(int i=0; i<stars.length;i++)
@@ -127,11 +128,13 @@ public void show()
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
   	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
+  	println("this is recharge: "+radians(3.6*invfill));
 }
 public void draw() 
 {
 	fill(0,0,0);
 	rect(0, 0, 1000, 1000);
+	println("this is invfill: "+invfill);
 	//makes background
   	if(tCount==20&&tStop)
 	{
@@ -328,7 +331,7 @@ public void draw()
 	{
 		if(invfill>0)
 		{
-			invfill-=0.6;
+			invfill-=0.016;
 			invShipFlash(invfill);
 		}
 		if(invfill==0&&endGame==false)
@@ -622,7 +625,10 @@ public void keyPressed()
   			invinc=true;
   		break;
   		case 'b':
-  			invfill+=30;
+  			if(invfill<100)
+  			{
+  				invfill+=25;
+  			}
   		break;
   	}
 }
@@ -677,19 +683,19 @@ public void boAst()
   				{
   					invfill++;
   				}
-  				if(tStopX.size()!=0)
+  				if(tStopX.size()!=0&&!(tStopX.size()<=c))
   				{
-  					tStopX.remove(c-5);
-  					tStopY.remove(c-5);
+  					tStopX.remove(c);
+  					tStopY.remove(c);
   				}
   				break;
   			}
   		}
   	}
 }
-public void invShipFlash(int i)
+public void invShipFlash(float i)
 {
-	switch(i%10)
+	switch((int)i%10)
 	{
 		case 0:
 			ship.myColor=rd;
