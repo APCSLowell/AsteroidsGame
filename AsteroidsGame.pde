@@ -4,33 +4,15 @@ Leftwing lWing;
 Rightwing rWing;
 Leftbackwing lbWing;
 Rightbackwing rbWing;
-PImage img;
-PImage end1;
-PImage end2;
-PImage end3;
-PImage end4;
-PImage end5;
-PImage end6;
-PImage end7;
-PImage end8;
-PImage end9;
-PImage tieBoom;
-PImage boomwait;
-PImage telewait;
-PImage timewait;
-PImage crosswait;
+PImage img, end1, end2, end3, end4, end5, end6, end7;
+PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
 float invfill=0;
 int tSize=45, bX=5, bY=50;
-boolean tele = false;
-boolean boom = false;
-boolean tStop = false;
-boolean endGame = false;
-boolean blast = false;
-boolean bolCross = false;
-boolean invinc = false;
+boolean tele = false, boom = false, tStop = false, endGame = false;
+boolean blast = false, bolCross = false, invinc = false, help=false;
 int teleX, teleY;
 color rd=color(255,0,0);
 color og=color(255,127,0);
@@ -128,14 +110,24 @@ public void show()
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
   	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
-  	println("this is recharge: "+radians(3.6*invfill));
+  	fill(255,255,255);
+  	textSize(15);
+	text("PRESS H FOR HELP", 5, 80);
 }
 public void draw() 
 {
 	fill(0,0,0);
 	rect(0, 0, 1000, 1000);
-	println("this is invfill: "+invfill);
 	//makes background
+	if(help)
+	{
+		fill(255, 0, 0, 100);
+  		rect(0, 0, 1000,1000);
+  		//textSize(30);
+  		//text("ability: description, button, time w/o invincibility, time w/ invincibility")
+  		//text("bomb: destroys all ships on screen, Q, 15 seconds");
+  		//text("time stop");
+	}
   	if(tCount==20&&tStop)
 	{
 		tStop=false;
@@ -569,8 +561,6 @@ public void keyPressed()
 					tStopX.add(rockBottom.get(f).getDirectionX());
 					tStopY.add(rockBottom.get(f).getDirectionY());
 				}
-				tStop=true;
-				tCount=0;
 				tiStop();
 				chroWait=0;
 			}
@@ -630,6 +620,10 @@ public void keyPressed()
   				invfill+=25;
   			}
   		break;
+  		case 'h':
+  			help=true;
+  		break;
+
   	}
 }
 public void tiStop()
@@ -683,11 +677,11 @@ public void boAst()
   				{
   					invfill++;
   				}
-  				if(tStopX.size()!=0&&!(tStopX.size()<=c))
-  				{
-  					tStopX.remove(c);
-  					tStopY.remove(c);
-  				}
+  				// if(tStopX.size()!=0&&!(tStopX.size()<=c))
+  				// {
+  				// 	tStopX.remove(c);
+  				// 	tStopY.remove(c);
+  				// }
   				break;
   			}
   		}
