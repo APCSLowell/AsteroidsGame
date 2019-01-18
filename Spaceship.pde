@@ -14,8 +14,8 @@ class Spaceship extends Floater
     	//corners=50;
     	corners=70;
     	myColor=color(211,211,211);
-    	myCenterX=0;
-    	myCenterY=0;
+    	myCenterX=500;
+    	myCenterY=500;
     	myDirectionX=0;
     	myDirectionY=0;
     	myPointDirection=0;
@@ -50,9 +50,6 @@ class Spaceship extends Floater
     {
         if(dist(asx, asy, this.getX(), this.getY())<=14)
         {
-            setDirectionX(0);
-            setDirectionY(0);
-            myColor=color(0,0,0);
             return true;
         }else{
             return false;

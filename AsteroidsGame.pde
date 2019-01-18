@@ -27,6 +27,7 @@ ArrayList<Integer> tieBlastX = new ArrayList<Integer>();
 ArrayList<Integer> tieBlastY = new ArrayList<Integer>();
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
+PImage[] endBoom = new PImage[9];
 public void setup() 
 {
 	ship=new Spaceship();
@@ -34,16 +35,16 @@ public void setup()
 	rWing=new Rightwing();
 	lbWing=new Leftbackwing();
 	rbWing=new Rightbackwing();
-	ship.setX(500);
-	ship.setY(500);
-	lWing.setX(500);
-	lWing.setY(500);
-	rWing.setX(500);
-	rWing.setY(500);
-	lbWing.setX(500);
-	lbWing.setY(500);
-	rbWing.setX(500);
-	rbWing.setY(500);
+	// ship.setX(500);
+	// ship.setY(500);
+	// lWing.setX(500);
+	// lWing.setY(500);
+	// rWing.setX(500);
+	// rWing.setY(500);
+	// lbWing.setX(500);
+	// lbWing.setY(500);
+	// rbWing.setX(500);
+	// rbWing.setY(500);
 	size(1000, 1000);
 	frameRate(60);
 	background(0, 0, 0);
@@ -61,15 +62,15 @@ public void setup()
 		}
   	}
   	img=loadImage("flashtele.png");
-  	end1=loadImage("explofr1.gif");
-  	end2=loadImage("explofr2.gif");
-  	end3=loadImage("explofr3.gif");
-  	end4=loadImage("explofr4.gif");
-  	end5=loadImage("explofr5.gif");
-  	end6=loadImage("explofr6.gif");
-  	end7=loadImage("explofr7.gif");
-  	end8=loadImage("explofr8.gif");
-  	end9=loadImage("explofr9.gif");
+  	endBoom[0]=loadImage("explofr1.gif");
+  	endBoom[1]=loadImage("explofr2.gif");
+  	endBoom[2]=loadImage("explofr3.gif");
+  	endBoom[3]=loadImage("explofr4.gif");
+  	endBoom[4]=loadImage("explofr5.gif");
+  	endBoom[5]=loadImage("explofr6.gif");
+  	endBoom[6]=loadImage("explofr7.gif");
+  	endBoom[7]=loadImage("explofr8.gif");
+  	endBoom[8]=loadImage("explofr9.gif");
   	tieBoom=loadImage("explosion.png");
   	boomwait=loadImage("boomwait.png");
   	telewait=loadImage("telewait.png");
@@ -83,12 +84,15 @@ public void show()
   		stars[i].show();
   	}
   	//makes stars
-  	ship.show();
-  	lWing.show();
-  	rWing.show();
-  	lbWing.show();
-  	rbWing.show();
-  	//shows the ship
+  	if(endGame==false)
+  	{
+  		ship.show();
+	  	lWing.show();
+	  	rWing.show();
+	  	lbWing.show();
+	  	rbWing.show();
+	}
+  	//shows the ship if it isnt a fucking dumbass and dies
   	for(int g=0; g<rockBottom.size();g++)
   	{
   		rockBottom.get(g).show();
@@ -128,146 +132,16 @@ public void draw()
   		//text("bomb: destroys all ships on screen, Q, 15 seconds");
   		//text("time stop");
 	}
-  	if(tCount==20&&tStop)
-	{
-		tStop=false;
-		tiStart();
-	}else if(tStop)
-	{
-		tCount++;
-	}
-	//frame counter for the time stop button
-  	for(int g=0; g<rockBottom.size();g++)
-  	{
-  		rockBottom.get(g).move();
-  	}
-  	//moves all tie fighter asteroids
-	ship.move();
-	lWing.move();
-	rWing.move();
-	lbWing.move();
-	rbWing.move();
-	//moves the ship
-	for(int f=0; f<rockBottom.size();f++)
-  	{
-  		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY())&&invinc==false)
-  		{
-  			rockBottom.remove(f);
-  			endX=ship.getX();
-			endY=ship.getY();
-  			ship.setX(0);
-  			ship.setY(0);
-  			lWing.setX(0);
-  			lWing.setY(0);
-  			lWing.setX(0);
-  			lWing.setY(0);
-  			rWing.setX(0);
-  			rWing.setY(0);
-  			lbWing.setX(0);
-  			lbWing.setY(0);
-  			rbWing.setX(0);
-  			rbWing.setY(0);
-  			ship.setTagX(0);
-  			ship.setTagY(0);
-  			ship.setBombX(0);
-  			ship.setBombY(0);
-  			ship.setDirectionX(0);
-        	ship.setDirectionY(0);
-        	lWing.setDirectionX(0);
-        	lWing.setDirectionY(0);
-        	rWing.setDirectionX(0);
-        	rWing.setDirectionY(0);
-        	lbWing.setDirectionX(0);
-        	lbWing.setDirectionY(0);
-        	rbWing.setDirectionX(0);
-        	rbWing.setDirectionY(0);
-        	ship.myColor=color(0,0,0);
-        	lWing.myColor=color(0,0,0);
-        	rWing.myColor=color(0,0,0);
-        	lbWing.myColor=color(0,0,0);
-        	rbWing.myColor=color(0,0,0);
-  			endGame=true;
-		}
-  	}
-  	//ship to asteroid impact detector
-	for(int e=0; e<bolt.size();e++)
-  	{
-  		bolt.get(e).move();
-  	}
-  	//moves the bolts
-  	for(int e=0; e<bolt.size();e++)
-  	{
-  		if(bolt.get(e).myCenterX>1000||bolt.get(e).myCenterX<0||bolt.get(e).myCenterY>1000||bolt.get(e).myCenterY<0)
-    	{
-    		bolt.remove(e);
-    	}
-  	}
-  	//removes the bolts
+	//help button code
+  	timeFrameCount();
+  	tieMove();
+	moveShip();
+	gameOver();
+	boltMove();
   	boAst();
-  	//bolt to asteroid impact detection
-	if(count<5&&tele)
-	{
-		flashDis();
-		if(count==4)
-		{
-			tele=false;
-		}
-	}
-	if(tele)
-	{
-		count++;
-	}
-	//frame counter for teleportation image
+  	teleFrameCount();
+  	shipExploCounter();
 	
-	if(eCount<201&&endGame)
-	{
-		if(eCount<10)
-		{
-			image(end1, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>9&&eCount<20)
-		{
-			image(end2, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>19&&eCount<30)
-		{
-			image(end3, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>29&&eCount<40)
-		{
-			image(end4, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>39&&eCount<50)
-		{	
-			image(end5, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>49&&eCount<60)
-		{
-			image(end6, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>59&&eCount<70)
-		{
-			image(end7, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>69&&eCount<80)
-		{
-			image(end8, endX-150,endY-150, 300, 300);
-		}
-		if(eCount>79&&eCount<90)
-		{
-			image(end9, endX-150,endY-150, 300, 300);
-		}
-		if(eCount==200)
-		{
-			endGame=false;
-			exit();
-		}
-		if(endGame)
-		{
-			eCount++;
-		}
-	}
-	//ship explosion counter at the end of the game
 	
 	if(dCount<31&&blast)
 	{
@@ -364,7 +238,7 @@ public void draw()
 			cCount++;
 		}
 	}
-	if(turn%100==0)
+	if(turn%100==0&&tStop==false)
 	{
 		rockBottom.add(new Asteroid());
 		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
@@ -505,16 +379,7 @@ public void keyPressed()
 		  			ship.setTagY(0);
 		  			ship.setBombX(0);
 		  			ship.setBombY(0);
-		  			ship.setDirectionX(0);
-	            	ship.setDirectionY(0);
-	            	lWing.setDirectionX(0);
-	            	lWing.setDirectionY(0);
-	            	rWing.setDirectionX(0);
-	            	rWing.setDirectionY(0);
-	            	lbWing.setDirectionX(0);
-	            	lbWing.setDirectionY(0);
-	            	rbWing.setDirectionX(0);
-	            	rbWing.setDirectionY(0);
+		  			stopShip();
 	            	ship.myColor=color(0,0,0);
 	            	lWing.myColor=color(0,0,0);
 	            	rWing.myColor=color(0,0,0);
@@ -525,16 +390,7 @@ public void keyPressed()
 				telWait=0;
 			}
 		case 'f':
-			ship.setDirectionX(0);
-			ship.setDirectionY(0);
-			lWing.setDirectionX(0);
-	        lWing.setDirectionY(0);
-	        rWing.setDirectionX(0);
-	        rWing.setDirectionY(0);
-	        lbWing.setDirectionX(0);
-	        lbWing.setDirectionY(0);
-	        rbWing.setDirectionX(0);
-	        rbWing.setDirectionY(0);
+			stopShip();
 		break;
 		case 'c':
 			if(plusWait==300)
@@ -578,7 +434,7 @@ public void keyPressed()
 		case 'r':
 			endX=ship.getX();
 			endY=ship.getY();
-  			ship.setX(0);
+  			/*ship.setX(0);
   			ship.setY(0);
   			lWing.setX(0);
   			lWing.setY(0);
@@ -593,22 +449,13 @@ public void keyPressed()
   			ship.setTagX(0);
   			ship.setTagY(0);
   			ship.setBombX(0);
-  			ship.setBombY(0);
-  			ship.setDirectionX(0);
-        	ship.setDirectionY(0);
-        	lWing.setDirectionX(0);
-        	lWing.setDirectionY(0);
-        	rWing.setDirectionX(0);
-        	rWing.setDirectionY(0);
-        	lbWing.setDirectionX(0);
-        	lbWing.setDirectionY(0);
-        	rbWing.setDirectionX(0);
-        	rbWing.setDirectionY(0);
-        	ship.myColor=color(0,0,0);
+  			ship.setBombY(0);*/
+  			stopShip();
+        	/*ship.myColor=color(0,0,0);
         	lWing.myColor=color(0,0,0);
         	rWing.myColor=color(0,0,0);
         	lbWing.myColor=color(0,0,0);
-        	rbWing.myColor=color(0,0,0);
+        	rbWing.myColor=color(0,0,0);*/
   			endGame=true;
   		break;
   		case 'v':
@@ -687,6 +534,7 @@ public void boAst()
   		}
   	}
 }
+//bolt to asteroid impact detection
 public void invShipFlash(float i)
 {
 	switch((int)i%10)
@@ -763,3 +611,137 @@ public void invShipFlash(float i)
 		break;
 	}
 }
+void timeFrameCount()
+{
+	if(tCount==180&&tStop)
+	{
+		tStop=false;
+		tiStart();
+	}else if(tStop)
+	{
+		tCount++;
+	}
+}
+//frame counter for the time stop button
+void tieMove()
+{
+	for(int g=0; g<rockBottom.size();g++)
+  	{
+  		rockBottom.get(g).move();
+  	}
+}
+//moves all tie fighter asteroids
+void gameOver()
+{
+	for(int f=0; f<rockBottom.size();f++)
+  	{
+  		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY())&&invinc==false)
+  		{
+  			rockBottom.remove(f);
+  			endX=ship.getX();
+			endY=ship.getY();
+  			// ship.setX(0);
+  			// ship.setY(0);
+  			// lWing.setX(0);
+  			// lWing.setY(0);
+  			// lWing.setX(0);
+  			// lWing.setY(0);
+  			// rWing.setX(0);
+  			// rWing.setY(0);
+  			// lbWing.setX(0);
+  			// lbWing.setY(0);
+  			// rbWing.setX(0);
+  			// rbWing.setY(0);
+  			// ship.setTagX(0);
+  			// ship.setTagY(0);
+  			// ship.setBombX(0);
+  			// ship.setBombY(0);
+  			stopShip();
+        	// ship.myColor=color(0,0,0);
+        	// lWing.myColor=color(0,0,0);
+        	// rWing.myColor=color(0,0,0);
+        	// lbWing.myColor=color(0,0,0);
+        	// rbWing.myColor=color(0,0,0);
+  			endGame=true;
+		}
+  	}
+}
+//ship to asteroid impact detector
+void stopShip()
+{
+	ship.setDirectionX(0);
+	ship.setDirectionY(0);
+	lWing.setDirectionX(0);
+    lWing.setDirectionY(0);
+    rWing.setDirectionX(0);
+    rWing.setDirectionY(0);
+    lbWing.setDirectionX(0);
+    lbWing.setDirectionY(0);
+    rbWing.setDirectionX(0);
+    rbWing.setDirectionY(0);
+}
+//stops the ship
+void boltMove()
+{
+	for(int e=0; e<bolt.size();e++)
+  	{
+  		bolt.get(e).move();
+  	}
+}
+//moves the bolts
+void moveShip()
+{
+	ship.move();
+	lWing.move();
+	rWing.move();
+	lbWing.move();
+	rbWing.move();
+}
+//moves the ship and its parts
+void boltRemove()
+{
+	for(int e=0; e<bolt.size();e++)
+  	{
+  		if(bolt.get(e).myCenterX>1000||bolt.get(e).myCenterX<0||bolt.get(e).myCenterY>1000||bolt.get(e).myCenterY<0)
+    	{
+    		bolt.remove(e);
+    	}
+  	}
+}
+//removes the bolts once they go offscreen
+void teleFrameCount()
+{
+	if(count<5&&tele)
+	{
+		flashDis();
+		if(count==4)
+		{
+			tele=false;
+		}
+	}
+	if(tele)
+	{
+		count++;
+	}
+}
+//frame counter for teleportation image
+void shipExploCounter()
+{
+	if(eCount<201&&endGame)
+	{
+		if(eCount/10<9)
+		{
+			image(endBoom[eCount/10], endX-150,endY-150, 300, 300);
+		}
+		if(eCount==200)
+		{
+			endGame=false;
+			exit();
+		}
+		if(endGame)
+		{
+			eCount++;
+		}
+	}
+}
+//ship explosion counter at the end of the game

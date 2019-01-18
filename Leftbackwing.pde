@@ -9,5 +9,7 @@ class Leftbackwing extends Spaceship
     	//corners=50;
     	corners=6;
         myColor=color(255,0,0);
+        myCenterX=500;
+        myCenterY=500;
     }
 }
