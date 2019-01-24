@@ -4,6 +4,7 @@ Leftwing lWing;
 Rightwing rWing;
 Leftbackwing lbWing;
 Rightbackwing rbWing;
+Boss boss;
 PImage img, end1, end2, end3, end4, end5, end6, end7;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
@@ -35,6 +36,7 @@ public void setup()
 	rWing=new Rightwing();
 	lbWing=new Leftbackwing();
 	rbWing=new Rightbackwing();
+	boss=new Boss();
 	// ship.setX(500);
 	// ship.setY(500);
 	// lWing.setX(500);
@@ -93,6 +95,8 @@ public void show()
 	  	rbWing.show();
 	}
   	//shows the ship if it isnt a fucking dumbass and dies
+  	boss.show();
+  	//shows the boss
   	for(int g=0; g<rockBottom.size();g++)
   	{
   		rockBottom.get(g).show();
@@ -127,10 +131,15 @@ public void draw()
 	{
 		fill(255, 0, 0, 100);
   		rect(0, 0, 1000,1000);
-  		//textSize(30);
-  		//text("ability: description, button, time w/o invincibility, time w/ invincibility")
-  		//text("bomb: destroys all ships on screen, Q, 15 seconds");
-  		//text("time stop");
+  		/*textSize(30);
+  		text("ability: description, button, time w/o invincibility, time w/ invincibility")
+  		text("bomb: destroys all ships on screen, Q, 15 seconds, 3 seconds");
+  		text("time stop: stops all ships from moving for one second, E, 10 seconds, 2 seconds");
+  		text("set teleport tag:places the tag that the teleport move teleports to, Z, no recharge")
+  		text("teleport: teleports the ship to the teleport tag, X, 5 seconds, 1 second");
+  		text("cross: makes a cross of bullets from the ship, C, 5 seconds, 1 second");
+  		text("invincibility: become invincible for a max of ten seconds, V, no recharge, "");
+  		text("but length depends on counter of destroyed ships in top right corner")*/
 	}
 	//help button code
   	timeFrameCount();
@@ -434,28 +443,7 @@ public void keyPressed()
 		case 'r':
 			endX=ship.getX();
 			endY=ship.getY();
-  			/*ship.setX(0);
-  			ship.setY(0);
-  			lWing.setX(0);
-  			lWing.setY(0);
-  			lWing.setX(0);
-  			lWing.setY(0);
-  			rWing.setX(0);
-  			rWing.setY(0);
-  			lbWing.setX(0);
-  			lbWing.setY(0);
-  			rbWing.setX(0);
-  			rbWing.setY(0);
-  			ship.setTagX(0);
-  			ship.setTagY(0);
-  			ship.setBombX(0);
-  			ship.setBombY(0);*/
   			stopShip();
-        	/*ship.myColor=color(0,0,0);
-        	lWing.myColor=color(0,0,0);
-        	rWing.myColor=color(0,0,0);
-        	lbWing.myColor=color(0,0,0);
-        	rbWing.myColor=color(0,0,0);*/
   			endGame=true;
   		break;
   		case 'v':
@@ -613,7 +601,7 @@ public void invShipFlash(float i)
 }
 void timeFrameCount()
 {
-	if(tCount==180&&tStop)
+	if(tCount==60&&tStop)
 	{
 		tStop=false;
 		tiStart();
@@ -640,28 +628,7 @@ void gameOver()
   			rockBottom.remove(f);
   			endX=ship.getX();
 			endY=ship.getY();
-  			// ship.setX(0);
-  			// ship.setY(0);
-  			// lWing.setX(0);
-  			// lWing.setY(0);
-  			// lWing.setX(0);
-  			// lWing.setY(0);
-  			// rWing.setX(0);
-  			// rWing.setY(0);
-  			// lbWing.setX(0);
-  			// lbWing.setY(0);
-  			// rbWing.setX(0);
-  			// rbWing.setY(0);
-  			// ship.setTagX(0);
-  			// ship.setTagY(0);
-  			// ship.setBombX(0);
-  			// ship.setBombY(0);
   			stopShip();
-        	// ship.myColor=color(0,0,0);
-        	// lWing.myColor=color(0,0,0);
-        	// rWing.myColor=color(0,0,0);
-        	// lbWing.myColor=color(0,0,0);
-        	// rbWing.myColor=color(0,0,0);
   			endGame=true;
 		}
   	}
