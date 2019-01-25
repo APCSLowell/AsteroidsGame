@@ -5,9 +5,10 @@ Rightwing rWing;
 Leftbackwing lbWing;
 Rightbackwing rbWing;
 Boss boss;
+BossHull hull;
 PImage img, end1, end2, end3, end4, end5, end6, end7;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
-int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0;
+int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, hCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
 float invfill=0;
@@ -37,6 +38,7 @@ public void setup()
 	lbWing=new Leftbackwing();
 	rbWing=new Rightbackwing();
 	boss=new Boss();
+	hull=new BossHull();
 	// ship.setX(500);
 	// ship.setY(500);
 	// lWing.setX(500);
@@ -96,6 +98,7 @@ public void show()
 	}
   	//shows the ship if it isnt a fucking dumbass and dies
   	boss.show();
+  	hull.show();
   	//shows the boss
   	for(int g=0; g<rockBottom.size();g++)
   	{
@@ -127,21 +130,6 @@ public void draw()
 	fill(0,0,0);
 	rect(0, 0, 1000, 1000);
 	//makes background
-	if(help)
-	{
-		fill(255, 0, 0, 100);
-  		rect(0, 0, 1000,1000);
-  		/*textSize(30);
-  		text("ability: description, button, time w/o invincibility, time w/ invincibility")
-  		text("bomb: destroys all ships on screen, Q, 15 seconds, 3 seconds");
-  		text("time stop: stops all ships from moving for one second, E, 10 seconds, 2 seconds");
-  		text("set teleport tag:places the tag that the teleport move teleports to, Z, no recharge")
-  		text("teleport: teleports the ship to the teleport tag, X, 5 seconds, 1 second");
-  		text("cross: makes a cross of bullets from the ship, C, 5 seconds, 1 second");
-  		text("invincibility: become invincible for a max of ten seconds, V, no recharge, "");
-  		text("but length depends on counter of destroyed ships in top right corner")*/
-	}
-	//help button code
   	timeFrameCount();
   	tieMove();
 	moveShip();
@@ -150,7 +138,19 @@ public void draw()
   	boAst();
   	teleFrameCount();
   	shipExploCounter();
-	
+	if(hCount<121&&help)
+	{
+		helpWall();
+		if(hCount==120)
+		{
+			help=false;
+			hCount=0;
+		}
+		if(help)
+		{
+			hCount++;
+		}
+	}
 	
 	if(dCount<31&&blast)
 	{
@@ -712,3 +712,23 @@ void shipExploCounter()
 	}
 }
 //ship explosion counter at the end of the game
+public void helpWall()
+{
+	fill(255, 0, 0, 100);
+	rect(0, 0, 1000,1000);
+	fill(255,255,255);
+	text("ability: description, button, time w/o invincibility, time w/ invincibility",5,100);
+	text("bomb: destroys all ships on screen, Q, 15 seconds, 3 seconds", 5,130);
+	text("time stop: stops all ships from moving for one second, E, 10 seconds, 2 seconds",5,160);
+	text("set teleport tag:places the tag that the teleport move teleports to, Z, no recharge",5,190);
+	text("teleport: teleports the ship to the teleport tag, X, 5 seconds, 1 second",5,220);
+	text("cross: makes a cross of bullets from the ship, C, 5 seconds, 1 second",5,250);
+	text("invincibility: become invincible for a max of ten seconds, V, destroy ships to recharge", 5,280);
+	text("but length depends on counter of destroyed ships in top right corner",5,310);
+	stroke(255, 255, 255);
+	line(900, 100, 930, 70);
+	line(910,70,930,70);
+	line(930,70,930,90);
+	text("invincibility counter", 850,120);
+}
+//help button code
