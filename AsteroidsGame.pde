@@ -39,16 +39,6 @@ public void setup()
 	rbWing=new Rightbackwing();
 	boss=new Boss();
 	hull=new BossHull();
-	// ship.setX(500);
-	// ship.setY(500);
-	// lWing.setX(500);
-	// lWing.setY(500);
-	// rWing.setX(500);
-	// rWing.setY(500);
-	// lbWing.setX(500);
-	// lbWing.setY(500);
-	// rbWing.setX(500);
-	// rbWing.setY(500);
 	size(1000, 1000);
 	frameRate(60);
 	background(0, 0, 0);
@@ -83,6 +73,10 @@ public void setup()
 }
 public void show()
 {
+	if(help)
+  	{
+  		helpWall();
+  	}
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i].show();
@@ -138,20 +132,6 @@ public void draw()
   	boAst();
   	teleFrameCount();
   	shipExploCounter();
-	if(hCount<121&&help)
-	{
-		helpWall();
-		if(hCount==120)
-		{
-			help=false;
-			hCount=0;
-		}
-		if(help)
-		{
-			hCount++;
-		}
-	}
-	
 	if(dCount<31&&blast)
 	{
 		boAst();
@@ -202,15 +182,12 @@ public void draw()
 		bCount++;
 	}
 	//pulse bomb impact detection
-	if(invinc)
+	if(invfill>0&&invinc)
 	{
-		if(invfill>0)
-		{
-			invfill-=0.016;
-			invShipFlash(invfill);
-		}
-		if(invfill==0&&endGame==false)
-		{
+		invShipFlash(invfill);
+	}
+	if(invfill<=0&&endGame==false)
+		{	
 			invinc=false;
 			ship.myColor=color(211,211,211);
 			lWing.myColor=color(255,0,0);
@@ -218,6 +195,10 @@ public void draw()
 			lbWing.myColor=color(255,0,0);
 			rbWing.myColor=color(255,0,0);
 		}
+	if(invinc)
+	{
+		invfill-=0.16;
+		println(invfill);
 	}
 	if(cCount<3600&&bolCross)
 	{
@@ -455,8 +436,14 @@ public void keyPressed()
   				invfill+=25;
   			}
   		break;
+  		case 'n':
+  			if(invfill>0)
+  			{
+  				invfill=0;
+  			}
+  		break;
   		case 'h':
-  			help=true;
+  			help=!help;
   		break;
 
   	}
