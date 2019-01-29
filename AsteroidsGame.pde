@@ -11,7 +11,7 @@ PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
 int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, hCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
-float invfill=0;
+float invfill=0, bossfill=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false;
 boolean blast = false, bolCross = false, invinc = false, help=false;
@@ -73,37 +73,14 @@ public void setup()
 }
 public void show()
 {
-	if(help)
-  	{
-  		helpWall();
-  	}
-	for(int i=0; i<stars.length;i++)
-  	{
-  		stars[i].show();
-  	}
-  	//makes stars
-  	if(endGame==false)
-  	{
-  		ship.show();
-	  	lWing.show();
-	  	rWing.show();
-	  	lbWing.show();
-	  	rbWing.show();
-	}
-  	//shows the ship if it isnt a fucking dumbass and dies
+	helpDraw();
+	starShow();
+  	shipShow();
   	boss.show();
   	hull.show();
   	//shows the boss
-  	for(int g=0; g<rockBottom.size();g++)
-  	{
-  		rockBottom.get(g).show();
-  	}
-  	//shows the tie fighter asteroid
-  	for(int e=0; e<bolt.size();e++)
-  	{
-  		bolt.get(e).show();
-  	}
-  	//shows the bolts
+  	tieShow();
+  	boltShow();
   	noStroke();
   	fill(255,255,255);
   	rect(70, 5, 60, chroWait/10);
@@ -115,6 +92,9 @@ public void show()
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
   	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
+  	rect(5,80,5,500);
+  	fill(255,0,0);
+  	rect(5, 80, 5, bossfill/2);
   	fill(255,255,255);
   	textSize(15);
 	text("PRESS H FOR HELP", 5, 80);
@@ -132,151 +112,12 @@ public void draw()
   	boAst();
   	teleFrameCount();
   	shipExploCounter();
-	if(dCount<31&&blast)
-	{
-		boAst();
-		image(tieBoom, bolAstX, bolAstY, 50, 50);
-		if(dCount==30)
-		{
-			blast=false;
-			dCount=0;
-		}
-		if(blast)
-		{
-			dCount++;
-		}
-	}
-
-	if(bCount<51&&boom)
-	{
-		if(bCount==50)
-		{
-			boom=false;
-			bCount=0;
-			tieBlastX.clear();
-			tieBlastY.clear();
-		}
-	}
-	if(boom)
-	{
-		fill(255,255,255);
-		ellipse(ship.getBombX(), ship.getBombY(), bCount*50, bCount*50);
-		fill(0,0,0);
-		ellipse(ship.getBombX(), ship.getBombY(), (bCount*35), (bCount*35));
-		for(int z=0;z<rockBottom.size();z++)
-		{
-			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*35))
-			{
-				tieBlastX.add(rockBottom.get(z).getX());
-
-				tieBlastY.add(rockBottom.get(z).getY());
-				rockBottom.remove(z);
-				if(invfill<101)
-				{
-					invfill++;
-				}
-				break;
-			}
-		}
-		boomDis();
-		bCount++;
-	}
-	//pulse bomb impact detection
-	if(invfill>0&&invinc)
-	{
-		invShipFlash(invfill);
-	}
-	if(invfill<=0&&endGame==false)
-		{	
-			invinc=false;
-			ship.myColor=color(211,211,211);
-			lWing.myColor=color(255,0,0);
-			rWing.myColor=color(255,0,0);
-			lbWing.myColor=color(255,0,0);
-			rbWing.myColor=color(255,0,0);
-		}
-	if(invinc)
-	{
-		invfill-=0.16;
-		println(invfill);
-	}
-	if(cCount<3600&&bolCross)
-	{
-		if(cCount==40)
-		{
-			bolCross=false;
-			cCount=0;
-		}
-		if(bolCross)
-		{
-			bolt.add(new Bolt());
-			bolt.get(bolt.size()-1).setDirectionX(25);
-			bolt.get(bolt.size()-1).setDirectionY(0);
-			bolt.get(bolt.size()-1).setPointDirection(0);
-			bolt.add(new Bolt());
-			bolt.get(bolt.size()-1).setDirectionX(0);
-			bolt.get(bolt.size()-1).setDirectionY(-25);
-			bolt.get(bolt.size()-1).setPointDirection(90);
-			bolt.add(new Bolt());
-			bolt.get(bolt.size()-1).setDirectionX(-25);
-			bolt.get(bolt.size()-1).setDirectionY(0);
-			bolt.get(bolt.size()-1).setPointDirection(180);
-			bolt.add(new Bolt());
-			bolt.get(bolt.size()-1).setDirectionX(0);
-			bolt.get(bolt.size()-1).setDirectionY(25);
-			bolt.get(bolt.size()-1).setPointDirection(270);
-			cCount++;
-		}
-	}
-	if(turn%100==0&&tStop==false)
-	{
-		rockBottom.add(new Asteroid());
-		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
-		{
-			rockBottom.remove(rockBottom.size()-1);
-		}
-	}
-	turn++;
-	//adds a new asteroid every 100 frames
-	if(invinc==false)
-	{
-		if(blastWait<900)
-		{
-			blastWait++;
-		}
-		if(chroWait<600)
-		{
-			chroWait++;
-		}
-		if(telWait<300)
-		{
-			telWait++;
-		}
-		if(plusWait<300)
-		{
-			plusWait++;
-		}
-	}else if(invinc==true)
-	{
-		if(blastWait<900)
-		{
-			blastWait+=5;
-		}
-		if(chroWait<600)
-		{
-			chroWait+=5;
-		}
-		if(telWait<300)
-		{
-			telWait+=5;
-		}
-		if(plusWait<300)
-		{
-			plusWait+=5;
-		}
-	}
-	
-	//determines recharge time
+	boltAstCount();
+	bombRingCount();
+	invincCount();
+	boltCross();
+	newTie();
+	abilCount();
 	show();
 }
 
@@ -289,32 +130,16 @@ public void keyPressed()
 {
 	switch (key) {
 		case 'w':
-			ship.accelerate(1);
-			lWing.accelerate(1);
-			rWing.accelerate(1);
-			lbWing.accelerate(1);
-			rbWing.accelerate(1);
+			shipAccel(1);
 		break;
 		case 'a':
-			ship.turn(-10);
-			lWing.turn(-10);
-			rWing.turn(-10);
-			lbWing.turn(-10);
-			rbWing.turn(-10);
+			shipTurn(-10);
 		break;
 		case 's':
-			ship.accelerate(-1);
-			lWing.accelerate(-1);
-			rWing.accelerate(-1);
-			lbWing.accelerate(-1);
-			rbWing.accelerate(-1);
+			shipAccel(-1);
 		break;
 		case 'd':
-			ship.turn(10);
-			lWing.turn(10);
-			rWing.turn(10);
-			lbWing.turn(10);
-			rbWing.turn(10);
+			shipTurn(10);
 		break;
 		case 'z':
 			ship.setTagX(ship.getX());
@@ -336,16 +161,7 @@ public void keyPressed()
 				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
 				teleX=ship.getX();
 				teleY=ship.getY();
-				ship.setX(ship.getTagX());
-				ship.setY(ship.getTagY());
-				lWing.setX(ship.getTagX());
-				lWing.setY(ship.getTagY());
-				rWing.setX(ship.getTagX());
-				rWing.setY(ship.getTagY());
-				lbWing.setX(ship.getTagX());
-				lbWing.setY(ship.getTagY());
-				rbWing.setX(ship.getTagX());
-				rbWing.setY(ship.getTagY());
+				shipTeleSet(ship.getTagX(), ship.getTagY());
 				dedPer=(int)(Math.random()*10);
 				if(dedPer!=4)
 				{
@@ -353,29 +169,8 @@ public void keyPressed()
 				}else if(dedPer==4){
 					endX=ship.getX();
 	  				endY=ship.getY();
-		  			ship.setX(0);
-		  			ship.setY(0);
-		  			lWing.setX(0);
-		  			lWing.setY(0);
-		  			lWing.setX(0);
-		  			lWing.setY(0);
-		  			rWing.setX(0);
-		  			rWing.setY(0);
-		  			lbWing.setX(0);
-		  			lbWing.setY(0);
-		  			rbWing.setX(0);
-		  			rbWing.setY(0);
-		  			ship.setTagX(0);
-		  			ship.setTagY(0);
-		  			ship.setBombX(0);
-		  			ship.setBombY(0);
-		  			stopShip();
-	            	ship.myColor=color(0,0,0);
-	            	lWing.myColor=color(0,0,0);
-	            	rWing.myColor=color(0,0,0);
-	            	lbWing.myColor=color(0,0,0);
-	            	rbWing.myColor=color(0,0,0);
 		  			endGame=true;
+		  			stopShip();
 				}
 				telWait=0;
 			}
@@ -499,6 +294,7 @@ public void boAst()
   				{
   					invfill++;
   				}
+  				bossfill++;
   				// if(tStopX.size()!=0&&!(tStopX.size()<=c))
   				// {
   				// 	tStopX.remove(c);
@@ -719,3 +515,237 @@ public void helpWall()
 	text("invincibility counter", 850,120);
 }
 //help button code
+public void boltAstCount()
+{
+	if(dCount<31&&blast)
+	{
+		boAst();
+		image(tieBoom, bolAstX, bolAstY, 50, 50);
+		if(dCount==30)
+		{
+			blast=false;
+			dCount=0;
+		}
+		if(blast)
+		{
+			dCount++;
+		}
+	}
+}
+//bolt to asteroid frame counter
+public void bombRingCount()
+{
+	if(bCount<51&&boom)
+	{
+		if(bCount==50)
+		{
+			boom=false;
+			bCount=0;
+			tieBlastX.clear();
+			tieBlastY.clear();
+		}
+	}
+	if(boom)
+	{
+		fill(255,255,255);
+		ellipse(ship.getBombX(), ship.getBombY(), bCount*50, bCount*50);
+		fill(0,0,0);
+		ellipse(ship.getBombX(), ship.getBombY(), (bCount*35), (bCount*35));
+		for(int z=0;z<rockBottom.size();z++)
+		{
+			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*35))
+			{
+				tieBlastX.add(rockBottom.get(z).getX());
+
+				tieBlastY.add(rockBottom.get(z).getY());
+				rockBottom.remove(z);
+				if(invfill<101)
+				{
+					invfill++;
+				}
+				bossfill++;
+				break;
+			}
+		}
+		boomDis();
+		bCount++;
+	}
+}
+//pulse bomb impact detection
+public void invincCount()
+{
+	if(invfill>0&&invinc)
+	{
+		invShipFlash(invfill);
+	}
+	if(invfill<=0&&endGame==false)
+		{	
+			invinc=false;
+			invfill=0;
+			ship.myColor=color(211,211,211);
+			lWing.myColor=color(255,0,0);
+			rWing.myColor=color(255,0,0);
+			lbWing.myColor=color(255,0,0);
+			rbWing.myColor=color(255,0,0);
+		}
+	if(invinc)
+	{
+		invfill-=0.16;
+		println(invfill);
+	}
+}
+//invincibility color counter
+public void newBoltCross(int x, int y, int z)
+{
+	bolt.add(new Bolt());
+	bolt.get(bolt.size()-1).setDirectionX(x);
+	bolt.get(bolt.size()-1).setDirectionY(y);
+	bolt.get(bolt.size()-1).setPointDirection(z);
+}
+//adds a bolt for bolt cross
+public void boltCross()
+{
+	if(cCount<3600&&bolCross)
+	{
+		if(cCount==40)
+		{
+			bolCross=false;
+			cCount=0;
+		}
+		if(bolCross)
+		{
+			newBoltCross(25,0,0);
+			newBoltCross(0,-25,90);
+			newBoltCross(-25,0,180);
+			newBoltCross(0,25,270);
+			cCount++;
+		}
+	}
+}
+//bolt cross frame counter
+public void newTie()
+{
+	if(turn%100==0&&tStop==false)
+	{
+		rockBottom.add(new Asteroid());
+		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+		{
+			rockBottom.remove(rockBottom.size()-1);
+		}
+	}
+	turn++;
+}
+//adds a new asteroid every 100 frames
+public void abilCount()
+{
+	if(invinc==false)
+	{
+		if(blastWait<900)
+		{
+			blastWait++;
+		}
+		if(chroWait<600)
+		{
+			chroWait++;
+		}
+		if(telWait<300)
+		{
+			telWait++;
+		}
+		if(plusWait<300)
+		{
+			plusWait++;
+		}
+	}else if(invinc==true)
+	{
+		if(blastWait<900)
+		{
+			blastWait+=5;
+		}
+		if(chroWait<600)
+		{
+			chroWait+=5;
+		}
+		if(telWait<300)
+		{
+			telWait+=5;
+		}
+		if(plusWait<300)
+		{
+			plusWait+=5;
+		}
+	}
+}
+//determines recharge time
+public void helpDraw()
+{
+	if(help)
+  	{
+  		helpWall();
+  	}
+}
+public void starShow()
+{
+	for(int i=0; i<stars.length;i++)
+  	{
+  		stars[i].show();
+  	}
+}
+//shows the stars
+public void shipShow()
+{
+	if(endGame==false)
+  	{
+  		ship.show();
+	  	lWing.show();
+	  	rWing.show();
+	  	lbWing.show();
+	  	rbWing.show();
+	}
+}
+//shows the ship if it isnt a fucking dumbass and dies
+public void tieShow()
+{
+	for(int g=0; g<rockBottom.size();g++)
+  	{
+  		rockBottom.get(g).show();
+  	}
+}
+//shows the tie fighter asteroid
+public void boltShow()
+{
+	for(int e=0; e<bolt.size();e++)
+  	{
+  		bolt.get(e).show();
+  	}
+}
+//shows the bolts
+public void shipAccel(int x)
+{
+	ship.accelerate(x);
+	lWing.accelerate(x);
+	rWing.accelerate(x);
+	lbWing.accelerate(x);
+	rbWing.accelerate(x);
+}
+public void shipTurn(int x)
+{
+	ship.turn(x);
+	lWing.turn(x);
+	rWing.turn(x);
+	lbWing.turn(x);
+	rbWing.turn(x);
+}
+public void shipTeleSet(int x, int y)
+{
+	ship.setX(x);
+	ship.setY(y);
+	lWing.setX(x);
+	lWing.setY(y);
+	rWing.setX(x);
+	rWing.setY(y);
+	lbWing.setX(x);
+	lbWing.setY(y);
+	rbWing.setX(x);
+	rbWing.setY(y);
+}
