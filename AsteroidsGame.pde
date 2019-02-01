@@ -27,6 +27,7 @@ ArrayList<Double> tStopX = new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
 ArrayList<Integer> tieBlastX = new ArrayList<Integer>();
 ArrayList<Integer> tieBlastY = new ArrayList<Integer>();
+ArrayList<Integer> destroyID = new ArrayList<Integer>();
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
 PImage[] endBoom = new PImage[9];
@@ -50,6 +51,16 @@ public void setup()
   	for(int h=0;  h<5; h++)
   	{
   		rockBottom.add(new Asteroid());
+  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
+  		{
+  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
+  			{
+  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
+  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
+  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+  				rockBottom.remove(rockBottom.size()-1);
+  			}
+  		}
   		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
 		{
 			rockBottom.remove(rockBottom.size()-1);
@@ -92,9 +103,9 @@ public void show()
   	rect(5,5,60,blastWait/15);
   	image(boomwait,5,5,60,60);
   	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
-  	rect(5,80,5,500);
+  	rect(5,80,5,250);
   	fill(255,0,0);
-  	rect(5, 80, 5, bossfill/2);
+  	rect(5, 80, 5, bossfill);
   	fill(255,255,255);
   	textSize(15);
 	text("PRESS H FOR HELP", 5, 80);
@@ -240,7 +251,26 @@ public void keyPressed()
   		case 'h':
   			help=!help;
   		break;
-
+  		case 't':
+  			for(int h=0;  h<20; h++)
+		  	{
+		  		rockBottom.add(new Asteroid());
+		  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
+		  		{
+		  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
+		  			{
+		  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
+		  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
+		  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+		  				rockBottom.remove(rockBottom.size()-1);
+		  			}
+		  		}
+		  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+				{
+					rockBottom.remove(rockBottom.size()-1);
+				}
+		  	}
+		break;
   	}
 }
 public void tiStop()
@@ -288,22 +318,20 @@ public void boAst()
   				bolAstX=rockBottom.get(c).getX();
   				bolAstY=rockBottom.get(c).getY();
   				image(tieBoom, bolAstX, bolAstY, 50, 50);
-  				rockBottom.remove(c);
+  				destroyID.add(c);
   				blast=true;
   				if(invfill<101)
   				{
   					invfill++;
   				}
-  				bossfill++;
-  				// if(tStopX.size()!=0&&!(tStopX.size()<=c))
-  				// {
-  				// 	tStopX.remove(c);
-  				// 	tStopY.remove(c);
-  				// }
-  				break;
+  				if(bossfill<251)
+  				{
+  					bossfill++;
+  				}
   			}
   		}
   	}
+  	realGone();
 }
 //bolt to asteroid impact detection
 public void invShipFlash(float i)
@@ -556,17 +584,19 @@ public void bombRingCount()
 			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*35))
 			{
 				tieBlastX.add(rockBottom.get(z).getX());
-
 				tieBlastY.add(rockBottom.get(z).getY());
-				rockBottom.remove(z);
+				destroyID.add(z);
 				if(invfill<101)
 				{
 					invfill++;
 				}
-				bossfill++;
-				break;
+				if(bossfill<251)
+				{
+					bossfill++;
+				}
 			}
 		}
+		realGone();
 		boomDis();
 		bCount++;
 	}
@@ -591,7 +621,6 @@ public void invincCount()
 	if(invinc)
 	{
 		invfill-=0.16;
-		println(invfill);
 	}
 }
 //invincibility color counter
@@ -748,4 +777,12 @@ public void shipTeleSet(int x, int y)
 	lbWing.setY(y);
 	rbWing.setX(x);
 	rbWing.setY(y);
+}
+public void realGone()
+{
+	for(int p=0;p<destroyID.size()-1;p++)
+	{
+		rockBottom.remove(destroyID.get(p));
+	}
+	destroyID.clear();
 }
