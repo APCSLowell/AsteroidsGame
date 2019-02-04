@@ -271,6 +271,9 @@ public void keyPressed()
 				}
 		  	}
 		break;
+		case 'y':
+			rockBottom.clear();
+		break;
   	}
 }
 public void tiStop()
@@ -594,9 +597,9 @@ public void bombRingCount()
 				{
 					bossfill++;
 				}
+				realGone();
 			}
 		}
-		realGone();
 		boomDis();
 		bCount++;
 	}
