@@ -71,8 +71,9 @@ public class Asteroid extends Floater
 	}
 	public boolean bomDet(int box, int boy, int sphe)
 	{
-		if(dist(box, boy, this.getX(), this.getY())<=sphe+5||dist(box, boy, this.getX(), this.getY())>=sphe-5)
-		{
+		if(dist(box, boy, this.getX(), this.getY())<sphe+5||dist(box, boy, this.getX(), this.getY())>sphe-5)
+		//if(dist(box, boy, this.getX(), this.getY())==sphe)
+        {
 			return true;
 		}else{
 			return false;

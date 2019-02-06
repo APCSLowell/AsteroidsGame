@@ -14,7 +14,7 @@ int blastWait=900, chroWait=600, telWait=300, plusWait=300;
 float invfill=0, bossfill=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false;
-boolean blast = false, bolCross = false, invinc = false, help=false;
+boolean blast = false, bolCross = false, invinc = false, help=false, invTest=false;
 int teleX, teleY;
 color rd=color(255,0,0);
 color og=color(255,127,0);
@@ -109,6 +109,8 @@ public void show()
   	fill(255,255,255);
   	textSize(15);
 	text("PRESS H FOR HELP", 5, 80);
+	println(rockBottom.size());
+	invTest();
 }
 public void draw() 
 {
@@ -218,14 +220,13 @@ public void keyPressed()
 			}
 		break;
 		case 'q':
-			if(blastWait==900)
+			if(blastWait>=900)
 			{
 				boom=true;
 				ship.setBombX(ship.getX());
 				ship.setBombY(ship.getY());
 				blastWait=0;
 			}
-			
 		break;
 		case 'r':
 			endX=ship.getX();
@@ -274,6 +275,8 @@ public void keyPressed()
 		case 'y':
 			rockBottom.clear();
 		break;
+		case 'g':
+			invTest=!invTest;
   	}
 }
 public void tiStop()
@@ -312,6 +315,7 @@ public void boomDis()
 	program is 60 frames per second*/
 public void boAst()
 {
+	int ccount=0;
 	for(int c=0; c<rockBottom.size();c++)
   	{
   		for(int b=0; b<bolt.size();b++)
@@ -321,7 +325,10 @@ public void boAst()
   				bolAstX=rockBottom.get(c).getX();
   				bolAstY=rockBottom.get(c).getY();
   				image(tieBoom, bolAstX, bolAstY, 50, 50);
-  				destroyID.add(c);
+  				//breakpoint1
+  				rockBottom.remove(c-ccount);
+  				ccount++;
+  				//destroyID.add(c);
   				blast=true;
   				if(invfill<101)
   				{
@@ -331,10 +338,14 @@ public void boAst()
   				{
   					bossfill++;
   				}
+  				if(rockBottom.size()-ccount-1==c)
+  				{
+  					break;
+  				}
   			}
   		}
+  		realGone();
   	}
-  	realGone();
 }
 //bolt to asteroid impact detection
 public void invShipFlash(float i)
@@ -582,13 +593,16 @@ public void bombRingCount()
 		ellipse(ship.getBombX(), ship.getBombY(), bCount*50, bCount*50);
 		fill(0,0,0);
 		ellipse(ship.getBombX(), ship.getBombY(), (bCount*35), (bCount*35));
+		int ccount=0;
 		for(int z=0;z<rockBottom.size();z++)
 		{
 			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*35))
 			{
 				tieBlastX.add(rockBottom.get(z).getX());
 				tieBlastY.add(rockBottom.get(z).getY());
-				destroyID.add(z);
+				rockBottom.remove(z-ccount);
+				//destroyID.add(z);
+				ccount++;
 				if(invfill<101)
 				{
 					invfill++;
@@ -785,7 +799,15 @@ public void realGone()
 {
 	for(int p=0;p<destroyID.size()-1;p++)
 	{
-		rockBottom.remove(destroyID.get(p));
+		rockBottom.remove(destroyID.get(p)-p);
 	}
 	destroyID.clear();
+}
+public void invTest()
+{
+	if(invTest)
+	{
+		invfill=100;
+		invinc=true;
+	}
 }
