@@ -15,6 +15,7 @@ float invfill=0, bossfill=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false;
 boolean blast = false, bolCross = false, invinc = false, help=false, invTest=false;
+boolean code1=false, code2=false, code3=false, code4=false, cheatCode=false;
 int teleX, teleY;
 color rd=color(255,0,0);
 color og=color(255,127,0);
@@ -110,6 +111,15 @@ public void show()
   	textSize(15);
 	text("PRESS H FOR HELP", 5, 80);
 	invTest();
+	if(cheatCode)
+	{
+		rect(20, 200, 210, 210);
+		rect(270, 200, 210, 210);
+		rect(520, 200, 210, 210);
+		rect(770, 200, 210, 210);
+		textSize(50);
+		text("INPUT CHEAT CODE", 270, 150);
+	}
 }
 public void draw() 
 {
@@ -276,6 +286,10 @@ public void keyPressed()
 		break;
 		case 'g':
 			invTest=!invTest;
+		break;
+		case 'l':
+			cheatCode=true;
+		break;
   	}
 }
 public void tiStop()
@@ -597,14 +611,13 @@ public void bombRingCount()
 		int ccount=0;
 		for(int z=0;z<rockBottom.size();z++)
 		{
-			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*40/**43*/))
+			if(rockBottom.get(z).bomDet(ship.getBombX(), ship.getBombY(), bCount*25/**43*/))
 			{
 				tieBlastX.add(rockBottom.get(z).getX());
 				tieBlastY.add(rockBottom.get(z).getY());
-				rockBottom.remove(z-ccount);
-				//boomDis();
+				rockBottom.remove(z);
+				boomDis();
 				//destroyID.add(z);
-				ccount++;
 				if(invfill<101)
 				{
 					invfill++;
