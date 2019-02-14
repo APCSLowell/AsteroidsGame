@@ -8,12 +8,12 @@ Boss boss;
 BossHull hull;
 PImage img, end1, end2, end3, end4, end5, end6, end7;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
-int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, hCount=0, pCount=0;
+int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, hCount=0, pCount=0, incCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
 float invfill=0, bossfill=0;
 int tSize=45, bX=5, bY=50;
-boolean tele = false, boom = false, tStop = false, endGame = false;
+boolean tele = false, boom = false, tStop = false, endGame = false, inco=false;
 boolean blast = false, bolCross = false, invinc = false, help=false, invTest=false;
 boolean code1=false, code2=false, code3=false, code4=false, cheatCode=false;
 boolean cheat = false;
@@ -123,165 +123,15 @@ public void show()
 		rect(770, 200, 210, 210);
 		textSize(50);
 		text("INPUT CHEAT CODE", 270, 150);
-		/*if(pCount>0)
-		{
-			for(int p=0;p<pCount;p++)
-			{
-				text(guessCode.get(pCount-1), 220+(220*(pCount-1)), 160);
-			}
-		}*/
-		/*if(pCount>0)
-		{
-			for(int p=0;p<pCount;p++)
-			{
-				println("code");
-				fill(255,0,0);
-				textSize(50);
-				text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-			}
-		}*/
-		/*switch(key)
-		{
-			case '1':
-				guessCode.add("1");
-				println("testing");
-				cheatOne=true;
-			break;
-			case '2':
-				guessCode.add("2");
-				println("testing");
-				pCount++;
-			break;
-			case '3':
-				guessCode.add("3");
-				println("testing");
-				pCount++;
-			break;
-			case '4':
-				guessCode.add("4");
-				println("testing");
-				pCount++;
-			break;
-			case '5':
-				guessCode.add("5");
-				println("testing");
-				pCount++;
-			break;
-			case '6':
-				guessCode.add("6");
-				println("testing");
-				pCount++;
-			break;
-			case '7':
-				guessCode.add("7");
-				println("testing");
-				pCount++;
-			break;
-			case '8':
-				guessCode.add("8");
-				println("testing");
-				pCount++;
-			break;
-			case '9':
-				guessCode.add("9");
-				println("testing");
-				pCount++;
-			break;
-			case '0':
-				guessCode.add("0");
-				println("testing");
-				pCount++;
-			break;
-		}*/
-		/*if(pCount>=0)
-		{
-			for(int p=0;p<pCount;p++)
-			{
-				println("code");
-				fill(255,0,0);
-				textSize(50);
-				if(cheatOne==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatOne=false;
-				}
-				if(cheatTwo==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatTwo=false;
-				}
-				if(cheatThree==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatThree=false;
-				}
-				if(cheatFour==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatFour=false;
-				}
-				if(cheatFive==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatFive=false;
-				}
-				if(cheatSix==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatSix=false;
-				}
-				if(cheatSeven==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatSeven=false;
-				}
-				if(cheatEight==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatEight=false;
-				}
-				if(cheatNine==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatNine=false;
-				}
-				if(cheatZero==true)
-				{
-					text(guessCode.get(pCount-1), 220+(220*pCount), 160);
-					pCount++;
-					println("testing");
-					cheatZero=false;
-				}
-			}
-		}*/
+		codeNum();
 		if(pCount==4)
 		{
 			for (int g=0;g<correctCode.length;g++)
 			{
 				if(correctCode[g]!=guessCode[g])
 				{
-					fill(255,0,0);
-					textSize(100);
-					text("CODE INCORRECT", 60, 300);
-					println("code incorrect");
+					inco=true;
+					incCodeCount();
 				}
 			}
 			/*if(guessCode==correctCode)
@@ -480,8 +330,6 @@ public void keyPressed()
 						if(pCount<4)
 						{
 							guessCode[pCount]=Character.toString(key);
-							textSize(100);
-							text(key, 200*pCount, 100);
 							pCount++;
 						}
 					}
@@ -489,6 +337,40 @@ public void keyPressed()
 			}
 		break;
   	}
+}
+public void codeNum()
+{
+	for(int c=0;c<guessCode.length+1;c++)
+	{
+		textSize(100);
+		text(guessCode[pCount], 250*pCount, 250);
+	}
+}
+public void incCodeCount()
+{
+	if(incCount<121&&inco)
+	{
+		incoWord();
+		if(incCount==120)
+		{
+			inco=false;
+			cheatCode=false;
+			incCount=0;
+			guessCode=new String[4];
+			pCount=0;
+		}
+	}
+	if(inco)
+	{
+		incCount++;
+	}
+}
+public void incoWord()
+{
+	fill(255,0,0);
+	textSize(100);
+	text("CODE INCORRECT", 60, 300);
+	println("code incorrect");
 }
 public void tiStop()
 {
@@ -748,6 +630,10 @@ public void boAst()
   				//breakpoint1
   				rockBottom.remove(c-ccount);
   				ccount++;
+  				if(c+ccount>=rockBottom.size())
+  				{
+  					break;
+  				}
   				//destroyID.add(c);
   				blast=true;
   				if(invfill<101)
@@ -763,6 +649,10 @@ public void boAst()
   					break;
   				}
   			}
+  			if(c+ccount>=rockBottom.size())
+			{
+				break;
+			}
   		}
   		//boomDis();
   	}
@@ -824,8 +714,6 @@ public void bombRingCount()
 				{
 					bossfill++;
 				}
-			}else{
-				println("missed me");
 			}
 		}
 		bCount++;
