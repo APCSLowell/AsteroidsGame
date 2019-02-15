@@ -16,9 +16,17 @@ int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false, inco=false;
 boolean blast = false, bolCross = false, invinc = false, help=false, invTest=false;
 boolean code1=false, code2=false, code3=false, code4=false, cheatCode=false;
-boolean cheat = false;
-boolean cheatOne=false, cheatTwo=false, cheatThree=false, cheatFour=false, cheatFive=false, cheatSix=false, cheatSeven=false, cheatEight=false, cheatNine=false, cheatZero=false;
+boolean cheat = false, start=false, open=true;
 int teleX, teleY;
+int rectX, rectY;
+int circleX, circleY;
+int rectSize=100;
+int circleSize=100;
+color rectColor, circleColor, baseColor;
+color rectHighlight, circleHighlight;
+color currentColor;
+boolean rectOver=false;
+boolean circleOver=false;
 color rd=color(255,0,0);
 color og=color(255,127,0);
 color yw=color(255,255,0);
@@ -33,8 +41,8 @@ ArrayList<Integer> tieBlastY = new ArrayList<Integer>();
 ArrayList<Integer> destroyID = new ArrayList<Integer>();
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
-String[] correctCode = {"1","9","7","9"};
-String[] guessCode = new String[4];
+public String[] correctCode = {"1","9","7","9"};
+public String[] guessCode = new String[4];
 PImage[] endBoom = new PImage[9];
 public void setup() 
 {
@@ -49,11 +57,36 @@ public void setup()
 	frameRate(60);
 	background(0, 0, 0);
 	noStroke();
+	img=loadImage("flashtele.png");
+  	endBoom[0]=loadImage("explofr1.gif");
+  	endBoom[1]=loadImage("explofr2.gif");
+  	endBoom[2]=loadImage("explofr3.gif");
+  	endBoom[3]=loadImage("explofr4.gif");
+  	endBoom[4]=loadImage("explofr5.gif");
+  	endBoom[5]=loadImage("explofr6.gif");
+  	endBoom[6]=loadImage("explofr7.gif");
+  	endBoom[7]=loadImage("explofr8.gif");
+  	endBoom[8]=loadImage("explofr9.gif");
+  	tieBoom=loadImage("explosion.png");
+  	boomwait=loadImage("boomwait.png");
+  	telewait=loadImage("telewait.png");
+  	timewait=loadImage("timewait.png");
+  	crosswait=loadImage("crosswait.png");
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i]=new Star();
   	}
-  	for(int h=0;  h<5; h++)
+	rectColor=color(150,0,0);
+	rectHighlight=color(255,0,0);
+	circleColor=color(200,0,0);
+	circleHighlight=color(255,0,0);
+	baseColor=color(102);
+	currentColor=baseColor;
+	circleX=250;
+	circleY=600;
+	rectX=250;
+	rectY=500;
+	for(int h=0;  h<5; h++)
   	{
   		rockBottom.add(new Asteroid());
   		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
@@ -71,97 +104,117 @@ public void setup()
 			rockBottom.remove(rockBottom.size()-1);
 		}
   	}
-  	img=loadImage("flashtele.png");
-  	endBoom[0]=loadImage("explofr1.gif");
-  	endBoom[1]=loadImage("explofr2.gif");
-  	endBoom[2]=loadImage("explofr3.gif");
-  	endBoom[3]=loadImage("explofr4.gif");
-  	endBoom[4]=loadImage("explofr5.gif");
-  	endBoom[5]=loadImage("explofr6.gif");
-  	endBoom[6]=loadImage("explofr7.gif");
-  	endBoom[7]=loadImage("explofr8.gif");
-  	endBoom[8]=loadImage("explofr9.gif");
-  	tieBoom=loadImage("explosion.png");
-  	boomwait=loadImage("boomwait.png");
-  	telewait=loadImage("telewait.png");
-  	timewait=loadImage("timewait.png");
-  	crosswait=loadImage("crosswait.png");
 }
 public void show()
 {
-	helpDraw();
-	starShow();
-  	shipShow();
-  	boss.show();
-  	hull.show();
-  	//shows the boss
-  	tieShow();
-  	boltShow();
-  	noStroke();
-  	fill(255,255,255);
-  	rect(70, 5, 60, chroWait/10);
-  	image(timewait, 70, 5, 60, 60);
-  	rect(135, 5, 60, telWait/5);
-  	image(telewait, 135, 5, 60, 60);
-  	rect(200, 5, 60, plusWait/5);
-  	image(crosswait, 200, 5, 60, 60);
-  	rect(5,5,60,blastWait/15);
-  	image(boomwait,5,5,60,60);
-  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
-  	rect(5,80,5,250);
-  	fill(255,0,0);
-  	rect(5, 80, 5, bossfill);
-  	fill(255,255,255);
-  	textSize(15);
-	text("PRESS H FOR HELP", 5, 80);
-	invTest();
-	if(cheatCode)
+	if(start)
 	{
-		rect(20, 200, 210, 210);
-		rect(270, 200, 210, 210);
-		rect(520, 200, 210, 210);
-		rect(770, 200, 210, 210);
-		textSize(50);
-		text("INPUT CHEAT CODE", 270, 150);
-		codeNum();
-		if(pCount==4)
+		helpDraw();
+		starShow();
+	  	shipShow();
+	  	boss.show();
+	  	hull.show();
+	  	//shows the boss
+	  	tieShow();
+	  	boltShow();
+	  	noStroke();
+	  	fill(255,255,255);
+	  	rect(70, 5, 60, chroWait/10);
+	  	image(timewait, 70, 5, 60, 60);
+	  	rect(135, 5, 60, telWait/5);
+	  	image(telewait, 135, 5, 60, 60);
+	  	rect(200, 5, 60, plusWait/5);
+	  	image(crosswait, 200, 5, 60, 60);
+	  	rect(5,5,60,blastWait/15);
+	  	image(boomwait,5,5,60,60);
+	  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
+	  	rect(5,80,5,250);
+	  	fill(255,0,0);
+	  	rect(5, 80, 5, bossfill);
+	  	fill(255,255,255);
+	  	textSize(15);
+		text("PRESS H FOR HELP", 5, 80);
+		invTest();
+		/*if(cheatCode||circleOver)
 		{
-			for (int g=0;g<correctCode.length;g++)
+			fill(0,0,0);
+			rect(20, 200, 210, 210);
+			rect(270, 200, 210, 210);
+			rect(520, 200, 210, 210);
+			rect(770, 200, 210, 210);
+			textSize(50);
+			text("INPUT CHEAT CODE", 270, 150);
+			codeNum();
+			if(pCount==4)
 			{
-				if(correctCode[g]!=guessCode[g])
+				for (int g=0;g<correctCode.length;g++)
 				{
-					inco=true;
-					incCodeCount();
+					if(correctCode[g]!=guessCode[g])
+					{
+						inco=true;
+						incCodeCount();
+					}
 				}
 			}
-			/*if(guessCode==correctCode)
-			{
-				cheat=true;
-				println("cheater");
-			}*/
-		}
+		}*/
 	}
 }
 public void draw() 
 {
-	fill(0,0,0);
-	rect(0, 0, 1000, 1000);
-	//makes background
-  	timeFrameCount();
-  	tieMove();
-	moveShip();
-	gameOver();
-	boltMove();
-  	boAst();
-  	teleFrameCount();
-  	shipExploCounter();
-	//boltAstCount();
-	bombRingCount();
-	invincCount();
-	boltCross();
-	newTie();
-	abilCount();
-	show();
+	if(open)
+	{
+		update();
+		fill(0,0,0);
+		rect(0,0,1000,1000);
+		noFill();
+		if(rectOver==true)
+		{
+			fill(rectHighlight);
+			println("rect on");
+		}else{
+			fill(rectColor);
+			println("rect off");
+		}
+		stroke(0);
+		rect(rectX, rectY, 500, 50);
+		noFill();
+		fill(0,0,0);
+		textSize(45);
+		text("Start game", 400, 540);
+		noFill();
+		if(circleOver)
+		{
+			fill(circleHighlight);
+		}else{
+			fill(circleColor);
+		}
+		stroke(0);
+		rect(circleX, circleY, 500, 50);
+		fill(0,0,0);
+		textSize(45);
+		text("Input cheat code", 350, 640);
+		noFill();
+	}else if(start)
+	{
+		fill(0,0,0);
+		rect(0, 0, 1000, 1000);
+		//makes background
+		timeFrameCount();
+		tieMove();
+		moveShip();
+		gameOver();
+		boltMove();
+		boAst();
+		teleFrameCount();
+		shipExploCounter();
+		//boltAstCount();
+		bombRingCount();
+		invincCount();
+		boltCross();
+		newTie();
+		abilCount();
+		show();
+	}
 }
 
 
@@ -259,54 +312,76 @@ public void keyPressed()
 			}
 		break;
 		case 'r':
-			endX=ship.getX();
-			endY=ship.getY();
-  			stopShip();
-  			endGame=true;
+			//if(cheat)
+			//{
+				endX=ship.getX();
+				endY=ship.getY();
+	  			stopShip();
+	  			endGame=true;
+			//}
   		break;
   		case 'v':
   			invinc=true;
   		break;
   		case 'b':
-  			if(invfill<100)
-  			{
-  				invfill+=25;
-  			}
+  			//temp comment start if(cheat)
+  			//{
+  				if(invfill<100)
+	  			{
+	  				invfill+=25;
+	  			}
+	  		//}
   		break;
   		case 'n':
-  			if(invfill>0)
-  			{
-  				invfill=0;
-  			}
+  			//if(cheat)
+  			//{
+  				if(invfill>0)
+	  			{
+	  				invfill=0;
+	  			}
+  			//}
   		break;
   		case 'h':
   			help=!help;
+  			/*if(cheat)
+  			{
+  				cheatHelp=true;
+  			}*/
   		break;
   		case 't':
-  			for(int h=0;  h<20; h++)
-		  	{
-		  		rockBottom.add(new Asteroid());
-		  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
-		  		{
-		  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
-		  			{
-		  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
-		  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
-		  				image(tieBoom, bolAstX, bolAstY, 50, 50);
-		  				rockBottom.remove(rockBottom.size()-1);
-		  			}
-		  		}
-		  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
-				{
-					rockBottom.remove(rockBottom.size()-1);
-				}
-		  	}
+  			//if(cheat)
+			//{
+				for(int h=0;  h<20; h++)
+			  	{
+			  		rockBottom.add(new Asteroid());
+			  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
+			  		{
+			  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
+			  			{
+			  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
+			  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
+			  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+			  				rockBottom.remove(rockBottom.size()-1);
+			  			}
+			  		}
+			  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+					{
+						rockBottom.remove(rockBottom.size()-1);
+					}
+			  	}
+			//}
 		break;
 		case 'y':
-			rockBottom.clear();
+			//if(cheat)
+			//{
+				rockBottom.clear();
+			//}
 		break;
 		case 'g':
-			invTest=!invTest;
+			//if(cheat)
+			//{
+				invTest=!invTest;
+			//}
 		break;
 		case 'l':
 			cheatCode=true;
@@ -338,26 +413,104 @@ public void keyPressed()
 		break;
   	}
 }
+void update()
+{
+	if(overRect(rectX, rectY, 500, 50))
+	{
+		rectOver=true;
+    	circleOver=false;
+    	println("rectOver");
+	}
+	if(overRect(circleX, circleY, 500, 50))
+	{
+		circleOver=true;
+		rectOver=false;
+		println("circleOver");
+	}else{
+		circleOver=rectOver=false;
+	}
+}
+
+void mousePressed() 
+{
+	if(circleOver)
+	{
+		rect(20, 200, 210, 210);
+		rect(270, 200, 210, 210);
+		rect(520, 200, 210, 210);
+		rect(770, 200, 210, 210);
+		textSize(50);
+		text("INPUT CHEAT CODE", 270, 150);
+		codeNum();
+		if(pCount==4)
+		{
+			for (int g=0;g<correctCode.length;g++)
+			{
+				if(correctCode[g]!=guessCode[g])
+				{
+					inco=true;
+					incCodeCount();
+				}
+			}
+			/*if(guessCode==correctCode)
+			{
+				cheat=true;
+				println("cheater");
+			}*/
+		
+		}
+	}
+	if(rectOver)
+	{
+		start=true;
+	}
+}
+
+boolean overRect(int x, int y, int width, int height)  {
+	if(mouseX>=x&&mouseX<=x+width&&mouseY>=y&&mouseY<=y+height)
+	{
+    	return true;
+  	}else{
+    	return false;
+	}
+}
+
+boolean overCircle(int x, int y, int diameter) {
+	float disX = x - mouseX;
+	float disY = y - mouseY;
+	if(sqrt(sq(disX) + sq(disY)) < diameter/2)
+	{
+		return true;
+	}else{
+    	return false;
+  	}
+}
 public void codeNum()
 {
-	for(int c=0;c<guessCode.length+1;c++)
+	for(int c=0;c<pCount;c++)
 	{
+		String text=guessCode[c];
 		textSize(100);
-		text(guessCode[pCount], 250*pCount, 250);
+		//fill(255,255,255);
+		fill(0,0,0);
+		text(text, 80+250*c, 335);
 	}
 }
 public void incCodeCount()
 {
-	if(incCount<121&&inco)
+	if(incCount<241&&inco)
 	{
-		incoWord();
-		if(incCount==120)
+		if(incCount>60)
 		{
-			inco=false;
-			cheatCode=false;
-			incCount=0;
-			guessCode=new String[4];
-			pCount=0;
+			incoWord();
+			if(incCount==240)
+			{
+				inco=false;
+				cheatCode=false;
+				incCount=0;
+				guessCode=new String[4];
+				pCount=0;
+			}
 		}
 	}
 	if(inco)
@@ -370,7 +523,6 @@ public void incoWord()
 	fill(255,0,0);
 	textSize(100);
 	text("CODE INCORRECT", 60, 300);
-	println("code incorrect");
 }
 public void tiStop()
 {
@@ -658,7 +810,7 @@ public void boAst()
   	}
 }
 //bolt to asteroid impact detection
-/*public void boltAstCount()
+public void boltAstCount()
 {
 	if(dCount<31&&blast)
 	{
@@ -675,8 +827,7 @@ public void boAst()
 		}
 	}
 }
-//bolt to asteroid frame counter*/
-
+//bolt to asteroid frame counter
 public void bombRingCount()
 {
 	if(bCount<51&&boom)
