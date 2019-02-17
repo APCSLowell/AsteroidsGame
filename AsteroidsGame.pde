@@ -6,44 +6,45 @@ Leftbackwing lbWing;
 Rightbackwing rbWing;
 Boss boss;
 BossHull hull;
+Missile miss;
 PImage img, end1, end2, end3, end4, end5, end6, end7;
-PImage end8, end9, tieBoom, boomwait, telewait, timewait,crosswait;
-int count=0, tCount=0, bCount=0, dCount=0, cCount=0, eCount=0, hCount=0, pCount=0, incCount=0;
+PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar;
+int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, incCount=0, bossCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
 float invfill=0, bossfill=0;
 int tSize=45, bX=5, bY=50;
-boolean tele = false, boom = false, tStop = false, endGame = false, inco=false;
-boolean blast = false, bolCross = false, invinc = false, help=false, invTest=false;
-boolean code1=false, code2=false, code3=false, code4=false, cheatCode=false;
-boolean cheat = false, start=false, open=true;
+boolean tele = false, boom = false, tStop = false, endGame = false, inco=false, home=false;
+boolean blast = false, bolSpi = false, invinc = false, help=false, invTest=false;
+boolean cheatCode=false, cheat = false, start=false, open=true, bossGame=false;
 int teleX, teleY;
 int rectX, rectY;
 int circleX, circleY;
+int tarX, tarY;
 int rectSize=100;
 int circleSize=100;
 color rectColor, circleColor, baseColor;
 color rectHighlight, circleHighlight;
 color currentColor;
-boolean rectOver=false;
-boolean circleOver=false;
+public boolean rectOver=false;
+public boolean circleOver=false;
 color rd=color(255,0,0);
 color og=color(255,127,0);
 color yw=color(255,255,0);
 color gn=color(0,255,0);
 color bu=color(0,0,255);
 color pe=color(139,0,255);
-ArrayList<Bolt> bolt = new ArrayList<Bolt>();
-ArrayList<Double> tStopX = new ArrayList<Double>();
+ArrayList<Bolt> bolt=new ArrayList<Bolt>();
+ArrayList<Double> tStopX=new ArrayList<Double>();
 ArrayList<Double> tStopY = new ArrayList<Double>();
-ArrayList<Integer> tieBlastX = new ArrayList<Integer>();
-ArrayList<Integer> tieBlastY = new ArrayList<Integer>();
-ArrayList<Integer> destroyID = new ArrayList<Integer>();
+ArrayList<Integer> tieBlastX=new ArrayList<Integer>();
+ArrayList<Integer> tieBlastY=new ArrayList<Integer>();
+ArrayList<Integer> destroyID=new ArrayList<Integer>();
 Star[] stars=new Star[500];
-ArrayList<Asteroid> rockBottom = new ArrayList<Asteroid>();
-public String[] correctCode = {"1","9","7","9"};
-public String[] guessCode = new String[4];
-PImage[] endBoom = new PImage[9];
+ArrayList<Asteroid> rockBottom=new ArrayList<Asteroid>();
+public String[] correctCode={"1","9","7","9"};
+public String[] guessCode=new String[4];
+PImage[] endBoom=new PImage[9];
 public void setup() 
 {
 	ship=new Spaceship();
@@ -53,6 +54,7 @@ public void setup()
 	rbWing=new Rightbackwing();
 	boss=new Boss();
 	hull=new BossHull();
+	miss=new Missile();
 	size(1000, 1000);
 	frameRate(60);
 	background(0, 0, 0);
@@ -67,18 +69,19 @@ public void setup()
   	endBoom[6]=loadImage("explofr7.gif");
   	endBoom[7]=loadImage("explofr8.gif");
   	endBoom[8]=loadImage("explofr9.gif");
+  	misstar=loadImage("missTar.png");
   	tieBoom=loadImage("explosion.png");
   	boomwait=loadImage("boomwait.png");
   	telewait=loadImage("telewait.png");
   	timewait=loadImage("timewait.png");
-  	crosswait=loadImage("crosswait.png");
+  	spinwait=loadImage("spinwait.png");
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i]=new Star();
   	}
-	rectColor=color(200,0,0);
+	rectColor=color(150,0,0);
 	rectHighlight=color(255,0,0);
-	circleColor=color(200,0,0);
+	circleColor=color(150,0,0);
 	circleHighlight=color(255,0,0);
 	baseColor=color(102);
 	currentColor=baseColor;
@@ -110,41 +113,68 @@ public void show()
 	if(start)
 	{
 		helpDraw();
-		starShow();
 	  	shipShow();
 	  	boss.show();
 	  	hull.show();
 	  	//shows the boss
+	  	starShow();
 	  	tieShow();
 	  	boltShow();
+	  	if(home)
+		{
+			miss.show();
+		}
 	  	noStroke();
+	  	if(home==false)
+	  	{
+	  		image(misstar, mouseX-25, mouseY-25, 50, 50);
+	  	}else if(home==true)
+	  	{
+	  		image(misstar, tarX, tarY, 50, 50);
+	  	}
 	  	fill(255,255,255);
 	  	rect(70, 5, 60, chroWait/10);
 	  	image(timewait, 70, 5, 60, 60);
 	  	rect(135, 5, 60, telWait/5);
 	  	image(telewait, 135, 5, 60, 60);
 	  	rect(200, 5, 60, plusWait/5);
-	  	image(crosswait, 200, 5, 60, 60);
+	  	image(spinwait, 200, 5, 60, 60);
 	  	rect(5,5,60,blastWait/15);
 	  	image(boomwait,5,5,60,60);
 	  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
-	  	rect(5,80,5,250);
+	  	rect(5,80,5,1000);
 	  	fill(255,0,0);
 	  	rect(5, 80, 5, bossfill);
 	  	fill(255,255,255);
 	  	textSize(15);
 		text("PRESS H FOR HELP", 5, 80);
 		invTest();
-		if(cheatCode||circleOver)
+		if(endGame)
 		{
-			fill(0,0,0);
+			fill(255,0,0);
+			textSize(150);
+			text("GAME OVER", 50, 250);
+		}
+	}
+}
+public void draw() 
+{
+	if(open)
+	{
+		//update();
+		fill(0,0,0);
+		rect(0, 0, 1000, 1000);
+		noFill();
+		if(cheatCode)
+		{
+			fill(255,255,255);
 			rect(20, 200, 210, 210);
 			rect(270, 200, 210, 210);
 			rect(520, 200, 210, 210);
 			rect(770, 200, 210, 210);
+			noFill();
 			textSize(50);
 			text("INPUT CHEAT CODE", 270, 150);
-			codeNum();
 			if(pCount==4)
 			{
 				for (int g=0;g<correctCode.length;g++)
@@ -155,40 +185,33 @@ public void show()
 						incCodeCount();
 					}
 				}
-				/*if(guessCode==correctCode)
-				{
-					cheat=true;
-					println("cheater");
-				}*/
-			
 			}
 		}
-	}
-}
-public void draw() 
-{
-	if(open)
-	{
-		update(mouseX, mouseY);
-		fill(0,0,0);
-		rect(0,0,1000,1000);
-		noFill();
-		if(rectOver)
+		if(overRect(rectX, rectY, 500, 50))
 		{
-			fill(rectHighlight);
+			rectOver=true;
+			//println("rect on");
+			fill(255,0,0);
 		}else{
-			fill(rectColor);
+			rectOver=false;
+			//println("rect off");
+			fill(150,0,0);
 		}
 		stroke(0);
 		rect(rectX, rectY, 500, 50);
+		noFill();
 		fill(0,0,0);
 		textSize(45);
 		text("Start game", 400, 540);
 		noFill();
-		if(circleOver)
+		if(overRect(circleX, circleY, 500, 50))
 		{
+			circleOver=true;
+			//println("circle on");
 			fill(circleHighlight);
 		}else{
+			circleOver=false;
+			//println("circle off");
 			fill(circleColor);
 		}
 		stroke(0);
@@ -207,15 +230,31 @@ public void draw()
 		moveShip();
 		gameOver();
 		boltMove();
+		if(home)
+		{
+			miss.move();
+		}
 		boAst();
+		bossMove();
+		bossSet();
 		teleFrameCount();
 		shipExploCounter();
 		//boltAstCount();
 		bombRingCount();
 		invincCount();
-		boltCross();
+		boltSpiral();
 		newTie();
 		abilCount();
+		PVector v1 = new PVector(miss.getX()-ship.getX(), miss.getY()-ship.getY());
+		PVector v2 = new PVector(tarX-ship.getX(), tarY-ship.getY()); 
+		float a = PVector.angleBetween(v1, v2);
+		if(missTurnCheck((float)ship.getPointDirection(), a))
+		{
+			println("false");
+		}else{
+			println("true");
+		}
+
 		show();
 	}
 }
@@ -227,245 +266,362 @@ public void draw()
 
 public void keyPressed()
 {
-	switch (key) {
-		case 'w':
-			shipAccel(1);
-		break;
-		case 'a':
-			shipTurn(-10);
-		break;
-		case 's':
-			shipAccel(-1);
-		break;
-		case 'd':
-			shipTurn(10);
-		break;
-		case 'z':
-			ship.setTagX(ship.getX());
-			ship.setTagY(ship.getY());
-		break;
-		case 'x':
-			if(ship.getTagX()==0)
-			{
+	if(start)
+	{
+		switch (key) {
+			case 'w':
+				shipAccel(1);
+			break;
+			case 'a':
+				shipTurn(-10);
+			break;
+			case 's':
+				shipAccel(-1);
+			break;
+			case 'd':
+				shipTurn(10);
+			break;
+			case 'z':
 				ship.setTagX(ship.getX());
-			}
-			if(ship.getTagY()==0)
-			{
 				ship.setTagY(ship.getY());
-			}
-			if(telWait==300)
-			{
-				tele=true;
-				count=0;
-				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
-				teleX=ship.getX();
-				teleY=ship.getY();
-				shipTeleSet(ship.getTagX(), ship.getTagY());
-				dedPer=(int)(Math.random()*10);
-				if(dedPer!=4)
+			break;
+			case 'x':
+				if(ship.getTagX()==0)
 				{
-					image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
-				}else if(dedPer==4){
-					endX=ship.getX();
-	  				endY=ship.getY();
-		  			endGame=true;
-		  			stopShip();
+					ship.setTagX(ship.getX());
 				}
-				telWait=0;
-			}
-		case 'f':
-			stopShip();
-		break;
-		case 'c':
-			if(plusWait==300)
-			{
-				bolCross=true;
-				plusWait=0;
-			}
-		case ' ':
-			bolt.add(new Bolt());
-			/*bolt.setX(ship.getX());
-			bolt.setY(ship.getY());
-			bolt.setPointDirection((int)ship.myPointDirection);
-			bolt.accelerate(2);*/
-		break;
-		case 'e':
-			if(chroWait==600)
-			{
-				tStop=true;
-				tCount=0;
-				tStopX.clear();
-				tStopY.clear();
-				for(int f=0;f<rockBottom.size();f++)
+				if(ship.getTagY()==0)
 				{
-					tStopX.add(rockBottom.get(f).getDirectionX());
-					tStopY.add(rockBottom.get(f).getDirectionY());
+					ship.setTagY(ship.getY());
 				}
-				tiStop();
-				chroWait=0;
-			}
-		break;
-		case 'q':
-			if(blastWait>=900)
-			{
-				boom=true;
-				ship.setBombX(ship.getX());
-				ship.setBombY(ship.getY());
-				blastWait=0;
-			}
-		break;
-		case 'r':
-			//if(cheat)
-			//{
-				endX=ship.getX();
-				endY=ship.getY();
-	  			stopShip();
-	  			endGame=true;
-			//}
-  		break;
-  		case 'v':
-  			invinc=true;
-  		break;
-  		case 'b':
-  			//temp comment start if(cheat)
-  			//{
-  				if(invfill<100)
-	  			{
-	  				invfill+=25;
-	  			}
-	  		//}
-  		break;
-  		case 'n':
-  			//if(cheat)
-  			//{
-  				if(invfill>0)
-	  			{
-	  				invfill=0;
-	  			}
-  			//}
-  		break;
-  		case 'h':
-  			help=!help;
-  			/*if(cheat)
-  			{
-  				cheatHelp=true;
-  			}*/
-  		break;
-  		case 't':
-  			//if(cheat)
-			//{
-				for(int h=0;  h<20; h++)
-			  	{
-			  		rockBottom.add(new Asteroid());
-			  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
-			  		{
-			  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
-			  			{
-			  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
-			  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
-			  				image(tieBoom, bolAstX, bolAstY, 50, 50);
-			  				rockBottom.remove(rockBottom.size()-1);
-			  			}
-			  		}
-			  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+				if(telWait==300)
+				{
+					tele=true;
+					count=0;
+					image(img, ship.getX()-140, ship.getY()-106, 280, 212);
+					teleX=ship.getX();
+					teleY=ship.getY();
+					shipTeleSet(ship.getTagX(), ship.getTagY());
+					dedPer=(int)(Math.random()*10);
+					if(dedPer!=4)
 					{
-						rockBottom.remove(rockBottom.size()-1);
+						image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+					}else if(dedPer==4){
+						endX=ship.getX();
+		  				endY=ship.getY();
+			  			endGame=true;
+			  			stopShip();
 					}
-			  	}
-			//}
-		break;
-		case 'y':
-			//if(cheat)
-			//{
-				rockBottom.clear();
-			//}
-		break;
-		case 'g':
-			//if(cheat)
-			//{
-				invTest=!invTest;
-			//}
-		break;
-		case 'l':
-			cheatCode=true;
-		break;
-		case '1':
-		case '2':
-		case '3':
-		case '4':
-		case '5':
-		case '6':
-		case '7':
-		case '8':
-		case '9':
-		case '0':
-			if(cheatCode)
-			{
-				if(pCount>=0)
+					telWait=0;
+				}
+			case 'f':
+				stopShip();
+			break;
+			case 'c':
+				if(plusWait==300)
 				{
-					if(guessCode.length<5)
+					bolSpi=true;
+					plusWait=0;
+				}
+			case ' ':
+				bolt.add(new Bolt());
+				/*bolt.setX(ship.getX());
+				bolt.setY(ship.getY());
+				bolt.setPointDirection((int)ship.myPointDirection);
+				bolt.accelerate(2);*/
+			break;
+			case 'e':
+				if(chroWait==600)
+				{
+					tStop=true;
+					tCount=0;
+					tStopX.clear();
+					tStopY.clear();
+					for(int f=0;f<rockBottom.size();f++)
 					{
-						if(pCount<4)
+						tStopX.add(rockBottom.get(f).getDirectionX());
+						tStopY.add(rockBottom.get(f).getDirectionY());
+					}
+					tiStop();
+					chroWait=0;
+				}
+			break;
+			case 'q':
+				if(blastWait>=900)
+				{
+					boom=true;
+					ship.setBombX(ship.getX());
+					ship.setBombY(ship.getY());
+					blastWait=0;
+				}
+			break;
+			case 'r':
+				//if(cheat)
+				//{
+					endX=ship.getX();
+					endY=ship.getY();
+		  			stopShip();
+		  			endGame=true;
+				//}
+	  		break;
+	  		case 'v':
+	  			invinc=true;
+	  		break;
+	  		case 'b':
+	  			//temp comment start if(cheat)
+	  			//{
+	  				if(invfill<100)
+		  			{
+		  				invfill+=25;
+		  			}
+		  		//}
+	  		break;
+	  		case 'n':
+	  			//if(cheat)
+	  			//{
+	  				if(invfill>0)
+		  			{
+		  				invfill=0;
+		  			}
+	  			//}
+	  		break;
+	  		case 'h':
+	  			help=!help;
+	  			/*if(cheat)
+	  			{
+	  				cheatHelp=true;
+	  			}*/
+	  		break;
+	  		case 't':
+	  			//if(cheat)
+				//{
+					for(int h=0;  h<20; h++)
+				  	{
+				  		rockBottom.add(new Asteroid());
+				  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
+				  		{
+				  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
+				  			{
+				  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
+				  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
+				  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+				  				rockBottom.remove(rockBottom.size()-1);
+				  			}
+				  		}
+				  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
 						{
-							guessCode[pCount]=Character.toString(key);
-							pCount++;
+							rockBottom.remove(rockBottom.size()-1);
+						}
+				  	}
+				//}
+			break;
+			case 'y':
+				//if(cheat)
+				//{
+					rockBottom.clear();
+				//}
+			break;
+			case 'g':
+				//if(cheat)
+				//{
+					invTest=!invTest;
+				//}
+			break;
+			case '1':
+			case '2':
+			case '3':
+			case '4':
+			case '5':
+			case '6':
+			case '7':
+			case '8':
+			case '9':
+			case '0':
+				if(cheatCode)
+				{
+					if(pCount>=0)
+					{
+						if(guessCode.length<5)
+						{
+							if(pCount<4)
+							{
+								guessCode[pCount]=Character.toString(key);
+								pCount++;
+							}
 						}
 					}
 				}
-			}
-		break;
-  	}
-}
-void update(int x, int y)
-{
-	if(overRect(circleX+250, circleY+25, 500, 50))
-	{
-		circleOver=true;
-    	rectOver=false;
-    	println("overCircle");
-	}
-	if(overRect(rectX+250, rectY+25, 500, 50))
-	{
-		rectOver=true;
-		circleOver=false;
-		println("overRect");
-	}else{
-		circleOver=rectOver=false;
-	}
-}
-
-void mousePressed() 
-{
-	if(circleOver)
-	{
-		rect(20, 200, 210, 210);
-		rect(270, 200, 210, 210);
-		rect(520, 200, 210, 210);
-		rect(770, 200, 210, 210);
-		textSize(50);
-		text("INPUT CHEAT CODE", 270, 150);
-		codeNum();
-		if(pCount==4)
-		{
-			for (int g=0;g<correctCode.length;g++)
-			{
-				if(correctCode[g]!=guessCode[g])
+			break;
+			case 'u':
+				open=true;
+				start=false;
+				bolt.clear();
+				tStopX.clear();
+				tStopY.clear();
+				tieBlastX.clear();
+				tieBlastY.clear();
+				destroyID.clear();
+				rockBottom.clear();
+				varReset();
+				shipReset();
+			break;
+			case 'j':
+				bossGame=true;
+				println("sdgjkfgajkhgakjhgfkjhsagdkjhgaskjhgfkasgkfhgkajhgfkjagsdkfgkahgsdkfgaksdhgfk");
+			break;
+			case 'm':
+				home=!home;
+				if(home==false)
 				{
-					inco=true;
-					incCodeCount();
+					miss.setX(ship.getX());
+					miss.setY(ship.getY());
+					miss.setDirectionX(0);
+					miss.setDirectionY(0);
 				}
-			}
-			/*if(guessCode==correctCode)
-			{
-				cheat=true;
-				println("cheater");
-			}*/
-		
+				if(home)
+				{
+					//miss.setDirectionX(ship.getDirectionX());
+					//miss.setDirectionY(ship.getDirectionY());
+					miss.setPointDirection((int)ship.getPointDirection());
+					miss.accelerate(5);
+				}
+			break;
+	  	}
+	}
+}
+boolean missTurnCheck(float x, float y)
+{
+	boolean result=false;
+	float gap=x-y;
+	if(gap<0)
+	{
+		result=true;
+	}
+	if(Math.abs(gap)>180)
+	{
+		result=!result;
+	}
+	return result;
+}
+void missSpeed(int x)
+{
+	miss.speed=0;
+	miss.setDirectionX(0);
+	miss.setDirectionY(0);
+	miss.accelerate(x);
+}
+void bossSet()
+{
+	if(bossCount<10&&bossGame)
+	{
+		if(bossCount<2)
+		{
+			bossAccel(-160);
+			println("qowiuyeroiqwueyriu");
+		}
+		if(bossCount>1)
+		{
+			bossStop();
+			println("yuiytioytouyoityiuo");
 		}
 	}
-	if(rectOver)
+	if(bossCount==10)
 	{
-		start=true;
+		bossGame=false;
+		bossCount=0;
+	}
+	if(bossGame)
+	{
+		bossCount++;
+	}
+}
+void bossAccel(float x)
+{
+	boss.accelerate(x);
+	hull.accelerate(x);
+}
+void bossMove()
+{
+	boss.move();
+	hull.move();
+}
+void bossStop()
+{
+	boss.setDirectionX(0);
+	boss.setDirectionY(0);
+	hull.setDirectionX(0);
+	hull.setDirectionY(0);
+}
+void varReset()
+{
+	count=tCount=bCount=dCount=sCount=eCount=pCount=incCount=0;
+	turn=endX=endY=dedPer=bolAstX=bolAstY=0;
+	blastWait=900;
+	chroWait=600;
+	telWait=300;
+	plusWait=300;
+	invfill=bossfill=0;
+	tSize=45;
+	bX=5;
+	bY=50;
+	tele=boom=tStop=endGame=inco=false;
+	blast=bolSpi=invinc=help=invTest=false;
+	cheat=start=open=true;
+}
+void shipReset()
+{
+	ship.setX(500);
+    ship.setY(500);
+    lWing.setX(500);
+    lWing.setY(500);
+    rWing.setX(500);
+    rWing.setY(500);
+    lbWing.setX(500);
+    lbWing.setY(500);
+    rbWing.setX(500);
+    rbWing.setY(500);
+    ship.setDirectionX(0);
+    ship.setDirectionY(0);
+    lWing.setDirectionX(0);
+    lWing.setDirectionY(0);
+    rWing.setDirectionX(0);
+    rWing.setDirectionY(0);
+    lbWing.setDirectionX(0);
+    lbWing.setDirectionY(0);
+    rbWing.setDirectionX(0);
+    rbWing.setDirectionY(0);
+    ship.setPointDirection(0);
+    lWing.setPointDirection(0);
+    rWing.setPointDirection(0);
+    lbWing.setPointDirection(0);
+    rbWing.setPointDirection(0);
+    ship.setTagX(0);
+	ship.setTagY(0);
+    ship.setBombX(0);
+    ship.setBombY(0);
+}
+void mousePressed() 
+{
+	if(open)
+	{
+		if(circleOver)
+		{
+			println("cheat test hjgjngnhvfhnvhvhbrgvbhrgbhrgbh");
+			cheatCode=true;
+		}
+		if(rectOver)
+		{
+			start=true;
+			open=false;
+		}
+	}
+	if(start)
+	{
+		if(home)
+		{
+			tarX=mouseX-25;
+			tarY=mouseY-25;
+		}
 	}
 }
 
@@ -495,7 +651,7 @@ public void codeNum()
 		String text=guessCode[c];
 		textSize(100);
 		//fill(255,255,255);
-		fill(0,0,0);
+		fill(255,0,0);
 		text(text, 80+250*c, 335);
 	}
 }
@@ -731,7 +887,21 @@ void shipExploCounter()
 		if(eCount==200)
 		{
 			endGame=false;
-			exit();
+			open=true;
+			start=false;
+			bolt.clear();
+			tStopX.clear();
+			tStopY.clear();
+			tieBlastX.clear();
+			tieBlastY.clear();
+			destroyID.clear();
+			rockBottom.clear();
+			varReset();
+			shipReset();
+			boss.setX(900);
+			boss.setY(500);
+			hull.setX(900);
+			hull.setY(500);
 		}
 		if(endGame)
 		{
@@ -750,7 +920,7 @@ public void helpWall()
 	text("time stop: stops all ships from moving for one second, E, 10 seconds, 2 seconds",5,160);
 	text("set teleport tag:places the tag that the teleport move teleports to, Z, no recharge",5,190);
 	text("teleport: teleports the ship to the teleport tag, X, 5 seconds, 1 second",5,220);
-	text("cross: makes a cross of bullets from the ship, C, 5 seconds, 1 second",5,250);
+	text("spiral: makes a spiral of bullets from the ship, C, 5 seconds, 1 second",5,250);
 	text("invincibility: become invincible for a max of ten seconds, V, destroy ships to recharge", 5,280);
 	text("but length depends on counter of destroyed ships in top right corner",5,310);
 	stroke(255, 255, 255);
@@ -770,6 +940,10 @@ public void boomDis()
 	/*start working with the explogif. each frame of the gif 
 	plays every 0.01 seconds and the framerate of this 
 	program is 60 frames per second*/
+void boAstBo(int x, int y)
+{
+	image(tieBoom, x, y, 50, 50);
+}
 public void boAst()
 {
 	int ccount=0;
@@ -783,6 +957,7 @@ public void boAst()
   				bolAstY=rockBottom.get(c).getY();
   				//image(tieBoom, bolAstX, bolAstY, 50, 50);
   				//breakpoint1
+  				boAstBo(bolAstX, bolAstY);
   				rockBottom.remove(c-ccount);
   				ccount++;
   				if(c+ccount>=rockBottom.size())
@@ -795,7 +970,7 @@ public void boAst()
   				{
   					invfill++;
   				}
-  				if(bossfill<251)
+  				if(bossfill<1001)
   				{
   					bossfill++;
   				}
@@ -864,7 +1039,7 @@ public void bombRingCount()
 				{
 					invfill++;
 				}
-				if(bossfill<251)
+				if(bossfill<1001)
 				{
 					bossfill++;
 				}
@@ -897,34 +1072,33 @@ public void invincCount()
 	}
 }
 //invincibility color counter
-public void newBoltCross(int x, int y, int z)
+public void newBoltSpiral()
 {
+	ship.setPointDirection((int)(ship.getPointDirection()-9));
+	lWing.setPointDirection((int)(lWing.getPointDirection()-9));
+	rWing.setPointDirection((int)(rWing.getPointDirection()-9));
+	lbWing.setPointDirection((int)(lbWing.getPointDirection()-9));
+	rbWing.setPointDirection((int)(rbWing.getPointDirection()-9));
 	bolt.add(new Bolt());
-	bolt.get(bolt.size()-1).setDirectionX(x);
-	bolt.get(bolt.size()-1).setDirectionY(y);
-	bolt.get(bolt.size()-1).setPointDirection(z);
 }
-//adds a bolt for bolt cross
-public void boltCross()
+//adds a bolt for bolt spiral
+public void boltSpiral()
 {
-	if(cCount<3600&&bolCross)
+	if(sCount<3600&&bolSpi)
 	{
-		if(cCount==40)
+		if(sCount==40)
 		{
-			bolCross=false;
-			cCount=0;
+			bolSpi=false;
+			sCount=0;
 		}
-		if(bolCross)
+		if(bolSpi)
 		{
-			newBoltCross(25,0,0);
-			newBoltCross(0,-25,90);
-			newBoltCross(-25,0,180);
-			newBoltCross(0,25,270);
-			cCount++;
+			newBoltSpiral();
+			sCount++;
 		}
 	}
 }
-//bolt cross frame counter
+//bolt spiral frame counter
 public void newTie()
 {
 	if(turn%100==0&&tStop==false)
