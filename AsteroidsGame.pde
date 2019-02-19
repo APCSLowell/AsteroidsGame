@@ -494,6 +494,7 @@ public void keyPressed()
 		break;
 		case 'l':
 			cheat=!cheat;
+		break;
 	}
 }
 boolean missTurnCheck(float x, float y)
