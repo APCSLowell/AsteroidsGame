@@ -9,14 +9,14 @@ BossHull hull;
 Missile miss;
 PImage img, end1, end2, end3, end4, end5, end6, end7;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar;
-int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, incCount=0, bossCount=0;
+int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, incCount=0, bossCount=0, corCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
 int blastWait=900, chroWait=600, telWait=300, plusWait=300;
-float invfill=0, bossfill=0;
+float invfill=0, bossfill=0, codeCount=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false, inco=false, home=false;
 boolean blast = false, bolSpi = false, invinc = false, help=false, invTest=false;
-boolean cheatCode=false, cheat = false, start=false, open=true, bossGame=false;
+boolean cheatCode=false, cheat = false, start=false, open=true, bossGame=false, corCheat=false;
 int teleX, teleY;
 int rectX, rectY;
 int circleX, circleY;
@@ -40,10 +40,11 @@ ArrayList<Double> tStopY = new ArrayList<Double>();
 ArrayList<Integer> tieBlastX=new ArrayList<Integer>();
 ArrayList<Integer> tieBlastY=new ArrayList<Integer>();
 ArrayList<Integer> destroyID=new ArrayList<Integer>();
+boolean[] guessCheck={false, false, false, false};
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom=new ArrayList<Asteroid>();
 public String[] correctCode={"1","9","7","9"};
-public String[] guessCode=new String[4];
+public String[] guessCode={"f", "f", "f","f"};
 PImage[] endBoom=new PImage[9];
 public void setup() 
 {
@@ -144,7 +145,7 @@ public void show()
 	  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
 	  	rect(5,0,5,1000);
 	  	fill(255,0,0);
-	  	rect(5, 0, 5, bossfill);
+	  	rect(5, 80, 5, bossfill/2);
 	  	fill(255,255,255);
 	  	textSize(15);
 		text("PRESS H FOR HELP", 5, 80);
@@ -176,20 +177,35 @@ public void draw()
 			textSize(50);
 			text("INPUT CHEAT CODE", 270, 150);
 			codeNum();
-			if(pCount==4)
+			if(guessCode[guessCode.length-1]!="f")
 			{
 				for (int g=0;g<correctCode.length;g++)
 				{
 					println(correctCode[g]+" vs "+guessCode[g]);
-					if(correctCode[g]!=guessCode[g])
+					if(!correctCode[g].equals(guessCode[g]))
 					{
 						inco=true;
 						incCodeCount();
-						guessCode=new String[4];
+						println("Nope");
+						cheat=false;
+						break;
 					}else{
-						cheat=true;
-						guessCode=new String[4];
+						guessCheck[g]=true;
+						codeCount++;
 					}
+				}
+				//inco=false;
+				if(codeCount==4)
+				{
+					cheat=true;
+					println("code worked");
+					codeCount=0;
+					corCheat=true;
+					corCodeCount();
+				}
+				for(int ii=0; ii<guessCode.length;ii++)
+				{
+					guessCode[ii]="f";
 				}
 			}
 		}
@@ -447,11 +463,14 @@ public void keyPressed()
 					{
 						if(guessCode.length<5)
 						{
-							if(pCount<4)
+							for(int i=0; i<correctCode.length; i++)
 							{
-								guessCode[pCount]=Character.toString(key);
-								println("put "+key+" into guessCode");
-								pCount++;
+								if(guessCode[i]=="f")
+								{
+									guessCode[i]=Character.toString(key);
+									println("put "+key+" into guessCode");
+									break;
+								}
 							}
 						}
 					}
@@ -656,7 +675,7 @@ public void codeNum()
 {
 	if(inco==false)
 	{
-		for(int c=0;c<pCount;c++)
+		for(int c=0;c<firstF();c++)
 		{
 			String text=guessCode[c];
 			textSize(100);
@@ -665,6 +684,45 @@ public void codeNum()
 			text(text, 80+250*c, 335);
 		}
 	}
+}
+public void corCodeCount()
+{
+	if(corCount<241&&corCheat)
+	{
+		if(corCount>60)
+		{
+			corWord();
+			if(corCount==240)
+			{
+				corCheat=false;
+				corCount=0;
+				pCount=0;
+				cheatCode=false;
+			}
+		}
+	}
+	if(corCheat)
+	{
+		corCount++;
+	}
+}
+String firstF()
+{
+	for(int i=0; i<guessCode.length; i++)
+	{
+		if(guessCode[i]=="f")
+		{
+			int x=i;
+			return i;
+		}
+	}
+	return 99;
+}
+public void corWord()
+{
+	fill(255,0,0);
+	textSize(100);
+	text("CODE CORRECT", 60, 300);
 }
 public void incCodeCount()
 {
@@ -676,7 +734,6 @@ public void incCodeCount()
 			if(incCount==240)
 			{
 				inco=false;
-				cheatCode=false;
 				incCount=0;
 				pCount=0;
 			}
