@@ -112,12 +112,12 @@ public void show()
 {
 	if(start)
 	{
+		starShow();
 		helpDraw();
 	  	shipShow();
 	  	boss.show();
 	  	hull.show();
 	  	//shows the boss
-	  	starShow();
 	  	tieShow();
 	  	boltShow();
 	  	if(home)
@@ -142,9 +142,9 @@ public void show()
 	  	rect(5,5,60,blastWait/15);
 	  	image(boomwait,5,5,60,60);
 	  	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
-	  	rect(5,80,5,1000);
+	  	rect(5,0,5,1000);
 	  	fill(255,0,0);
-	  	rect(5, 80, 5, bossfill);
+	  	rect(5, 0, 5, bossfill);
 	  	fill(255,255,255);
 	  	textSize(15);
 		text("PRESS H FOR HELP", 5, 80);
@@ -175,14 +175,20 @@ public void draw()
 			noFill();
 			textSize(50);
 			text("INPUT CHEAT CODE", 270, 150);
+			codeNum();
 			if(pCount==4)
 			{
 				for (int g=0;g<correctCode.length;g++)
 				{
+					println(correctCode[g]+" vs "+guessCode[g]);
 					if(correctCode[g]!=guessCode[g])
 					{
 						inco=true;
 						incCodeCount();
+						guessCode=new String[4];
+					}else{
+						cheat=true;
+						guessCode=new String[4];
 					}
 				}
 			}
@@ -245,16 +251,14 @@ public void draw()
 		boltSpiral();
 		newTie();
 		abilCount();
-		PVector v1 = new PVector(miss.getX()-ship.getX(), miss.getY()-ship.getY());
-		PVector v2 = new PVector(tarX-ship.getX(), tarY-ship.getY()); 
-		float a = PVector.angleBetween(v1, v2);
-		if(missTurnCheck((float)ship.getPointDirection(), a))
+		float a=asin((tarY/**cos(miss.getPointDirection()*/)-(miss.getY())/**cos(miss.getPointDirection())*//(dist(tarX,tarY,miss.getX(),miss.getY())));
+		if(missTurnCheck(a, (float)(miss.getPointDirection())))
 		{
 			println("false");
+
 		}else{
 			println("true");
 		}
-
 		show();
 	}
 }
@@ -266,177 +270,177 @@ public void draw()
 
 public void keyPressed()
 {
-	if(start)
-	{
-		switch (key) {
-			case 'w':
-				shipAccel(1);
-			break;
-			case 'a':
-				shipTurn(-10);
-			break;
-			case 's':
-				shipAccel(-1);
-			break;
-			case 'd':
-				shipTurn(10);
-			break;
-			case 'z':
+	switch (key){
+		case 'w':
+			shipAccel(1);
+		break;
+		case 'a':
+			shipTurn(-10);
+		break;
+		case 's':
+			shipAccel(-1);
+		break;
+		case 'd':
+			shipTurn(10);
+		break;
+		case 'z':
+			ship.setTagX(ship.getX());
+			ship.setTagY(ship.getY());
+		break;
+		case 'x':
+			if(ship.getTagX()==0)
+			{
 				ship.setTagX(ship.getX());
+			}
+			if(ship.getTagY()==0)
+			{
 				ship.setTagY(ship.getY());
-			break;
-			case 'x':
-				if(ship.getTagX()==0)
+			}
+			if(telWait==300)
+			{
+				tele=true;
+				count=0;
+				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
+				teleX=ship.getX();
+				teleY=ship.getY();
+				shipTeleSet(ship.getTagX(), ship.getTagY());
+				dedPer=(int)(Math.random()*10);
+				if(dedPer!=4)
 				{
-					ship.setTagX(ship.getX());
-				}
-				if(ship.getTagY()==0)
-				{
-					ship.setTagY(ship.getY());
-				}
-				if(telWait==300)
-				{
-					tele=true;
-					count=0;
-					image(img, ship.getX()-140, ship.getY()-106, 280, 212);
-					teleX=ship.getX();
-					teleY=ship.getY();
-					shipTeleSet(ship.getTagX(), ship.getTagY());
-					dedPer=(int)(Math.random()*10);
-					if(dedPer!=4)
-					{
-						image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
-					}else if(dedPer==4){
-						endX=ship.getX();
-		  				endY=ship.getY();
-			  			endGame=true;
-			  			stopShip();
-					}
-					telWait=0;
-				}
-			case 'f':
-				stopShip();
-			break;
-			case 'c':
-				if(plusWait==300)
-				{
-					bolSpi=true;
-					plusWait=0;
-				}
-			case ' ':
-				bolt.add(new Bolt());
-				/*bolt.setX(ship.getX());
-				bolt.setY(ship.getY());
-				bolt.setPointDirection((int)ship.myPointDirection);
-				bolt.accelerate(2);*/
-			break;
-			case 'e':
-				if(chroWait==600)
-				{
-					tStop=true;
-					tCount=0;
-					tStopX.clear();
-					tStopY.clear();
-					for(int f=0;f<rockBottom.size();f++)
-					{
-						tStopX.add(rockBottom.get(f).getDirectionX());
-						tStopY.add(rockBottom.get(f).getDirectionY());
-					}
-					tiStop();
-					chroWait=0;
-				}
-			break;
-			case 'q':
-				if(blastWait>=900)
-				{
-					boom=true;
-					ship.setBombX(ship.getX());
-					ship.setBombY(ship.getY());
-					blastWait=0;
-				}
-			break;
-			case 'r':
-				//if(cheat)
-				//{
+					image(img, ship.getTagX()-140, ship.getTagY()-106, 280, 212);
+				}else if(dedPer==4){
 					endX=ship.getX();
-					endY=ship.getY();
-		  			stopShip();
+	  				endY=ship.getY();
 		  			endGame=true;
-				//}
-	  		break;
-	  		case 'v':
-	  			invinc=true;
-	  		break;
-	  		case 'b':
-	  			//temp comment start if(cheat)
-	  			//{
-	  				if(invfill<100)
-		  			{
-		  				invfill+=25;
-		  			}
-		  		//}
-	  		break;
-	  		case 'n':
-	  			//if(cheat)
-	  			//{
-	  				if(invfill>0)
-		  			{
-		  				invfill=0;
-		  			}
-	  			//}
-	  		break;
-	  		case 'h':
-	  			help=!help;
-	  			/*if(cheat)
+		  			stopShip();
+				}
+				telWait=0;
+			}
+		case 'f':
+			stopShip();
+		break;
+		case 'c':
+			if(plusWait==300)
+			{
+				bolSpi=true;
+				plusWait=0;
+			}
+		case ' ':
+			bolt.add(new Bolt());
+			/*bolt.setX(ship.getX());
+			bolt.setY(ship.getY());
+			bolt.setPointDirection((int)ship.myPointDirection);
+			bolt.accelerate(2);*/
+		break;
+		case 'e':
+			if(chroWait==600)
+			{
+				tStop=true;
+				tCount=0;
+				tStopX.clear();
+				tStopY.clear();
+				for(int f=0;f<rockBottom.size();f++)
+				{
+					tStopX.add(rockBottom.get(f).getDirectionX());
+					tStopY.add(rockBottom.get(f).getDirectionY());
+				}
+				tiStop();
+				chroWait=0;
+			}
+		break;
+		case 'q':
+			if(blastWait>=900)
+			{
+				boom=true;
+				ship.setBombX(ship.getX());
+				ship.setBombY(ship.getY());
+				blastWait=0;
+			}
+		break;
+		case 'r':
+			if(cheat)
+			{
+				endX=ship.getX();
+				endY=ship.getY();
+	  			stopShip();
+	  			endGame=true;
+			}
+  		break;
+  		case 'v':
+  			invinc=true;
+  		break;
+  		case 'b':
+  			if(cheat)
+  			{
+  				if(invfill<100)
 	  			{
-	  				cheatHelp=true;
-	  			}*/
-	  		break;
-	  		case 't':
-	  			//if(cheat)
-				//{
-					for(int h=0;  h<20; h++)
-				  	{
-				  		rockBottom.add(new Asteroid());
-				  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
-				  		{
-				  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
-				  			{
-				  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
-				  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
-				  				image(tieBoom, bolAstX, bolAstY, 50, 50);
-				  				rockBottom.remove(rockBottom.size()-1);
-				  			}
-				  		}
-				  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
-						{
-							rockBottom.remove(rockBottom.size()-1);
-						}
-				  	}
-				//}
-			break;
-			case 'y':
-				//if(cheat)
-				//{
-					rockBottom.clear();
-				//}
-			break;
-			case 'g':
-				//if(cheat)
-				//{
-					invTest=!invTest;
-				//}
-			break;
-			case '1':
-			case '2':
-			case '3':
-			case '4':
-			case '5':
-			case '6':
-			case '7':
-			case '8':
-			case '9':
-			case '0':
+	  				invfill+=25;
+	  			}
+	  		}
+  		break;
+  		case 'n':
+  			if(cheat)
+  			{
+  				if(invfill>0)
+	  			{
+	  				invfill=0;
+	  			}
+  			}
+  		break;
+  		case 'h':
+  			help=!help;
+  			//if(cheat)
+  			//{
+  			//	cheatHelp=true;
+  			//}
+  		break;
+  		case 't':
+  			if(cheat)
+			{
+				for(int h=0;  h<20; h++)
+			  	{
+			  		rockBottom.add(new Asteroid());
+			  		if(rockBottom.get(rockBottom.size()-1).getDirectionX()==0)
+			  		{
+			  			if(rockBottom.get(rockBottom.size()-1).getDirectionY()==0)
+			  			{
+			  				bolAstX=rockBottom.get(rockBottom.size()-1).getX();
+			  				bolAstY=rockBottom.get(rockBottom.size()-1).getY();
+			  				image(tieBoom, bolAstX, bolAstY, 50, 50);
+			  				rockBottom.remove(rockBottom.size()-1);
+			  			}
+			  		}
+			  		if(rockBottom.get(rockBottom.size()-1).cloDet(ship.getX(), ship.getY()))
+					{
+						rockBottom.remove(rockBottom.size()-1);
+					}
+			  	}
+			}
+		break;
+		case 'y':
+			if(cheat)
+			{
+				rockBottom.clear();
+			}
+		break;
+		case 'g':
+			if(cheat)
+			{
+				invTest=!invTest;
+			}
+		break;
+		case '1':
+		case '2':
+		case '3':
+		case '4':
+		case '5':
+		case '6':
+		case '7':
+		case '8':
+		case '9':
+		case '0':
+			if(open)
+			{
 				if(cheatCode)
 				{
 					if(pCount>=0)
@@ -446,47 +450,50 @@ public void keyPressed()
 							if(pCount<4)
 							{
 								guessCode[pCount]=Character.toString(key);
+								println("put "+key+" into guessCode");
 								pCount++;
 							}
 						}
 					}
 				}
-			break;
-			case 'u':
-				open=true;
-				start=false;
-				bolt.clear();
-				tStopX.clear();
-				tStopY.clear();
-				tieBlastX.clear();
-				tieBlastY.clear();
-				destroyID.clear();
-				rockBottom.clear();
-				varReset();
-				shipReset();
-			break;
-			case 'j':
-				bossGame=true;
-				println("sdgjkfgajkhgakjhgfkjhsagdkjhgaskjhgfkasgkfhgkajhgfkjagsdkfgkahgsdkfgaksdhgfk");
-			break;
-			case 'm':
-				home=!home;
-				if(home==false)
-				{
-					miss.setX(ship.getX());
-					miss.setY(ship.getY());
-					miss.setDirectionX(0);
-					miss.setDirectionY(0);
-				}
-				if(home)
-				{
-					//miss.setDirectionX(ship.getDirectionX());
-					//miss.setDirectionY(ship.getDirectionY());
-					miss.setPointDirection((int)ship.getPointDirection());
-					miss.accelerate(5);
-				}
-			break;
-	  	}
+			}
+		break;
+		case 'u':
+			open=true;
+			start=false;
+			bolt.clear();
+			tStopX.clear();
+			tStopY.clear();
+			tieBlastX.clear();
+			tieBlastY.clear();
+			destroyID.clear();
+			rockBottom.clear();
+			varReset();
+			shipReset();
+		break;
+		case 'j':
+			bossGame=true;
+			println("sdgjkfgajkhgakjhgfkjhsagdkjhgaskjhgfkasgkfhgkajhgfkjagsdkfgkahgsdkfgaksdhgfk");
+		break;
+		case 'm':
+			home=!home;
+			if(home==false)
+			{
+				miss.setX(ship.getX());
+				miss.setY(ship.getY());
+				miss.setDirectionX(0);
+				miss.setDirectionY(0);
+			}
+			if(home)
+			{
+				//miss.setDirectionX(ship.getDirectionX());
+				//miss.setDirectionY(ship.getDirectionY());
+				miss.setPointDirection((int)ship.getPointDirection());
+				miss.accelerate(5);
+			}
+		break;
+		case 'l':
+			cheat=!cheat;
 	}
 }
 boolean missTurnCheck(float x, float y)
@@ -646,13 +653,16 @@ boolean overCircle(int x, int y, int diameter) {
 }
 public void codeNum()
 {
-	for(int c=0;c<pCount;c++)
+	if(inco==false)
 	{
-		String text=guessCode[c];
-		textSize(100);
-		//fill(255,255,255);
-		fill(255,0,0);
-		text(text, 80+250*c, 335);
+		for(int c=0;c<pCount;c++)
+		{
+			String text=guessCode[c];
+			textSize(100);
+			//fill(255,255,255);
+			fill(0,0,0);
+			text(text, 80+250*c, 335);
+		}
 	}
 }
 public void incCodeCount()
@@ -667,7 +677,6 @@ public void incCodeCount()
 				inco=false;
 				cheatCode=false;
 				incCount=0;
-				guessCode=new String[4];
 				pCount=0;
 			}
 		}
@@ -902,6 +911,11 @@ void shipExploCounter()
 			boss.setY(500);
 			hull.setX(900);
 			hull.setY(500);
+			home=false;
+			miss.setX(ship.getX());
+			miss.setY(ship.getY());
+			miss.setDirectionX(0);
+			miss.setDirectionY(0);
 		}
 		if(endGame)
 		{
