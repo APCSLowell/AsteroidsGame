@@ -675,7 +675,7 @@ public void codeNum()
 {
 	if(inco==false)
 	{
-		for(int c=0;c<firstF();c++)
+		for(int c=0;c<(int)(firstF());c++)
 		{
 			String text=guessCode[c];
 			textSize(100);
@@ -706,7 +706,7 @@ public void corCodeCount()
 		corCount++;
 	}
 }
-String firstF()
+Integer firstF()
 {
 	for(int i=0; i<guessCode.length; i++)
 	{
