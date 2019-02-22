@@ -7,7 +7,7 @@ Rightbackwing rbWing;
 Boss boss;
 BossHull hull;
 Missile miss;
-PImage img, end1, end2, end3, end4, end5, end6, end7;
+PImage img, end1, end2, end3, end4, end5, end6, end7, boxTar;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar;
 int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, incCount=0, bossCount=0, corCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0;
@@ -43,6 +43,7 @@ ArrayList<Integer> destroyID=new ArrayList<Integer>();
 boolean[] guessCheck={false, false, false, false};
 Star[] stars=new Star[500];
 ArrayList<Asteroid> rockBottom=new ArrayList<Asteroid>();
+ArrayList<PImage> boxTars=new ArrayList<PImage>();
 public String[] correctCode={"1","9","7","9"};
 public String[] guessCode={"f", "f", "f","f"};
 PImage[] endBoom=new PImage[9];
@@ -76,6 +77,7 @@ public void setup()
   	telewait=loadImage("telewait.png");
   	timewait=loadImage("timewait.png");
   	spinwait=loadImage("spinwait.png");
+  	boxTar=loadImage("boxTarget.png");
 	for(int i=0; i<stars.length;i++)
   	{
   		stars[i]=new Star();
@@ -257,8 +259,11 @@ public void draw()
 			miss.move();
 		}
 		boAst();
-		bossMove();
-		bossSet();
+		if(bossGame)
+		{
+			bossMove();
+			bossSet();
+		}
 		teleFrameCount();
 		shipExploCounter();
 		//boltAstCount();
@@ -267,14 +272,13 @@ public void draw()
 		boltSpiral();
 		newTie();
 		abilCount();
-		float a=asin((tarY/**cos(miss.getPointDirection()*/)-(miss.getY())/**cos(miss.getPointDirection())*//(dist(tarX,tarY,miss.getX(),miss.getY())));
-		if(missTurnCheck(a, (float)(miss.getPointDirection())))
-		{
-			println("false");
-
-		}else{
-			println("true");
-		}
+		float turning=asin(Math.abs((tarY+25/**cos(miss.getPointDirection()*/)-(miss.getY()))/**cos(miss.getPointDirection())*//(dist(miss.getX(),miss.getY(),tarX+25,tarY+25)));
+		float a = degrees(turning);
+		println("a="+a);
+		miss.setPointDirection((int)a);
+		println("point at target");
+		missSpeed(miss.speed);
+		println("stop speed and go");
 		show();
 	}
 }
@@ -505,30 +509,23 @@ public void keyPressed()
 			}
 			if(home)
 			{
-				//miss.setDirectionX(ship.getDirectionX());
-				//miss.setDirectionY(ship.getDirectionY());
-				miss.setPointDirection((int)ship.getPointDirection());
-				miss.accelerate(5);
+				if(fireHome!=true)
+				{
+					for(t=0;t<rockBottom.size();t++)
+					{
+						boxTars.add(image(boxTar, rockBottom.get(t).getX()-25, rockBottom.get(t).getY()-25, 50, 50));
+					}else
+					{
+						miss.setPointDirection((int)ship.getPointDirection());
+						miss.accelerate(5);
+					}
+				}
 			}
 		break;
 		case 'l':
 			cheat=!cheat;
 		break;
 	}
-}
-boolean missTurnCheck(float x, float y)
-{
-	boolean result=false;
-	float gap=x-y;
-	if(gap<0)
-	{
-		result=true;
-	}
-	if(Math.abs(gap)>180)
-	{
-		result=!result;
-	}
-	return result;
 }
 void missSpeed(int x)
 {
@@ -646,8 +643,16 @@ void mousePressed()
 	{
 		if(home)
 		{
-			tarX=mouseX-25;
-			tarY=mouseY-25;
+			for(m=0;m<rockBottom.size();m++)
+			{
+				
+				if(mouseX>=rockBottom.get(m).getX()-5&&mouseX<=rockBottom.get(m).getX()+5&&mouseY>=rockBottom.get(m).getY()-5&&mouseY<=rockBottom.get(m).getY()+5)
+				}
+					tarX=rockBottom.get(m).getX()-25;
+					tarY=rockBottom.get(m).getY()-25;
+					fireHome=true;
+				}
+			}
 		}
 	}
 }
@@ -675,7 +680,7 @@ public void codeNum()
 {
 	if(inco==false)
 	{
-		for(int c=0;c<(int)(firstF());c++)
+		for(int c=0;c<(int)(firstF())&&c<correctCode.length;c++)
 		{
 			String text=guessCode[c];
 			textSize(100);
@@ -716,7 +721,7 @@ Integer firstF()
 			return i;
 		}
 	}
-	return 99;
+	return 50;
 }
 public void corWord()
 {
