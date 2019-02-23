@@ -30,7 +30,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   public void turn (int nDegreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
-    myPointDirection+=nDegreesOfRotation;   
+    myPointDirection+=nDegreesOfRotation;  
   }   
   public void move ()   //move the floater in the current direction of travel
   {      
