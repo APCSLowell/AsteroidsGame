@@ -3,7 +3,10 @@ public class Asteroid extends Floater
 	int topSide=(int)(Math.random()*2+1);
 	int leftRight=(int)(Math.random()*2+1);
 	int topDown=(int)(Math.random()*2+1);
-	public Asteroid()
+	int dir=(int)random(0,2);
+    double ray;
+    float rand=random(1,5);
+    public Asteroid()
     {
     	//xCorners=new int[]{-1,-2,-2,-6,-6,-14,-14,-15,-15,-16,-16,-17,-17,-16,-16,-15,-15,-14,-14,-5,-5,-3,-3,-2,-2,2,2,3,3,5,5,14,14,15,15,16,16,17,17,16,16,15,15,14,14,6,6,2,2,1};
     	//yCorners=new int[]{20,1,2,2,1,1,2,2,15,15,2,2,-10,-10,-11,-11,-10,-10,-9,-11,-16,-16,-10,-9,-11,-11,-9,-10,-16,-16,-11,-9,-10,-10,-11,-11,-10,-10,2,2,15,15,2,2,1,1,2,2,1,20};
@@ -18,9 +21,22 @@ public class Asteroid extends Floater
     		myCenterY=0;
     	}
     	myCenterY=(int)(Math.random()*990+5);
-    	myDirectionX=(int)(Math.random()*5+1);
-    	myDirectionY=(int)(Math.random()*5+1);
-    	myPointDirection=0;
+    	// myDirectionX=(int)(Math.random()*5+1);
+    	// myDirectionY=(int)(Math.random()*5+1);
+        if(dir==0)
+        {
+            myPointDirection=random(5,85);
+        }else if(dir==1)
+        {
+            myPointDirection=random(275,355);
+        }
+        println("pd: "+myPointDirection);
+        ray=(myPointDirection*(Math.PI/180));
+        println("ray: "+ray+", and rand: "+rand);
+        myDirectionX=(rand)*Math.cos(ray);
+        println("dx: "+myDirectionX);   
+        myDirectionY=(rand)*Math.sin(ray);
+        println("dy: "+myDirectionY);
     }
 	public void setX(int x){myCenterX=x;}
     public int getX(){return (int)myCenterX;}
