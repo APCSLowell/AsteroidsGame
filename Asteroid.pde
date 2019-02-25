@@ -30,13 +30,9 @@ public class Asteroid extends Floater
         {
             myPointDirection=random(275,355);
         }
-        println("pd: "+myPointDirection);
         ray=(myPointDirection*(Math.PI/180));
-        println("ray: "+ray+", and rand: "+rand);
         myDirectionX=(rand)*Math.cos(ray);
-        println("dx: "+myDirectionX);   
         myDirectionY=(rand)*Math.sin(ray);
-        println("dy: "+myDirectionY);
     }
 	public void setX(int x){myCenterX=x;}
     public int getX(){return (int)myCenterX;}

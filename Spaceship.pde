@@ -5,6 +5,7 @@ class Spaceship extends Floater
     int bombX=0;
     int bombY=0;
     int colCon=0;
+    int speed;
     public Spaceship()
     {
     	//xCorners=new int[]{-1,-2,-2,-6,-6,-14,-14,-15,-15,-16,-16,-17,-17,-16,-16,-15,-15,-14,-14,-5,-5,-3,-3,-2,-2,2,2,3,3,5,5,14,14,15,15,16,16,17,17,16,16,15,15,14,14,6,6,2,2,1};
@@ -54,5 +55,13 @@ class Spaceship extends Floater
         }else{
             return false;
         }
+    }
+    public void accelerate(int x)
+    {
+        //double dRadians=myPointDirection*(Math.PI/180);     
+        //myDirectionX+=(x)*Math.cos(dRadians);    
+        //myDirectionY+=(x) * Math.sin(dRadians);       
+        speed+=x;
+        super.accelerate(x);
     }
 }
