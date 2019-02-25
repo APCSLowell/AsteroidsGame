@@ -1492,6 +1492,7 @@ public void shipTeleSet(int x, int y)
 	rbWing.setX(x);
 	rbWing.setY(y);
 }
+
 public void realGone()
 {
 	for(int p=0;p<destroyID.size()-1;p++)
@@ -1500,6 +1501,7 @@ public void realGone()
 	}
 	destroyID.clear();
 }
+
 public void invTest()
 {
 	if(invTest)
