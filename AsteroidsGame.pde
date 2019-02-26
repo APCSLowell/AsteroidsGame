@@ -347,26 +347,29 @@ public void keyPressed()
   			}
   		break;
   		case 'h':
-  			if(missOff==false)
-			{
-				if(missWait>=300)
+  			if(cheat)
+  			{
+  				if(missOff==false)
 				{
-					home=!home;
-					if(home==false)
+					if(missWait>=300)
 					{
-						retMiss();
-						selectTar=false;
-						fireHome=false;
-						missSet=false;
-						missTrailClear();
-					}
-					if(home)
-					{
-						if(fireHome!=true)
+						home=!home;
+						if(home==false)
 						{
-							selectTar=true;
-							missBounce=true;
+							retMiss();
+							selectTar=false;
+							fireHome=false;
+							missSet=false;
 							missTrailClear();
+						}
+						if(home)
+						{
+							if(fireHome!=true)
+							{
+								selectTar=true;
+								missBounce=true;
+								missTrailClear();
+							}
 						}
 					}
 				}
