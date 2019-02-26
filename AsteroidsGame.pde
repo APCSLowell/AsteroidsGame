@@ -7,12 +7,12 @@ Rightbackwing rbWing;
 Missile miss;
 PImage img, end1, end2, end3, end4, end5, end6, end7, boxTar, xOut;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar,misswait;
-int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, missCount=0, incCount=0, corCount=0, scorCount=0;
+int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, missCount=0, incCount=0, corCount=0, scorCount=0, suckCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0, missShip=0;
 int blastWait=900, chroWait=600, telWait=300, spiWait=300, missWait=300;
 float invfill=0, codeCount=0;
 int tSize=45, bX=5, bY=50;
-boolean tele = false, boom = false, tStop = false, endGame = false, home=false, missOff=false;
+boolean tele = false, boom = false, tStop = false, endGame = false, home=false, missOff=false, missBounce=false;
 boolean blast = false, bolSpi = false, invinc = false, help=false, invTest=false;
 boolean cheatCode=false, cheat = false, start=false, open=true, inco=false, corr=false;
 boolean fireHome=false, selectTar=false, missSet=false, missi=false;
@@ -222,7 +222,6 @@ public void keyPressed()
 				}
 				telWait=0;
 			}
-		break;
 		case 'f':
 			stopShip();
 		break;
@@ -348,11 +347,30 @@ public void keyPressed()
   			}
   		break;
   		case 'h':
-  			help=!help;
-  			//if(cheat)
-  			//{
-  			//	cheatHelp=true;
-  			//}
+  			if(missOff==false)
+			{
+				if(missWait>=300)
+				{
+					home=!home;
+					if(home==false)
+					{
+						retMiss();
+						selectTar=false;
+						fireHome=false;
+						missSet=false;
+						missTrailClear();
+					}
+					if(home)
+					{
+						if(fireHome!=true)
+						{
+							selectTar=true;
+							missBounce=true;
+							missTrailClear();
+						}
+					}
+				}
+			}
   		break;
   		case 't':
   			if(cheat)
@@ -381,6 +399,11 @@ public void keyPressed()
 			if(cheat)
 			{
 				rockBottom.clear();
+				selectTar=false;
+				fireHome=false;
+				missSet=false;
+				home=false;
+				retMiss();
 			}
 		break;
 		case 'm':
@@ -480,10 +503,26 @@ void missRun()
 	}
 	if(missSet)
 	{
-		tarX=rockBottom.get(missShip).getX();
-		tarY=rockBottom.get(missShip).getY();
-		selectTar=false;
-		fireHome=true;
+		if(missShip<rockBottom.size())
+		{
+			if(rockBottom.size()>0)
+			{
+				{
+					tarX=rockBottom.get(missShip).getX();
+					tarY=rockBottom.get(missShip).getY();
+					selectTar=false;
+					fireHome=true;
+				}
+			}
+		}
+		if(missShip<=1)
+		{
+			selectTar=false;
+			fireHome=false;
+			missSet=false;
+			home=false;
+			retMiss();
+		}
 	}
 	if(fireHome)
 	{
@@ -530,6 +569,18 @@ void missTrailDraw()
 }
 void buttonDraw()
 {
+	if(help==false)
+	{
+		if(suckCount>=10&&cheat==false)
+		{
+			fill(255,255,255);
+			textSize(15);
+			text("Since you're such a GREAT player", 750, 300);
+			text("and lost ten times, here's the", 750,320);
+			text("cheat code: "+1979+"", 750,340);
+			noFill();
+		}
+	}
 	if(overRect(rectX, rectY, 500, 50))
 	{
 		rectOver=true;
@@ -639,6 +690,7 @@ void cheatWord()
 				if(!correctCode[g].equals(guessCode[g]))
 				{
 					inco=true;
+					incCount=0;
 					cheat=false;
 					cheatCode=false;
 					for(int j=0;j<guessCode.length;j++)
@@ -798,7 +850,13 @@ void missSpeed(int x)
 		missTrailX.add(0, miss.getX());
 		missTrailY.add(0, miss.getY());
 	}
-	miss.accelerate(10);
+	if(missBounce==false)
+	{
+		miss.accelerate(10);
+	}else if(missBounce==true)
+	{
+		miss.accelerate(20);
+	}
 }
 void varReset()
 {
@@ -883,20 +941,55 @@ void mousePressed()
 }
 void missTarCheck()
 {
-	if(dist(miss.getX(), miss.getY(), tarX, tarY)<10)
+	if(missBounce==false)
+	{	
+		if(dist(miss.getX(), miss.getY(), tarX, tarY)<10)
+		{
+			missi=true;
+			missCount=0;
+			rockBottom.remove(missShip-1);
+			scorCount++;
+			missEndX=tarX;
+			missEndY=tarY;
+			missWait=0;
+			selectTar=false;
+			fireHome=false;
+			missSet=false;
+			home=false;
+			retMiss();
+			
+		}
+	}else if(missBounce==true)
 	{
-		missWait=0;
-		missi=true;
-		missCount=0;
-		missEndX=tarX;
-		missEndY=tarY;
-		rockBottom.remove(missShip);
-		scorCount++;
-		retMiss();
-		selectTar=false;
-		fireHome=false;
-		missSet=false;
-		home=false;
+		if(dist(miss.getX(), miss.getY(), tarX, tarY)<40)
+		{
+			missi=true;
+			missCount=0;
+			if(rockBottom.size()==missShip)
+			{
+				missShip-=1;
+			}
+			if(rockBottom.size()>0)
+			{
+				rockBottom.remove(missShip-1);
+			}else if(rockBottom.size()==0)
+			{
+				rockBottom.remove(missShip);
+			}
+			scorCount++;
+			missEndX=tarX;
+			missEndY=tarY;
+			if(rockBottom.size()-1==0)
+			{
+				missWait=0;
+				selectTar=false;
+				fireHome=false;
+				missSet=false;
+				home=false;
+				missBounce=false;
+				retMiss();
+			}
+		}
 	}
 }
 void missCount()
@@ -1176,10 +1269,8 @@ void shipExploCounter()
 			varReset();
 			shipReset();
 			home=false;
-			miss.setX(ship.getX());
-			miss.setY(ship.getY());
-			miss.setDirectionX(0);
-			miss.setDirectionY(0);
+			retMiss();
+			suckCount++;
 		}
 		if(endGame)
 		{
@@ -1232,6 +1323,10 @@ public void helpWall()
 		text("M: toggle invincibility, regardless",550,450);
 		text("of the invincibility counter",550,490);
 		text("K: makes 1 fast tie fighter",550,540);
+		text("H: makes it so that the homing",550,590);
+		text("missile destroys many targets after",550,620);
+		text("it destroys the initial target, though",550,650);
+		text("the score counter gets glitchy",550,680);
 	}
 }
 //help button code
