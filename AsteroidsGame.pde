@@ -7,7 +7,7 @@ Rightbackwing rbWing;
 Missile miss;
 PImage img, end1, end2, end3, end4, end5, end6, end7, boxTar, xOut;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar,misswait;
-int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, missCount=0, incCount=0, corCount=0;
+int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, missCount=0, incCount=0, corCount=0, scorCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0, missShip=0;
 int blastWait=900, chroWait=600, telWait=300, spiWait=300, missWait=300;
 float invfill=0, codeCount=0;
@@ -23,8 +23,8 @@ int triX, triY;
 int tarX, tarY, missEndX, missEndY;
 color rectColor, circleColor, triColor;
 color rectHighlight, circleHighlight, triHighlight;
-public boolean rectOver=false;
-public boolean circleOver=false;
+boolean rectOver=false;
+boolean circleOver=false;
 boolean triOver = false;
 color rd=color(255,0,0);
 color og=color(255,127,0);
@@ -178,10 +178,7 @@ public void keyPressed()
 		break;
 		case 'a':
 			shipTurn(-10);
-			if(ship.getPointDirection()==360)
-	        {
-	            ship.setPointDirection((int)(ship.getPointDirection()-360));
-	        }
+			angReset();
 			shipSpeed();
 		break;
 		case 's':
@@ -189,10 +186,7 @@ public void keyPressed()
 		break;
 		case 'd':
 			shipTurn(10);
-			if(ship.getPointDirection()>=360)
-	        {
-	            ship.setPointDirection((int)(ship.getPointDirection()-360));
-	        }
+			angReset();
 			shipSpeed();
 		break;
 		case 'z':
@@ -215,7 +209,7 @@ public void keyPressed()
 				image(img, ship.getX()-140, ship.getY()-106, 280, 212);
 				teleX=ship.getX();
 				teleY=ship.getY();
-				shipTeleSet(ship.getTagX(), ship.getTagY());
+				shipSet(ship.getTagX(), ship.getTagY());
 				dedPer=(int)(Math.random()*10);
 				if(dedPer!=4)
 				{
@@ -228,6 +222,7 @@ public void keyPressed()
 				}
 				telWait=0;
 			}
+		break;
 		case 'f':
 			stopShip();
 		break;
@@ -240,8 +235,14 @@ public void keyPressed()
 					sCount=0;
 					spiWait=0;
 					missOff=true;
+					retMiss();
+					selectTar=false;
+					fireHome=false;
+					missSet=false;
+					missTrailClear();
 				}
 			}
+		break;
 		case ' ':
 			missOff=true;
 			bolt.add(new Bolt());
@@ -264,6 +265,11 @@ public void keyPressed()
 					}
 					tiStop();
 					chroWait=0;
+					retMiss();
+					selectTar=false;
+					fireHome=false;
+					missSet=false;
+					missTrailClear();
 				}
 			}
 		break;
@@ -277,6 +283,12 @@ public void keyPressed()
 					ship.setBombX(ship.getX());
 					ship.setBombY(ship.getY());
 					blastWait=0;
+					retMiss();
+					selectTar=false;
+					fireHome=false;
+					missSet=false;
+					missTrailX.clear();
+					missTrailY.clear();
 				}
 			}
 		break;
@@ -288,28 +300,19 @@ public void keyPressed()
 					home=!home;
 					if(home==false)
 					{
-						miss.setX(ship.getX());
-						miss.setY(ship.getY());
-						miss.setDirectionX(0);
-						miss.setDirectionY(0);
+						retMiss();
 						selectTar=false;
 						fireHome=false;
 						missSet=false;
-						missTrailX.clear();
-						missTrailY.clear();
+						missTrailClear();
 					}
 					if(home)
 					{
 						if(fireHome!=true)
 						{
 							selectTar=true;
-							missTrailX.clear();
-							missTrailY.clear();
-						}//else if(fireHome){
-							//selectTar=false;
-							//miss.setPointDirection((int)ship.getPointDirection());
-							//miss.accelerate(5);
-						//}
+							missTrailClear();
+						}
 					}
 				}
 			}
@@ -421,10 +424,8 @@ public void keyPressed()
 			open=true;
 			start=false;
 			bolt.clear();
-			tStopX.clear();
-			tStopY.clear();
-			tieBlastX.clear();
-			tieBlastY.clear();
+			tStopClear();
+			tieBlastClear();
 			destroyID.clear();
 			rockBottom.clear();
 			varReset();
@@ -436,14 +437,41 @@ public void keyPressed()
 		break;
 	}
 }
+
+void missTrailClear()
+{
+	missTrailX.clear();
+	missTrailY.clear();
+}
+void tieBlastClear()
+{
+	tieBlastX.clear();
+	tieBlastY.clear();
+}
+void tStopClear()
+{
+	tStopX.clear();
+	tStopY.clear();
+}
+void angReset()
+{
+	if(ship.getPointDirection()>=360)
+    {
+        ship.setPointDirection((int)(ship.getPointDirection()-360));
+    }
+}
+void retMiss()
+{
+	miss.setX(ship.getX());
+	miss.setY(ship.getY());
+	miss.setDirectionX(0);
+	miss.setDirectionY(0);
+}
 void missRun()
 {
 	if(home==false)
 	{
-		miss.setX(ship.getX());
-		miss.setY(ship.getY());
-		miss.setDirectionX(0);
-		miss.setDirectionY(0);
+		retMiss();
 		selectTar=false;
 		fireHome=false;
 		missSet=false;
@@ -517,19 +545,31 @@ void buttonDraw()
 	textSize(45);
 	text("Start game", 400, 540);
 	noFill();
-	if(overRect(circleX, circleY, 500, 50))
+	if(cheat==false)
 	{
-		circleOver=true;
-		fill(circleHighlight);
-	}else{
-		circleOver=false;
-		fill(circleColor);
+		if(overRect(circleX, circleY, 500, 50))
+		{
+			circleOver=true;
+			fill(circleHighlight);
+		}else{
+			circleOver=false;
+			fill(circleColor);
+		}
+	}else if(cheat==true)
+	{
+		fill(0,255,0);
 	}
 	stroke(0);
 	rect(circleX, circleY, 500, 50);
 	fill(0,0,0);
 	textSize(45);
-	text("Input cheat code", 350, 640);
+	if(cheat==false)
+	{
+		text("Input cheat code", 350, 640);
+	}else if(cheat)
+	{
+		text("Code already entered",275,640);
+	}
 	noFill();
 	if(help)
 	{
@@ -667,6 +707,9 @@ void rechaImage()
   		image(xOut,265,5,60,60);
   	}
 	arc(965, 35, 60, 60, 0, radians(3.6*invfill), PIE);
+	textSize(45);
+	text("HIGH SCORE: 2000", 350,35);
+	text("SCORE: "+scorCount, 350,80);
 }
 void titleWord()
 {
@@ -759,19 +802,23 @@ void missSpeed(int x)
 }
 void varReset()
 {
-	count=tCount=bCount=dCount=sCount=eCount=pCount=0;
-	turn=endX=endY=dedPer=bolAstX=bolAstY=0;
+	count=tCount=bCount=dCount=sCount=eCount=0;
+	pCount=missCount=incCount=corCount=scorCount=0;
+	turn=endX=endY=dedPer=bolAstX=bolAstY=missShip=0;
 	blastWait=900;
 	chroWait=600;
-	telWait=300;
-	spiWait=300;
-	invfill=0;
+	telWait=spiWait=missWait=300;
+	invfill=codeCount=0;
 	tSize=45;
 	bX=5;
 	bY=50;
-	tele=boom=tStop=endGame=false;
+	tele=boom=tStop=endGame=home=missOff=false;
 	blast=bolSpi=invinc=help=invTest=false;
-	cheat=start=open=true;
+	cheatCode=start=false;
+	open=true;
+	inco=corr=false;
+	fireHome=selectTar=missSet=missi=false;
+	rectOver=circleOver=triOver=false;
 }
 void shipReset()
 {
@@ -802,7 +849,10 @@ void mousePressed()
 	{
 		if(circleOver)
 		{
-			cheatCode=true;
+			if(cheat==false)
+			{
+				cheatCode=true;
+			}
 		}
 		if(rectOver)
 		{
@@ -841,10 +891,8 @@ void missTarCheck()
 		missEndX=tarX;
 		missEndY=tarY;
 		rockBottom.remove(missShip);
-		miss.setX(ship.getX());
-		miss.setY(ship.getY());
-		miss.setDirectionX(0);
-		miss.setDirectionY(0);
+		scorCount++;
+		retMiss();
 		selectTar=false;
 		fireHome=false;
 		missSet=false;
@@ -1039,6 +1087,7 @@ void gameOver()
   		if(ship.distDet(rockBottom.get(f).getX(),rockBottom.get(f).getY())&&invinc==false)
   		{
   			rockBottom.remove(f);
+  			scorCount++;
   			endX=ship.getX();
 			endY=ship.getY();
   			stopShip();
@@ -1120,10 +1169,8 @@ void shipExploCounter()
 			open=true;
 			start=false;
 			bolt.clear();
-			tStopX.clear();
-			tStopY.clear();
-			tieBlastX.clear();
-			tieBlastY.clear();
+			tStopClear();
+			tieBlastClear();
 			destroyID.clear();
 			rockBottom.clear();
 			varReset();
@@ -1218,6 +1265,7 @@ public void boAst()
   				boAstBo(bolAstX, bolAstY);
   				rockBottom.remove(c-ccount);
   				ccount++;
+  				scorCount++;
   				if(c+ccount>=rockBottom.size())
   				{
   					break;
@@ -1270,8 +1318,7 @@ public void bombRingCount()
 			boom=false;
 			missOff=false;
 			bCount=0;
-			tieBlastX.clear();
-			tieBlastY.clear();
+			tieBlastClear();
 		}
 	}
 	if(boom)
@@ -1288,6 +1335,7 @@ public void bombRingCount()
 				tieBlastX.add(rockBottom.get(z).getX());
 				tieBlastY.add(rockBottom.get(z).getY());
 				rockBottom.remove(z);
+				scorCount++;
 				boomDis();
 				//destroyID.add(z);
 				if(invfill<101)
@@ -1479,7 +1527,7 @@ public void shipTurn(int x)
 	lbWing.turn(x);
 	rbWing.turn(x);
 }
-public void shipTeleSet(int x, int y)
+public void shipSet(int x, int y)
 {
 	ship.setX(x);
 	ship.setY(y);
@@ -1492,7 +1540,6 @@ public void shipTeleSet(int x, int y)
 	rbWing.setX(x);
 	rbWing.setY(y);
 }
-
 public void realGone()
 {
 	for(int p=0;p<destroyID.size()-1;p++)
@@ -1501,7 +1548,6 @@ public void realGone()
 	}
 	destroyID.clear();
 }
-
 public void invTest()
 {
 	if(invTest)
