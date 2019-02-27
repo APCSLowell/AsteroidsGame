@@ -1,3 +1,4 @@
+//Credit for the Floater class to Mr. Simon
 abstract class Floater //Do NOT modify the Floater class! Make changes in the Spaceship class 
 {   
   protected int corners;  //the number of corners, a triangular floater has 3   
