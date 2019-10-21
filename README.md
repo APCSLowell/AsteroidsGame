@@ -1,8 +1,6 @@
 Asteroids (Part 1)
 ==================
-In this assignment we will start to replicate the old video game Asteroids. You will write a program that has a space ship that can be controlled with the keyboard. You will need to write a `Spaceship` class. Your `Spaceship` class will extend the `Floater` class, an `abstract` class that represents all things that float in space. 
-
-An `abstract` class is an "incomplete" class. It has `abstract` methods--incomplete methods that have no body. When your class extends an `abstract` class, you typically write the methods that are needed to "complete" the class. _Note: To complete this assignment you will be writing two classes `Spaceship` and `Star`. Do not modify the `Floater` class._
+In this assignment we will start to replicate the old video game Asteroids. You will write a program that has a space ship that can be controlled with the keyboard. You will need to write a `Spaceship` class. Your `Spaceship` class will extend the `Floater` class, a class that represents all things that float in space. _Note: To complete this assignment you will be writing two classes `Spaceship` and `Star`. Do not modify the `Floater` class._
 
 Suggested steps to complete this assignment
 -------------------------------------------
@@ -10,7 +8,6 @@ Suggested steps to complete this assignment
 1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame). 
 1. Open the program by opening `AsteroidsGame.pde` in Processing or opening the AsteroidsGame folder in Sublime.
 2. Uncomment the `extends floater` on Line 1 of `Spaceship.pde`
-3. Complete the 10 abstract `set` and `get` functions that the `Spaceship` class inherits from `Floater`
 4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find slides #1 - 58 on the [Asteroids](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit?usp=sharing) and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
 5. At the top of `AsteroidsGame.pde`, declare a variable of type `Spaceship`
 6. Initialize the `Spaceship` as a new instance of the class
@@ -27,11 +24,9 @@ These steps are only a suggestion. Your Asteroids game doesn't have to work or a
 
 Some important things to keep in mind
 -------------------------------------
-1. Abstract classes are "unfinished"
-2. Abstract classes are one way that programmers can collaborate and divide up the work of a large program
-3. You're collaborating! Some of the work for the `Spaceship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Ship` class. 
-3. To create the `Spaceship` class you need to write a constructor and finish the "unfinished" `abstract` functions in `Floater`.
-4. When you are sketching out your ship on th [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) make sure the ship is centered at (0,0) and pointing to the right
+3. You're collaborating! Most of the work for the `Spaceship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Spaceship` class. 
+3. To create the `Spaceship` class you need to write a constructor.
+4. When you are sketching out your ship on the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) make sure the ship is centered at (0,0) and pointing to the right
 4. Don't declare any duplicate variables in your `Spaceship` class. You are inheriting all the variables you need from `Floater`
 5. Make sure your `Spaceship` constructor initializes all 9 of the `protected` variables it inherits from `Floater`
 
