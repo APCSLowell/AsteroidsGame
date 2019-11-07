@@ -4,6 +4,8 @@ ArrayList<Star> starList;
 boolean accelerating;
 boolean rightDown;
 boolean leftDown;
+boolean javascript;
+DumbObject engineAudio;
 
 public void setup() 
 {
@@ -18,6 +20,20 @@ public void setup()
 	accelerating = false;
 	rightDown = false;
 	leftDown = false;
+
+	//console.log(javascript);
+
+	try
+	{
+		if (javascript)
+		{
+			size(50, 50);
+		}
+	}
+	catch(Exception e)
+	{
+
+	}
 }
 public void draw() 
 {
@@ -35,11 +51,11 @@ public void draw()
 		spaceship.accelerate(0.1);
 	}
 
-	if (leftDown && !rightDown)
+	if (leftDown && rightDown == false)
 	{
 		spaceship.turn(-4);
 	}
-	else if (rightDown && !leftDown)
+	else if (rightDown && leftDown == false)
 	{
 		spaceship.turn(4);
 	}
@@ -70,6 +86,15 @@ public void keyReleased()
 	{
 		case UP:
 			accelerating = false;
+			try {
+				if (javascript)
+				{
+					System.out.println("doo");
+					engineAudio.stop();
+					engineAudio.currentTime = 0;
+				}
+			}
+			catch(Exception _) {}
 			break;
 		case DOWN:
 			break;
@@ -84,4 +109,10 @@ public void keyReleased()
 public void handleKeys()
 {
 	
+}
+
+class DumbObject
+{
+	public int currentTime;
+	public void stop(){}
 }
