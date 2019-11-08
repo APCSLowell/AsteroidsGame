@@ -22,7 +22,21 @@
 	    	var javascript = true;
 	    	var engineAudio = document.createElement("audio");
 	    	engineAudio.loop=true;
-			engineAudio.src="audioFile.mp3";
+			engineAudio.src="to_be_found.mp3";
+
+			window.addEventListener("keydown", event => {
+				if (event.keyCode === 38) {
+					engineAudio.play();
+				}
+			});
+
+			window.addEventListener("keyup", event => {
+				if (event.keyCode === 38) {
+					engineAudio.pause();
+					engineAudio.currentTime = 0;
+				}
+			});
+
 
 
 			

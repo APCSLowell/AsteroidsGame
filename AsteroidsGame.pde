@@ -4,7 +4,6 @@ ArrayList<Star> starList;
 boolean accelerating;
 boolean rightDown;
 boolean leftDown;
-boolean javascript;
 DumbObject engineAudio;
 
 public void setup() 
@@ -23,8 +22,9 @@ public void setup()
 
 	//console.log(javascript);
 
-	try
+	/*try
 	{
+		console.log(javascript);
 		if (javascript)
 		{
 			size(50, 50);
@@ -33,7 +33,7 @@ public void setup()
 	catch(Exception e)
 	{
 
-	}
+	}*/
 }
 public void draw() 
 {
@@ -86,7 +86,7 @@ public void keyReleased()
 	{
 		case UP:
 			accelerating = false;
-			try {
+			/*try {
 				if (javascript)
 				{
 					System.out.println("doo");
@@ -94,7 +94,7 @@ public void keyReleased()
 					engineAudio.currentTime = 0;
 				}
 			}
-			catch(Exception _) {}
+			catch(Exception _) {}*/
 			break;
 		case DOWN:
 			break;
