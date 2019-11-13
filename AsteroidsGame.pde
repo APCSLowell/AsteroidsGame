@@ -1,9 +1,12 @@
+import java.util.Date;
+
 //your variable declarations here
 Spaceship spaceship;
 ArrayList<Star> starList;
 boolean accelerating;
 boolean rightDown;
 boolean leftDown;
+boolean hyperspace;
 DumbObject engineAudio;
 
 public void setup() 
@@ -59,49 +62,58 @@ public void draw()
 	{
 		spaceship.turn(4);
 	}
+
+	if (hyperspace)
+	{
+		spaceship.hyperspace();
+	}
 }
 
 public void keyPressed()
 {
-	switch(keyCode)
+	switch(key)
 	{
-		case UP:
+		case 'w':
+		case 'W':
 			accelerating = true;
 			break;
-		case DOWN:
+		case 's':
+		case 'S':
 			accelerating = false;
 			break;
-		case LEFT:
+		case 'a':
+		case 'A':
 			leftDown = true;
 			break;
-		case RIGHT:
+		case 'd':
+		case 'D':
 			rightDown = true;
+			break;
+		case 'f':
+		case 'F':
+			hyperspace = true;
 			break;
 	}
 }
 
 public void keyReleased()
 {
-	switch(keyCode)
+	switch(key)
 	{
-		case UP:
+		case 'w':
+		case 'W':
 			accelerating = false;
-			/*try {
-				if (javascript)
-				{
-					System.out.println("doo");
-					engineAudio.stop();
-					engineAudio.currentTime = 0;
-				}
-			}
-			catch(Exception _) {}*/
 			break;
-		case DOWN:
-			break;
-		case LEFT:
+		/*case 's':
+		case 'S':
+			accelerating = false;
+			break;*/
+		case 'a':
+		case 'A':
 			leftDown = false;
 			break;
-		case RIGHT:
+		case 'd':
+		case 'D':
 			rightDown = false;
 			break;
 	}

@@ -1,5 +1,7 @@
 class Spaceship extends Floater  
 {   
+	long hyperspaceTime;
+
 	public Spaceship(
 		int corners,
 		int[] xCorners,
@@ -19,6 +21,7 @@ class Spaceship extends Floater
 		this.myDirectionX = myDirectionX;
 		this.myDirectionY = myDirectionY;
 		this.myPointDirection = myPointDirection;
+		this.hyperspaceTime = 0;
 	}
 
 	public void accelerate(double dAmount)
@@ -65,10 +68,29 @@ class Spaceship extends Floater
 			endShape(CLOSE);
 			popMatrix();
 
+		if ((new Date()).getTime() - hyperspaceTime > 0)
+		{
+			fill(0, 0, 255, 20);
+			ellipse((float)(this.myCenterX), (float)(this.myCenterY), 10, 15);
+		}
+		else
+		{
+			this.hyperspaceTime = 0;
+		}
+
 
 			
 		}
 		super.show();
+	}
 
+	public void hyperspace()
+	{
+		this.myCenterX = Math.random() * width;
+		this.myCenterY = Math.random() * height;
+		this.myDirectionX = 0;
+		this.myDirectionY = 0;
+		this.myPointDirection = 0;
+		this.hyperspaceTime = (new Date()).getTime();
 	}
 }
