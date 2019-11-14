@@ -21,6 +21,8 @@ class Spaceship extends Floater
 		this.myDirectionX = myDirectionX;
 		this.myDirectionY = myDirectionY;
 		this.myPointDirection = myPointDirection;
+
+		
 		this.hyperspaceTime = 0;
 	}
 
@@ -67,30 +69,39 @@ class Spaceship extends Floater
 			vertex(-8, 8);
 			endShape(CLOSE);
 			popMatrix();
-
-		if ((new Date()).getTime() - hyperspaceTime > 0)
-		{
-			fill(0, 0, 255, 20);
-			ellipse((float)(this.myCenterX), (float)(this.myCenterY), 10, 15);
-		}
-		else
-		{
-			this.hyperspaceTime = 0;
-		}
-
-
 			
 		}
+
+		if (this.hyperspaceTime != 0) {
+			System.out.println((new Date()).getTime());
+			if ((new Date()).getTime() - this.hyperspaceTime < 1000)
+			{
+				fill(0, 0, 255, 255);
+				ellipse((float)(this.myCenterX), (float)(this.myCenterY), 15, 20);
+			}
+			else
+			{
+				this.hyperspaceTime = 0;
+				hyperspace = false;
+				this.myCenterX = Math.random() * width;
+				this.myCenterY = Math.random() * height;
+				this.myDirectionX = 0;
+				this.myDirectionY = 0;
+				this.myPointDirection = 0;
+			}
+		}
+		
 		super.show();
 	}
 
 	public void hyperspace()
 	{
-		this.myCenterX = Math.random() * width;
-		this.myCenterY = Math.random() * height;
-		this.myDirectionX = 0;
-		this.myDirectionY = 0;
-		this.myPointDirection = 0;
 		this.hyperspaceTime = (new Date()).getTime();
+		System.out.println("Initial: " + this.hyperspaceTime);
+	}
+
+	public boolean inHyperspace()
+	{
+		return this.hyperspaceTime != 0;
 	}
 }

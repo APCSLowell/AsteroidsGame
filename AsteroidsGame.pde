@@ -3,6 +3,7 @@ import java.util.Date;
 //your variable declarations here
 Spaceship spaceship;
 ArrayList<Star> starList;
+ArrayList<Asteroid> asteroidList;
 boolean accelerating;
 boolean rightDown;
 boolean leftDown;
@@ -19,6 +20,15 @@ public void setup()
 	{
 		starList.add(new Star((int)(width*Math.random()), (int)(height*Math.random())));
 	}
+
+	asteroidList = new ArrayList<Asteroid>();
+	int[] asteroidVertexesX = {15, 8, 0, -7, -14,  -8, -6,    0,  8};
+	int[] asteroidVertexesY = {3, 15, 8,  4,  -2, -18, -10, -3, -4};
+	for (int i = 0; i < 15; i++)
+	{
+		asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
+	}
+	//asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
 	accelerating = false;
 	rightDown = false;
 	leftDown = false;
@@ -49,23 +59,27 @@ public void draw()
 		i.show();
 	}
 
-	if (accelerating)
+	for (Asteroid i : asteroidList)
 	{
-		spaceship.accelerate(0.1);
+		i.show();
+		i.move();
 	}
 
-	if (leftDown && rightDown == false)
+	if (!spaceship.inHyperspace())
 	{
-		spaceship.turn(-4);
-	}
-	else if (rightDown && leftDown == false)
-	{
-		spaceship.turn(4);
-	}
+		if (accelerating)
+		{
+			spaceship.accelerate(0.1);
+		}
 
-	if (hyperspace)
-	{
-		spaceship.hyperspace();
+		if (leftDown && rightDown == false)
+		{
+			spaceship.turn(-4);
+		}
+		else if (rightDown && leftDown == false)
+		{
+			spaceship.turn(4);
+		}
 	}
 }
 
@@ -91,7 +105,7 @@ public void keyPressed()
 			break;
 		case 'f':
 		case 'F':
-			hyperspace = true;
+			spaceship.hyperspace();
 			break;
 	}
 }
