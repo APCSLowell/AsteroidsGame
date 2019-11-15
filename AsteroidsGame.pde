@@ -10,6 +10,10 @@ boolean leftDown;
 boolean hyperspace;
 DumbObject engineAudio;
 
+//temporary
+int[] asteroidVertexesX = {15, 8, 0, -7, -14,  -8, -6,    0,  8};
+int[] asteroidVertexesY = {3,  6, 8,  4,  -2, -8, -10,  -12, -4};
+
 public void setup() 
 {
   //your code here
@@ -23,12 +27,12 @@ public void setup()
 
 	asteroidList = new ArrayList<Asteroid>();
 	int[] asteroidVertexesX = {15, 8, 0, -7, -14,  -8, -6,    0,  8};
-	int[] asteroidVertexesY = {3, 15, 8,  4,  -2, -18, -10, -3, -4};
+	int[] asteroidVertexesY = {3,  6, 8,  4,  -2, -8, -10,  -12, -4};
 	for (int i = 0; i < 15; i++)
 	{
-		asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
+		//asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
 	}
-	//asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
+	asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
 	accelerating = false;
 	rightDown = false;
 	leftDown = false;
@@ -59,10 +63,37 @@ public void draw()
 		i.show();
 	}
 
-	for (Asteroid i : asteroidList)
+	for (int i = 0; i < asteroidList.size(); ++i)
 	{
-		i.show();
-		i.move();
+		Asteroid asteroid = asteroidList.get(i);
+		if (dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 20)
+		{
+			asteroidList.remove(i);
+
+			//implement SAT collision detection
+			//https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
+			//get vertexes from asteroids instead next time
+
+			//loop through each vertex of the asteroid
+			if (false)
+			{
+				for (int j = 0; j < asteroidVertexesX.length; ++j)
+				{
+					//calculate left normal of each side
+					double normalX = -(asteroidVertexesY[j+1] - asteroidVertexesY[j]);
+					double normalY = (asteriodVertexesX[j+1] - asteroidVertexes[j]);
+
+					//project onto the normal
+					//asteroidVertexesX[j]
+				}
+			}
+			
+		}
+		else
+		{
+			asteroid.show();
+			asteroid.move();
+		}
 	}
 
 	if (!spaceship.inHyperspace())

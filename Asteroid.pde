@@ -29,7 +29,11 @@ class Asteroid extends Floater
 
 	public void move()
 	{
+
 		this.myPointDirection += this.rotationRate;
 		super.move();
 	}
+
+	public double getX(){ return this.myCenterX; }
+	public double getY(){ return this.myCenterY; }
 }

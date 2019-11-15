@@ -104,4 +104,13 @@ class Spaceship extends Floater
 	{
 		return this.hyperspaceTime != 0;
 	}
+
+	public double getX()
+	{
+		return this.myCenterX;
+	}
+	public double getY()
+	{
+		return this.myCenterY;
+	}
 }
