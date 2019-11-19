@@ -1,7 +1,6 @@
-class Asteroid extends Floater
+ class Asteroid extends Floater
 {
-
-	private double                                                                                                                                                                                                                                                        rotationRate;
+	private double rotationRate;
 
 	public Asteroid(
 		int corners,
@@ -29,11 +28,11 @@ class Asteroid extends Floater
 
 	public void move()
 	{
-
 		this.myPointDirection += this.rotationRate;
 		super.move();
 	}
 
 	public double getX(){ return this.myCenterX; }
 	public double getY(){ return this.myCenterY; }
+	public double getPointDirection(){ return this.myPointDirection; }
 }
