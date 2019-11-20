@@ -1,6 +1,6 @@
 class Spaceship extends Floater  
 {   
-  private long hyperspaceTime;
+  private int hyperspaceTime;
 
   public Spaceship(
     int corners, 
@@ -73,10 +73,16 @@ class Spaceship extends Floater
 
     if (this.hyperspaceTime != 0) {
       //System.out.println((new Date()).getTime());
-      if ((new Date()).getTime() - this.hyperspaceTime < 1000)
+    	int time = millis() - this.hyperspaceTime;
+      if (time < 1000)
       {
+      	pushMatrix();
         fill(0, 0, 255, 255);
-        ellipse((float)(this.myCenterX), (float)(this.myCenterY), 15, 20);
+        translate((float) this.myCenterX, (float) this.myCenterY);
+        float dRadians = (float)(this.myPointDirection*(Math.PI/180));
+      	rotate(dRadians);
+        ellipse(0, 0, max(9, time / 20), max(6, time / 25));
+        popMatrix();
       } else
       {
         this.hyperspaceTime = 0;
@@ -94,8 +100,7 @@ class Spaceship extends Floater
 
   public void hyperspace()
   {
-    this.hyperspaceTime = (new Date()).getTime();
-    System.out.println("Initial: " + this.hyperspaceTime);
+    this.hyperspaceTime = millis();
   }
 
   public boolean inHyperspace()
