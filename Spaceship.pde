@@ -111,4 +111,14 @@ class Spaceship extends Floater
   {
     return this.myCenterY;
   }
+  
+  public void setX(double x)
+  {
+    this.myCenterX = x;
+  }
+  
+  public void setY(double y)
+  {
+    this.myCenterY = y;
+  }
 }
