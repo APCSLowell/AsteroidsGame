@@ -32,9 +32,9 @@ public void setup()
   int[] asteroidVertexesY = {3, 6, 8, 4, -2, -8, -10, -12, -4};
   for (int i = 0; i < 15; i++)
   {
-    asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
+    //asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
   }
-  //asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
+  asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
   accelerating = false;
   rightDown = false;
   leftDown = false;
@@ -59,10 +59,10 @@ public void setup()
 public void draw() 
 {
   background(0);
-  /*spaceship.setX(mouseX);
-  spaceship.setY(mouseY);*/
+  spaceship.setX(mouseX);
+  spaceship.setY(mouseY);
   spaceship.show(accelerating);
-  spaceship.move();
+  // spaceship.move();
 
   for (Star i : starList)
   {
@@ -72,16 +72,16 @@ public void draw()
   for (int i = 0; i < asteroidList.size(); ++i)
   {
     Asteroid asteroid = asteroidList.get(i);
-    if (dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 20)
+    if (true || dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 20)
     {
-      asteroidList.remove(i);
+      //asteroidList.remove(i);
 
       //implement SAT collision detection
       //https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
       //get vertexes from asteroids instead next time
 
       //loop through each vertex of the asteroid
-      if (false)
+      if (true)
       {
         //System.out.println("Going");
         for (int j = 0; j < asteroidVertexesX.length; j++)
@@ -109,7 +109,9 @@ public void draw()
             normalY = asteroidVertexesX[j+1] - asteroidVertexesX[j];
           }
 
-          ellipse((float)(asteroidVertexesX[j] + asteroid.getX()), (float)(asteroidVertexesY[j] + asteroid.getY()), 10, 10);
+          if (j == 50) {
+          	ellipse((float)(asteroidVertexesX[j] + asteroid.getX()), (float)(asteroidVertexesY[j] + asteroid.getY()), 10, 10);	
+          }
 
           //for each vertex, project onto normal
           for (int k = 0; k < asteroidVertexesX.length; k++)
