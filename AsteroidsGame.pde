@@ -10,12 +10,12 @@ PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar,misswa
 int count=0, tCount=0, bCount=0, dCount=0, sCount=0, eCount=0, pCount=0, missCount=0, incCount=0, corCount=0, scorCount=0, suckCount=0;
 int turn=0, endX=0, endY=0, dedPer=0, bolAstX=0, bolAstY=0, missShip=0;
 int blastWait=900, chroWait=600, telWait=300, spiWait=300, missWait=300;
-float invfill=0, codeCount=0;
+float invfill=0, codeCount=0,theWorldCount=0;
 int tSize=45, bX=5, bY=50;
 boolean tele = false, boom = false, tStop = false, endGame = false, home=false, missOff=false, missBounce=false;
 boolean blast = false, bolSpi = false, invinc = false, help=false, invTest=false;
 boolean cheatCode=false, cheat = false, start=false, open=true, inco=false, corr=false;
-boolean fireHome=false, selectTar=false, missSet=false, missi=false;
+boolean fireHome=false, selectTar=false, missSet=false, missi=false,theWorld=false;
 int teleX, teleY;
 int rectX, rectY;
 int circleX, circleY;
@@ -47,6 +47,7 @@ ArrayList<Integer> missTrailY=new ArrayList<Integer>();
 public String[] correctCode={"1","9","7","9"};
 public String[] guessCode={"f", "f", "f","f"};
 PImage[] endBoom=new PImage[9];
+PImage[] dio=new PImage[25];
 public void setup() 
 {
 	ship=new Spaceship();
@@ -69,6 +70,31 @@ public void setup()
   	endBoom[6]=loadImage("explofr7.gif");
   	endBoom[7]=loadImage("explofr8.gif");
   	endBoom[8]=loadImage("explofr9.gif");
+  	dio[0]=loadImage("zawarudo1.gif");
+  	dio[1]=loadImage("zawarudo2.gif");
+  	dio[2]=loadImage("zawarudo3.gif");
+  	dio[3]=loadImage("zawarudo4.gif");
+  	dio[4]=loadImage("zawarudo5.jpg");
+  	dio[5]=loadImage("zawarudo6.jpg");
+  	dio[6]=loadImage("zawarudo7.jpg");
+  	dio[7]=loadImage("zawarudo8.jpg");
+  	dio[8]=loadImage("zawarudo9.jpg");
+  	dio[9]=loadImage("zawarudo10.jpg");
+  	dio[10]=loadImage("zawarudo11.jpg");
+  	dio[11]=loadImage("zawarudo12.jpg");
+  	dio[12]=loadImage("zawarudo13.jpg");
+  	dio[13]=loadImage("zawarudo14.jpg");
+  	dio[14]=loadImage("zawarudo15.jpg");
+  	dio[15]=loadImage("zawarudo16.jpg");
+  	dio[16]=loadImage("zawarudo17.jpg");
+  	dio[17]=loadImage("zawarudo18.jpg");
+  	dio[18]=loadImage("zawarudo19.jpg");
+  	dio[19]=loadImage("zawarudo20.jpg");
+  	dio[20]=loadImage("zawarudo21.jpg");
+  	dio[21]=loadImage("zawarudo22.jpg");
+  	dio[22]=loadImage("zawarudo23.jpg");
+  	dio[23]=loadImage("zawarudo24.jpg");
+  	dio[24]=loadImage("zawarudo25.jpg");
   	misstar=loadImage("missTar.png");
   	tieBoom=loadImage("explosion.png");
   	boomwait=loadImage("boomwait.png");
@@ -254,6 +280,7 @@ public void keyPressed()
 				{
 					tStop=true;
 					missOff=true;
+					theWorld=true;
 					tCount=0;
 					tStopX.clear();
 					tStopY.clear();
@@ -261,6 +288,10 @@ public void keyPressed()
 					{
 						tStopX.add(rockBottom.get(f).getDirectionX());
 						tStopY.add(rockBottom.get(f).getDirectionY());
+					}
+					if(cheat==true)
+					{
+						zaWARUDO();
 					}
 					tiStop();
 					chroWait=0;
@@ -460,6 +491,12 @@ public void keyPressed()
 		case 'k':
 			rockBottom.add(new Asteroid());
 			rockBottom.get(rockBottom.size()-1).accelerate(7);
+		break;
+		case 'o':
+			if(cheat)
+			{
+				theWorld=!theWorld;
+			}
 		break;
 	}
 }
@@ -1054,6 +1091,25 @@ Integer firstF()
 		}
 	}
 	return 50;
+}public void zaWARUDO()
+{
+	if(theWorldCount<300&&theWorld)
+	{
+		if(theWorldCount/12<25)
+		{
+			image(dio[(int)(theWorldCount/12)],-166,250, 1332, 750);
+			tint(255,127);
+		}
+		if(theWorldCount==300)
+		{
+			theWorldCount=0;
+			theWorld=false;
+		}
+	}
+	if(theWorld)
+	{
+		theWorldCount++;
+	}
 }
 public void tiStop()
 {
@@ -1065,7 +1121,7 @@ public void tiStop()
 }
 public void tiStart()
 {
-	for(int d=0;d<rockBottom.size()-1;d++)
+	for(int d=0;d<rockBottom.size();d++)
 	{
 		rockBottom.get(d).setDirectionX(tStopX.get(d));
 		rockBottom.get(d).setDirectionY(tStopY.get(d));
@@ -1330,6 +1386,7 @@ public void helpWall()
 		text("missile destroys many targets after",550,620);
 		text("it destroys the initial target, though",550,650);
 		text("the score counter gets glitchy",550,680);
+		text("O: bizarre effect to time stop",550,710);
 	}
 }
 //help button code
