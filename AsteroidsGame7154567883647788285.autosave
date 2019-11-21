@@ -1,4 +1,5 @@
-// import java.util.Scanner;
+import java.util.Date;
+import java.util.Scanner;
 
 //your variable declarations here
 Spaceship spaceship;
@@ -9,10 +10,11 @@ boolean rightDown;
 boolean leftDown;
 boolean hyperspace;
 
+Scanner scanner;
 
 //temporary
-int[] asteroidVertexesX = {5, 5, -5, -5};//{15, 8, 0, -7, -14, -8, -6, 0, 8};
-int[] asteroidVertexesY = {5, -5, -5, 5};//{3, 6, 8, 4, -2, -8, -10, -12, -4};
+int[] asteroidVertexesX = {15, 8, 0, -7, -14, -8, -6, 0, 8};
+int[] asteroidVertexesY = {3, 6, 8, 4, -2, -8, -10, -12, -4};
 int[] shipVertexesX = {-8, 16, -8};
 int[] shipVertexesY = {-8, 0, 8};
 
@@ -28,13 +30,13 @@ public void setup()
   }
 
   asteroidList = new ArrayList<Asteroid>();
-  //int[] asteroidVertexesX = {15, 8, 0, -7, -14, -8, -6, 0, 8};
-  //int[] asteroidVertexesY = {3, 6, 8, 4, -2, -8, -10, -12, -4};
+  int[] asteroidVertexesX = {15, 8, 0, -7, -14, -8, -6, 0, 8};
+  int[] asteroidVertexesY = {3, 6, 8, 4, -2, -8, -10, -12, -4};
   for (int i = 0; i < 15; i++)
   {
     //asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, Math.random()*5-2, Math.random()*5-2,Math.random()*360, Math.random()*5-2));
   }
-  asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), 300, 300, 0, 0, 0, 0));
+  asteroidList.add(new Asteroid(asteroidVertexesX.length, asteroidVertexesX, asteroidVertexesY, color(240), Math.random()*width, Math.random()*height, 0, 0, 0, 0));
   accelerating = false;
   rightDown = false;
   leftDown = false;
@@ -54,7 +56,7 @@ public void setup()
    
    	}*/
    
-   // scanner = new Scanner(System.in);
+   scanner = new Scanner(System.in);
 }
 public void draw() 
 {
@@ -62,7 +64,7 @@ public void draw()
   spaceship.setX(mouseX);
   spaceship.setY(mouseY);
   spaceship.show(accelerating);
-  // spaceship.move();
+  //spaceship.move();
 
   for (Star i : starList)
   {
@@ -81,104 +83,84 @@ public void draw()
       //get vertexes from asteroids instead next time
 
       //loop through each vertex of the asteroid
-      
-      
-      
-      
-      
       if (true)
       {
-        int[] shiftedAsteroidVertexesX = new int[asteroidVertexesX.length];
-        int[] shiftedAsteroidVertexesY = new int[asteroidVertexesY.length];
-        
-        for (int j = 0; j < asteroidVertexesX.length; j++)
-        {
-          shiftedAsteroidVertexesX[j] = (int)(asteroidVertexesX[j] + asteroid.getX());
-          shiftedAsteroidVertexesY[j] = (int)(asteroidVertexesY[j] + asteroid.getY());
-        }
-        
-        int[] shiftedShipVertexesX = new int[shipVertexesX.length];
-        int[] shiftedShipVertexesY = new int[shipVertexesX.length];
-        
-        for (int j = 0; j < shipVertexesX.length; j++)
-        {
-          shiftedShipVertexesX[j] = (int)(shiftedAsteroidVertexesX[j] + spaceship.getX());
-          shiftedShipVertexesY[j] = (int)(asteroidVertexesY[j] + spaceship.getY());
-        }
-        
         //System.out.println("Going");
         for (int j = 0; j < asteroidVertexesX.length; j++)
         {
-          
-          //shift coordinate
-          
-          //calculate left normal of each side //<>//
+          //calculate left normal of each side
           //System.out.println("Iteration" + j);
           double normalX;
           double normalY;
 
+          double shipMaxX, shipMaxY, shipMinX, shipMinY;
+          shipMaxX = shipMaxY = 0;
+          shipMinX = shipMinY = 9999999999L;
+          double asteroidMaxX, asteroidMaxY, asteroidMinX, asteroidMinY;
+          asteroidMaxX = asteroidMaxY = 0;
+          asteroidMinX = asteroidMinY = 9999999999L;
+
           //if on last vertex of the side, go back to first
-          if (j == shiftedAsteroidVertexesX.length - 1)
+          if (j == asteroidVertexesX.length - 1)
           {
-            normalX = -(shiftedAsteroidVertexesY[0] - shiftedAsteroidVertexesY[j]);
-            normalY = shiftedAsteroidVertexesX[0] - shiftedAsteroidVertexesX[j];
+            normalX = -(asteroidVertexesY[0] - asteroidVertexesY[j]);
+            normalY = asteroidVertexesX[0] - asteroidVertexesX[j];
           } else
           {
-            normalX = -(shiftedAsteroidVertexesY[j+1] - shiftedAsteroidVertexesY[j]);
-            normalY = shiftedAsteroidVertexesX[j+1] - shiftedAsteroidVertexesX[j];
+            normalX = -(asteroidVertexesY[j+1] - asteroidVertexesY[j]);
+            normalY = asteroidVertexesX[j+1] - asteroidVertexesX[j];
           }
-          
-          double shipMax, shipMin;
-          double asteroidMax, asteroidMin;
-          shipMax = shipMin = shiftedShipVertexesX[0] * normalX + shiftedShipVertexesY[0] * normalY;
-          asteroidMax = asteroidMin = shiftedAsteroidVertexesX[0] * normalX + shiftedAsteroidVertexesY[0] * normalY;
+
+          ellipse((float)(asteroidVertexesX[j] + asteroid.getX()), (float)(asteroidVertexesY[j] + asteroid.getY()), 10, 10);
 
           //for each vertex, project onto normal
-          for (int k = 0; k < shiftedAsteroidVertexesX.length; k++)
+          for (int k = 0; k < asteroidVertexesX.length; k++)
           {
-            double projection = shiftedAsteroidVertexesX[k] * normalX + shiftedAsteroidVertexesY[k] * normalY;
+            double projectX = asteroidVertexesX[k] * normalX;
+            double projectY = asteroidVertexesY[k] * normalY;
 
-            if (projection > asteroidMax)
+            if (asteroidMaxX < projectX)
             {
-              asteroidMax = projection;
-            } else if (projection < asteroidMin)
+              asteroidMaxX = projectX;
+            } else if (asteroidMinX > projectX)
             {
-              asteroidMin = projection;
+              asteroidMinX = projectX;
+            }
+
+            if (asteroidMaxY < projectY)
+            {
+              asteroidMaxY = projectY;
+            } else if (asteroidMinY > projectY)
+            {
+              asteroidMinY = projectY;
             }
           }
 
-          for (int k = 0; k < shiftedShipVertexesX.length; k++)
+          for (int k = 0; k < shipVertexesX.length; k++)
           {
-            double projection = shiftedShipVertexesX[k] * normalX + shiftedShipVertexesY[k] * normalY;
+            double projectX = shipVertexesX[k] * normalX;
+            double projectY = shipVertexesY[k] * normalY;
 
-            if (projection > shipMax)
+            if (shipMaxX < projectX)
             {
-              shipMax = projection;
-            } else if (projection < shipMin)
+              shipMaxX = projectX;
+            } else if (shipMinX > projectX)
             {
-              shipMin = projection;
+              shipMinX = projectX;
+            }
+
+            if (shipMaxY < projectY)
+            {
+              shipMaxY = projectY;
+            } else if (shipMinY > projectY)
+            {
+              shipMinY = projectY;
             }
           }
-          
-          boolean collision = false;
-          
           //System.out.println("Calculated Normals");
-          if (asteroidMax < shipMin || shipMax < asteroidMin) //<>//
+          if (asteroidMaxX > shipMinX || shipMaxX > asteroidMinY)
           {
-            //System.out.println("No collision");
-          }
-          else
-          {
-            collision = true;
-          }
-          
-          if (collision)
-          {
-            System.out.println("collision");
-          }
-          else
-          {
-            System.out.println("No Collision");
+            System.out.println("collision");            
           }
         }
       }
@@ -252,4 +234,8 @@ public void keyReleased()
     rightDown = false;
     break;
   }
+}
+
+private int[] calcProjection() {
+  return new int[]{};
 }
