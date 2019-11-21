@@ -109,34 +109,31 @@ public void draw()
         for (int j = 0; j < asteroidVertexesX.length; j++)
         {
           
-          //calculate left normal of each side of each shape
+          //calculate left normal of each side
           //System.out.println("Iteration" + j);
-          double asteroidNormalX;
-          double asteroidNormalY;
+          double normalX;
+          double normalY;
 
           //if on last vertex of the side, go back to first
           if (j == shiftedAsteroidVertexesX.length - 1)
           {
-            asteroidNormalX = shiftedAsteroidVertexesY[0] - shiftedAsteroidVertexesY[j];
-            asteroidNormalY = -(shiftedAsteroidVertexesX[0] - shiftedAsteroidVertexesX[j]);
+            normalX = shiftedAsteroidVertexesY[0] - shiftedAsteroidVertexesY[j];
+            normalY = -(shiftedAsteroidVertexesX[0] - shiftedAsteroidVertexesX[j]);
           } else
           {
-            asteroidNormalX = shiftedAsteroidVertexesY[j+1] - shiftedAsteroidVertexesY[j];
-            asteroidNormalY = -(shiftedAsteroidVertexesX[j+1] - shiftedAsteroidVertexesX[j]);
+            normalX = shiftedAsteroidVertexesY[j+1] - shiftedAsteroidVertexesY[j];
+            normalY = -(shiftedAsteroidVertexesX[j+1] - shiftedAsteroidVertexesX[j]);
           }
-
-          //calculate ship normals
-          double shipNormalX, shipNormalY;
           
           double shipMax, shipMin;
           double asteroidMax, asteroidMin;
-          shipMax = shipMin = shiftedShipVertexesX[0] * asteroidNormalX + shiftedShipVertexesY[0] * asteroidNormalY; //<>//
-          asteroidMax = asteroidMin = shiftedAsteroidVertexesX[0] * asteroidNormalX + shiftedAsteroidVertexesY[0] * asteroidNormalY; //<>//
+          shipMax = shipMin = shiftedShipVertexesX[0] * normalX + shiftedShipVertexesY[0] * normalY;
+          asteroidMax = asteroidMin = shiftedAsteroidVertexesX[0] * normalX + shiftedAsteroidVertexesY[0] * normalY;
 
           //for each vertex, project onto normal
           for (int k = 0; k < shiftedAsteroidVertexesX.length; k++)
           {
-            double projection = shiftedAsteroidVertexesX[k] * asteroidNormalX + shiftedAsteroidVertexesY[k] * asteroidNormalY;
+            double projection = shiftedAsteroidVertexesX[k] * normalX + shiftedAsteroidVertexesY[k] * normalY;
 
             if (projection > asteroidMax)
             {
@@ -149,7 +146,7 @@ public void draw()
 
           for (int k = 0; k < shiftedShipVertexesX.length; k++)
           {
-            double projection = shiftedShipVertexesX[k] * asteroidNormalX + shiftedShipVertexesY[k] * asteroidNormalY;
+            double projection = shiftedShipVertexesX[k] * normalX + shiftedShipVertexesY[k] * normalY;
 
             if (projection > shipMax)
             {
@@ -164,7 +161,7 @@ public void draw()
           //System.out.println("Calculated Normals");
           //check if there is a gap
           //if so, doesn't collide
-          if (asteroidMax < shipMin || shipMax < asteroidMin) //<>//
+          if (asteroidMax < shipMin || shipMax < asteroidMin)
           {
             //System.out.println("No collision");
             collision = false;
