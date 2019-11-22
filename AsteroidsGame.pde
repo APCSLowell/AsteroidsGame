@@ -75,7 +75,7 @@ public void draw()
   for (int i = 0; i < asteroidList.size(); ++i)
   {
     Asteroid asteroid = asteroidList.get(i);
-    if (true || dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 20)
+    if (dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 40)
     {
       //implement SAT collision detection
       //https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
