@@ -59,10 +59,11 @@ public void setup()
 public void draw() 
 {
   background(0);
-  //spaceship.setX(mouseX);
-  //spaceship.setY(mouseY);
-  spaceship.setX(291);
-  spaceship.setY(287);
+  spaceship.setX(mouseX);
+  spaceship.setY(mouseY);
+  //text(mouseX + " " + mouseY, 20, 30);
+  //spaceship.setX(355);
+  //spaceship.setY(258);
   spaceship.show(accelerating);
   // spaceship.move();
 
@@ -76,8 +77,6 @@ public void draw()
     Asteroid asteroid = asteroidList.get(i);
     if (true || dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 20)
     {
-      //asteroidList.remove(i);
-
       //implement SAT collision detection
       //https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
       //get vertexes from asteroids instead next time
@@ -98,15 +97,63 @@ public void draw()
         int[] shiftedShipVertexesX = new int[shipVertexesX.length];
         int[] shiftedShipVertexesY = new int[shipVertexesX.length];
         
+        
         for (int j = 0; j < shipVertexesX.length; j++)
         {
           shiftedShipVertexesX[j] = (int)(shipVertexesX[j] + spaceship.getX());
           shiftedShipVertexesY[j] = (int)(shipVertexesY[j] + spaceship.getY());
         }
         
+        Point[] shipNormals = new Point[shipVertexesX.length];
+        
+        //Calculate normal of each side in the shipvertex
+        for (int j = 0; j < shipVertexesX.length - 1; j++) {
+          shipNormals[j] = calcNormal(shiftedShipVertexesX[j+1],shiftedShipVertexesY[j+1],shiftedShipVertexesX[j],shiftedShipVertexesY[j]); 
+        }
+        shipNormals[shipNormals.length-1] = calcNormal(shiftedShipVertexesX[shipNormals.length-1],shiftedShipVertexesY[shipNormals.length-1],shiftedShipVertexesX[0],shiftedShipVertexesY[0]);
+        
+        Point[] asteroidNormals = new Point[asteroidVertexesX.length];
+        
+        for (int j = 0; j < asteroidVertexesX.length - 1; j++) {
+          asteroidNormals[j] = calcNormal(shiftedAsteroidVertexesX[j+1],shiftedAsteroidVertexesY[j+1],shiftedAsteroidVertexesX[j],shiftedAsteroidVertexesY[j]); 
+        }
+        
+        asteroidNormals[asteroidNormals.length-1] = calcNormal(shiftedAsteroidVertexesX[asteroidNormals.length-1],shiftedAsteroidVertexesY[asteroidNormals.length-1],shiftedAsteroidVertexesX[0],shiftedAsteroidVertexesY[0]);
+        
+        if (spaceship.getX() == 355 && spaceship.getY() == 258) {
+          shipNormals = shipNormals;
+        }
+        
+        for (int j = 0; j < shipNormals.length; j++) {
+          collision = checkCollision(shipNormals[j], shiftedShipVertexesX, shiftedShipVertexesY, shiftedAsteroidVertexesX, shiftedAsteroidVertexesY);
+          if (!collision) {
+            break;
+          }
+        }
+        if (collision) {       //<>//
+          for (int j = 0; j < asteroidNormals.length; j++) { //<>//
+            collision = checkCollision(asteroidNormals[j], shiftedShipVertexesX, shiftedShipVertexesY, shiftedAsteroidVertexesX, shiftedAsteroidVertexesY);
+            if (!collision) {
+              break;
+            }
+          }
+        }
+        
+        if (collision) {
+          System.out.println("Collision");
+          //asteroidList.remove(i);
+        }
+        else {
+          System.out.println("No Collision");
+        }
+        
+        
+          
+        
+        
         //System.out.println("Going");
         //loop through each vertex of the asteroid     
-        for (int j = 0; j < asteroidVertexesX.length; j++)
+        /*for (int j = 0; j < asteroidVertexesX.length; j++)
         {
           
           //calculate left normal of each side of each shape
@@ -125,8 +172,6 @@ public void draw()
             asteroidNormalY = -(shiftedAsteroidVertexesX[j+1] - shiftedAsteroidVertexesX[j]);
           }
 
-          //calculate ship normals
-          double shipNormalX, shipNormalY;
           
           double shipMax, shipMin;
           double asteroidMax, asteroidMin;
@@ -179,11 +224,12 @@ public void draw()
         if (collision)
           {
             System.out.println("collision");
+            asteroidList.remove(i);
           }
           else
           {
             System.out.println("No Collision");
-          }
+          }*/
       }
     }
     asteroid.show();
@@ -255,4 +301,67 @@ public void keyReleased()
     rightDown = false;
     break;
   }
+}
+
+class Point {
+  private double x;
+  private double y;
+  
+  Point(double x, double y) {
+    this.x = x;
+    this.y = y;
+  }
+  
+  public double getX() {
+    return this.x;
+  }
+  public double getY() {
+    return this.y;
+  }
+  public void setX(double newX) {
+    this.x = newX;
+  }
+  public void setY(double newY) {
+    this.y = newY;
+  }
+}
+
+public Point calcNormal(double x1, double y1, double x2, double y2) {
+    return new Point(y1 - y2, -(x1 - x2));
+}
+
+public boolean checkCollision(Point normal, int[] x1, int[] y1, int[] x2, int[] y2) {
+  double[] minMax1 = findMinMaxProjection(normal, x1, y1);
+  double[] minMax2 = findMinMaxProjection(normal, x2, y2);
+  
+  boolean collision = false;
+   //<>//
+  if (minMax1[1] < minMax2[0] || minMax2[1] < minMax1[0]) {
+    return false;
+  }
+  else {
+    return true;
+  }
+  
+  
+}
+
+public double[] findMinMaxProjection(Point vector, int[] x, int[] y) {
+  double vectorX = vector.getX();
+  double vectorY = vector.getY();
+  
+  double min, max;
+  max = min = vectorX * x[0] + vectorY * y[0];
+  
+  //find object 1's projections //<>//
+  for (int i = 1; i < x.length; i++) {
+    double projection = vectorX * x[i] + vectorY * y[i];
+    if (projection > max) {
+      max = projection;
+    }
+    else if (projection < min) {
+      min = projection;
+    }
+  }
+  return new double[]{min, max};
 }
