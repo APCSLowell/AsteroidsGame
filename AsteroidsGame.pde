@@ -11,8 +11,8 @@ boolean hyperspace;
 
 
 //temporary
-int[] asteroidVertexesX = {5, 5, -5, -5};//{15, 8, 0, -7, -14, -8, -6, 0, 8};
-int[] asteroidVertexesY = {5, -5, -5, 5};//{3, 6, 8, 4, -2, -8, -10, -12, -4};
+int[] asteroidVertexesX = {5, 5, -5, -5};/*{15, 8, 0, -7, -14, -8, -6, 0, 8};*/
+int[] asteroidVertexesY = {5, -5, -5, 5};/*{3, 6, 8, 4, -2, -8, -10, -12, -4};*/
 int[] shipVertexesX = {-8, 16, -8};
 int[] shipVertexesY = {-8, 0, 8};
 
@@ -65,7 +65,7 @@ public void draw()
   //spaceship.setX(355);
   //spaceship.setY(258);
   spaceship.show(accelerating);
-  // spaceship.move();
+  //spaceship.move();
 
   for (Star i : starList)
   {
@@ -75,7 +75,7 @@ public void draw()
   for (int i = 0; i < asteroidList.size(); ++i)
   {
     Asteroid asteroid = asteroidList.get(i);
-    if (dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 40)
+    if (dist((float)asteroid.getX(), (float)asteroid.getY(), (float)spaceship.getX(), (float)spaceship.getY()) < 60)
     {
       //implement SAT collision detection
       //https://gamedevelopment.tutsplus.com/tutorials/collision-detection-using-the-separating-axis-theorem--gamedev-169
@@ -85,24 +85,17 @@ public void draw()
       {
       	boolean collision = false;
 
-        int[] shiftedAsteroidVertexesX = new int[asteroidVertexesX.length];
-        int[] shiftedAsteroidVertexesY = new int[asteroidVertexesY.length];
+        double[] shiftedAsteroidVertexesX = new double[asteroidVertexesX.length];
+        double[] shiftedAsteroidVertexesY = new double[asteroidVertexesY.length];
+        //double[] shiftedAsteroidVertexesX, shiftedAsteroidVertexesY, shiftedShipVertexesX, shiftedShipVertexesY;
+        //shift vertexes by the center positions and then rotate around center point
         
-        for (int j = 0; j < asteroidVertexesX.length; j++)
-        {
-          shiftedAsteroidVertexesX[j] = (int)(asteroidVertexesX[j] + asteroid.getX());
-          shiftedAsteroidVertexesY[j] = (int)(asteroidVertexesY[j] + asteroid.getY());
-        }
+        shiftRotatePoints(asteroidVertexesX, asteroidVertexesX, asteroid.getX(), asteroid.getY(), asteroid.getPointDirection(), shiftedAsteroidVertexesX,  shiftedAsteroidVertexesY);
         
-        int[] shiftedShipVertexesX = new int[shipVertexesX.length];
-        int[] shiftedShipVertexesY = new int[shipVertexesX.length];
+        double[] shiftedShipVertexesX = new double[shipVertexesX.length];
+        double[] shiftedShipVertexesY = new double[shipVertexesX.length];
         
-        
-        for (int j = 0; j < shipVertexesX.length; j++)
-        {
-          shiftedShipVertexesX[j] = (int)(shipVertexesX[j] + spaceship.getX());
-          shiftedShipVertexesY[j] = (int)(shipVertexesY[j] + spaceship.getY());
-        }
+        shiftRotatePoints(shipVertexesX, shipVertexesX, spaceship.getX(), spaceship.getY(), spaceship.getPointDirection(), shiftedShipVertexesX,  shiftedShipVertexesY);
         
         Point[] shipNormals = new Point[shipVertexesX.length];
         
@@ -120,18 +113,14 @@ public void draw()
         
         asteroidNormals[asteroidNormals.length-1] = calcNormal(shiftedAsteroidVertexesX[asteroidNormals.length-1],shiftedAsteroidVertexesY[asteroidNormals.length-1],shiftedAsteroidVertexesX[0],shiftedAsteroidVertexesY[0]);
         
-        if (spaceship.getX() == 355 && spaceship.getY() == 258) {
-          shipNormals = shipNormals;
-        }
-        
         for (int j = 0; j < shipNormals.length; j++) {
           collision = checkCollision(shipNormals[j], shiftedShipVertexesX, shiftedShipVertexesY, shiftedAsteroidVertexesX, shiftedAsteroidVertexesY);
           if (!collision) {
             break;
           }
         }
-        if (collision) {       //<>//
-          for (int j = 0; j < asteroidNormals.length; j++) { //<>//
+        if (collision) {      
+          for (int j = 0; j < asteroidNormals.length; j++) {
             collision = checkCollision(asteroidNormals[j], shiftedShipVertexesX, shiftedShipVertexesY, shiftedAsteroidVertexesX, shiftedAsteroidVertexesY);
             if (!collision) {
               break;
@@ -141,7 +130,7 @@ public void draw()
         
         if (collision) {
           System.out.println("Collision");
-          //asteroidList.remove(i);
+          asteroidList.remove(i);
         }
         else {
           System.out.println("No Collision");
@@ -330,7 +319,7 @@ public Point calcNormal(double x1, double y1, double x2, double y2) {
     return new Point(y1 - y2, -(x1 - x2));
 }
 
-public boolean checkCollision(Point normal, int[] x1, int[] y1, int[] x2, int[] y2) {
+public boolean checkCollision(Point normal, double[] x1, double[] y1, double[] x2, double[] y2) {
   double[] minMax1 = findMinMaxProjection(normal, x1, y1);
   double[] minMax2 = findMinMaxProjection(normal, x2, y2);
   
@@ -346,7 +335,7 @@ public boolean checkCollision(Point normal, int[] x1, int[] y1, int[] x2, int[] 
   
 }
 
-public double[] findMinMaxProjection(Point vector, int[] x, int[] y) {
+public double[] findMinMaxProjection(Point vector, double[] x, double[] y) {
   double vectorX = vector.getX();
   double vectorY = vector.getY();
   
@@ -364,4 +353,30 @@ public double[] findMinMaxProjection(Point vector, int[] x, int[] y) {
     }
   }
   return new double[]{min, max};
+}
+
+public double[][] shiftRotatePoints(int[] vertexesX, int[] vertexesY, double x, double y, double angle, double[] outputArrayX, double[] outputArrayY) {
+  double[] newPointsX = new double[vertexesX.length];
+  double[] newPointsY = new double[vertexesX.length];
+  for (int i = 0; i < vertexesX.length; i++) {
+    double translatedX = vertexesX[i] + x;
+    double translatedY = vertexesY[i] + y;
+    
+    outputArrayX[i] = translatedX*Math.cos(angle) - translatedY*Math.sin(angle);
+    outputArrayY[i] = translatedX*Math.sin(angle) + translatedY*Math.cos(angle);
+  }
+  return new double[][]{outputArrayX,outputArrayY};
+}
+
+public double[][] shiftRotatePoints(int[] vertexesX, int[] vertexesY, double x, double y, double angle) {
+  double[] newPointsX = new double[vertexesX.length];
+  double[] newPointsY = new double[vertexesX.length];
+  for (int i = 0; i < vertexesX.length; i++) {
+    double translatedX = vertexesX[i] + x;
+    double translatedY = vertexesY[i] + y;
+    
+    newPointsX[i] = translatedX*Math.cos(angle) - translatedY*Math.sin(angle);
+    newPointsY[i] = translatedX*Math.sin(angle) + translatedY*Math.cos(angle);
+  }
+  return new double[][]{newPointsX,newPointsY};
 }

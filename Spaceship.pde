@@ -116,6 +116,10 @@ class Spaceship extends Floater
   {
     return this.myCenterY;
   }
+  public double getPointDirection()
+  {
+    return this.myPointDirection;
+  }
   
   public void setX(double x)
   {
@@ -126,4 +130,6 @@ class Spaceship extends Floater
   {
     this.myCenterY = y;
   }
+  
+
 }
