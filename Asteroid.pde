@@ -28,7 +28,7 @@
 
 	public void move()
 	{
-		this.myPointDirection += this.rotationRate;
+		this.myPointDirection = (this.myPointDirection + this.rotationRate) % 360;
 		super.move();
 	}
 
