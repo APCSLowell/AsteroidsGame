@@ -32,6 +32,8 @@ Some important things to keep in mind
 
 Samples of Student Work
 -----------------------
+[Kendrick](https://kendrick-lee.github.io/AsteroidsGame/)   
+[Jaason](https://jjjscodes.github.io/AsteroidsGame/)   
 [Marvin](https://malee31.github.io/AsteroidsGameProcessing/)   
 [Timmy](https://tidang.github.io/AsteroidsGame/)   
 [David](https://daamaya.github.io/AsteroidsGame/)   
