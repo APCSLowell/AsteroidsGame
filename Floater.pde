@@ -17,7 +17,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     myDirectionX += ((dAmount) * Math.cos(dRadians));    
     myDirectionY += ((dAmount) * Math.sin(dRadians));       
   }   
-  public void turn (doulbe degreesOfRotation)   
+  public void turn (double degreesOfRotation)   
   {     
     //rotates the floater by a given number of degrees    
     myPointDirection+=degreesOfRotation;   
