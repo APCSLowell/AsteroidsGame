@@ -69,6 +69,7 @@ public void setup()
   	for(int worldWide=1; worldWide<=dio.length; worldWide++)
   	{
   		dio[worldWide-1]=loadImage("zawarudo"+worldWide+".gif");
+  		println("zawarudo"+worldWide+".gif");
   	}
   	misstar=loadImage("missTar.png");
   	tieBoom=loadImage("explosion.png");
@@ -266,7 +267,11 @@ public void keyPressed()
 					}
 					if(cheat==true)
 					{
-						zaWARUDO();
+						if(theWorld=true)
+						{
+							zaWARUDO();
+							println("zaWARUDO");
+						}
 					}
 					tiStop();
 					chroWait=0;
@@ -471,10 +476,13 @@ public void keyPressed()
 			if(cheat)
 			{
 				theWorld=!theWorld;
+				println("theWorld="+theWorld);
 			}
 		break;
 	}
 }
+
+
 
 void missTrailClear()
 {
