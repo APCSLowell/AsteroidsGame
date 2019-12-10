@@ -1,9 +1,9 @@
 //your variable declarations here
 Spaceship ship;
-Leftwing lWing;
-Rightwing rWing;
-Leftbackwing lbWing;
-Rightbackwing rbWing;
+Colorant lWing;
+Colorant rWing;
+Colorant lbWing;
+Colorant rbWing;
 Missile miss;
 PImage img, end1, end2, end3, end4, end5, end6, end7, boxTar, xOut;
 PImage end8, end9, tieBoom, boomwait, telewait, timewait,spinwait,misstar,misswait;
@@ -21,6 +21,7 @@ int rectX, rectY;
 int circleX, circleY;
 int triX, triY;
 int tarX, tarY, missEndX, missEndY;
+//rect & tri unused
 color rectColor, circleColor, triColor;
 color rectHighlight, circleHighlight, triHighlight;
 boolean rectOver=false;
@@ -51,50 +52,24 @@ PImage[] dio=new PImage[25];
 public void setup() 
 {
 	ship=new Spaceship();
-	lWing=new Leftwing();
-	rWing=new Rightwing();
-	lbWing=new Leftbackwing();
-	rbWing=new Rightbackwing();
+	lWing=new Colorant(new int[]{-18,-4,0,16,20,8,6,4,-4,-6,-14}, new int[]{-5,-5,-4,-4,-6,-10,-10,-6,-6,-7,-7}, color(255,0,0));
+	rWing=new Colorant(new int[]{-18,-4,0,16,20,8,6,4,-4,-6,-14}, new int[]{5,5,4,4,6,10,10,6,6,7,7}, color(255, 0, 0));
+	lbWing=new Colorant(new int[]{0,-3,-11,-14,-12,-2}, new int[]{-16,-12,-12,-16,-18,-18}, color(255, 0, 0));
+	rbWing=new Colorant(new int[]{0,-3,-11,-14,-12,-2}, new int[]{16,12,12,16,18,18}, color(255, 0, 0));
 	miss=new Missile();
 	size(1000, 1000);
 	frameRate(60);
 	background(0,0,0);
 	noStroke();
 	img=loadImage("flashtele.png");
-  	endBoom[0]=loadImage("explofr1.gif");
-  	endBoom[1]=loadImage("explofr2.gif");
-  	endBoom[2]=loadImage("explofr3.gif");
-  	endBoom[3]=loadImage("explofr4.gif");
-  	endBoom[4]=loadImage("explofr5.gif");
-  	endBoom[5]=loadImage("explofr6.gif");
-  	endBoom[6]=loadImage("explofr7.gif");
-  	endBoom[7]=loadImage("explofr8.gif");
-  	endBoom[8]=loadImage("explofr9.gif");
-  	dio[0]=loadImage("zawarudo1.gif");
-  	dio[1]=loadImage("zawarudo2.gif");
-  	dio[2]=loadImage("zawarudo3.gif");
-  	dio[3]=loadImage("zawarudo4.gif");
-  	dio[4]=loadImage("zawarudo5.gif");
-  	dio[5]=loadImage("zawarudo6.gif");
-  	dio[6]=loadImage("zawarudo7.gif");
-  	dio[7]=loadImage("zawarudo8.gif");
-  	dio[8]=loadImage("zawarudo9.gif");
-  	dio[9]=loadImage("zawarudo10.gif");
-  	dio[10]=loadImage("zawarudo11.gif");
-  	dio[11]=loadImage("zawarudo12.gif");
-  	dio[12]=loadImage("zawarudo13.gif");
-  	dio[13]=loadImage("zawarudo14.gif");
-  	dio[14]=loadImage("zawarudo15.gif");
-  	dio[15]=loadImage("zawarudo16.gif");
-  	dio[16]=loadImage("zawarudo17.gif");
-  	dio[17]=loadImage("zawarudo18.gif");
-  	dio[18]=loadImage("zawarudo19.gif");
-  	dio[19]=loadImage("zawarudo20.gif");
-  	dio[20]=loadImage("zawarudo21.gif");
-  	dio[21]=loadImage("zawarudo22.gif");
-  	dio[22]=loadImage("zawarudo23.gif");
-  	dio[23]=loadImage("zawarudo24.gif");
-  	dio[24]=loadImage("zawarudo25.gif");
+  	for(int boom=1; boom<=endBoom.length; boom++)
+  	{
+  		endBoom[boom-1]=loadImage("explofr"+boom+".gif");
+  	}
+  	for(int worldWide=1; worldWide<=dio.length; worldWide++)
+  	{
+  		dio[worldWide-1]=loadImage("zawarudo"+worldWide+".gif");
+  	}
   	misstar=loadImage("missTar.png");
   	tieBoom=loadImage("explosion.png");
   	boomwait=loadImage("boomwait.png");
@@ -869,8 +844,8 @@ void tarLock()
 }
 void shipSpeed()
 {
-	int a=(int)ship.speed;
-	ship.speed=0;
+	int a=ship.getSpeed();
+	ship.setSpeed(0);
 	stopShip();
 	shipAccel(a);
 }

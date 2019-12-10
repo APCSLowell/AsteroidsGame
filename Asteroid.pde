@@ -12,8 +12,7 @@ public class Asteroid extends Floater
     	//yCorners=new int[]{20,1,2,2,1,1,2,2,15,15,2,2,-10,-10,-11,-11,-10,-10,-9,-11,-16,-16,-10,-9,-11,-11,-9,-10,-16,-16,-11,-9,-10,-10,-11,-11,-10,-10,2,2,15,15,2,2,1,1,2,2,1,20};
     	yCorners=new int[]{-10,-9,-9,-5,-4,-4,-3,-3,-1,1,3,3,4,4,5,9,9,10,10,9,9,5,4,3,1,-1,-3,-4,-5,-9,-9,-10};
     	xCorners=new int[]{8,8,1,1,3,7,7,4,5,5,4,7,7,3,1,1,8,8,-8,-8,-1,-1,-3,-4,-5,-5,-4,-3,-1,-1,-8,-8};
-    	//corners=50;
-    	corners=32;
+    	corners=Math.min(xCorners.length, yCorners.length);
     	myColor=color(255,255,255);
     	if(topSide==0)
     	{
@@ -74,21 +73,12 @@ public class Asteroid extends Floater
     }
     public boolean cloDet(int box, int boy)
 	{
-		if(dist(box, boy, this.getX(), this.getY())<=20)
-		{
-			return true;
-		}else{
-			return false;
-		}
+        //ALERT! You can use operator overiding for this and bomDet()
+		return dist(box, boy, (float)myCenterX, (float)myCenterY)<=20;
 	}
 	public boolean bomDet(int box, int boy, int sphe)
 	{
 		//if(dist(box, boy, this.getX(), this.getY())>sphe+5||dist(box, boy, this.getX(), this.getY())<sphe-5)
-		if(dist(box, boy, this.getX(), this.getY())<=sphe)
-        {
-			return true;
-		}else{
-			return false;
-		}
-	}
+		return dist(box, boy, (float)myCenterX, (float)myCenterY)<=sphe;
+    }
 }
