@@ -15,7 +15,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     double dRadians =myPointDirection*(Math.PI/180);     
     //change coordinates of direction of travel    
     myXspeed += ((dAmount) * Math.cos(dRadians));    
-    myDirectionY += ((dAmount) * Math.sin(dRadians));       
+    myYspeed += ((dAmount) * Math.sin(dRadians));       
   }   
   public void turn (double degreesOfRotation)   
   {     
@@ -24,9 +24,9 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
   }   
   public void move ()   //move the floater in the current direction of travel
   {      
-    //change the x and y coordinates by myXspeed and myDirectionY       
+    //change the x and y coordinates by myXspeed and myYspeed       
     myCenterX += myXspeed;    
-    myCenterY += myDirectionY;     
+    myCenterY += myYspeed;     
 
     //wrap around screen    
     if(myCenterX >width)
