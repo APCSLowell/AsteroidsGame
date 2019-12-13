@@ -256,7 +256,7 @@ public void keyPressed()
 				{
 					tStop=true;
 					missOff=true;
-					theWorld=true;
+					//theWorld=true;
 					tCount=0;
 					tStopX.clear();
 					tStopY.clear();
@@ -267,7 +267,7 @@ public void keyPressed()
 					}
 					if(cheat==true)
 					{
-						if(theWorld=true)
+						if(theWorld==true)
 						{
 							zaWARUDO();
 							println("zaWARUDO");
