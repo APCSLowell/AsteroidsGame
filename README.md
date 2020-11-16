@@ -5,8 +5,9 @@ In this assignment we will start to replicate the old video game Asteroids. You 
 Suggested steps to complete this assignment
 -------------------------------------------
 
-1. Fork [this repository](https://github.com/APCSLowell/AsteroidsGame). 
-1. Open the program by opening `AsteroidsGame.pde` in Processing or opening the AsteroidsGame folder in Sublime.
+1. Start a new program in Processing called `AsteroidsGame`. 
+1. Copy the code in `AsteroidsGame.pde` into your program.
+1. Open a new tab and name it `Spaceship.pde`. Copy the class definition from `Spaceship.pde` above. Do the same for `Floater.pde` and `Star.pde`.
 2. Uncomment the `extends floater` on Line 1 of `Spaceship.pde`
 4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find slides #1 - 58 on the [Asteroids](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit?usp=sharing) and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
 5. At the top of `AsteroidsGame.pde`, declare a variable of type `Spaceship`
