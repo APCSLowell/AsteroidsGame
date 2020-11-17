@@ -1,6 +1,6 @@
 Asteroids (Part 1)
 ==================
-In this assignment we will start to replicate the old video game Asteroids. You will write a program that has a space ship that can be controlled with the keyboard. You will need to write a `Spaceship` class. Your `Spaceship` class will extend the `Floater` class, a class that represents all things that float in space. _Note: To complete this assignment you will be writing two classes `Spaceship` and `Star`. Do not modify the `Floater` class._ You may find slides 1-32 of the [Asteroids slide presentation](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit) helpful completing this assignment.
+In this assignment we will start to replicate the old video game Asteroids. You will write a program that has a space ship that can be controlled with the keyboard. You will need to write a `Spaceship` class. Your `Spaceship` class will extend the `Floater` class, a class that represents all things that float in space. _Note: To complete this assignment you will be writing two classes `Spaceship` and `Star`. Do not modify the `Floater` class._ You may find slides 1-34 of the [Asteroids slide presentation](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit) helpful completing this assignment.
 
 Suggested steps to complete this assignment
 -------------------------------------------
@@ -17,7 +17,7 @@ Suggested steps to complete this assignment
 10. Add code to the `draw()` in `AsteroidsGame.pde` to `move()` the Spaceship
 11. Finish the `Star` class in `Star.pde` 
 12. Finally, add code to `AsteroidsGame.pde` that declares and initializes an array of instances of the `Star` class to create a number of stars in random positions
-12. Note that for full credit, **you MUST include instructions on how to operate your Spaceship in the `index.html` file**
+12. Note that for full credit, **you MUST include instructions on how to operate your Spaceship in the `index.html` file.** For an example look at slides 33 & 34 in the [Asteroids slide presentation](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit)
 12. OPTIONAL: If you have extra time and are looking for a challenge, you might try to add an animation of "rockets" that appear from the back of the ship when you accelerate, simliar to the [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/). The best way to do this is to override `show()` by copying the `show()` function from Floater into your Spaceship class. Then add an `if` statement in your Spaceship `show()` function right after `endShape(CLOSE);`. If your rockets are firing, draw additional shapes just behind your Spaceship. You can sketch out the shapes on graph paper with the ship centered at (0,0) and pointing right. The `show()` function will rotate and translate the rocket shapes to the correct position on the screen.
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
