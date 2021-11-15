@@ -26,6 +26,7 @@ Requirements
 * All code in the `Spaceship` and `Star` classes must be encapsulated (i.e. all members must be labeled as `public` or `private`)
 * The Spaceship must have a hyperspace feature that stops the ship from moving, and gives it a new random position and direction 
 * All random numbers must be generated using `Math.random()`
+* Do not modify any code in the `Floater` class
 
 Extensions
 ----------
