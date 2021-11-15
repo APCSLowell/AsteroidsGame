@@ -8,7 +8,7 @@ Suggested steps to complete this assignment
 1. Start a new program in Processing called `AsteroidsGame`. 
 1. Copy the code in `AsteroidsGame.pde` into your program.
 1. Open a new tab and name it `Spaceship.pde`. Copy the class definition from `Spaceship.pde` above. Do the same for `Floater.pde` and `Star.pde`.
-4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find slides #1 - 58 on the [Asteroids](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit?usp=sharing) and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
+4. Write the `Spaceship` constructor. Make sure you initialize all 9 of the inherited `protected` member variables. You may find You may find the [Asteroids Part 1 slide presentation](https://docs.google.com/presentation/d/1xEIchvoA0s2BO-HB8g9wjk1jSBH8sq9Gtkij5Y7slOs/edit) helpful and the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) helpful. You may also find [this sample Spaceship program](https://apcslowell.github.io/AsteroidsVariableDemoV2/) helpful in understanding how the `protected Floater` variables affect the Spaceship's movement.
 5. At the top of `AsteroidsGame.pde`, declare a variable of type `Spaceship`
 6. Initialize the `Spaceship` as a new instance of the class
 7. In `draw()` in `AsteroidsGame.pde` call the Spaceship's `show()` function
