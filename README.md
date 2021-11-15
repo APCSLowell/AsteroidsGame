@@ -23,6 +23,7 @@ These steps are only a suggestion. Your Asteroids game doesn't have to work or a
 Requirements
 ----------
 * All code in the `Spaceship` and `Star` classes must be encapsulated (i.e. all members must be labeled as `public` or `private`)
+* Do not write any unnecessary code in the `Spaceship` class that duplicates inherited code
 * The Spaceship must have a hyperspace feature that stops the ship from moving, and gives it a new random position and direction 
 * All random numbers must be generated using `Math.random()`
 * Do not modify any code in the `Floater` class
@@ -35,10 +36,9 @@ Extensions
 
 Some important things to keep in mind
 -------------------------------------
-1. You're collaborating! Most of the work for the `Spaceship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Spaceship` class. 
-2. To create the `Spaceship` class you need to write a constructor.
+1. You are collaborating! Most of the work for the `Spaceship` class has already been done in the `Floater` class. Don't change it! Your job is to extend the `Floater` class to "build on top of it" to make a `Spaceship` class. 
+2. To create the `Spaceship` class you only need to write a constructor and one or more functions to implement the hyperspace feature.
 3. When you are sketching out your ship on the [Spaceship design worksheet](https://drive.google.com/file/d/0Bz2ZkT6qWPYTRDJvNUJRdXFjNGs/view?usp=sharing) make sure the ship is centered at (0,0) and pointing to the right
-4. Don't declare any duplicate variables in your `Spaceship` class. You are inheriting all the variables you need from `Floater`
 5. Make sure your `Spaceship` constructor initializes all 9 of the `protected` variables it inherits from `Floater`
 
 Samples of Student Work
