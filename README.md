@@ -21,6 +21,12 @@ Suggested steps to complete this assignment
 
 These steps are only a suggestion. Your Asteroids game doesn't have to work or act like any other. Have fun and be creative.
 
+Requirements
+----------
+* All code in the `Spaceship` and `Star` classes must be encapsulated (i.e. all members must be labeled as `public` or `private`)
+* The Spaceship must have a hyperspace feature that stops the ship from moving, and gives it a new random position and direction 
+* All random numbers must be generated using `Math.random()`
+
 Extensions
 ----------
 * You can smooth out the control of the ship using booleans for each key press. There is an example [here](http://apcslowell.github.io/TwoKeys/)   
