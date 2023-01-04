@@ -263,6 +263,33 @@ Samples of Student Work
 [Matthew](https://matttwongg.github.io/AsteroidsGame/)   
 [Wanyan](https://cheesicake.github.io/AsteroidsGame/)   
 [Kaitlyn](https://kaitlynzhou.github.io/AsteroidsGame/)   
+[Austin](https://aublaylock.github.io/AsteroidsGame/)   
+[Evan](https://evanchen-e.github.io/AsteroidsGame/)   
+[Xiaoyi](https://jceychen.github.io/AsteroidsGame/)   
+[Damien](***)   
+[Marie-Fleur](https://marie-fleur.github.io/AsteroidsGame/)   
+[Richard](https://richardfongg.github.io/AsteroidsGame/)   
+[Amy](https://amyhuang4.github.io/AsteroidsGame/)   
+[Lisa](https://llisahuang.github.io/AsteroidsGame/)   
+[Jeffery](https://likuang2.github.io/AsteroidsGame/)   
+[Garvin](https://garvinkwong.github.io/AsteroidsGame/)   
+[Ethan](https://ethan893.github.io/AsteroidsGame/)   
+[Ekaterina](https://eklevinton.github.io/AsteroidsGame/)   
+[Cole](https://mayamelon.github.io/AsteroidsGame/)   
+[Alice](https://alliang1.github.io/AsteroidsGame/)   
+[Raymond](https://raymondlui1.github.io/AsteroidsGame/)   
+[Susanna](***)   
+[Jocelyn](https://joce7yn.github.io/AsteroidsGame/)   
+[Davyn](https://pandasharkkk.github.io/AsteroidsGame/)   
+[Francisco](https://frponce.github.io/AsteroidsGame/)   
+[Roan](https://rwrftr.github.io/AsteroidsGame/)   
+[Omara](https://omidomiomi.github.io/AsteroidsGame/)   
+[Lucas](https://llucasrj.github.io/AsteroidsGame/)   
+[Jenny](https://planttofu.github.io/AsteroidsGame/)   
+[Justin](https://jaguar-p5.github.io/AsteroidsGame/)   
+
+
+
 
 
   
