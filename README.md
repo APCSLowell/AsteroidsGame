@@ -191,7 +191,7 @@ Samples of Student Work
 [Dylan](https://dylanwei1.github.io/AsteroidsGame/)   
 [Nicholas](https://quantalope.github.io/AsteroidsGame/)   
 [Samson](https://xusamson8.github.io/AsteroidsGame/)   
-[Patrick] (https://patyao.github.io/AsteroidsGame/)   
+[Patrick](https://patyao.github.io/AsteroidsGame/)   
 [Diego](https://diegoyuhuang.github.io/AsteroidsGame/)   
 
 
