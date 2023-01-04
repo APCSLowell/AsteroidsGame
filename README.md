@@ -179,8 +179,20 @@ Samples of Student Work
 [Maxwell] (https://maxapcs.github.io/Asteroids/)   
 [Humphrey] (https://humphreyylu.github.io/AsteroidsGame/)   
 [Hannah] (https://hannahlucas987.github.io/AsteroidsGame/)   
-
-
+[Piero] (https://piero-lujan-pedreschi.github.io/AsteroidsGame/)   
+[Fiona] (https://f-iona.github.io/AsteroidsGame/)   
+[Isaac] (https://isaacmai.github.io/AsteroidsGame/)   
+[Karla] (https://karla0311.github.io/AsteroidsGame/)   
+[Saw] (https://sawyn01.github.io/AsteroidsGame/)   
+[Aiden] (https://aip24.github.io/AsteroidsGame/)   
+[Theo] (https://jssuperior.github.io/AsteroidsGame/)   
+[Tara] (https://tara-tiong.github.io/AsteroidsGame/)   
+[Maya] (https://mawang4.github.io/AsteroidsGame/)   
+[Dylan] (https://dylanwei1.github.io/AsteroidsGame/)   
+[Nicholas] (https://quantalope.github.io/AsteroidsGame/)   
+[Samson] (https://xusamson8.github.io/AsteroidsGame/)   
+[Patrick] (https://patyao.github.io/AsteroidsGame/)   
+[Diego] (https://diegoyuhuang.github.io/AsteroidsGame/)   
 
 
 *This assignment was selected as a "Nifty CS Assignment" in 2008 by Nick Parlante @ Stanford*
