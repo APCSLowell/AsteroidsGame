@@ -287,6 +287,20 @@ Samples of Student Work
 [Lucas](https://llucasrj.github.io/AsteroidsGame/)   
 [Jenny](https://planttofu.github.io/AsteroidsGame/)   
 [Justin](https://jaguar-p5.github.io/AsteroidsGame/)   
+[Jason](https://jasonshue.github.io/AsteroidsGame/)   
+[Amiya](https://pinksweetmango.github.io/AsteroidsGame/)   
+[Ngoc](https://ngtrann.github.io/AsteroidsGame/)   
+[Yuki](***)   
+[Niko](https://nitsurutome.github.io/AsteroidsGame/)   
+[Naomi](https://naotungnach.github.io/AsteroidsGame/)   
+[Caspar](https://crispycube.github.io/AsteroidsGame/)   
+[Alvin](***)   
+[Charlene](https://broccolihater.github.io/AsteroidsGame/)   
+[Stanley](https://stanleyxu1.github.io/AsteroidsGame/)   
+[Noah](https://noahyang667.github.io/AsteroidsGame/)   
+[Ruibin](https://bennotben1224.github.io/Ben-Yu---Asteroids-Game/)   
+[Wingyan](https://wingyanyu0.github.io/AsteroidsGame/)   
+[Joseph](https://joyuen27.github.io/AsteroidsGame/)   
 
 
 
