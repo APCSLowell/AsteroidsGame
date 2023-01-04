@@ -159,6 +159,15 @@ Samples of Student Work
 [Jonathan](https://jonathanchu33.github.io/AsteroidsGame/)   
 [Derek](https://keredlew.github.io/AsteroidsGame/)   
 [Mi-Kaela](https://mikamarciales.github.io/AsteroidsGame/)   
+[Willa](https://willaandrade.github.io/AsteroidsGame/)   
+[James] (https://jamesbackstrom43.github.io/AsteroidsGame/)   
+[Kathleen] (https://kathb3.github.io/AsteroidsGame/)   
+[Juan] (https://jucalvohuerta.github.io/AsteroidsGame/)   
+[Toby] (https://tobyjchan.github.io/AsteroidsGame/)   
+[Ryan] (https://rchen0902.github.io/AsteroidsGame/)   
+[Ryan] (https://rychick.github.io/AsteroidsGame/)   
+[Evie] (https://evchien.github.io/AsteroidsGame/)   
+[Miriam] (https://mifreedman.github.io/AsteroidsGame/)   
 
 
 
