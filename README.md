@@ -233,6 +233,23 @@ Samples of Student Work
 [Emily](https://emyang1.github.io/AsteroidsGame/)   
 [Haoheng](https://haoxd123.github.io/AsteroidsGame/)   
 [Gabriel](https://gabrielzub.github.io/AsteroidsGame/)   
+[Alejandro](https://alejandrofpv.github.io/AsteroidsGame/)   
+[Angela](https://angelachen690.github.io/AsteroidsGame/)   
+[Kelvin](https://shibainuinuinu.github.io/AsteroidsGame/)   
+[Lily](https://lantom101.github.io/AsteroidsGame/)   
+[Aaron](https://hilla99.github.io/AsteroidsGame/)   
+[Terrance](https://tehoang-apcsa.github.io/AsteroidsGame/)   
+[Jesica](https://jessicah7.github.io/AsteroidsGame/)   
+[Grace](https://huang-g.github.io/AsteroidsGame/)   
+[Danil](https://hugistaken.github.io/AsteroidsGame/)   
+[Matthew](https://matthewlau217.github.io/AsteroidsGame/)   
+[Leanna](https://lele452005.github.io/AsteroidsGame/)   
+[Andre](https://anlee16.github.io/AsteroidsGame/)   
+[Felicia](https://feliciacatlee.github.io/AsteroidsGame/)   
+[Andrew](https://andjli.github.io/AsteroidsGame/)   
+[Calvin](https://cow-van.github.io/AsteroidsGame/)   
+[Aaron](https://aaronluii.github.io/AsteroidsGame/)   
+[Justin](https://mintmilktea.github.io/AsteroidsGame/)   
   
 
 
