@@ -227,6 +227,15 @@ Samples of Student Work
 [Kayla](https://kawong2.github.io/AsteroidsGame/)   
 [Justin](https://daqk1.github.io/AsteroidsGame/)   
 [Leanna](https://lewu7.github.io/AsteroidsGame/)   
+[Philix](https://philix.github.io/AsteroidsGame/)
+[Lixin](***)   
+[Audrey](https://audreyyann.github.io/AsteroidsGame/)   
+[Emily](https://emyang1.github.io/AsteroidsGame/)   
+[Haoheng](https://haoxd123.github.io/AsteroidsGame/)   
+[Gabriel](https://gabrielzub.github.io/AsteroidsGame/)   
+  
+
+
 
 
 
