@@ -2,11 +2,11 @@ Spaceship m = new Spaceship();
 public void setup() 
 {
   size(500, 500);
-  background(200);
+  background(150);
 }
 public void draw() 
 {
-  background(200);
+  background(150);
   m.show();
   m.myCenterX = m.myCenterX + m.myXspeed;
   m.myCenterY = m.myCenterY + m.myYspeed;
