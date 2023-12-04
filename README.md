@@ -1,12 +1,18 @@
 Spaceship m = new Spaceship();
+ArrayList <Asteroid> asteroids = new ArrayList <Asteroid>();
+
+
 public void setup() 
 {
+  for(int i = 0; i < 8; i++){
+    asteroids.add(new Asteroid());
+  }
   size(500, 500);
-  background(200);
+  background(150);
 }
 public void draw() 
 {
-  background(200);
+  background(0);
   m.show();
   m.myCenterX = m.myCenterX + m.myXspeed;
   m.myCenterY = m.myCenterY + m.myYspeed;
@@ -22,13 +28,21 @@ public void draw()
   if(m.myCenterY < 0){
    m.myCenterY = 500; 
   }
+  for(int i = 0; i < asteroids.size(); i++){
+   Asteroid a = asteroids.get(i); 
+   a.show();
+   a.move();
+   if(dist((float)a.getCenterX(), (float)a.getCenterY(), (float)m.myCenterX, (float)m.myCenterY) < 20){
+     asteroids.remove(i);
+   }
+  }
 }
 public void keyPressed(){
   if(key == 'a'){
-   m.myPointDirection = m.myPointDirection - 12; 
+   m.myPointDirection = m.myPointDirection - 15; 
   }
   if(key == 'd'){
-   m.myPointDirection = m.myPointDirection + 12; 
+   m.myPointDirection = m.myPointDirection + 15; 
   }
   if(key == 'w'){
    m.myXspeed = m.myXspeed + 0.3*Math.cos(m.myPointDirection*Math.PI/180);
@@ -43,6 +57,66 @@ public void keyPressed(){
   
 }
 
+
+class Asteroid extends Floater
+{
+  private double rot;
+  public Asteroid(){
+    rot = (Math.random()*10)-5;
+    myCenterX = (Math.random()*500);
+    myCenterY = (Math.random()*500);
+    myXspeed = (Math.random()*10)-5;
+    myYspeed = (Math.random()*10)-5;
+    myPointDirection = 0;
+    corners = 4; 
+    xCorners = new int[corners]; 
+    yCorners = new int[corners]; 
+    xCorners[0] = -10; 
+    yCorners[0] = -10; 
+    xCorners[1] = 10; 
+    yCorners[1] = -10; 
+    xCorners[2] = 10; 
+    yCorners[2] = 10;
+    xCorners[3] = -10; 
+    yCorners[3] = 10;
+    myColor = 180;
+    
+    
+    
+  }
+  public void move(){
+    myPointDirection = myPointDirection + rot;
+    myCenterX += myXspeed;    
+    myCenterY += myYspeed;     
+
+    //wrap around screen    
+    if(myCenterX >width)
+    {     
+      myCenterX = 0;    
+    }    
+    else if (myCenterX<0)
+    {     
+      myCenterX = width;    
+    }    
+    if(myCenterY >height)
+    {    
+      myCenterY = 0;    
+    } 
+    
+    else if (myCenterY < 0)
+    {     
+      myCenterY = height;    
+    }        
+
+  }
+  public double getCenterX(){
+   return myCenterX; 
+  }
+  public double getCenterY(){
+   return myCenterY; 
+  }
+  
+}
 
 
 class Floater //Do NOT modify the Floater class! Make changes in the Spaceship class 
@@ -95,7 +169,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
     }   
   }   
   public void show ()  //Draws the floater at the current position  
-  {             
+  {   
     fill(myColor);   
     stroke(myColor);    
     
@@ -125,7 +199,7 @@ class Floater //Do NOT modify the Floater class! Make changes in the Spaceship c
 
 class Spaceship extends Floater  
 {   
-    Spaceship(){
+    public Spaceship(){
      myCenterX = 250;
      myCenterY = 250;
      myXspeed = 0;
@@ -140,14 +214,17 @@ class Spaceship extends Floater
      yCorners[1] = 0; 
      xCorners[2] = -8; 
      yCorners[2] = 8;
+     myColor = 255;
 
     }
     
 }
-  
 
 
-
+class Star //note that this class does NOT extend Floater
+{
+  //your code here
+}
 
 
 
